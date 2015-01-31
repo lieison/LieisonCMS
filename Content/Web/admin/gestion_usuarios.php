@@ -238,6 +238,7 @@
 											<button id="nuevo_usuario" class="btn green">
 											Nuevo Usuario <i class="fa fa-plus"></i>
 											</button>
+                                                                                    <div class="alert-info" id="alertas_usuarios"></div>
 										</div>
 									</div>
 								</div>
@@ -430,11 +431,7 @@
             jqTds[4].innerHTML = '<select class="form-control" ><option value="1">Activo</option><option value="0">Desactivado</option></select>';
             jqTds[5].innerHTML = '<a class="edit" href="">Guardar</a>';
             jqTds[6].innerHTML = '<a class="cancel" href="">Cancelar</a>';
-            
-           
-           /* if(aData[8] == null || aData[8] == ""){
-                jqTds[8].innerHTML = '<input type="text" class="form-control input-small" value="' + "" + '">';
-            }*/
+ 
             
         }
         
@@ -446,6 +443,57 @@
             
             if(aData[8] == null || aData[8]== "")
             {
+                 var parametros = {
+                       "usuario" : jqInputs[0].value,
+                       "nombre":jqInputs[1].value,
+                       "email": jqInputs[2].value,
+                       "privilegios": jqselect[0].value,
+                       "estado":jqselect[1].value,
+                       "key": "null"
+                 };
+
+                $.ajax({
+                        type: "POST",
+                        url: "ControlPage/GetSaveUserResponsive.php",
+                        data:parametros,
+                        success: function(value){
+                            console.log(value);
+                             var data = value.replace(/\s/g, '');
+                             switch(data)
+                             {
+                                 case '1':
+                                    oTable.fnUpdate(jqInputs[0].value, nRow, 0, false);
+                                    oTable.fnUpdate(jqInputs[1].value, nRow, 1, false);
+                                    oTable.fnUpdate(jqInputs[2].value, nRow, 2, false);
+                                    oTable.fnUpdate(jqselect[0].value, nRow, 3, false);
+                                    if(jqselect[1].value==1){
+                                        oTable.fnUpdate("Activo", nRow, 4, false);
+                                    }else{
+                                        oTable.fnUpdate("Desactivado", nRow, 4, false);
+                                    }
+                                     break;
+                                 case '0':
+                                     document.getElementById("alertas_usuarios").value = "Error al guardar , favor revisar los datos";
+                                     break;
+                                 case "mail":
+                                      document.getElementById("alertas_usuarios").value = "Se Necesita un correo electronico";
+                                     break;
+                                 case "nombre":
+                                     document.getElementById("alertas_usuarios").value = "Se Necesita un nombre y/o apellido";
+                                     break;
+                                 case "user":
+                                     alert();
+                                     document.getElementById("alertas_usuarios").innerHTML = "Se Necesita un usuario";
+                                     break;
+                                 default:
+                                     document.getElementById("alertas_usuarios").value = "Error al guardar , servidor ocupado.";
+                                     break;
+                             }
+                            
+                            
+                         
+                         }
+                   });
                 
             }
             else{

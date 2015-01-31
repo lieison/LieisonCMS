@@ -4,11 +4,9 @@
 
 class AdminController extends MysqlConection {
     
-    
  
     var $query = null;
-    
-
+   
     public function __construct() {
         parent::__construct();
     }
@@ -16,6 +14,8 @@ class AdminController extends MysqlConection {
 
     public function GetLogin($user , $password )
     {
+        
+        $password = \SivarApi\Tools\Encriptacion\Encriptacion::encrypt($password);
         
         $this->query = "SELECT usuario.id_usuario as id , login.user , login.activo , login.rol "
                     . ", concat(usuario.nombre , ' ' , usuario.apellido) as nombre"
@@ -44,7 +44,6 @@ class AdminController extends MysqlConection {
         }
     }
     
-    
     public function Create_Log( $id_user , $hora_entrada , $fecha )
     {
         $id_log = $hora_entrada . rand(100, 5000) . $id_user . rand(0, 99);
@@ -58,12 +57,10 @@ class AdminController extends MysqlConection {
         return $id_log;
     }
     
-    
     public function Update_log($id_log , $hora_salida)
     {
         $this->Update("log", array("salida"=>$hora_salida) , "id_log LIKE '$id_log'");
     }
-    
     
     public function Show_log($date = null)
     {
@@ -82,7 +79,6 @@ class AdminController extends MysqlConection {
         return $result = $this->RawQuery($this->query) ?: NULL;
             
     }
-    
     
     public function get_rols_values($rol_)
     {
@@ -105,12 +101,6 @@ class AdminController extends MysqlConection {
         return $result;
     }
     
-    public function Get_MasterPrivilegios()
-    {
-        $this->query = "SELECT nivel , nombre FROM privilegios";
-        return $this->RawQuery($this->query);
-    }
-    
     public function UpdateUsers($args_user = array() , $args_login = array() , $id_user = null , $id_login = null)
     {
         $update = false;
@@ -126,6 +116,43 @@ class AdminController extends MysqlConection {
         
         return $update;
         
+    }
+    
+    public function CreateUser($args_user = array() , $args_login = array())
+    {
+        $create = null;
+
+        if(count($args_login) != 0 && count($args_user) != 0):
+                $create =  $this->Insert("login", $args_login );
+                $create= $this->Insert("usuario",$args_user );
+        elseif(count($args_user) != 0):
+              $create=  $this->Insert("usuario",$args_user );
+        elseif(count($args_login) != 0):
+             $create =  $this->Insert("login", $args_login);
+        endif;
+        
+        return $create;
+    }
+    
+    public function DeleteUser($id_user = null , $id_login=null)
+    {
+        $delete = null;
+        if($id_user != null && $id_login != null):
+              $delete = $this->Delete("login", "id_login LIKE $id_login");
+              $delete = $this->Delete("usuario", "id_usuario LIKE '$id_user'");
+        elseif($id_user != null):
+             $delete = $this->Delete("usuario", "id_usuario LIKE '$id_user'");
+        elseif($id_login != null):
+              $delete = $this->Delete("login", "id_login LIKE $id_login");
+        endif;
+        
+        return $delete;
+    }
+    
+     public function Get_MasterPrivilegios()
+    {
+        $this->query = "SELECT nivel , nombre FROM privilegios";
+        return $this->RawQuery($this->query);
     }
  
 }

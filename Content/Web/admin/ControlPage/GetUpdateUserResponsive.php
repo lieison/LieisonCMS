@@ -1,15 +1,6 @@
 <?php
 
  include '../../../Conf/Include.php';
-/**
- *                      "usuario" : jqInputs[0].value
-                       "nombre":jqInputs[0].value,
-                       "email": jqInputs[0].value,
-                       "privilegios": jqselect[0].value,
-                       "estado":jqselect[1].value
-                       "key": aData[8]
- * 
- */
 
  $admin = new AdminController();
  
