@@ -25,7 +25,7 @@ class DashboardController extends MysqlConection {
         return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";
     }
     
-    public function get_dashboard_sidebar_menu($privilegios , $puntero = null)
+    public function get_dashboard_sidebar_menu($privilegios , $puntero = null )
     {
         $nivel = 0;
         $array_seccion = array();
@@ -35,7 +35,7 @@ class DashboardController extends MysqlConection {
         $result = $this->RawQuery($query);
         $nivel =  $result[0]["nivel"];
         
-        $query = "SELECT id_seccion , seccion_dashboard.icono , seccion_dashboard.titulo , numero"
+        $query = "SELECT id_seccion , seccion_dashboard.icono , seccion_dashboard.titulo , numero , privilegios"
                 . " FROM seccion_dashboard ORDER BY numero ASC";
        
         $result_d = $this->RawQuery($query);
@@ -43,11 +43,13 @@ class DashboardController extends MysqlConection {
 
         foreach ($result_d as $k=>$v)
         {
+            if($nivel == $v['privilegios'] || $v['privilegios'] == 0 ){
             $id = $v["id_seccion"];
             $array_seccion[$id] = array(
                 "icono" =>$v["icono"] , 
                 "titulo"=>$v["titulo"],
                 "numero"=>$v['numero']);
+            }
         }
         
         foreach ($array_seccion as $key=>$value)
@@ -82,7 +84,7 @@ class DashboardController extends MysqlConection {
             {
                 
                 $format .= '<li><a href="javascript:;">';
-                $format .= '<i class="' . $side['icono'] .'"></i>';
+                $format .= '<i class="' . $side['icono'] .'"></i>&nbsp&nbsp';
                 $format .= '<span class="title">' . $side['titulo'] .'</span>';
                 $format .= '<span class="arrow"></span></a>';
             }
@@ -97,7 +99,7 @@ class DashboardController extends MysqlConection {
                 $link = $v['link'];
                 $titulo = $v['titulo'];
                 
-                if($priv <= $nivel )
+                if($priv == $nivel  || $priv==0)
                 {
                     
                     if($puntero != null && $puntero == $titulo){
@@ -108,7 +110,7 @@ class DashboardController extends MysqlConection {
                     }
                    
                     $format.= '<a href="' . $this->GetUrl($link) .'">';
-                    $format.= '<i class="'.$icon.'"></i>';
+                    $format.= '<i class="'.$icon.'"></i>&nbsp&nbsp';
                     $format.= $titulo . '</a></li>';
                 }
             }
@@ -116,8 +118,7 @@ class DashboardController extends MysqlConection {
             $format .= "</ul></li>";
 
         }
-        
-         //$format .= '</li>';
+       
          return $format;
   
     }

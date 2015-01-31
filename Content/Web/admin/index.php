@@ -34,7 +34,7 @@
     switch ($nivel)
     {
         case 0:
-            $header->redirect("index_user.php");
+            //$header->redirect("index_user.php");
             break;
         case 4:
             break;

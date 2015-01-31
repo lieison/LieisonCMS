@@ -29,7 +29,7 @@ if(!is_array($ARRAY_DIR)):
 if(isset($_COOKIE['FOLDER']))
     $FOLDER_ = $_COOKIE['FOLDER'];
 else
-    $FOLDER_ = "Lieison";
+    $FOLDER_ = "LieisonCMS";
 
 $CONFIG_ = array(
     
@@ -69,7 +69,7 @@ $CONFIG_ = array(
         "protocol" => "http://"
     ],
     
-    "APP_FOLDER" => $FOLDER_ ?: "Lieison"
+    "APP_FOLDER" => $FOLDER_ ?: "LieisonCMS"
      
 )
 

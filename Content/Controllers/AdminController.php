@@ -94,5 +94,38 @@ class AdminController extends MysqlConection {
             return 0;
         endif;
     }
+    
+    public function Get_Users()
+    {
+        $this->query = "SELECT login.id_usuario , login.id_login , login.user ,"
+                . " concat(usuario.nombre , ' ', usuario.apellido) as nombre"
+                . " ,usuario.email , login.rol , login.activo  "
+                . " FROM login INNER JOIN usuario ON login.id_usuario=usuario.id_usuario ";
+        $result = $this->RawQuery($this->query);
+        return $result;
+    }
+    
+    public function Get_MasterPrivilegios()
+    {
+        $this->query = "SELECT nivel , nombre FROM privilegios";
+        return $this->RawQuery($this->query);
+    }
+    
+    public function UpdateUsers($args_user = array() , $args_login = array() , $id_user = null , $id_login = null)
+    {
+        $update = false;
+        
+        if(count($args_login) != 0 && count($args_user) != 0):
+            $update = $this->Update("login", $args_login , "id_login LIKE $id_login" );
+            $update= $this->Update("usuario",$args_user , "id_usuario LIKE '$id_user'");
+        elseif(count($args_user) != 0):
+              $update= $this->Update("usuario",$args_user , "id_usuario LIKE '$id_user'");
+        elseif(count($args_login) != 0):
+             $update = $this->Update("login", $args_login , "id_login LIKE $id_login" );
+        endif;
+        
+        return $update;
+        
+    }
  
 }
