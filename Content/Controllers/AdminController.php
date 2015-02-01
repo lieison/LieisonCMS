@@ -91,6 +91,37 @@ class AdminController extends MysqlConection {
         endif;
     }
     
+    public function get_master_rols($master = true)
+    {
+        if ($master != true) {
+            $this->query = "SELECT id_privilegios , nombre , nivel , padre FROM privilegios WHERE padre NOT LIKE 0";
+            $result = $this->RawQuery($this->query);
+            $this->query = "SELECT nivel, nombre FROM privilegios WHERE padre LIKE 0";
+            $result_padre = $this->RawQuery($this->query);
+            foreach ($result as $k=>$v){
+                foreach ($result_padre as $key=>$value)
+                {
+                    if($value['nivel'] == $v['padre'])
+                    {
+                        $result[$k]['padre'] =  $value['nombre'];
+                    }
+                }
+            }
+            
+        } else {
+            $this->query = "SELECT id_privilegios , nombre , nivel , padre FROM privilegios WHERE padre LIKE 0";
+            $result = $this->RawQuery($this->query);
+        }
+        
+        
+
+        if (count($result) == 0) {
+            return null;
+        }
+
+        return $result ?: null;
+    }
+    
     public function Get_Users()
     {
         $this->query = "SELECT login.id_usuario , login.id_login , login.user ,"

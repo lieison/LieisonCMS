@@ -277,7 +277,6 @@
 							</thead>
                                                         <tbody>
 							<?php
-                                                         
                                                             $datos_usuario = $adminc->Get_Users();
                                                             foreach ($datos_usuario as $key=>$value):
                                                                 echo "<tr>";
@@ -315,6 +314,156 @@
 					</div>
 				</div>
                               <!-- FIN DE LA PRIMERA TABLA -->
+                                <!-- SEGUNDA TABLA ENTRADA Y SALIDA -->
+                                <div class="col-md-6">
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-edit"></i>Control De Super Permisos
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+                                                                    <form class="form-inline" method="POST" role="form" name="frm_priv" id="frm_priv">
+									<div class="col-md-6">
+										<div class="form-group">
+                                                                                    <input type="text" class="form-control input-sm" value="" placeholder="Nuevo Privilegio">
+                                                                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                                                                    <div class="alert-info" id="alertas_usuarios"></div>
+										</div>
+									</div>
+                                                                    <div class=""clearfix></div>
+                                                                    </form>
+								</div>
+							</div>
+							<table class="table table-striped table-hover table-bordered" id="tabla_usuarios_">
+							<thead>
+							<tr>
+								<th>
+									 Privilegios
+								</th>
+								<th>
+									 Nivel
+								</th>
+								<th>
+									
+                                                                </th>
+							</tr>
+							</thead>
+                                                        <tbody>
+							<?php
+                                                            $rols = $adminc->get_master_rols();
+                                                            if(SivarApi\Tools\Validation::Is_Empty_OrNull($rols)):
+                                                                echo "<tr><td>ERROR AL MOSTRAR LOS DATOS</td></tr>";
+                                                                echo "<tr><td>ERROR AL MOSTRAR LOS DATOS</td></tr>";
+                                                                echo "<tr><td>ERROR AL MOSTRAR LOS DATOS</td></tr>";
+                                                            endif;
+                                                            foreach ($rols as $key=>$value):
+                                                                echo "<tr>";
+                                                                foreach ($value as $k=>$v):
+                                                                    switch ($k)
+                                                                    {
+                                                                        
+                                                                        case "id_privilegios":
+                                                                        case "padre":
+                                                                            break;
+                                                                        default:
+                                                                            echo "<td>$v</td>";
+                                                                            break;
+                                                                    }
+                                                                endforeach;
+                                                                $id_u = $value['id_privilegios'];
+                                                                echo '<td><a class="delete" href="gestion_usuarios.php?id_rol=' . $id_u . '">Eliminar</a></td>';
+                                                                echo "</tr>";
+                                                            endforeach;
+                                                        ?>
+                                                        </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+                                <div class="col-md-6">
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-edit"></i>Control De Permisos Hijos 
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+                                                                            <form  name="frm_subpriv" id="frm_subpriv" method="POST">
+										<div class="form-group">
+                                                                                    <input type="text" class="form-control input-sm" value="" placeholder="Nombre Privilegio">
+                                                                                    <br>
+                                                                                    <select class="form-control">
+                                                                                        <?php
+                                                                                        
+                                                                                            $rols = $adminc->get_master_rols();
+                                                                                            foreach ($rols as $k=>$v):
+                                                                                                $idp = $v['id_privilegios'];
+                                                                                                $nombrep = $v['nombre'];
+                                                                                                echo "<option id='$idp'>$nombrep</option>";
+                                                                                            endforeach;
+                                                                                        ?>
+                                                                                    </select>
+                                                                                     <br>
+                                                                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                                                                    <div class="alert-info" id="alertas_usuarios"></div>
+										</div>
+                                                                            </form>
+									</div>
+								</div>
+							</div>
+							<table class="table table-striped table-hover table-bordered" id="tabla_usuarios_">
+							<thead>
+							<tr>
+								<th>
+									 Privilegios
+								</th>
+								<th>
+									 Nivel
+								</th>
+								<th>
+									Padre
+                                                                </th>
+                                                                <th></th>
+							</tr>
+							</thead>
+                                                        <tbody>
+							<?php
+                                                            $rols = $adminc->get_master_rols(false);
+                                                            if(SivarApi\Tools\Validation::Is_Empty_OrNull($rols)):
+                                                                echo "<tr><td>No Hay datos !!</td></tr>";
+                                                            else:
+                                                                foreach ($rols as $key=>$value):
+                                                                echo "<tr>";
+                                                                foreach ($value as $k=>$v):
+                                                                    switch ($k)
+                                                                    {
+                                                                        
+                                                                        case "id_privilegios":
+                                                                            break;
+                                                                        default:
+                                                                            echo "<td>$v</td>";
+                                                                            break;
+                                                                    }
+                                                                endforeach;
+                                                                $id_u = $value['id_privilegios'];
+                                                                echo '<td><a class="delete" href="gestion_usuarios.php?id_rol=' . $id_u . '">Eliminar</a></td>';
+                                                                echo "</tr>";
+                                                            endforeach;
+                                                            endif;
+                                                        
+                                                        ?>
+                                                        </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+                              <!-- FIN DE LA SEGUNDA TABLA -->
 			</div>
                         </div>
 		</div>
@@ -473,20 +622,19 @@
                                     }
                                      break;
                                  case '0':
-                                     document.getElementById("alertas_usuarios").value = "Error al guardar , favor revisar los datos";
+                                     document.getElementById("alertas_usuarios").innerHTML = "<br>Error al guardar , favor revisar los datos";
                                      break;
                                  case "mail":
-                                      document.getElementById("alertas_usuarios").value = "Se Necesita un correo electronico";
+                                      document.getElementById("alertas_usuarios").innerHTML = "<br>Se Necesita un correo electronico";
                                      break;
                                  case "nombre":
-                                     document.getElementById("alertas_usuarios").value = "Se Necesita un nombre y/o apellido";
+                                     document.getElementById("alertas_usuarios").innerHTML= "<br>Se Necesita un nombre y/o apellido";
                                      break;
                                  case "user":
-                                     alert();
-                                     document.getElementById("alertas_usuarios").innerHTML = "Se Necesita un usuario";
+                                     document.getElementById("alertas_usuarios").innerHTML = "<br>Se Necesita un usuario";
                                      break;
                                  default:
-                                     document.getElementById("alertas_usuarios").value = "Error al guardar , servidor ocupado.";
+                                     document.getElementById("alertas_usuarios").innerHTML = "<br>Error al guardar , servidor ocupado.";
                                      break;
                              }
                             
@@ -553,7 +701,7 @@
 
             "lengthMenu": [
                 [5, 15, 20, -1],
-                [5, 15, 20, "All"] // change per page values here
+                [5, 15, 20, "Todos"] // change per page values here
             ],
             // set the initial value
             "pageLength": 10,
@@ -587,9 +735,9 @@
             e.preventDefault();
 
             if (nNew && nEditing) {
-                if (confirm("Previose row not saved. Do you want to save it ?")) {
+                if (confirm("Fila anterior no se ha guardado. ¿deseas guardarla?")) {
                     saveRow(oTable, nEditing); // save
-                    $(nEditing).find("td:first").html("Untitled");
+                    $(nEditing).find("td:first").html("Alerta");
                     nEditing = null;
                     nNew = false;
 
@@ -612,14 +760,28 @@
 
         table.on('click', '.delete', function (e) {
             e.preventDefault();
-
-            if (confirm("Are you sure to delete this row ?") == false) {
+           
+            var nRow = $(this).parents('tr')[0];
+            var aData = oTable.fnGetData(nRow);
+            
+            if (confirm("¿Estas seguro que deseas eliminar " + aData[1] + " (" + aData[0] + ")?") == false) {
                 return;
             }
+              
+            var parametros = {
+                       "id": aData[8]
+                    };
 
-            var nRow = $(this).parents('tr')[0];
-            oTable.fnDeleteRow(nRow);
-            alert("Deleted! Do not forget to do some ajax to sync with backend :)");
+             $.ajax({
+                        type: "POST",
+                        url: "ControlPage/GetDeleteUserResponsive.php",
+                        data:parametros,
+                        success: function(value){
+                            console.log(value);
+                           oTable.fnDeleteRow(nRow);
+                            alert("Se ha eliminado " + aData[0] + " con exito !!");
+                       }
+               });
         });
 
         table.on('click', '.cancel', function (e) {
