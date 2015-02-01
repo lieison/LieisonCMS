@@ -44,9 +44,21 @@
  $id = $user . rand(0, 100) . $priv . rand(5000, 20000) . rand(500, 1000);
  $password = \SivarApi\Tools\Encriptacion\Encriptacion::encrypt($user);
  
+ $fecha_actual = date("Y-m-d");
+ 
 
- $login = array( "id_usuario"=>$id , "password"=>$password , "user"=>$user , "activo"=> $estado , "rol"=>$priv);
- $user = array( "id_usuario"=>$id , "nombre"=>$nombre[0] , "apellido"=>$nombre[1] , "email"=>$mail);
+ $login = array( "id_usuario"=>$id , 
+     "password"=>$password , 
+     "user"=>$user , 
+     "activo"=> $estado , 
+     "rol"=>$priv ,
+     "fecha"=>$fecha_actual);
+ 
+ $user = array( "id_usuario"=>$id ,
+     "nombre"=>$nombre[0] , 
+     "apellido"=>$nombre[1] , 
+     "email"=>$mail);
+ 
  $create = $admin->CreateUser($user, $login);
  
  if($create):

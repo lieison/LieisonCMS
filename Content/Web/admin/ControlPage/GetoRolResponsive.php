@@ -2,8 +2,6 @@
 
 include '../../../Conf/Include.php';
 
-
-
 if(!isset($_REQUEST['type'])){
     exit();
 }
