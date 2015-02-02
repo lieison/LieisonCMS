@@ -212,6 +212,9 @@ class AdminController extends MysqlConection {
         return $delete;
     }
     
+     /**
+      * @deprecated since version 1.0
+      */
      public function Get_MasterPrivilegios()
     {
         $this->query = "SELECT nivel , nombre FROM privilegios";

@@ -77,6 +77,8 @@
                                         se le desactivo la cuenta por medio 
                                         del administrador o CEO de la empresa
                                     </a> 
+                                    <br>
+                                    <a href="ControlPage/LogoutPage.php">Cerrar Sesion</a>
 				</div>
 			</form>
 		</div>
