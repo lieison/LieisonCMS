@@ -2,12 +2,23 @@
 
 <?php
 
-  
-     
+      /**
+       *@author Rolando <rmarroquin@lieison.com>
+       *@version 1.0 
+       *@copyright (c) Lieison, Working Together
+       *@since 1.0 , index.php
+       */
+
      /**
       * NO MODIFICAR 
-      * CUALQUIER MODIFICACION PUEDE AFECTAR EL RESULTADO 
+      * CUALQUIER MODIFICACION PUEDE AFECTAR EL ENRUTAMIENTO Y REDIRECCIONAMIENTO 
+      * DEL SISTEMA; TRABAJA CON UN SISTEMA DE DIRECCIONES RELATIVAS 
+      * DADO CASO SE DEBE DETECTAR LA CARPETA DEL PROYECTO , RAIZ Y EL HOSTING 
+      * 
+      * SI ESTO FALLA , SE HA SEÑALADO COMO DEFAULT LA CARPETA LieisonCMS
+      * ESTO SE PUEDE ALTERAR Y/O MODIFICAR EN Content/Conf/Config.php
       */
+
      $SERVER_DIR = getcwd();
      $ARRAY_DIR = explode("\\", $SERVER_DIR);
      
