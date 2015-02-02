@@ -30,9 +30,45 @@
     if($nivel == 50):
         $header->redirect("index.php");
     endif;
+    //guardar_superpermisos
+    
+   
+    if(isset($_POST['guardar_superpermisos']) && isset($_POST['txt_superpermisos'])):
+        if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($_POST['txt_superpermisos'])):
+             $nombre_rol = $_POST['txt_superpermisos'];
+             $is_ok = $adminc->add_rols($nombre_rol);
+                if($is_ok):
+                    echo "<script>alert('Se agrego nuevo privilegio');</script>";
+                else:
+                    echo "<script>alert('No se pudo agregar el nuevo privilegio');</script>";
+               endif; 
+        endif;
+    elseif(isset($_POST['cmd_padre_guardar']) && isset($_POST['txt_namehijo'])):
+                $nombre_rol_hijo = $_POST['txt_namehijo'];
+                $opt_padre = $_POST['opt_padre'];
+                $is_ok = $adminc->add_rols($nombre_rol_hijo , $opt_padre);
+                if($is_ok):
+                    echo "<script>alert('Se agrego nuevo privilegio hijo');</script>";
+                else:
+                    echo "<script>alert('No se pudo agregar el nuevo privilegio hijo');</script>";
+                endif;
+     elseif(isset($_REQUEST['id_rol'])):
+           $is_ok = $adminc->delete_rols($_REQUEST['id_rol']);
+            if($is_ok):
+                    echo "<script>alert('Se ha eliminado el privilegio');</script>";
+                    $header->redirect("gestion_usuarios.php");
+                else:
+                    echo "<script>alert('Error al eliminar el privilegio');</script>";
+                endif;
+    endif;
+    
+    
     
 
 ?>
+
+
+
 
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -328,8 +364,8 @@
                                                                     <form class="form-inline" method="POST" role="form" name="frm_priv" id="frm_priv">
 									<div class="col-md-6">
 										<div class="form-group">
-                                                                                    <input type="text" class="form-control input-sm" value="" placeholder="Nuevo Privilegio">
-                                                                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                                                                    <input type="text" name="txt_superpermisos" class="form-control input-sm" value="" placeholder="Nuevo Privilegio">
+                                                                                    <input type="submit" name="guardar_superpermisos" class="btn btn-primary" value="Guardar">
                                                                                     <div class="alert-info" id="alertas_usuarios"></div>
 										</div>
 									</div>
@@ -394,23 +430,23 @@
 							<div class="table-toolbar">
 								<div class="row">
 									<div class="col-md-6">
-                                                                            <form  name="frm_subpriv" id="frm_subpriv" method="POST">
+                                                                            <form  name="frm_subpriv" id="frm_subpriv" action="gestion_usuarios.php" method="POST">
 										<div class="form-group">
-                                                                                    <input type="text" class="form-control input-sm" value="" placeholder="Nombre Privilegio">
+                                                                                    <input type="text" name="txt_namehijo" class="form-control input-sm" value="" placeholder="Nombre Privilegio">
                                                                                     <br>
-                                                                                    <select class="form-control">
+                                                                                    <select name="opt_padre" class="form-control">
                                                                                         <?php
                                                                                         
                                                                                             $rols = $adminc->get_master_rols();
                                                                                             foreach ($rols as $k=>$v):
-                                                                                                $idp = $v['id_privilegios'];
+                                                                                                $idp = $v['nivel'];
                                                                                                 $nombrep = $v['nombre'];
-                                                                                                echo "<option id='$idp'>$nombrep</option>";
+                                                                                                echo "<option value='$idp'>$nombrep</option>";
                                                                                             endforeach;
                                                                                         ?>
                                                                                     </select>
                                                                                      <br>
-                                                                                    <input type="submit" class="btn btn-primary" value="Guardar">
+                                                                                    <input type="submit" name="cmd_padre_guardar" class="btn btn-primary" value="Guardar">
                                                                                     <div class="alert-info" id="alertas_usuarios"></div>
 										</div>
                                                                             </form>
