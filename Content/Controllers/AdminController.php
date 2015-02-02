@@ -91,6 +91,38 @@ class AdminController extends MysqlConection {
         endif;
     }
     
+    public function add_rols($rol_name , $padre = null)
+    {
+        $id = null;
+        $data = array();
+        $insert = false;
+        
+        $id = rand("1", "200");
+        $is_exist = $this->RawQuery("SELECT * FROM privilegios WHERE NIVEL LIKE $id");
+        if(count($is_exist)>=1):
+                 while(count($is_exist)>= 1):
+                    $id = rand(1,200);
+                    $is_exist = $this->RawQuery("SELECT * FROM privilegios WHERE NIVEL LIKE $id");
+                 endwhile;
+        endif;
+        
+        if(\SivarApi\Tools\Validation::Is_Empty_OrNull($padre)):
+              $data = array("nivel" => $id  , "nombre"=> $rol_name , "padre"=>0);
+              $insert = $this->Insert("privilegios", $data );
+            else:
+               $data = array("nivel"=>$id , "nombre"=> $rol_name , "padre"=>$padre);
+               $insert = $this->Insert("privilegios", $data );
+        endif;
+            
+       return $insert;
+    }
+    
+    public function delete_rols($id_rols)
+    {
+        $this->query = "id_privilegios LIKE $id_rols";
+        return $this->Delete("privilegios", $this->query);
+    }
+    
     public function get_master_rols($master = true)
     {
         if ($master != true) {
@@ -180,6 +212,9 @@ class AdminController extends MysqlConection {
         return $delete;
     }
     
+     /**
+      * @deprecated since version 1.0
+      */
      public function Get_MasterPrivilegios()
     {
         $this->query = "SELECT nivel , nombre FROM privilegios";
