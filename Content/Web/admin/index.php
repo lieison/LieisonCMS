@@ -418,8 +418,8 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">
 						<li>
-							<a href="extra_profile.html">
-							<i class="icon-user"></i> My Profile </a>
+                                                    <a href="perfil.php">
+							<i class="icon-user"></i> Mi Perfil</a>
 						</li>
 						<li>
 							<a href="page_calendar.html">

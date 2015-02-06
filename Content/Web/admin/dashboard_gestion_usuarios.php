@@ -25,12 +25,11 @@
     endif;
     
     $adminc = new AdminController();
-    $nivel= $adminc->get_rols_values($rol);
-    
-    if($nivel == 50):
+    $priv = $adminc->get_permission_page($rol, FunctionsController::get_actual_page());
+    if(!$priv):
         $header->redirect("index.php");
     endif;
-    //guardar_superpermisos
+   
     
    
     if(isset($_POST['guardar_superpermisos']) && isset($_POST['txt_superpermisos'])):

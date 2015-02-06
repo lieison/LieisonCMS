@@ -110,18 +110,6 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Pdf/exportPDF.class.php';
 //require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/GoPaypal.class.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php';
 
-
-/**
- * Controladores | Controllers
- *
- * 
- */
-
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/AdminController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/DashboardController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FrontEndController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FunctionsController.php';
- 
  /**
  * Modelos | Models
  *
@@ -129,7 +117,24 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php
  */
  
  require $GLOBAL_ROOT . $FOLDER . '/Content/Models/SliderModel.php';
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Models/UserModel.php';
+
+
+/**
+ * Controladores | Controllers
+ *
+ * 
+ */
+
+
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/AdminController.php';
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/DashboardController.php';
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FrontEndController.php';
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FunctionsController.php';
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/PageController.php';
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/UserController.php';
  
+
 
 /**AGREGANDO PLUGINS**/
 

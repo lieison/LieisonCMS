@@ -38,9 +38,23 @@ class FunctionsController {
     {
         $directory = self::GetRootUrl($directory);
         $dir = new _Directory();
-        echo "<pre>";
-        print_r($dir->FindDataDirectory($directory , $pattern));
-        echo "</pre>";
+        return $dir->FindDataDirectory($directory , $pattern);
      }
+     
+     
+     public static function get_actual_page()
+     {
+        $data_server =  $_SERVER['REQUEST_URI'];
+        $data_server = explode("/" , $data_server);
+        if (count($data_server) < 2) {
+            $data_server = explode("\\" , $data_server);
+            if(count($data_server) < 2)
+                return $data_server[0];
+            else
+                return $data_server[count($data_server) - 1];
+        } else {
+            return $data_server[count($data_server) - 1];
+        }
+    }
 
 }

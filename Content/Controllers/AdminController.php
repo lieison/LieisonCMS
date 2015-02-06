@@ -10,8 +10,7 @@ class AdminController extends MysqlConection {
     public function __construct() {
         parent::__construct();
     }
-
-
+    
     public function GetLogin($user , $password )
     {
         
@@ -210,6 +209,25 @@ class AdminController extends MysqlConection {
         endif;
         
         return $delete;
+    }
+    
+ 
+    
+    public function get_permission_page($rol , $dashboard_page)
+    {
+        $this->query = "SELECT privilegios FROM dashboard WHERE link LIKE '%$dashboard_page%'";
+        $result = $this->RawQuery($this->query);
+        $rol_value = $this->get_rols_values($rol);
+        foreach ($result as $k=>$v)
+        {
+           $page_rol = $v['privilegios'];
+           if((int)$rol_value == (int) $page_rol)
+           {
+               return true;
+           }
+        }
+        
+        return false;
     }
     
      /**

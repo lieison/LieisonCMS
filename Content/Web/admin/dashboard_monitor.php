@@ -25,8 +25,11 @@
         $header->redirect("cuenta_desactivada.php");
     endif;
     
-    if($rol != 'admin' && $rol != "ceo"):
-         $http->redirect("login.php");
+    //ACA ESTA TODA LA SEGURIDAD Y CONTROL DE USUARIO EN LOS SISTEMAS DE PRIVILEGIOS DASHBOARD
+    $adminc = new AdminController();
+    $priv = $adminc->get_permission_page($rol, FunctionsController::get_actual_page());
+    if(!$priv):
+        $header->redirect("index.php");
     endif;
     
 ?>
