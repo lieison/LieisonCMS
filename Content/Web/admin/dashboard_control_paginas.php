@@ -25,10 +25,7 @@
     endif;
     
     $adminc = new AdminController();
-    $nivel= $adminc->get_rols_values($rol);
-    
     $priv = $adminc->get_permission_page($rol, FunctionsController::get_actual_page());
-    
     if(!$priv):
         $header->redirect("index.php");
     endif;
