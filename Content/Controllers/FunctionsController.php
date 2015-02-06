@@ -37,36 +37,10 @@ class FunctionsController {
     public static function get_directory_tree($directory , $pattern = null)
     {
         $directory = self::GetRootUrl($directory);
-        
-        if(is_dir($directory))
-        {
-          
-         if ($dh = opendir($directory)) { 
-         while (($file = readdir($dh)) !== false) { 
-            //esta línea la utilizaríamos si queremos listar todo lo que hay en el directorio 
-            //mostraría tanto archivos como directorios 
-            //echo "<br>Nombre de archivo: $file : Es un: " . filetype($ruta . $file); 
-            if (is_dir($directory . $file) && $file!="." && $file!=".."){ 
-               //solo si el archivo es un directorio, distinto que "." y ".." 
-               echo "<br>Directorio: $ruta$file"; 
-             //  listar_directorios_ruta($ruta . $file . "/"); 
-            } 
-         } 
-            closedir($dh); 
-        } 
-         
-       
-        if(SivarApi\Tools\Validation::Is_Empty_OrNull($pattern))
-        {
-            
-        }
-        else
-        {
-            
-        }
-           
-        }
-        
-    }
-    
+        $dir = new _Directory();
+        echo "<pre>";
+        print_r($dir->FindDataDirectory($directory , $pattern));
+        echo "</pre>";
+     }
+
 }

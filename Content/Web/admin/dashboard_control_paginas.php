@@ -31,7 +31,7 @@
         $header->redirect("index.php");
     endif;
     
-    FunctionsController::get_directory_tree("admin");
+    FunctionsController::get_directory_tree("admin" ,  array("name"=>"dashboard" , "extend"=> "php"));
     
     
     ?>
