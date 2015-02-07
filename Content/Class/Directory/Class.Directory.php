@@ -12,14 +12,16 @@ class _Directory {
     
     var $array_dir = array();
     
+    protected $array_file = array();
+    
     
     public function __construct() {
         
     }
     
-    public function CreateDirectory($path , $nombre_directorio)
+    public function CreateDirectory($path , $dir_name)
     {
-        $direccion = $path."/$nombre_directorio";
+        $direccion = $path."/$dir_name";
         if (!file_exists($direccion)) {
             mkdir($direccion, 777);
             RETURN TRUE;
@@ -47,8 +49,50 @@ class _Directory {
     }else {
         copy( $source, $target );
     }
-}
+    }
+    
+    
+    public function UploadFile($directory, $name_file , $new_name = "")
+    {
+        if(is_uploaded_file($_FILES[$name_file]['tmp_name'])){
+            
+            $name = "";
+            $archivo=$_FILES[$name_file]['name']; 
+         
+            if ($new_name == "") {
+                $name_ = pathinfo($archivo, PATHINFO_FILENAME);
+            } else {
+                $name_ = $new_name;
+            }
 
+            $extension = pathinfo($archivo,PATHINFO_EXTENSION); 
+            $random = substr(md5(time().rand()),2,8);
+            $name = base64_encode("$name_$random") . ".$extension"; 
+            
+            if (move_uploaded_file($_FILES[$name_file]['tmp_name'], $directory. "/$name")) {
+                
+                $this->array_file = array(
+                    "nombre"=> $archivo,
+                    "tipo"=>$_FILES[$name_file]['type'],
+                    "extencion"=>$extension,
+                    "encriptacion"=>$name,
+                    "dimension"=>$_FILES[$name_file]['size'] / 1024
+                );
+                
+                return $name;
+            } else {
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    public function Get_UploadFiles(){ return $this->array_file; }
+    
+    
     /**
      *@version 1.0
      *@author Rolando Arriaza , ultima version

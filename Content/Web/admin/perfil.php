@@ -1,12 +1,9 @@
 <?php
 
+
     session_start();
     include   '../../Conf/Include.php';
     $header = new Http\Header();
-    
-    if(!isset($_SESSION['login'])):
-        $header->redirect("login.php");
-    endif;
     
     $usuario = $_SESSION['login']['user'];
     $rol = $_SESSION['login']['rol'];
@@ -14,29 +11,42 @@
     $mail = $_SESSION['login']['email'];
     $activo = $_SESSION['login']['activo'];
     $id_user = $_SESSION['login']['id'];
-    $imagen = $_SESSION['login']['imagen'];
+    $imagen =  $_SESSION['login']['imagen'];
     
     if(\SivarApi\Tools\Validation::Is_Empty_OrNull($imagen)):
         $imagen = "avatar.png";
     endif;
+
+    if(!isset($_SESSION['login'])):
+        $header->redirect("login.php");
+    endif;
     
+        
     $user_controller = new UserController($id_user);
+    
+    if(isset($_REQUEST['avatar_guardar'])):
+        $is_save =$user_controller->SetNew_Avatar(FunctionsController::GetRootUrl("admin/img/users"), "avatar_imagen");
+        if(!$is_save):
+            echo "<script>alert('Imposible subir la imagen intente de nuevo mas tarde ...');</script>";
+        else:
+            $_SESSION['login']['imagen'] = $user_controller->get_file_name();
+            $imagen =  $_SESSION['login']['imagen'];
+        endif;
+    else:   
+       
+    endif;
+    
+    
+    
    // print_r($user_controller->Get_DataUser());
-   
 ?>
 
+
+
+
+
+
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.1
-Version: 3.6.1
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -48,7 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <title>Metronic | Pages - User Account</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-type"  content="text/html; charset=utf-8">
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -73,17 +83,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
 </head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
-<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
-<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
-<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
-<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
-<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
-<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
-<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
-<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+
 <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed page-sidebar-closed-hide-logo page-container-bg-solid">
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
@@ -359,9 +359,10 @@ License: You must have a valid license purchased only from themeforest(the above
 												<p>
 													 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
 												</p>
-												<form action="#" role="form">
+                                                                                                <form action="#" role="form" method="post" enctype="multipart/form-data">
 													<div class="form-group">
 														<div class="fileinput fileinput-new" data-provides="fileinput">
+                                                                           
 															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
 																<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
 															</div>
@@ -370,13 +371,13 @@ License: You must have a valid license purchased only from themeforest(the above
 															<div>
 																<span class="btn default btn-file">
 																<span class="fileinput-new">
-																Select image </span>
+                                                                                                                                Seleccionar Imagen</span>
 																<span class="fileinput-exists">
-																Change </span>
-																<input type="file" name="...">
+																Cambiar </span>
+                                                                                                                                    <input type="file" id="avatar_imagen" name="avatar_imagen" />
 																</span>
 																<a href="#" class="btn default fileinput-exists" data-dismiss="fileinput">
-																Remove </a>
+																Remover </a>
 															</div>
 														</div>
 														<div class="clearfix margin-top-10">
@@ -385,10 +386,10 @@ License: You must have a valid license purchased only from themeforest(the above
 														</div>
 													</div>
 													<div class="margin-top-10">
-														<a href="#" class="btn green-haze">
-														Submit </a>
+                                                                                                            <input type="submit" value="Guardar" class="btn green-haze" id="avatar_guardar" name="avatar_guardar" />
+														
 														<a href="#" class="btn default">
-														Cancel </a>
+														Cancelar </a>
 													</div>
 												</form>
 											</div>
@@ -531,10 +532,10 @@ License: You must have a valid license purchased only from themeforest(the above
 jQuery(document).ready(function() {       
    // initiate layout and plugins
    Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-QuickSidebar.init(); // init quick sidebar
-Demo.init(); // init demo features
-Profile.init(); // init page demo
+    Layout.init(); // init current layout
+    QuickSidebar.init(); // init quick sidebar
+    Demo.init(); // init demo features
+    Profile.init(); // init page demo
 });
 </script>
 <!-- END JAVASCRIPTS -->

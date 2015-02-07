@@ -77,7 +77,7 @@
      * el nombre ya expuesto.
      */
     
-    public function UploadFile($new_name = "")
+  /*  public function UploadFile($new_name = "")
     {
         if(is_uploaded_file($_FILES[$this->att_name]['tmp_name'])){
             
@@ -117,7 +117,7 @@
             $this->showError();
             return false;
         }
-    }
+    }*/
     
     
     /**
