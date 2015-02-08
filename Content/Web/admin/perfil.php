@@ -35,9 +35,7 @@
     elseif(isset($_REQUEST['usuario_datos'])):   
        
     endif;
-    
-    
-    
+
    // print_r($user_controller->Get_DataUser());
 ?>
 
@@ -314,6 +312,7 @@
                                                                                         //obteniendo datos del usuario
                                                                                        $data_user =$user_controller->Get_DataUser();
                                                                                        $data_login = $user_controller->get_login();
+
                                                                                     ?>
 											<!-- PERSONAL INFO TAB -->
 											<div class="tab-pane active" id="tab_1_1">
@@ -413,7 +412,17 @@
 											</div>
 											<!-- END CHANGE PASSWORD TAB -->
 											<!-- PRIVACY SETTINGS TAB -->
+                                                                                         <?php
+                                                                                            
+                                                                                              $contrato = $user_controller->find_contract(FunctionsController::GetRootUrl("admin/files/manifiest"));
+                                                                                             echo "<pre>";
+                                                                                             print_r($contrato);
+                                                                                             echo "</pre>";
+                                                                                            
+                                                                                            ?>
+                                                                                        
 											<div class="tab-pane" id="tab_1_4">
+                                                                                           
 												<form action="#">
 													<table class="table table-light table-hover">
 													<tr>

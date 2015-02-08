@@ -8,134 +8,44 @@
  */
 
    
- class File extends _Directory {
+ class FileExtension {
+     
+     
+    static $extensions = array(
+        "docx" =>"DocWord.png",
+        "doc"=>"DocWord.png",
+        "xml"=>"DocFile.png",
+        "txt"=>"DocFile.png"
+    );
         
     
-    private $dir = null;
-    private $att_name = null;
-    private $arreglo = null;
-    
-    private $original_name = null;
-    private $encrypt_name = null;
-    
-   
-    /**
-     * 
-     * @param String $directorio Crea un nuevo directorio raiz donde se guardara los archivos 
-     * @todo parametro opcional
-     */
-    
-    function __construct($directorio = null)
+    public static function GetIcon_extension($dir , $ext ,$fname = null)
     {
-
-        if ($directorio != null) {
-            $this->dir = dirname(__FILE__) . "/$directorio";
-        } else {
-            $this->dir = dirname(__FILE__) . "/images";
-        }
-
-        if(!file_exists($this->dir))
-        {
-            $priv = 777;
-            mkdir($this->dir , $priv);
-        }
-    }
-    
-    
-    /**
-     * @todo obtiene el nombre original del archivo con su extencion
-     * @return String devuelve una cadena con el nombre
-     */
-    
-    public function GetOriginalName()
-    {
-        return $this->original_name ? : NULL;
-    }
-    
-     /**
-     * @todo obtiene el nombre encriptado del archivo con su extencion
-     * @return String devuelve una cadena con el nombre encriptado
-     */
-    
-    public function GetEncryptName()
-    {
-        return $this->encrypt_name ? : NULL;
-    }
-    
-    /**
-     * @param String $att_name Establece nombre del archivo $_FILES para ser manejado
-     */
-    
-    public function SetNameFile($att_name)
-    {
-        $this->att_name = $att_name;
-    }
-    
-    
-    /**
-     * @param String $new_name Establece un nuevo nombde al archivo en dado caso no exista se le dejara
-     * el nombre ya expuesto.
-     */
-    
-  /*  public function UploadFile($new_name = "")
-    {
-        if(is_uploaded_file($_FILES[$this->att_name]['tmp_name'])){
-            
-            $name = "";
-            $archivo=$_FILES[$this->att_name]['name']; 
-            $this->original_name = $archivo;
+         $directory = new _Directory();
+         $datafiles = $directory->FindDataDirectory($dir);
+         foreach($datafiles as $key =>$value)
+         {
+             if($fname == $value['filename'] && $fname != null)
+             {
+                 foreach (self::$extensions as $k=>$v)
+                 {
+                     if ($k === $ext) {
+                        return $v;
+                    }
+                }
+             }
+             else
+             {
+                 foreach (self::$extensions as $k=>$v)
+                 {
+                     if ($k === $ext) {
+                        return $v;
+                    }
+                }
+             }
+         }
          
-            if ($new_name == "") {
-                $name_ = pathinfo($archivo, PATHINFO_FILENAME);
-            } else {
-                $name_ = $new_name;
-            }
-
-            $extension = pathinfo($archivo,PATHINFO_EXTENSION); 
-            $random = substr(md5(time().rand()),2,8);
-            $name = base64_encode("$name_$random") . ".$extension"; 
-            $this->encrypt_name = $name;
-            
-            if (move_uploaded_file($_FILES[$this->att_name]['tmp_name'], $this->dir . "/$name")) {
-                
-                $this->arreglo = array(
-                    "nombre"=> $archivo,
-                    "tipo"=>$_FILES[$this->att_name]['type'],
-                    "extencion"=>$extension,
-                    "encriptacion"=>$name,
-                    "dimension"=>$_FILES[$this->att_name]['size'] / 1024
-                );
-                
-                return true;
-            } else {
-                $this->showError();
-                return false;
-            }
-        }
-        else
-        {
-            $this->showError();
-            return false;
-        }
-    }*/
-    
-    
-    /**
-     * @return Array Devuelve un arreglo con la informacion del archivo a subir
-     */
-    public function GetArray()
-    {
-        return $this->arreglo;
-    }
-    
-    
-    /**
-     * @todo Muestra los errores
-     */
-    private function showError()
-    {
-        $err = $file[$this->att_name]['error'];
-        echo "<br><b>Hubo un error inesperado ($err)</b>";
+         return false;
     }
     
     /**
@@ -144,7 +54,7 @@
      * @return Array Devuelve los archivos encontrados
      */
     
-    public function FindFiles($dir = null)
+  /*  public function FindFiles($dir = null)
     {
         $raiz = null;
         $arreglo_file = array();
@@ -165,12 +75,10 @@
         }
         
         return $arreglo_file;
-     }
+     }*/
      
-     /**
-      * 
-      */
-     public function DownloadFile($direccion_archivo , 
+
+    /* public function DownloadFile($direccion_archivo , 
              $nuevo_nombre = null , 
              $extencion = null)
      {
@@ -188,22 +96,16 @@
           header ("Content-Type: application/octet-stream");
           header ("Content-Length: ".filesize($direccion_archivo));
           readfile($direccion_archivo);
-     }
+     }*/
      
    
-     
-    public static function RootDirectory()
-    {
-        include '/Content/Conf/Conf.php';
-        return  $configuracion["Dir"]["root"];
-    }
-      
+
       
    /**
    * @param String $nombre Nombre del archivo a crear
    * @param String $direccion Direccion del archivo a crear en dado caso si es null se crea en la raiz
    */
-  public  function CreateFile($name , $adress , $extension="php")
+ /* public  function CreateFile($name , $adress , $extension="php")
    {
       if( !\SivarApi\Tools\Validation::Is_Empty_OrNull($name))
       {
@@ -211,19 +113,7 @@
          fclose($archivo); 
       }
    }
-   
-   /**
-    * 
-    */
-   public function CreateDirectory($name , $adress  )
-   {
-      if( !\SivarApi\Tools\Validation::Is_Empty_OrNull($name))
-      {
-         $is_create = mkdir($adress  . "\\" . $nombre , $mode = 0777);
-         return $is_create;
-      }
-   }
-     
+   */
     
 }
 

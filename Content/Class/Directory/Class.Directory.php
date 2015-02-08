@@ -3,7 +3,6 @@
 
 class _Directory {
     
-    
     var $array_dir = array();
     
     protected $array_file = array();
@@ -139,7 +138,8 @@ class _Directory {
                  $p = $pattern["name"];
                  $ext = $pattern["extend"];
                  $preg = "/^($p\w+\.$ext)$/";
-            }else
+            }
+            else
             {
                 $preg = "/^($pattern\w+\.php)$/";
             }
@@ -150,9 +150,10 @@ class _Directory {
                 if( $class->getType() == "file"){
                     $filename = $class->getFilename();
                     $path = $class->getPath();
-                    if(preg_match($preg, $filename)){
-                        array_push($this->array_dir, array("root"=>$path , "filename"=>$filename));
-                    }
+                    $ext = $class->getExtension();
+                   if(preg_match($preg, $filename)){
+                            array_push($this->array_dir, array("root"=>$path , "filename"=>$filename));
+                   }
                 }
             }
         }

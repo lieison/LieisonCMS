@@ -4,7 +4,7 @@ class UserController extends UserModel  {
     
    protected $array_file = null;
     
-   function __construct($id_user = null) {
+    public function __construct($id_user = null) {
         if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($id_user))
         {
             $this->ID_USER = $id_user;
@@ -51,5 +51,50 @@ class UserController extends UserModel  {
     {
         return $this->array_file;
     }
+    
+    public function find_contract($dir)
+    {
+        $contract_array = array();
+        $directory = new _Directory();
+        $this->QUERY = "SELECT id_contrato , nombre , contrato , "
+                . "aceptado , fecha_envio , fecha_contrato FROM contrato WHERE id_usuario LIKE '$this->ID_USER'";
+        $result = parent::RawQuery($this->QUERY);
+        foreach ($result as $key=>$value)
+        {
+           
+           $extension = $directory->Get_Extension($value['contrato']);
+           $datafile = FileExtension::GetIcon_extension($dir , $extension , $value['contrato']);
+           if($datafile != false ){
+                    $contract_array[] = array(
+                        "id"=>$value['id_contrato'],
+                        "nombre"=>$value['nombre'],
+                        "contrato"=>$value['contrato'],
+                        "aceptado"=>$value['aceptado'],
+                        "fecha_envio"=>$value['fecha_envio'],
+                        "fecha_contrato"=>$value['fecha_contrato'],
+                        "icono"=> $datafile
+                    );
+           }
+           else {
+                 $contract_array[] = array(
+                        "id"=>$value['id_contrato'],
+                        "nombre"=>$value['nombre'],
+                        "contrato"=>$value['contrato'],
+                        "aceptado"=>$value['aceptado'],
+                        "fecha_envio"=>$value['fecha_envio'],
+                        "fecha_contrato"=>$value['fecha_contrato'],
+                        "icono"=> "DocBroken.png"
+                    );
+           }
+        }
+        
+        return  $contract_array;
+    }
+    
+    public function set_contract()
+    {
+        
+    }
+    
 
 }

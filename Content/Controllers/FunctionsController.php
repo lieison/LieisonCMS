@@ -13,7 +13,6 @@
  */
 class FunctionsController {
     
-    
     public static function GetRootUrl($directory)
     {
         return $url = $_SERVER['DOCUMENT_ROOT'] .  "/" . $_COOKIE['FOLDER'] . "/Content/Web/$directory/";
@@ -33,7 +32,6 @@ class FunctionsController {
         return date('d');
     }
     
-    
     public static function get_directory_tree($directory , $pattern = null)
     {
         $directory = self::GetRootUrl($directory);
@@ -41,8 +39,7 @@ class FunctionsController {
         return $dir->FindDataDirectory($directory , $pattern);
      }
      
-     
-     public static function get_actual_page()
+    public static function get_actual_page()
      {
         $data_server =  $_SERVER['REQUEST_URI'];
         $data_server = explode("/" , $data_server);
@@ -56,5 +53,7 @@ class FunctionsController {
             return $data_server[count($data_server) - 1];
         }
     }
+    
+    
 
 }

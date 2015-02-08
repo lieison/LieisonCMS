@@ -251,16 +251,7 @@
 							<div class="caption">
 								<i class="fa fa-edit"></i>Control De Usuarios 
 							</div>
-							<div class="tools">
-								<a href="javascript:;" class="collapse">
-								</a>
-								<a href="#portlet-config" data-toggle="modal" class="config">
-								</a>
-								<a href="javascript:;" class="reload">
-								</a>
-								<a href="javascript:;" class="remove">
-								</a>
-							</div>
+						
 						</div>
 						<div class="portlet-body">
 							<div class="table-toolbar">
@@ -406,7 +397,7 @@
                                                                     }
                                                                 endforeach;
                                                                 $id_u = $value['id_privilegios'];
-                                                                echo '<td><a class="delete" href="gestion_usuarios.php?id_rol=' . $id_u . '">Eliminar</a></td>';
+                                                                echo '<td><a class="delete" href="dashboard_gestion_usuarios.php?id_rol=' . $id_u . '">Eliminar</a></td>';
                                                                 echo "</tr>";
                                                             endforeach;
                                                         ?>
@@ -426,7 +417,7 @@
 							<div class="table-toolbar">
 								<div class="row">
 									<div class="col-md-6">
-                                                                            <form  name="frm_subpriv" id="frm_subpriv" action="gestion_usuarios.php" method="POST">
+                                                                            <form  name="frm_subpriv" id="frm_subpriv" action="dashboard_gestion_usuarios.php" method="POST">
 										<div class="form-group">
                                                                                     <input type="text" name="txt_namehijo" class="form-control input-sm" value="" placeholder="Nombre Privilegio">
                                                                                     <br>
@@ -484,7 +475,7 @@
                                                                     }
                                                                 endforeach;
                                                                 $id_u = $value['id_privilegios'];
-                                                                echo '<td><a class="delete" href="gestion_usuarios.php?id_rol=' . $id_u . '">Eliminar</a></td>';
+                                                                echo '<td><a class="delete" href="dashboard_gestion_usuarios.php?id_rol=' . $id_u . '">Eliminar</a></td>';
                                                                 echo "</tr>";
                                                             endforeach;
                                                             endif;
