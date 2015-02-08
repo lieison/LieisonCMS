@@ -52,12 +52,20 @@ class UserController extends UserModel  {
         return $this->array_file;
     }
     
-    public function find_contract($dir)
+    public function find_contract($dir , $id_user = null)
     {
         $contract_array = array();
         $directory = new _Directory();
-        $this->QUERY = "SELECT id_contrato , nombre , contrato , "
+        
+        if($id_user == null){
+            $this->QUERY = "SELECT id_contrato , nombre , contrato , "
                 . "aceptado , fecha_envio , fecha_contrato FROM contrato WHERE id_usuario LIKE '$this->ID_USER'";
+        }
+        else{
+             $this->QUERY = "SELECT id_contrato , nombre , contrato , "
+                . "aceptado , fecha_envio , fecha_contrato FROM contrato WHERE id_usuario LIKE '$id_user'";
+        }
+        
         $result = parent::RawQuery($this->QUERY);
         foreach ($result as $key=>$value)
         {
@@ -91,9 +99,12 @@ class UserController extends UserModel  {
         return  $contract_array;
     }
     
-    public function set_contract()
+    public function set_contract($id_contrato)
     {
-        
+        $fecha = date("y-m-d");
+        $update = parent::Update("contrato", array("aceptado"=>"1" ,
+                "fecha_contrato"=>$fecha) , "id_contrato LIKE $id_contrato");
+        return $update;
     }
     
 

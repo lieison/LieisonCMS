@@ -32,8 +32,10 @@
             $_SESSION['login']['imagen'] = $user_controller->get_file_name();
             $imagen =  $_SESSION['login']['imagen'];
         endif;
-    elseif(isset($_REQUEST['usuario_datos'])):   
-       
+    elseif(isset($_REQUEST['usuario_datos'])): 
+        
+    elseif(isset($_REQUEST['id_contrato'])):
+        $user_controller->set_contract($_REQUEST['id_contrato']); 
     endif;
 
    // print_r($user_controller->Get_DataUser());
@@ -415,65 +417,56 @@
                                                                                          <?php
                                                                                             
                                                                                               $contrato = $user_controller->find_contract(FunctionsController::GetRootUrl("admin/files/manifiest"));
-                                                                                             echo "<pre>";
-                                                                                             print_r($contrato);
-                                                                                             echo "</pre>";
+                                                                                    
                                                                                             
                                                                                             ?>
                                                                                         
 											<div class="tab-pane" id="tab_1_4">
-                                                                                           
-												<form action="#">
+                                                                                            <label>Tus Contratos</label>
 													<table class="table table-light table-hover">
-													<tr>
-														<td>
-															 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus..
-														</td>
-														<td>
-															<label class="uniform-inline">
-															<input type="radio" name="optionsRadios1" value="option1"/>
-															Yes </label>
-															<label class="uniform-inline">
-															<input type="radio" name="optionsRadios1" value="option2" checked/>
-															No </label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-														</td>
-														<td>
-															<label class="uniform-inline">
-															<input type="checkbox" value=""/> Yes </label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-														</td>
-														<td>
-															<label class="uniform-inline">
-															<input type="checkbox" value=""/> Yes </label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															 Enim eiusmod high life accusamus terry richardson ad squid wolf moon
-														</td>
-														<td>
-															<label class="uniform-inline">
-															<input type="checkbox" value=""/> Yes </label>
-														</td>
-													</tr>
+													
+                                                                                                            <?php
+                                                                                                            
+                                                                                                              if(count($contrato) == 0):
+                                                                                                                  echo "<tr><td>No Exiten contratos </td></tr>";
+                                                                                                              endif;
+                                                                                                        
+                                                                                                              foreach($contrato as $k=>$v):
+                                                                                                                  echo "<tr>";
+                                                                                                              
+                                                                                                                     echo "<td>" . $v['nombre'] . "</td>";
+                                                                                                                     if($v['aceptado'] != 0):
+                                                                                                                         echo "<td><label class='uniform-inline'>Contrato Aceptado</td>";
+                                                                                                                     else:
+                                                                                                                          echo "<td>";
+                                                                                                                          echo "<label class='uniform-inline'><a href='perfil.php?id_contrato=" . $v['id'] .
+                                                                                                                                  "' class='btn green-haze'>Aceptar Contrato</a></td>";
+                                                                                                                     endif;
+                                                                                                                     echo "<td>Enviado:<br>" . $v['fecha_envio'];
+                                                                                                                     if($v['fecha_contrato'] === "" || $v['fecha_contrato'] === null):
+                                                                                                                         echo "</td>";
+                                                                                                                     else:
+                                                                                                                         echo "<br>Firmado:<br>" . $v['fecha_contrato'] . "</td>";
+                                                                                                                     endif;
+                                                                                                                     
+                                                                                                                     if($v['icono'] === "DocBroken.png"):
+                                                                                                                          echo "<td><a href='alert('Archivo dañado');'><img src='img/documents/" 
+                                                                                                                         . $v['icono'] . "' width='30' height='30' /></a></td>";
+                                                                                                                     else:
+                                                                                                                           echo "<td><a href='files/manifiest/" . $v['contrato'] . "'><img src='img/documents/" 
+                                                                                                                         . $v['icono'] . "' width='30' height='30' /></a></td>";
+                                                                                                                     endif;
+                                          
+                                                                                                                  echo "</tr>";
+                                                                                                              endforeach;
+                                                                                                            
+                                                                                                            
+                                                                                                            ?>
+                                                                                                            
+												
 													</table>
-													<!--end profile-settings-->
-													<div class="margin-top-10">
-														<a href="#" class="btn green-haze">
-														Save Changes </a>
-														<a href="#" class="btn default">
-														Cancel </a>
-													</div>
-												</form>
+													
+												
 											</div>
 											<!-- END PRIVACY SETTINGS TAB -->
 										</div>
