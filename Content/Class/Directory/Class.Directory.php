@@ -1,12 +1,6 @@
 <?php
 
 
-
-/**
- * Description of Directorio
- *
- * @author rolandoantonio
- */
 class _Directory {
     
     
@@ -14,9 +8,13 @@ class _Directory {
     
     protected $array_file = array();
     
-    
     public function __construct() {
         
+    }
+    
+    public function Get_Extension($file)
+    {
+        return pathinfo($file , PATHINFO_EXTENSION);
     }
     
     public function CreateDirectory($path , $dir_name)
@@ -50,7 +48,6 @@ class _Directory {
         copy( $source, $target );
     }
     }
-    
     
     public function UploadFile($directory, $name_file , $new_name = "")
     {
@@ -91,7 +88,6 @@ class _Directory {
     }
     
     public function Get_UploadFiles(){ return $this->array_file; }
-    
     
     /**
      *@version 1.0

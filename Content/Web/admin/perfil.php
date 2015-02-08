@@ -32,7 +32,7 @@
             $_SESSION['login']['imagen'] = $user_controller->get_file_name();
             $imagen =  $_SESSION['login']['imagen'];
         endif;
-    else:   
+    elseif(isset($_REQUEST['usuario_datos'])):   
        
     endif;
     
@@ -40,10 +40,6 @@
     
    // print_r($user_controller->Get_DataUser());
 ?>
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -55,7 +51,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Metronic | Pages - User Account</title>
+<title>Perfil Lieison</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type"  content="text/html; charset=utf-8">
@@ -168,7 +164,7 @@
                                 <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
                                      $dashboard = new DashboardController();
-                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Principal");
+                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "");
                                 ?>
 				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>
@@ -295,76 +291,77 @@
 									<div class="portlet-title tabbable-line">
 										<div class="caption caption-md">
 											<i class="icon-globe theme-font hide"></i>
-											<span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+											<span class="caption-subject font-blue-madison bold uppercase">Tú Cuenta</span>
 										</div>
 										<ul class="nav nav-tabs">
 											<li class="active">
-												<a href="#tab_1_1" data-toggle="tab">Personal Info</a>
+												<a href="#tab_1_1" data-toggle="tab">Informacion Personal</a>
 											</li>
 											<li>
-												<a href="#tab_1_2" data-toggle="tab">Change Avatar</a>
+												<a href="#tab_1_2" data-toggle="tab">Cambiar Avatar</a>
 											</li>
 											<li>
-												<a href="#tab_1_3" data-toggle="tab">Change Password</a>
+												<a href="#tab_1_3" data-toggle="tab">Cambiar Contraseña</a>
 											</li>
 											<li>
-												<a href="#tab_1_4" data-toggle="tab">Privacy Settings</a>
+												<a href="#tab_1_4" data-toggle="tab">Otros</a>
 											</li>
 										</ul>
 									</div>
 									<div class="portlet-body">
 										<div class="tab-content">
+                                                                                    <?php
+                                                                                        //obteniendo datos del usuario
+                                                                                       $data_user =$user_controller->Get_DataUser();
+                                                                                       $data_login = $user_controller->get_login();
+                                                                                    ?>
 											<!-- PERSONAL INFO TAB -->
 											<div class="tab-pane active" id="tab_1_1">
 												<form role="form" action="#">
 													<div class="form-group">
-														<label class="control-label">First Name</label>
-														<input type="text" placeholder="John" class="form-control"/>
+														<label class="control-label">Nombres</label>
+                                                                                                                <input value="<?php echo $data_user['nombre']; ?>" type="text" placeholder="" class="form-control" id="txt_nombre" name="txt_nombre"/>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Last Name</label>
-														<input type="text" placeholder="Doe" class="form-control"/>
+														<label class="control-label">Apellidos</label>
+														<input value="<?php echo $data_user['apellido'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Mobile Number</label>
-														<input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control"/>
+														<label class="control-label">Dui</label>
+														<input value="<?php echo $data_user['dui'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Interests</label>
-														<input type="text" placeholder="Design, Web etc." class="form-control"/>
+														<label class="control-label">Nit</label>
+														<input value="<?php echo $data_user['nit'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Occupation</label>
-														<input type="text" placeholder="Web Developer" class="form-control"/>
+														<label class="control-label">Telefono</label>
+														<input value="<?php echo $data_user['telefono'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
-														<label class="control-label">About</label>
-														<textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
+														<label class="control-label">Celular</label>
+														<input value="<?php echo $data_user['celular'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Website Url</label>
-														<input type="text" placeholder="http://www.mywebsite.com" class="form-control"/>
+														<label class="control-label">Usuario</label>
+														<input value="<?php echo $data_login['user']; ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="margiv-top-10">
-														<a href="#" class="btn green-haze">
-														Save Changes </a>
-														<a href="#" class="btn default">
-														Cancel </a>
+                                                                                                            <input type="submit"  class="btn green-haze" name="usuario_datos" id="usuario_datos" value="Guardar Cambios" />
+	
 													</div>
 												</form>
 											</div>
 											<!-- END PERSONAL INFO TAB -->
 											<!-- CHANGE AVATAR TAB -->
 											<div class="tab-pane" id="tab_1_2">
-												<p>
-													 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-												</p>
+												
                                                                                                 <form action="#" role="form" method="post" enctype="multipart/form-data">
 													<div class="form-group">
 														<div class="fileinput fileinput-new" data-provides="fileinput">
                                                                            
 															<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-																<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
+                                                                                                                            <img src="img/users/<?php echo $imagen; ?>" alt=""/>
 															</div>
 															<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
 															</div>
@@ -380,10 +377,7 @@
 																Remover </a>
 															</div>
 														</div>
-														<div class="clearfix margin-top-10">
-															<span class="label label-danger">NOTE! </span>
-															<span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
-														</div>
+														
 													</div>
 													<div class="margin-top-10">
                                                                                                             <input type="submit" value="Guardar" class="btn green-haze" id="avatar_guardar" name="avatar_guardar" />
