@@ -8,8 +8,9 @@ abstract class UserModel extends MysqlConection {
     
     var $QUERY = null;
     
-    public abstract function Get_Password($actual_password);
+    public abstract function Get_Password($actual_password , $new_password);
     public abstract function SetNew_Avatar($destination ,  $file_name);
+    public abstract function Update_user($fields);
             
     function __construct() {
         parent::__construct();

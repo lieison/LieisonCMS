@@ -33,9 +33,19 @@
             $imagen =  $_SESSION['login']['imagen'];
         endif;
     elseif(isset($_REQUEST['usuario_datos'])): 
-        
+         $campos = array(
+             "telefono"=>$_REQUEST['txt_telefono'],
+             "celular"=>$_REQUEST['txt_celular']
+            );
+         $user_controller->Update_user($campos);
     elseif(isset($_REQUEST['id_contrato'])):
         $user_controller->set_contract($_REQUEST['id_contrato']); 
+    elseif(isset($_REQUEST['password_enviar'])):
+        $is_ok = $user_controller->Get_Password($_REQUEST['txt_current_pass'], $_REQUEST['txt_new_pass']);
+        if(!$is_ok):
+            echo "<script>alert('Puede que la contraseña actual sea incorrecta')</script>";
+        endif;
+        $header->redirect("perfil.php");
     endif;
 
    // print_r($user_controller->Get_DataUser());
@@ -321,31 +331,31 @@
 												<form role="form" action="#">
 													<div class="form-group">
 														<label class="control-label">Nombres</label>
-                                                                                                                <input value="<?php echo $data_user['nombre']; ?>" type="text" placeholder="" class="form-control" id="txt_nombre" name="txt_nombre"/>
+                                                                                                                <input  disabled="true" value="<?php echo $data_user['nombre']; ?>" type="text" placeholder="" class="form-control" id="txt_nombre" name="txt_nombre"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Apellidos</label>
-														<input value="<?php echo $data_user['apellido'];  ?>" type="text" placeholder="" class="form-control"/>
+														<input disabled="true" value="<?php echo $data_user['apellido'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Dui</label>
-														<input value="<?php echo $data_user['dui'];  ?>" type="text" placeholder="" class="form-control"/>
+														<input disabled="true" value="<?php echo $data_user['dui'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Nit</label>
-														<input value="<?php echo $data_user['nit'];  ?>" type="text" placeholder="" class="form-control"/>
+														<input disabled="true" value="<?php echo $data_user['nit'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Telefono</label>
-														<input value="<?php echo $data_user['telefono'];  ?>" type="text" placeholder="" class="form-control"/>
+                                                                                                                <input name="txt_telefono" maxlength="8" value="<?php echo $data_user['telefono'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Celular</label>
-														<input value="<?php echo $data_user['celular'];  ?>" type="text" placeholder="" class="form-control"/>
+                                                                                                                <input name="txt_celular" maxlength="8" value="<?php echo $data_user['celular'];  ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="form-group">
 														<label class="control-label">Usuario</label>
-														<input value="<?php echo $data_login['user']; ?>" type="text" placeholder="" class="form-control"/>
+														<input disabled="true" value="<?php echo $data_login['user']; ?>" type="text" placeholder="" class="form-control"/>
 													</div>
 													<div class="margiv-top-10">
                                                                                                             <input type="submit"  class="btn green-haze" name="usuario_datos" id="usuario_datos" value="Guardar Cambios" />
@@ -391,24 +401,21 @@
 											<!-- END CHANGE AVATAR TAB -->
 											<!-- CHANGE PASSWORD TAB -->
 											<div class="tab-pane" id="tab_1_3">
-												<form action="#">
+                                                                                            <form action="#" method="get">
 													<div class="form-group">
-														<label class="control-label">Current Password</label>
-														<input type="password" class="form-control"/>
+														<label class="control-label">Contraseña Actual</label>
+                                                                                                                <input name="txt_current_pass" type="password" class="form-control"/>
 													</div>
 													<div class="form-group">
-														<label class="control-label">New Password</label>
-														<input type="password" class="form-control"/>
+														<label class="control-label">Nueva Contraseña</label>
+                                                                                                                <input name="txt_new_pass"  id="txt_new_pass" type="password" class="form-control"/>
 													</div>
 													<div class="form-group">
-														<label class="control-label">Re-type New Password</label>
-														<input type="password" class="form-control"/>
+														<label class="control-label">Repetir Nueva Contraseña</label>
+                                                                                                                <input name="txt_new_pass2"  id="txt_new_pass2" type="password" class="form-control" onkeyup="comparar();"/>
 													</div>
-													<div class="margin-top-10">
-														<a href="#" class="btn green-haze">
-														Change Password </a>
-														<a href="#" class="btn default">
-														Cancel </a>
+                                                                                                    <div class="margin-top-10" id="cmd_password">
+                                                                                                        <input type="submit" name="password_enviar"   value="Cambiar Contraseña" class="btn green-haze" />
 													</div>
 												</form>
 											</div>
@@ -542,6 +549,20 @@ jQuery(document).ready(function() {
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-37564768-1', 'keenthemes.com');
   ga('send', 'pageview');
+  
+  function comparar()
+  {
+      var p1 = document.getElementById('txt_new_pass').value;
+      var p2 = document.getElementById('txt_new_pass2').value;
+      if(p1===p2)
+      {
+          document.getElementById('cmd_password').innerHTML ='<input type="submit" name="password_enviar"   value="Cambiar Contraseña" class="btn green-haze" />';
+      }else{
+          document.getElementById('cmd_password').innerHTML ='<p><b>Las contraseñas deben ser iguales</b></p>';
+      }
+      
+  }
+ 
 </script>
 </body>
 

@@ -17,8 +17,17 @@ class UserController extends UserModel  {
       $this->ID_USER = $id_user;
     }
 
-    public function Get_Password($actual_password) {
-        
+    public function Get_Password($actual_password , $new_password) {
+        $this->QUERY = "SELECT password FROM login WHERE id_usuario LIKE '$this->ID_USER'";
+        $result = parent::RawQuery($this->QUERY);
+        $password = $result[0]['password'];
+        if (strcmp(\SivarApi\Tools\Encriptacion\Encriptacion::encrypt($actual_password), $password) == 0) {
+            $new_password = \SivarApi\Tools\Encriptacion\Encriptacion::encrypt($new_password);
+            $change = parent::Update("login", array("password" => $new_password), "id_usuario LIKE '$this->ID_USER'");
+            return $change;
+        } else {
+            return false;
+        }
     }
 
     public function SetNew_Avatar($destination , $file_name) {
@@ -106,6 +115,10 @@ class UserController extends UserModel  {
                 "fecha_contrato"=>$fecha) , "id_contrato LIKE $id_contrato");
         return $update;
     }
-    
+
+    public function Update_user($fields) {
+        $update_ = parent::Update("usuario" , $fields , " id_usuario LIKE '$this->ID_USER'");
+        return $update_;
+    }
 
 }
