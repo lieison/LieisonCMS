@@ -291,7 +291,7 @@
 									<div class="portlet-title tabbable-line">
 										<div class="caption caption-md">
 											<i class="icon-globe theme-font hide"></i>
-											<span class="caption-subject font-blue-madison bold uppercase">Tú Cuenta</span>
+											<span class="caption-subject font-blue-madison bold uppercase">TU CUENTA</span>
 										</div>
 										<ul class="nav nav-tabs">
 											<li class="active">
