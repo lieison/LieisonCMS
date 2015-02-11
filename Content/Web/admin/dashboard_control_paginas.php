@@ -199,7 +199,7 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Monitoreo</a>
+						<a href="#">Monitoreo</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
@@ -225,20 +225,14 @@
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
 								</a>
-								<a href="javascript:;" class="reload">
-								</a>
+			
 							</div>
 						</div>
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="row">
 									<div class="col-md-6">
-                                                                            <input type="date" value="" placeholder="Buscar Por fecha" id="logdefault" name="logdefault" />
-										<div class="btn-group">
-                                                                                    <button id="sample_editable_1_new" class="btn green" onclick="buscar_log(1);">
-											Buscar <i class="fa fa-search"></i>
-                                                                                    </button>
-										</div>
+                                                                           
 									</div>
 									<div class="col-md-6">
 									
