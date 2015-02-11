@@ -31,7 +31,7 @@ $pages = $pagecontroller->get_dashboard_database();
        echo "<td>" . $value['priv_nombre'] . "</td>";
        echo "<td><a href='ViewPage/EditControlPage.php?id=" 
                     . $value['id'] . "'>Editar</a>  | <a href='dashboard_control_paginas.php?id=" 
-                    . $value['id'] . "&accion=1'>Eliminar</a>" . "</td>";
+                    . $value['id'] . "'>Eliminar</a>" . "</td>";
        echo "</tr>";
   }
   

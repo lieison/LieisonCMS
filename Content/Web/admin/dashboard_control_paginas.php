@@ -26,7 +26,10 @@
     
     $adminc = new AdminController();
     $priv = $adminc->get_permission_page($rol, FunctionsController::get_actual_page());
-    if(!$priv):
+  
+    if(isset($_REQUEST['id'])):
+        
+    elseif(!$priv):
         $header->redirect("index.php");
     endif;
     
