@@ -15,6 +15,8 @@
     $activo = $_SESSION['login']['activo'];
     $id_user = $_SESSION['login']['id'];
     
+    
+    
     $imagen = $_SESSION['login']['imagen'];
     if(\SivarApi\Tools\Validation::Is_Empty_OrNull($imagen)):
         $imagen = "avatar.png";
@@ -25,11 +27,6 @@
     endif;
     
     $adminc = new AdminController();
-    $priv = $adminc->get_permission_page($rol, FunctionsController::get_actual_page());
-    if(!$priv):
-        $header->redirect("index.php");
-    endif;
-   
     
    
     if(isset($_POST['guardar_superpermisos']) && isset($_POST['txt_superpermisos'])):
@@ -59,6 +56,11 @@
                 else:
                     echo "<script>alert('Error al eliminar el privilegio');</script>";
                 endif;
+     else:
+        $priv = $adminc->get_permission_page($rol, FunctionsController::get_actual_page());
+        if(!$priv):
+            $header->redirect("index.php");
+        endif;
     endif;
     
 ?>
