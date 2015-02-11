@@ -28,7 +28,6 @@ if (ereg("[^A-Za-z0-9]+", $user) || ereg("[^A-Za-z0-9]+", $pass) ):
 endif;
 
 
-
  $admin_controller = new AdminController();
  $is_user = $admin_controller->GetLogin($user, $pass);
  $date = new DateTime();
