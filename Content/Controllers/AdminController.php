@@ -220,10 +220,22 @@ class AdminController extends MysqlConection {
         $rol_value = $this->get_rols_values($rol);
         foreach ($result as $k=>$v)
         {
-           $page_rol = $v['privilegios'];
-           if((int)$rol_value == (int) $page_rol)
+           $page_rol = explode(',' , $v['privilegios']);
+           if(count($page_rol) >=2)
            {
-               return true;
+               foreach($page_rol as $rol)
+               {
+                    if((int)$rol_value == (int) $rol)
+                    {
+                        return true;
+                    }
+               }
+           }else{
+                if((int)$rol_value == (int) $page_rol[0])
+                {
+                    //echo "<script>alert('" . $page_rol[0] ."');</script>";
+                    return true;
+                }
            }
         }
         
