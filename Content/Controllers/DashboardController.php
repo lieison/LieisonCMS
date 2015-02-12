@@ -13,8 +13,10 @@
  */
 class DashboardController extends MysqlConection {
     
-    
-    
+    protected $format;
+    protected $puntero;
+
+
     public function __construct() {
         parent::__construct();
     }
@@ -30,7 +32,7 @@ class DashboardController extends MysqlConection {
         $nivel = 0;
         $array_seccion = array();
         
-        
+        $this->puntero = $puntero;
         $query = "SELECT nivel FROM privilegios WHERE nombre LIKE '$privilegios'";
         $result = $this->RawQuery($query);
         $nivel =  $result[0]["nivel"];
@@ -63,7 +65,7 @@ class DashboardController extends MysqlConection {
             $array_seccion[$key] = array($value , $result);
         }
 
-        $format = "";
+        $this->format = "";
         foreach ($array_seccion as $key=>$value)
         {
             
@@ -73,54 +75,68 @@ class DashboardController extends MysqlConection {
             if($side["numero"] == 1)
             {
                 
-                $format .= '<li class="start active open">';
-                $format .= '<a href="javascript:;">';
-                $format .= '<i class="' . $side['icono'] .'"></i>';
-                $format .= '<span class="title">' . $side['titulo'] .'</span>';
-                $format .= '<span class="selected"></span>
+                $this->format .= '<li class="start active open">';
+                $this->format .= '<a href="javascript:;">';
+                $this->format .= '<i class="' . $side['icono'] .'"></i>';
+                $this->format .= '<span class="title">' . $side['titulo'] .'</span>';
+                $this->format .= '<span class="selected"></span>
                             <span class="arrow open"></span></a>';
             }
             else
             {
                 
-                $format .= '<li><a href="javascript:;">';
-                $format .= '<i class="' . $side['icono'] .'"></i>&nbsp&nbsp';
-                $format .= '<span class="title">' . $side['titulo'] .'</span>';
-                $format .= '<span class="arrow"></span></a>';
+                $this->format .= '<li><a href="javascript:;">';
+                $this->format .= '<i class="' . $side['icono'] .'"></i>&nbsp&nbsp';
+                $this->format .= '<span class="title">' . $side['titulo'] .'</span>';
+                $this->format .= '<span class="arrow"></span></a>';
             }
             
             $data = $value[1];
-            $format .= '<ul class="sub-menu">';
+            $this->format .= '<ul class="sub-menu">';
             foreach ($data as $k=>$v)
             {
                
-                $priv = $v["privilegios"];
+                $priv = explode(",", $v["privilegios"]);
                 $icon = $v['icono'];
                 $link = $v['link'];
                 $titulo = $v['titulo'];
                 
-                if($priv == $nivel  || $priv==0)
+                if(count($priv) >= 2)
                 {
-                    
-                    if($puntero != null && $puntero == $titulo){
-                         $format.='<li class="start active open">';
+                    foreach ($priv as $p)
+                    {
+                        $this->ComparePriv($p, $nivel , $link , $titulo , $icon);
                     }
-                    else{
-                         $format.='<li>';
-                    }
-                   
-                    $format.= '<a href="' . $this->GetUrl($link) .'">';
-                    $format.= '<i class="'.$icon.'"></i>&nbsp&nbsp';
-                    $format.= $titulo . '</a></li>';
                 }
+                else{
+                    $this->ComparePriv($priv[0], $nivel, $link , $titulo , $icon);
+                } 
             }
             
-            $format .= "</ul></li>";
+            $this->format .= "</ul></li>";
 
         }
        
-         return $format;
+         return $this->format;
   
+    }
+    
+    private function ComparePriv($priv_user , $priv_dashboard , $link , $titulo , $icon )
+    {
+          if($priv_dashboard == $priv_user || $priv_dashboard==0)
+                {
+                    
+                    if($this->puntero != null && $this->puntero == $titulo){
+                         $this->format.='<li class="start active open">';
+                    }
+                    else{
+                         $this->format.='<li>';
+                    }
+                   
+                    $this->format.= '<a href="' . $this->GetUrl($link) .'">';
+                    $this->format.= '<i class="'.$icon.'"></i>&nbsp&nbsp';
+                    $this->format.= $titulo . '</a></li>';
+                }
     }
     
     
