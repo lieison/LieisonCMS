@@ -26,20 +26,11 @@
     endif;
     
     $adminc = new AdminController();
-    $nivel= $adminc->get_rols_values($rol);
+   // $nivel= $adminc->get_rols_values($rol);
     
-    unset($adminc);
+   // unset($adminc);
     
-    
-    switch ($nivel)
-    {
-        case 0:
-            //$header->redirect("index_user.php");
-            break;
-        case 4:
-            break;
-        
-    }
+   
     
   
 ?>
