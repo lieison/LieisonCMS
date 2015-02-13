@@ -109,13 +109,12 @@ class DashboardController extends MysqlConection {
                         foreach ($priv as $p)
                         {
                              if(!in_array($id, $this->dashboard_key)){
-                                $this->ComparePriv($p, $nivel , $link , $titulo , $icon);
-                                array_push($this->dashboard_key, $id);
+                                $this->ComparePriv($p, $nivel , $link , $titulo , $icon ,$id);
                              }
                         }
                     }
                     else{
-                        $this->ComparePriv($priv[0], $nivel, $link , $titulo , $icon);
+                        $this->ComparePriv($priv[0], $nivel, $link , $titulo , $icon , $id);
                     } 
                     
                 
@@ -129,7 +128,7 @@ class DashboardController extends MysqlConection {
   
     }
     
-    private function ComparePriv($priv_user , $priv_dashboard , $link , $titulo , $icon )
+    private function ComparePriv($priv_user , $priv_dashboard , $link , $titulo , $icon , $id )
     {
           if($priv_dashboard == $priv_user || $priv_dashboard==0 || $priv_dashboard == 55)
                 {
@@ -144,6 +143,8 @@ class DashboardController extends MysqlConection {
                     $this->format.= '<a href="' . $this->GetUrl($link) .'">';
                     $this->format.= '<i class="'.$icon.'"></i>&nbsp&nbsp';
                     $this->format.= $titulo .'</a></li>';
+                    
+                    array_push($this->dashboard_key, $id);
                 }
     }
     
