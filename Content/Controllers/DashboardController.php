@@ -23,10 +23,7 @@ class DashboardController extends MysqlConection {
     }
     
     
-    public function GetUrl($link)
-    {
-        return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";
-    }
+   
     
     public function get_dashboard_sidebar_menu($privilegios , $puntero = null )
     {
@@ -140,7 +137,7 @@ class DashboardController extends MysqlConection {
                          $this->format.='<li>';
                     }
                    
-                    $this->format.= '<a href="' . $this->GetUrl($link) .'">';
+                    $this->format.= '<a href="' . FunctionsController::GetUrl($link) .'">';
                     $this->format.= '<i class="'.$icon.'"></i>&nbsp&nbsp';
                     $this->format.= $titulo .'</a></li>';
                     

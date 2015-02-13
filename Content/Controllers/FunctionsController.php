@@ -18,6 +18,11 @@ class FunctionsController {
         return $url = $_SERVER['DOCUMENT_ROOT'] .  "/" . $_COOKIE['FOLDER'] . "/Content/Web/$directory/";
     }
     
+    public static function GetUrl($link)
+    {
+        return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";
+    }
+    
     public static function get_year(){
         return date('Y');
     }
