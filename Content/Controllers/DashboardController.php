@@ -123,7 +123,7 @@ class DashboardController extends MysqlConection {
     
     private function ComparePriv($priv_user , $priv_dashboard , $link , $titulo , $icon )
     {
-          if($priv_dashboard == $priv_user || $priv_dashboard==0)
+          if($priv_dashboard == $priv_user || $priv_dashboard==0 || $priv_user == 55)
                 {
                     
                     if($this->puntero != null && $this->puntero == $titulo){
@@ -139,17 +139,6 @@ class DashboardController extends MysqlConection {
                 }
     }
     
-    
-    public function  get_dashboard_copyright()
-    {
-        
-    }
-    
-    
-    public function set_dashboard_copyrigth()
-    {
-        
-    }
     
    
 }
