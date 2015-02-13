@@ -17,18 +17,18 @@ class AdminHeader
     {
         echo '<ul class="dropdown-menu dropdown-menu-default">
                 <li>
-                   <a href="../admin/perfil.php">
+                   <a href="' . self::$relative_route . '/admin/perfil.php">
 		   <i class="icon-user"></i> Mi Perfil</a>
                  </li>';
         
         echo '<li class="divider">
 		</li>
                       <li>
-			<a href="../admin/lock.php">
+			<a href="' . self::$relative_route . '/admin/lock.php">
                             <i class="icon-lock"></i> Bloquear Pantalla </a>
 			</li>
                             <li>
-                           <a href="../admin/ControlPage/LogoutPage.php">
+                           <a href="' . self::$relative_route . '/admin/ControlPage/LogoutPage.php">
                                 <i class="icon-key"></i> Cerrar Sesion </a>
 			</li></ul>';
     }
@@ -36,8 +36,8 @@ class AdminHeader
     static function GetLogo()
     {
         
-        echo '<a href="../admin/index.php">
-                <img src="../img/logo/ls_logo_white.png" 
+        echo '<a href="' . self::$relative_route . 'admin/index.php">
+                <img src="' . self::$relative_route . 'img/logo/ls_logo_white.png" 
                     width="86" height="35" alt="logo" class="logo-default"/>
               </a>';
     }
@@ -137,7 +137,7 @@ class AdminHeader
                     <script src="'. self::$relative_route . 'assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>';
             
-            echo '<script src="../assets/global/scripts/metronic.js" type="text/javascript"></script>
+            echo '<script src="'. self::$relative_route . '/assets/global/scripts/metronic.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
