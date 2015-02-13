@@ -125,7 +125,7 @@ class DashboardController extends MysqlConection {
     {
           if($priv_dashboard == $priv_user || 
                   $priv_user==0 || 
-                  $priv_user == 55)
+                  $priv_dashboard == 55)
                 {
                     
                     if($this->puntero != null && $this->puntero == $titulo){

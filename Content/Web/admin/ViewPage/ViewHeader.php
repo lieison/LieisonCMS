@@ -6,6 +6,13 @@ class AdminHeader
     
     public static  $relative_route = "../";
     
+    static function Get_CMS_Title($title , $version = null)
+    {
+        echo '<h3 class="page-title">
+			' . $title . ' <small> ' . $version . '</small>
+			</h3>';
+    }
+    
     static function Get_DropDown()
     {
         echo '<ul class="dropdown-menu dropdown-menu-default">

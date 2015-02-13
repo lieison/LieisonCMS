@@ -38,6 +38,7 @@
 <html lang="en" class="no-js">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
+
 <head>
 
 <?php 
@@ -61,7 +62,7 @@
 		<div class="page-logo">
 			<?php AdminHeader::GetLogo();  ?>
 			<div class="menu-toggler sidebar-toggler hide">
-				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+                            <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
 			</div>
 		</div>
 		<!-- END LOGO -->
@@ -72,9 +73,6 @@
 		<!-- BEGIN TOP NAVIGATION MENU -->
 		<div class="top-menu">
 			<ul class="nav navbar-nav pull-right">
-				
-                                
-				<!-- END TODO DROPDOWN -->
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
@@ -138,20 +136,10 @@
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">
-			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			
 			
 			<!-- BEGIN PAGE HEADER-->
-			<h3 class="page-title">
-			Lieison Dashboard <small>CMS Version 0.1</small>
-			</h3>
+			<?php AdminHeader::Get_CMS_Title("Dashboard"); ?>
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
 					<li>
@@ -163,16 +151,7 @@
 						<a href="#">Dashboard</a>
 					</li>
 				</ul>
-				<div class="page-toolbar">
-					<div id="dashboard-report-range" 
-                                             class="pull-right tooltips btn btn-fit-height
-                                             grey-salt" data-placement="top" 
-                                             data-original-title="Cambiar la Fecha del Dashboard">
-						<i class="icon-calendar"></i>&nbsp;
-						<span class="thin uppercase visible-lg-inline-block">&nbsp;</span>&nbsp;
-						<i class="fa fa-angle-down"></i>
-					</div>
-				</div>
+				
 			</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN DASHBOARD STATS -->
