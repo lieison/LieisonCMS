@@ -118,6 +118,12 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php
  
  require $GLOBAL_ROOT . $FOLDER . '/Content/Models/SliderModel.php';
  require $GLOBAL_ROOT . $FOLDER . '/Content/Models/UserModel.php';
+ 
+ 
+ /**
+        VIEWS O VISTAS
+  *   */
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Web/admin/ViewPage/ViewHeader.php';
 
 
 /**
