@@ -46,7 +46,6 @@
     AdminHeader::$relative_route = "../";
     AdminHeader::GetTitle("Lieison Dashboard");
     AdminHeader::GetMeta();
-    //AdminHeader::GetMetaContent(array("lieison"=>"dasboard" , "lieison_2014"=>"cms dashboard"));
     AdminHeader::GetCss();
     
 ?>
