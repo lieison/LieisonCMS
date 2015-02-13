@@ -6,6 +6,16 @@ class AdminHeader
     
     public static  $relative_route = "../";
     
+    static function GetTitle($name)
+    {
+        echo "<title>$name</title>";
+    }
+    
+    static function GetIcon($url)
+    {
+        echo '<link rel="shortcut icon" href="' . $url . '"/>';
+    }
+    
     static function GetMeta()
     {
         echo '<meta charset="utf-8"/>

@@ -39,20 +39,17 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-<title>Lieison Dashboard</title>
-
 
 <?php 
 
+    
     AdminHeader::$relative_route = "../";
+    AdminHeader::GetTitle("Lieison Dashboard");
     AdminHeader::GetMeta();
     //AdminHeader::GetMetaContent(array("lieison"=>"dasboard" , "lieison_2014"=>"cms dashboard"));
     AdminHeader::GetCss();
     
 ?>
-
-<!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
