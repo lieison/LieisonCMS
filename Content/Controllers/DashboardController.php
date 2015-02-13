@@ -15,6 +15,7 @@ class DashboardController extends MysqlConection {
     
     protected $format;
     protected $puntero;
+    protected $dashboard_key = array();
 
 
     public function __construct() {
@@ -45,7 +46,7 @@ class DashboardController extends MysqlConection {
 
         foreach ($result_d as $k=>$v)
         {
-            if($nivel == $v['privilegios'] || $v['privilegios'] == 0 ){
+            if($nivel == $v['privilegios'] || $v['privilegios'] == 0 || $nivel == 55 ){
             $id = $v["id_seccion"];
             $array_seccion[$id] = array(
                 "icono" =>$v["icono"] , 
@@ -56,7 +57,7 @@ class DashboardController extends MysqlConection {
         
         foreach ($array_seccion as $key=>$value)
         {
-            $query = "SELECT dashboard.privilegios , dashboard.icono as icono , dashboard.link"
+            $query = "SELECT dashboard.id_dashboard , dashboard.privilegios , dashboard.icono as icono , dashboard.link"
                 . ", dashboard.titulo FROM dashboard INNER JOIN seccion_dashboard ON "
                 . " dashboard.id_seccion=seccion_dashboard.id_seccion WHERE seccion_dashboard.id_seccion LIKE '$key'"
                 . " ORDER BY dashboard.start ASC";
@@ -100,17 +101,24 @@ class DashboardController extends MysqlConection {
                 $icon = $v['icono'];
                 $link = $v['link'];
                 $titulo = $v['titulo'];
+                $id = $v['id_dashboard'];
                 
-                if(count($priv) >= 2)
-                {
-                    foreach ($priv as $p)
+                    if(count($priv) >= 2)
                     {
-                        $this->ComparePriv($p, $nivel , $link , $titulo , $icon);
+                       
+                        foreach ($priv as $p)
+                        {
+                             if(!in_array($id, $this->dashboard_key)){
+                                $this->ComparePriv($p, $nivel , $link , $titulo , $icon);
+                                array_push($this->dashboard_key, $id);
+                             }
+                        }
                     }
-                }
-                else{
-                    $this->ComparePriv($priv[0], $nivel, $link , $titulo , $icon);
-                } 
+                    else{
+                        $this->ComparePriv($priv[0], $nivel, $link , $titulo , $icon);
+                    } 
+                    
+                
             }
             
             $this->format .= "</ul></li>";
@@ -123,7 +131,7 @@ class DashboardController extends MysqlConection {
     
     private function ComparePriv($priv_user , $priv_dashboard , $link , $titulo , $icon )
     {
-          if($priv_dashboard == $priv_user || $priv_dashboard==0 || $priv_user == 55)
+          if($priv_dashboard == $priv_user || $priv_dashboard==0 || $priv_dashboard == 55)
                 {
                     
                     if($this->puntero != null && $this->puntero == $titulo){
@@ -135,7 +143,7 @@ class DashboardController extends MysqlConection {
                    
                     $this->format.= '<a href="' . $this->GetUrl($link) .'">';
                     $this->format.= '<i class="'.$icon.'"></i>&nbsp&nbsp';
-                    $this->format.= $titulo . '</a></li>';
+                    $this->format.= $titulo .'</a></li>';
                 }
     }
     
