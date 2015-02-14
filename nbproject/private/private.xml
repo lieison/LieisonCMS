@@ -6,16 +6,16 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Models/UserModel.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/AdminController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Conf/Include.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_gestion_usuarios.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/FunctionsController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/login.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/ViewHeader.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/livecss.js</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_sales_addprospecto.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/EditControlPage.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_control_paginas.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/ResponsiveControlPaginas.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/DashboardController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PageController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/UserController.php</file>
         </group>

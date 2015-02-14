@@ -399,7 +399,11 @@
                                                                     }
                                                                 endforeach;
                                                                 $id_u = $value['id_privilegios'];
-                                                                echo '<td><a class="delete" href="dashboard_gestion_usuarios.php?id_rol=' . $id_u . '">Eliminar</a></td>';
+                                                                if($value['nombre'] != "admin"):
+                                                                      echo '<td><a class="delete" href="dashboard_gestion_usuarios.php?id_rol=' . $id_u . '">Eliminar</a></td>';
+                                                                else:
+                                                                    echo "<td>Irrevocable</td>";
+                                                                endif;
                                                                 echo "</tr>";
                                                             endforeach;
                                                         ?>
