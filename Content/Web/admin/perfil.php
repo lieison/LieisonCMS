@@ -43,9 +43,8 @@
     elseif(isset($_REQUEST['password_enviar'])):
         $is_ok = $user_controller->Get_Password($_REQUEST['txt_current_pass'], $_REQUEST['txt_new_pass']);
         if(!$is_ok):
-            echo "<script>alert('Puede que la contraseña actual sea incorrecta')</script>";
+            $header->redirect("perfil.php?a=1");
         endif;
-        $header->redirect("perfil.php");
     endif;
 
    // print_r($user_controller->Get_DataUser());
@@ -60,34 +59,24 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-<meta charset="utf-8"/>
-<title>Perfil Lieison</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta http-equiv="Content-type"  content="text/html; charset=utf-8">
-<meta content="" name="description"/>
-<meta content="" name="author"/>
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
-<!-- END GLOBAL MANDATORY STYLES -->
+    
+<?php 
+
+    
+    AdminHeader::$relative_route = "../";
+    AdminHeader::GetTitle("Perfil");
+    AdminHeader::GetMeta();
+    AdminHeader::GetCss();
+    AdminHeader::GetIcon();
+?>
+
+
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link href="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
 <link href="../assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/>
 <link href="../assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL STYLES -->
-<!-- BEGIN THEME STYLES -->
-<link href="../assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
-<link id="style_color" href="../assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
-<!-- END THEME STYLES -->
-<link rel="shortcut icon" href="favicon.ico"/>
+
 </head>
 
 <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -97,19 +86,8 @@
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
-			<a href="index.php">
-                            <img src="../img/logo/ls_logo_white.png" width="86" height="35" alt="logo" class="logo-default"/>
-			</a>
-			<div class="menu-toggler sidebar-toggler hide">
-				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-			</div>
+			<?php AdminHeader::GetLogo(); ?>
 		</div>
-		<!-- END LOGO -->
-		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-		</a>
-		<!-- END RESPONSIVE MENU TOGGLER -->
-		<!-- BEGIN TOP NAVIGATION MENU -->
 		<div class="top-menu">
 			<ul class="nav navbar-nav pull-right">
 				
@@ -125,26 +103,10 @@
                                         </span>
 					<i class="fa fa-angle-down"></i>
 					</a>
-					<ul class="dropdown-menu dropdown-menu-default">
-						<li>
-							<a href="lock.php">
-							<i class="icon-lock"></i> Bloquear Pantalla </a>
-						</li>
-						<li>
-                                                    <a href="ControlPage/LogoutPage.php">
-							<i class="icon-key"></i> Cerrar Sesion </a>
-						</li>
-					</ul>
+					
+                                        <?php AdminHeader::Get_DropDown(); ?>
+					
 				</li>
-				<!-- END USER LOGIN DROPDOWN -->
-				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
-				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-				<li class="dropdown dropdown-quick-sidebar-toggler">
-					<a href="javascript:;" class="dropdown-toggle">
-					<i class="icon-logout"></i>
-					</a>
-				</li>
-				<!-- END QUICK SIDEBAR TOGGLER -->
 			</ul>
 		</div>
 		<!-- END TOP NAVIGATION MENU -->
@@ -174,7 +136,7 @@
                                 <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
                                      $dashboard = new DashboardController();
-                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "");
+                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Menu");
                                 ?>
 				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>
@@ -302,7 +264,9 @@
 										<div class="caption caption-md">
 											<i class="icon-globe theme-font hide"></i>
 											<span class="caption-subject font-blue-madison bold uppercase">TU CUENTA</span>
+                                                                                        
 										</div>
+                                                                               
 										<ul class="nav nav-tabs">
 											<li class="active">
 												<a href="#tab_1_1" data-toggle="tab">Informacion Personal</a>
@@ -317,8 +281,19 @@
 												<a href="#tab_1_4" data-toggle="tab">Otros</a>
 											</li>
 										</ul>
+                                                                            
 									</div>
 									<div class="portlet-body">
+                                                                            <?php
+                                                                                                    if(isset($_REQUEST['a'])):
+                                                                                                        if($_REQUEST['a']==1):
+                                                                                                            echo ' <div class="alert alert-danger" role="alert">
+                                                                                                                   La contraseña actual es incorrecta, intenta de nuevo.
+                                                                                                                </div>';
+                                                                                                        endif;
+                                                                                                    endif;
+                                                                                                  
+                                                                               ?>
 										<div class="tab-content">
                                                                                     <?php
                                                                                         //obteniendo datos del usuario
@@ -402,6 +377,7 @@
 											<!-- CHANGE PASSWORD TAB -->
 											<div class="tab-pane" id="tab_1_3">
                                                                                             <form action="#" method="get">
+                                                                                                
 													<div class="form-group">
 														<label class="control-label">Contraseña Actual</label>
                                                                                                                 <input name="txt_current_pass" type="password" class="form-control"/>
@@ -495,31 +471,20 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
 	<div class="page-footer-inner">
-		 2014 &copy; Metronic by keenthemes.
+		<?php AdminHeader::GetCopyRight(); ?>
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
 	</div>
 </div>
-<!-- END FOOTER -->
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-<!-- BEGIN CORE PLUGINS -->
-<!--[if lt IE 9]>
-<script src="../assets/global/plugins/respond.min.js"></script>
-<script src="../assets/global/plugins/excanvas.min.js"></script> 
-<![endif]-->
-<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<script src="../assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-<!-- END CORE PLUGINS -->
+
+<?php
+
+    AdminHeader::GetJs();
+
+?>
+
+
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
@@ -534,7 +499,7 @@
 <script>
 jQuery(document).ready(function() {       
    // initiate layout and plugins
-   Metronic.init(); // init metronic core components
+    Metronic.init(); // init metronic core components
     Layout.init(); // init current layout
     QuickSidebar.init(); // init quick sidebar
     Demo.init(); // init demo features

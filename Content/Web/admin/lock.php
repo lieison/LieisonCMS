@@ -11,7 +11,7 @@
     
     $nombre = $_SESSION['login']['nombre'];
     $imagen = $_SESSION['login']['imagen'];
-    $password = $_SESSION['login']['password'];
+    $password = \SivarApi\Tools\Encriptacion\Encriptacion::decrypt($_SESSION['login']['password']);
     
     if(isset($_REQUEST['password'])):
          if(strcmp($password,$_REQUEST['password']) ==0):
@@ -26,20 +26,15 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-<meta charset="utf-8"/>
-<title> Lock Screen </title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta content="" name="description"/>
-<meta content="" name="author"/>
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-<!-- END GLOBAL MANDATORY STYLES -->
+<?php 
+
+    
+    AdminHeader::$relative_route = "../";
+    AdminHeader::GetTitle("Perfil");
+    AdminHeader::GetMeta();
+    AdminHeader::GetCss();
+    AdminHeader::GetIcon();
+?>
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link href="../assets/admin/pages/css/lock.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL STYLES -->
@@ -58,19 +53,19 @@
 <div class="page-lock">
 	<div class="page-logo">
 		<a class="brand" href="index.html">
-                    <img src="../img/logo/ls_logo_white.png" width="250" height="100" alt="logo"/>
+                    <?php AdminHeader::GetLogo("250" , "100"); ?>
+                   
 		</a>
 	</div>
 	<div class="page-body">
 		<div class="lock-head">
-			Pantalla Bloqueada
+                    <h4>Pantalla Bloqueada<br><br><?php echo $nombre; ?></h4>
 		</div>
 		<div class="lock-body">
-			<div class="pull-left lock-avatar-block">
+                    <div class="pull-left lock-avatar-block" >
                             <img src="../admin/img/users/<?php echo $imagen; ?>" class="lock-avatar">
 			</div>
 			<form class="lock-form pull-left" action="lock.php" method="post">
-				<h4><?php echo $nombre; ?></h4>
 				<div class="form-group">
 					<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" id="password" name="password"/>
 				</div>
@@ -84,7 +79,7 @@
 		</div>
 	</div>
 	<div class="page-footer-custom">
-		 2015 &copy; Lieison.
+		<?php AdminHeader::GetCopyRight(); ?>
 	</div>
 </div>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

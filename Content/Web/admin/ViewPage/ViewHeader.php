@@ -33,13 +33,21 @@ class AdminHeader
 			</li></ul>';
     }
     
-    static function GetLogo()
+    static function GetLogo($width = null , $height = null)
     {
-        
-        echo '<a href="' . self::$relative_route . 'admin/index.php">
+        if(SivarApi\Tools\Validation::Is_Empty_OrNull($width) || SivarApi\Tools\Validation::Is_Empty_OrNull($height)){
+            echo '<a href="' . self::$relative_route . 'admin/index.php">
                 <img src="' . self::$relative_route . 'img/logo/ls_logo_white.png" 
                     width="86" height="35" alt="logo" class="logo-default"/>
               </a>';
+        }
+        else
+        {
+             echo '<a href="' . self::$relative_route . 'admin/index.php">
+                <img src="' . self::$relative_route . 'img/logo/ls_logo_white.png" 
+                    width="' . $width .'" height="' . $height .'" alt="logo" class="logo-default"/>
+              </a>';
+        }
     }
     
     static function GetCopyRight()
@@ -52,9 +60,9 @@ class AdminHeader
         echo "<title>$name</title>";
     }
     
-    static function GetIcon($url)
+    static function GetIcon()
     {
-        echo '<link rel="shortcut icon" href="' . $url . '"/>';
+        echo '<link rel="shortcut icon" href="' . self::$relative_route . 'img/logo/favicon.png"/>';
     }
     
     static function GetMeta()
