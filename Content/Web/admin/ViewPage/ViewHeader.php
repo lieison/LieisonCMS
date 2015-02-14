@@ -17,14 +17,14 @@ class AdminHeader
     {
         echo '<ul class="dropdown-menu dropdown-menu-default">
                 <li>
-                   <a href="' . self::$relative_route . '/admin/perfil.php">
+                   <a href="' . self::$relative_route . 'admin/perfil.php">
 		   <i class="icon-user"></i> Mi Perfil</a>
                  </li>';
         
         echo '<li class="divider">
 		</li>
                       <li>
-			<a href="' . self::$relative_route . '/admin/lock.php">
+			<a href="' . self::$relative_route . 'admin/lock.php">
                             <i class="icon-lock"></i> Bloquear Pantalla </a>
 			</li>
                             <li>

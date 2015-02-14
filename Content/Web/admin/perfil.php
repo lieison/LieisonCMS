@@ -136,7 +136,7 @@
                                 <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
                                      $dashboard = new DashboardController();
-                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Menu");
+                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Principal");
                                 ?>
 				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>

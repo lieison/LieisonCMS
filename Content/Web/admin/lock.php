@@ -30,7 +30,7 @@
 
     
     AdminHeader::$relative_route = "../";
-    AdminHeader::GetTitle("Perfil");
+    AdminHeader::GetTitle("Pantalla bloqueada");
     AdminHeader::GetMeta();
     AdminHeader::GetCss();
     AdminHeader::GetIcon();
