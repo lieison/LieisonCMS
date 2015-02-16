@@ -21,8 +21,9 @@
         $header->redirect("login.php");
     endif;
     
-        
+       
     $user_controller = new UserController($id_user);
+    
     
     if(isset($_REQUEST['avatar_guardar'])):
         $is_save =$user_controller->SetNew_Avatar(FunctionsController::GetRootUrl("admin/img/users"), "avatar_imagen");
@@ -49,7 +50,6 @@
 
    // print_r($user_controller->Get_DataUser());
 ?>
-
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -98,7 +98,7 @@
                                             <img alt="" class="img-circle" src="img/users/<?php echo $imagen; ?>"/>
 					<span class="username username-hide-on-mobile">
 					 <?php
-                                           echo $usuario;
+                                            echo $usuario;
                                          ?>
                                         </span>
 					<i class="fa fa-angle-down"></i>
@@ -120,8 +120,9 @@
 <div class="page-container">
 	<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
-		<div class="page-sidebar navbar-collapse collapse">
-			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <!-- -->
+		<div class="page-sidebar navbar-collapse collapse ">
+			<ul class="page-sidebar-menu" data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200">
 				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
 				<li class="sidebar-toggler-wrapper">
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -478,11 +479,7 @@
 	</div>
 </div>
 
-<?php
-
-    AdminHeader::GetJs();
-
-?>
+<?php AdminHeader::GetJs(); ?>
 
 
 <!-- BEGIN PAGE LEVEL PLUGINS -->
