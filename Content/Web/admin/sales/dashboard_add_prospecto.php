@@ -130,7 +130,7 @@
                                 <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
                                      $dashboard = new DashboardController();
-                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Sales");
+                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Agregar Prospecto");
                                 ?>
 				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>
@@ -156,10 +156,185 @@
 						<a href="#">Prospectos</a>
 					</li>
 				</ul>
+				<div class="col-md-12 ">
+                            <div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-user"></i> Agrega un nuevo prospecto ...
+							</div>
+							<div class="tools">
+								<a href="" class="collapse">
+								</a>
+							</div>
+						</div>
+						<div class="portlet-body form">
+                                                    <form class="form-horizontal" role="form" action="setprospecto.php" method="post">
+								<div class="form-body">
+									<div class="form-group">
+										<label class="col-md-3 control-label">Nombre Prospecto *</label>
+										<div class="col-md-9">
+                                                                                    <input type="text" class="form-control input-inline medium_text" id="txt_nombre" name="txt_nombre" placeholder="Nombre o Empresa" onkeyup="verificar_prospecto(this.value);">
+                                                                                        <span class="help-block" id="verificar_prospecto">
+                                                                                            
+											</span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Direccion *</label>
+										<div class="col-md-9">
+                                                                                    <input type="text" required name="txt_direccion1" id="txt_direccion1" class="form-control" placeholder="Introduzca la direccion">
+											<span class="help-inline">
+											</span>
+										</div>
+                                                                                <div id="map-canvas"></div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Direccion Alternativa </label>
+										<div class="col-md-9">
+                                                                                    <input type="text" name="txt_direccion2" id="txt_direccion2" class="form-control" placeholder="(Opcional) Introduzca alguna direccion alternativa">
+					
+										</div>
+	
+									</div>
+                                                                        <div class="form-group">
+										<label class="col-md-3 control-label">Provincia</label>
+										<div class="col-md-9">
+                                                                                    <input type="text" class="form-control input-inline medium_text" id="txt_nombre" name="txt_nombre" placeholder="Ej: (San salvador)" >
+                                           
+										</div>
+									</div>
+                                                                        <div class="form-group">
+										<label class="col-md-3 control-label">Ciudad</label>
+										<div class="col-md-9">
+                                                                                    <input type="text" class="form-control input-inline medium_text" id="txt_nombre" name="txt_nombre" placeholder="Ej: (San salvador)" >
+                                           
+										</div>
+									</div>
+                                                                        <div class="form-group">
+										<label class="col-md-3 control-label">Pais *</label>
+                                                                                <div class="col-md-9" id="drown_pais">
+                                                                                    <!--AJAX DROPDOWN PAIS -->
+										</div>
+									</div>
+                                                                        <div class="form-group">
+										<label class="col-md-3 control-label">Codigo Zip</label>
+										<div class="col-md-3">
+											<div class="input-group">
+												<span class="input-group-addon">
+												<i class="fa fa-inbox"></i>
+												</span>
+                                                                                             <input type="text" class="form-control" placeholder="+503">
 				
+                                                                                        </div>
+                                                                                        
+										</div>
+                                                                               
+									</div>
+                                                                    
+                                                                     <div class="form-group">
+										 <label class="col-md-3 control-label">Telefono *</label>
+										<div class="col-md-3">
+											<div class="input-group">
+												<span class="input-group-addon">
+												<i class="fa fa-phone"></i>
+												</span>
+                                                                                             <input required type="tel" class="form-control" placeholder="">
+				
+                                                                                        </div>
+                                                                                        
+										</div>
+									</div>
+                                                                    
+                                                                     <div class="form-group">
+										 <label class="col-md-3 control-label">Fax</label>
+										<div class="col-md-3">
+											<div class="input-group">
+												<span class="input-group-addon">
+												<i class="fa fa-fax"></i>
+												</span>
+                                                                                             <input type="tel" class="form-control" placeholder="">
+				
+                                                                                        </div>
+                                                                                        
+										</div>
+									</div>
+                                                                        
+									<div class="form-group">
+										<label class="col-md-3 control-label">Email</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<span class="input-group-addon">
+												<i class="fa fa-envelope"></i>
+												</span>
+												<input type="email" class="form-control" placeholder="Correo electronico ...">
+											</div>
+										</div>
+									</div>
+                                                                    
+                                                                        <div class="form-group">
+										<label class="col-md-3 control-label">Pagina Web</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<span class="input-group-addon">
+												<i class="fa fa-dashboard"></i>
+												</span>
+                                                                                            <input type="url" class="form-control" placeholder="http://">
+											</div>
+										</div>
+									</div>
+                                                                    
+                                                                        <div class="form-group">
+										<label class="col-md-3 control-label">Facebook</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<span class="input-group-addon">
+												<i class="fa fa-facebook"></i>
+												</span>
+                                                                                            <input type="url" class="form-control" placeholder="https://">
+											</div>
+										</div>
+									</div>
+                                                                        <div class="form-group">
+										<label class="col-md-3 control-label">Twitter</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<span class="input-group-addon">
+												<i class="fa fa-twitter"></i>
+												</span>
+                                                                                            <input type="url" class="form-control" placeholder="https://">
+											</div>
+										</div>
+									</div>
+                                                                        <div class="form-group">
+										<label class="col-md-3 control-label">Notas</label>
+										<div class="col-md-9">
+											<div class="input-group">
+												<span class="input-group-addon">
+												
+												</span>
+                                                                                           <textarea class="ckeditor form-control" name="editor2" rows="6" data-error-container="#editor2_error"></textarea>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="form-actions">
+									<div class="row">
+										<div class="col-md-offset-3 col-md-9">
+                                                                                    <button type="submit" name="cmd_enviar" id="cmd_enviar" class="btn green">Guardar Prospecto</button>
+                                                                                    <label class=" control-label alert-warning" id="txt_error"></label>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+                            
+                        </div>
 			</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN DASHBOARD STATS -->
+                        
 			
 		</div>
 	</div>
@@ -178,155 +353,159 @@
 
 <?php AdminHeader::GetJs(); ?>
 
+
+
 <script>
+    
     jQuery(document).ready(function() {    
-   Metronic.init(); // init metronic core componets
+   //Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
-   QuickSidebar.init(); // init quick sidebar
-   Demo.init(); // init demo features 
-   Index.init();   
+   //QuickSidebar.init(); // init quick sidebar
+   //Demo.init(); // init demo features 
+   /*Index.init();   
    Index.initDashboardDaterange();
    Index.initJQVMAP(); // init index page's custom scripts
    Index.initCalendar(); // init index page's custom scripts
   // Index.initCharts(); // init index page's custom scripts
    Index.initChat();
    Index.initMiniCharts();
-   Tasks.initDashboardWidget();
+   Tasks.initDashboardWidget();*/
+        
+   var get_paises = function()
+   {
+        $.ajax({
+                      type: "POST",
+                      url: "get_paises.php",
+                      beforeSend: function()
+                      {
+                          $("#drown_pais").html("<p>Cargando datos ...</p>");
+                      },
+                      success: function(value){
+                          document.getElementById("drown_pais").innerHTML = value;
+                      },
+                      error: function()
+                      {
+                          $("#combo_pais").html("Error al cargar");
+                      }
+                      
+              });
+   }
    
-   
-    var iniciargraficos_visita = function () {
-            if (!jQuery.plot) {
-                return;
-            }
+   get_paises();
 
-            function showChartTooltip(x, y, xValue, yValue) {
-                $('<div id="tooltip" class="chart-tooltip">' + yValue + '<\/div>').css({
-                    position: 'absolute',
-                    display: 'none',
-                    top: y - 40,
-                    left: x - 40,
-                    border: '0px solid #ccc',
-                    padding: '2px 6px',
-                    'background-color': '#fff'
-                }).appendTo("body").fadeIn(200);
-            }
-            
-            
-            function getresponsivedata()
-            {
-                
-                 var fecha = new Date();
-                 var mes = fecha.getMonth();
-                 var anio = fecha.getYear();
-                
-                 var parametros = {
-                       "mes" : mes,
-                       "anio": anio
+});
+
+ function verificar_prospecto(nombre)
+    {
+         
+         var parametros = {
+                    "nombre" : nombre
                  };
 
                 $.ajax({
                       type: "POST",
-                      url: "ControlPage/GetVisits.php",
+                      url: "getexist_prospect.php",
                       data: parametros,
-                      success: function(json){
-                      var visitors = [];    
-                      console.log(json);
-                      var valores = $.parseJSON(json || "null");
-                      for(var i in valores)
+                      beforeSend: function()
                       {
-                        visitors.push(valores[i]);
-                        console.log(valores[i]);
-                      }
-                           if ($('#site_statistics').size() != 0) {
-
-                $('#site_statistics_loading').hide();
-                $('#site_statistics_content').show();
-
-                var plot_statistics = $.plot($("#site_statistics"),
-                    [{
-                        data: visitors,
-                        lines: {
-                            fill: 0.6,
-                            lineWidth: 0
-                        },
-                        color: ['#f89f9f']
-                    }, {
-                        data: visitors,
-                        points: {
-                            show: true,
-                            fill: true,
-                            radius: 5,
-                            fillColor: "#f89f9f",
-                            lineWidth: 3
-                        },
-                        color: '#fff',
-                        shadowSize: 0
-                    }],
-
-                    {
-                        xaxis: {
-                            tickLength: 0,
-                            tickDecimals: 0,
-                            mode: "categories",
-                            min: 0,
-                            font: {
-                                lineHeight: 14,
-                                style: "normal",
-                                variant: "small-caps",
-                                color: "#6F7B8A"
+                          $("#verificar_prospecto").html("<span class='fa fa-spinner'>Verificando</span>");
+                      },
+                      success: function(value){
+                             if(value == 0){
+                                 if(nombre == '' || nombre == null)
+                                 {
+                                      $("#verificar_prospecto").html("Prospecto vacio ..");
+                                      $("#cmd_enviar").hide();
+                                       $("#txt_error").text("Nombre del Prospecto esta vacio ...");
+                                 }
+                                 else{
+                                    $("#verificar_prospecto").html("Prospecto Disponible");
+                                     $("#cmd_enviar").show();
+                                      $("#txt_error").text("");
+                                }
                             }
-                        },
-                        yaxis: {
-                            ticks: 5,
-                            tickDecimals: 0,
-                            tickColor: "#eee",
-                            font: {
-                                lineHeight: 14,
-                                style: "normal",
-                                variant: "small-caps",
-                                color: "#6F7B8A"
-                            }
-                        },
-                        grid: {
-                            hoverable: true,
-                            clickable: true,
-                            tickColor: "#eee",
-                            borderColor: "#eee",
-                            borderWidth: 1
-                        }
-                    });
-
-                var previousPoint = null;
-                $("#site_statistics").bind("plothover", function (event, pos, item) {
-                    $("#x").text(pos.x.toFixed(2));
-                    $("#y").text(pos.y.toFixed(2));
-                    if (item) {
-                        if (previousPoint != item.dataIndex) {
-                            previousPoint = item.dataIndex;
-
-                            $("#tooltip").remove();
-                            var x = item.datapoint[0].toFixed(2),
-                                y = item.datapoint[1].toFixed(2);
-
-                            showChartTooltip(item.pageX, item.pageY, item.datapoint[0], item.datapoint[1] + ' visitas');
-                        }
-                    } else {
-                        $("#tooltip").remove();
-                        previousPoint = null;
-                    }
-                });
-            }
+                             else{
+                                 $("#verificar_prospecto").text("Nombre ya Utilizado "); 
+                                 $("#cmd_enviar").hide();
+                                 $("#txt_error").text("No se puede guardar este prospecto ya existe , cambie el nombre");
+                             }
                       }
-                 });
-            }
-            
-                getresponsivedata();
-        }
-   
-   iniciargraficos_visita();
-   
-});
+              });
+    }
 </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+ <script>
+     
+function initialize() {
+
+  var markers = [];
+  var map = new google.maps.Map( {
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng( 13.9336532,-89.2157002),
+      new google.maps.LatLng( 13.9336532,-89.2157002));
+  map.fitBounds(defaultBounds);
+
+ 
+  var input = /** @type {HTMLInputElement} */(
+      document.getElementById('txt_direccion1'));
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  var searchBox = new google.maps.places.SearchBox(
+   (input));
+
+ 
+  google.maps.event.addListener(searchBox, 'places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+    for (var i = 0, marker; marker = markers[i]; i++) {
+      marker.setMap(null);
+    }
+
+  
+    markers = [];
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0, place; place = places[i]; i++) {
+      var image = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+    
+      var marker = new google.maps.Marker({
+        map: map,
+        icon: image,
+        title: place.name,
+        position: place.geometry.location
+      });
+
+      markers.push(marker);
+
+      bounds.extend(place.geometry.location);
+    }
+
+    map.fitBounds(bounds);
+  });
+
+  google.maps.event.addListener(map, 'bounds_changed', function() {
+    var bounds = map.getBounds();
+    searchBox.setBounds(bounds);
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

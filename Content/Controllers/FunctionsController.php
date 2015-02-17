@@ -59,6 +59,12 @@ class FunctionsController {
         }
     }
     
+    public static function get_paises()
+    {
+        $mysql = new MysqlConection();
+        return $paises = $mysql->RawQuery("SELECT PAI_PK  as id , PAI_NOMBRE as nombre FROM pais");
+    }
+    
     
 
 }

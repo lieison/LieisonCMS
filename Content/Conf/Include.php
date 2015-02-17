@@ -139,6 +139,7 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php
  require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FunctionsController.php';
  require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/PageController.php';
  require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/UserController.php';
+  require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/ProspectController.php';
  
 
 
