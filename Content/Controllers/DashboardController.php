@@ -23,9 +23,28 @@ class DashboardController extends MysqlConection {
     }
     
     
+    
+    /**
+     *
+     *@todo Funcion en la cual verifica que objetos debe ir en el dashboard y apunta a ese objeto
+     *      una funcion muy importante en la cual consiste de dos parametros 
+     * 
+     *@param String $privilegios Nombre del privilegio 
+     *@param string $puntero , Nombre del script a apuntar 
+     *
+     * @version 1.2
+     *  -Se repararon bug en cuestion de privilegios administrativos
+     * @version 1.3
+     *  -Version Actual (creacion de la funcion ComparePriv para obtener mejor proceso )
+     *  -Se agrego el multi privilegio , consiste en que el usuario pueda agregar privilegios de terceros
+     * @version 1.4
+     *  -Muy pronto , se agregara la opcion de $privilegios por nivel ...
+     * 
+     * @return Mixed devuelve el dashboard menu sidebar
+     *
+     */
     public function get_dashboard_sidebar_menu($privilegios , $puntero = null )
     {
-        $nivel = 0;
         $array_seccion = array();
         
         $this->puntero = $puntero;
@@ -121,6 +140,7 @@ class DashboardController extends MysqlConection {
   
     }
     
+    /**FUNCION QUE COMPLEMENTA LA FUNCION PRINCIPAL get_dashboard_sidebar_menu*/
     private function ComparePriv($priv_user , $priv_dashboard , $link , $titulo , $icon , $id )
     {
 

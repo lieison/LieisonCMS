@@ -26,11 +26,7 @@
     endif;
     
     $adminc = new AdminController();
-   // $nivel= $adminc->get_rols_values($rol);
-    
-   // unset($adminc);
-    
-   
+ 
 ?>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -82,7 +78,7 @@
                                             ?>
 					<span class="username username-hide-on-mobile">
 					 <?php
-                                           echo $usuario;
+                                           echo $usuario; 
                                          ?>
                                         </span>
 					<i class="fa fa-angle-down"></i>

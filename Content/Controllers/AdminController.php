@@ -5,12 +5,21 @@
 class AdminController extends MysqlConection {
     
  
+    
     var $query = null;
    
     public function __construct() {
         parent::__construct();
     }
     
+    /**
+     * @todo Funcion para obtener si el usuario logueado esta dentro de la base de datos
+     * @version 1.1 
+     * @author Rolando Arriaza
+     * @param String $user usuario o correo corporativo
+     * @param String $password contraseña 
+     * @return boolean , true si existe , false si no existe
+     */
     public function GetLogin($user , $password )
     {
         
@@ -43,6 +52,15 @@ class AdminController extends MysqlConection {
         }
     }
     
+    /**
+     *@todo funcion en la cual registra a un usuario cuando utiliza el sistema
+     *@version 0.9 
+     *@author Rolando
+     *@param  string $id_user
+     *@param String $hora_entrada
+     *@param String/date $fecha 
+     *@return string/md5 , retorna el id del log iniciado
+     */
     public function Create_Log( $id_user , $hora_entrada , $fecha )
     {
         $id_log = $hora_entrada . rand(100, 5000) . $id_user . rand(0, 99);
@@ -56,11 +74,24 @@ class AdminController extends MysqlConection {
         return $id_log;
     }
     
+    /**
+     *@todo  funcion en la cual actualiza la bitacora segun el id del log 
+     *@version 0.9
+     *@author Rolando Arriaza
+     */
     public function Update_log($id_log , $hora_salida)
     {
         $this->Update("log", array("salida"=>$hora_salida) , "id_log LIKE '$id_log'");
     }
     
+    
+    /**
+     *@todo funcion en la cual muestra la bitacora 
+     *@version 0.9
+     *@author Rolando Arriaza
+     *@param string/optional $date fecha a mostrar de la bitacora
+     *@return array/mixed devuelve un arreglo 
+     */
     public function Show_log($date = null)
     {
         $this->query = "SELECT concat(usuario.nombre, ' ' , usuario.apellido ) as nombre "
@@ -79,6 +110,12 @@ class AdminController extends MysqlConection {
             
     }
     
+    /**
+     *@todo funcion que obtiene el nivel del rol o privilegio
+     *@version 0.1
+     *@author Rolando
+     *@return int retorna el nivel si existe / si no retorna nivel por defecto "0"
+     */
     public function get_rols_values($rol_)
     {
         $this->query = "SELECT nivel FROM privilegios WHERE nombre LIKE '$rol_'";
@@ -90,13 +127,18 @@ class AdminController extends MysqlConection {
         endif;
     }
     
+    /**
+     *@todo Funcion que establece nuevos privilegios en la base de datos
+     *@version 1.5
+     *@author Rolando Arriaza
+     *@param string $rol_name nombre del rol a agregar
+     *@param string $padre nombre del rol padre si es hijo el rol_name
+     */
     public function add_rols($rol_name , $padre = null)
     {
-        $id = null;
         $data = array();
         $insert = false;
-        
-        $id = rand("1", "200");
+        $id = rand(1, 2000);
         $is_exist = $this->RawQuery("SELECT * FROM privilegios WHERE NIVEL LIKE $id");
         if(count($is_exist)>=1):
                  while(count($is_exist)>= 1):
@@ -116,12 +158,24 @@ class AdminController extends MysqlConection {
        return $insert;
     }
     
+    /**
+     *@todo funcion que elimina el rol por medio de su id
+     */
     public function delete_rols($id_rols)
     {
         $this->query = "id_privilegios LIKE $id_rols";
         return $this->Delete("privilegios", $this->query);
     }
     
+    /**
+     *@todo function que obtiene el rol padre o rol maestro , dado caso obtiene el hijo
+     *@param boolean $name oibteniendo el padre o hijo
+     *              true=padre
+     *              false=hijo
+     *@version 1.1
+     *@author Rolando
+     *@return Array devuelve un arreglo de los roles
+     */
     public function get_master_rols($master = true)
     {
         if ($master != true) {
@@ -143,9 +197,7 @@ class AdminController extends MysqlConection {
             $this->query = "SELECT id_privilegios , nombre , nivel , padre FROM privilegios WHERE padre LIKE 0";
             $result = $this->RawQuery($this->query);
         }
-        
-        
-
+ 
         if (count($result) == 0) {
             return null;
         }
@@ -153,67 +205,9 @@ class AdminController extends MysqlConection {
         return $result ?: null;
     }
     
-    public function Get_Users()
-    {
-        $this->query = "SELECT login.id_usuario , login.id_login , login.user ,"
-                . " concat(usuario.nombre , ' ', usuario.apellido) as nombre"
-                . " ,usuario.email , login.rol , login.activo  "
-                . " FROM login INNER JOIN usuario ON login.id_usuario=usuario.id_usuario ";
-        $result = $this->RawQuery($this->query);
-        return $result;
-    }
     
-    public function UpdateUsers($args_user = array() , $args_login = array() , $id_user = null , $id_login = null)
-    {
-        $update = false;
         
-        if(count($args_login) != 0 && count($args_user) != 0):
-            $update = $this->Update("login", $args_login , "id_login LIKE $id_login" );
-            $update= $this->Update("usuario",$args_user , "id_usuario LIKE '$id_user'");
-        elseif(count($args_user) != 0):
-              $update= $this->Update("usuario",$args_user , "id_usuario LIKE '$id_user'");
-        elseif(count($args_login) != 0):
-             $update = $this->Update("login", $args_login , "id_login LIKE $id_login" );
-        endif;
-        
-        return $update;
-        
-    }
-    
-    public function CreateUser($args_user = array() , $args_login = array())
-    {
-        $create = null;
-
-        if(count($args_login) != 0 && count($args_user) != 0):
-                $create =  $this->Insert("login", $args_login );
-                $create= $this->Insert("usuario",$args_user );
-        elseif(count($args_user) != 0):
-              $create=  $this->Insert("usuario",$args_user );
-        elseif(count($args_login) != 0):
-             $create =  $this->Insert("login", $args_login);
-        endif;
-        
-        return $create;
-    }
-    
-    public function DeleteUser($id_user = null , $id_login=null)
-    {
-        $delete = null;
-        if($id_user != null && $id_login != null):
-              $delete = $this->Delete("login", "id_login LIKE $id_login");
-              $delete = $this->Delete("usuario", "id_usuario LIKE '$id_user'");
-        elseif($id_user != null):
-             $delete = $this->Delete("usuario", "id_usuario LIKE '$id_user'");
-        elseif($id_login != null):
-              $delete = $this->Delete("login", "id_login LIKE $id_login");
-        endif;
-        
-        return $delete;
-    }
-    
- 
-    
-    public function get_permission_page($rol , $dashboard_page)
+      public function get_permission_page($rol , $dashboard_page)
     {
         $this->query = "SELECT privilegios FROM dashboard WHERE link LIKE '%$dashboard_page%'";
         $result = $this->RawQuery($this->query);
@@ -233,7 +227,6 @@ class AdminController extends MysqlConection {
            }else{
                 if((int)$rol_value == (int) $page_rol[0])
                 {
-                    //echo "<script>alert('" . $page_rol[0] ."');</script>";
                     return true;
                 }
            }
@@ -243,12 +236,89 @@ class AdminController extends MysqlConection {
     }
     
      /**
-      * @deprecated since version 1.0
+      * @todo funcion que obtiene los niveles de los roles o privilegios
+      * @version 0.1
+      * @author Rolando
+      * @since 0.1
+      * @deprecated since version 0.1
       */
      public function Get_MasterPrivilegios()
     {
         $this->query = "SELECT nivel , nombre FROM privilegios";
         return $this->RawQuery($this->query);
     }
+    
+    
+    /***********************************************************************************************
+     * AREA DEL CONTROL DE USUARIOS DE FORMA ADMINISTRADOR 
+     * ESTA AREA NO ES IGUAL AL CONTROLADOR UserController.php
+     * YA QUE SE ESPECIFICA QUE ES PARA MANTENCION DE UN USUARIO RAPIDO
+     * 
+     *@version 1.5 todas las funciones
+     *@author Rolando Arriaza
+    ***********************************************************************************************/
+    
+    
+    public function Get_Users()
+    {
+        $this->query = "SELECT login.id_usuario , login.id_login , login.user ,"
+                . " concat(usuario.nombre , ' ', usuario.apellido) as nombre"
+                . " ,usuario.email , login.rol , login.activo  "
+                . " FROM login INNER JOIN usuario ON login.id_usuario=usuario.id_usuario ";
+        $result = $this->RawQuery($this->query);
+        return $result;
+    }
+    
+    public function UpdateUsers($args_user = array() , $args_login = array() , $id_user = null , $id_login = null)
+    {
+        $update = false;
+        
+        if(count($args_login) != 0 && count($args_user) != 0):
+            $this->Update("login", $args_login , "id_login LIKE $id_login" );
+            $update= $this->Update("usuario",$args_user , "id_usuario LIKE '$id_user'");
+        elseif(count($args_user) != 0):
+              $update= $this->Update("usuario",$args_user , "id_usuario LIKE '$id_user'");
+        elseif(count($args_login) != 0):
+             $update = $this->Update("login", $args_login , "id_login LIKE $id_login" );
+        endif;
+        
+        return $update;
+        
+    }
+    
+    public function CreateUser($args_user = array() , $args_login = array())
+    {
+        $create = null;
+
+        if(count($args_login) != 0 && count($args_user) != 0):
+                $this->Insert("login", $args_login );
+                $create= $this->Insert("usuario",$args_user );
+        elseif(count($args_user) != 0):
+              $create=  $this->Insert("usuario",$args_user );
+        elseif(count($args_login) != 0):
+             $create =  $this->Insert("login", $args_login);
+        endif;
+        
+        return $create;
+    }
+    
+    public function DeleteUser($id_user = null , $id_login=null)
+    {
+        $delete = null;
+        if($id_user != null && $id_login != null):
+              $this->Delete("login", "id_login LIKE $id_login");
+              $delete = $this->Delete("usuario", "id_usuario LIKE '$id_user'");
+        elseif($id_user != null):
+             $delete = $this->Delete("usuario", "id_usuario LIKE '$id_user'");
+        elseif($id_login != null):
+              $delete = $this->Delete("login", "id_login LIKE $id_login");
+        endif;
+        
+        return $delete;
+    }
+    
+ 
+    
+  
  
 }

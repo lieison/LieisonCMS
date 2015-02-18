@@ -247,7 +247,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-phone"></i>
 												</span>
-                                                                                             <input required type="tel" name="txt_telefono" class="form-control" placeholder="">
+                                                                                              <input required type="tel" name="txt_telefono" class="form-control" placeholder="">
 				
                                                                                         </div>
                                                                                         

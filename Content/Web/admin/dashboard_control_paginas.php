@@ -223,7 +223,7 @@
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="fa fa-globe"></i>
-                                                                Monitoreo Entradas y Salidas
+                                                                Control de Paginas Lieisoft
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse">
