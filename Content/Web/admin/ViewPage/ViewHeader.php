@@ -52,7 +52,7 @@ class AdminHeader
     
     static function GetCopyRight()
     {
-        echo date('Y') .  " &copy; Lieison S.A de S.V.";
+        echo date('Y') .  " &copy; Lieison S.A de C.V.";
     }
     
     static function GetTitle($name)
@@ -151,6 +151,11 @@ class AdminHeader
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/pages/scripts/index.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>';
+    }
+    
+    static function Get_ImgSesion($imagen)
+    {
+        echo '<img alt="" class="img-circle" src="' . self::$relative_route . 'admin/img/users/' . $imagen . '" />';
     }
     
 }

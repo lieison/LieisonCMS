@@ -56,6 +56,15 @@
     
 ?>
 </head>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&appId=271330856288382&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
@@ -168,10 +177,10 @@
 							</div>
 						</div>
 						<div class="portlet-body form">
-                                                    <form class="form-horizontal" role="form" action="setprospecto.php" method="post">
+                                                    <form class="form-horizontal" role="form" action="get_add_prospect.php" method="get">
 								<div class="form-body">
 									<div class="form-group">
-										<label class="col-md-3 control-label">Nombre Prospecto *</label>
+										<label class="col-md-3 control-label">Nombre del Prospecto *</label>
 										<div class="col-md-9">
                                                                                     <input type="text" class="form-control input-inline medium_text" id="txt_nombre" name="txt_nombre" placeholder="Nombre o Empresa" onkeyup="verificar_prospecto(this.value);">
                                                                                         <span class="help-block" id="verificar_prospecto">
@@ -199,14 +208,14 @@
                                                                         <div class="form-group">
 										<label class="col-md-3 control-label">Provincia</label>
 										<div class="col-md-9">
-                                                                                    <input type="text" class="form-control input-inline medium_text" id="txt_nombre" name="txt_nombre" placeholder="Ej: (San salvador)" >
+                                                                                    <input type="text" name="txt_provincia" class="form-control input-inline medium_text" id="txt_nombre" name="txt_nombre" placeholder="Ej: (San salvador)" >
                                            
 										</div>
 									</div>
                                                                         <div class="form-group">
 										<label class="col-md-3 control-label">Ciudad</label>
 										<div class="col-md-9">
-                                                                                    <input type="text" class="form-control input-inline medium_text" id="txt_nombre" name="txt_nombre" placeholder="Ej: (San salvador)" >
+                                                                                    <input type="text" name="txt_ciudad" class="form-control input-inline medium_text" id="txt_nombre" name="txt_nombre" placeholder="Ej: (San salvador)" >
                                            
 										</div>
 									</div>
@@ -223,7 +232,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-inbox"></i>
 												</span>
-                                                                                             <input type="text" class="form-control" placeholder="+503">
+                                                                                             <input type="text" name="txt_zip" class="form-control" placeholder="+503">
 				
                                                                                         </div>
                                                                                         
@@ -238,7 +247,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-phone"></i>
 												</span>
-                                                                                             <input required type="tel" class="form-control" placeholder="">
+                                                                                             <input required type="tel" name="txt_telefono" class="form-control" placeholder="">
 				
                                                                                         </div>
                                                                                         
@@ -252,7 +261,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-fax"></i>
 												</span>
-                                                                                             <input type="tel" class="form-control" placeholder="">
+                                                                                             <input type="tel" name="txt_fax" class="form-control" placeholder="">
 				
                                                                                         </div>
                                                                                         
@@ -266,7 +275,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-envelope"></i>
 												</span>
-												<input type="email" class="form-control" placeholder="Correo electronico ...">
+												<input type="email" name="txt_email" class="form-control" placeholder="Correo electronico ...">
 											</div>
 										</div>
 									</div>
@@ -278,7 +287,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-dashboard"></i>
 												</span>
-                                                                                            <input type="url" class="form-control" placeholder="http://">
+                                                                                            <input type="url" name="txt_paginaweb" class="form-control" placeholder="http://">
 											</div>
 										</div>
 									</div>
@@ -290,7 +299,10 @@
 												<span class="input-group-addon">
 												<i class="fa fa-facebook"></i>
 												</span>
-                                                                                            <input type="url" class="form-control" placeholder="https://">
+                                                                                            <input type="text" class="form-control" name="txt_facebook" placeholder="https://"  onkeyup="verificar_facebook(this.value);">
+                                                                                            <span class="help-block" id="verificar_facebook">
+                                                                                            
+                                                                                            </span>
 											</div>
 										</div>
 									</div>
@@ -301,7 +313,10 @@
 												<span class="input-group-addon">
 												<i class="fa fa-twitter"></i>
 												</span>
-                                                                                            <input type="url" class="form-control" placeholder="https://">
+                                                                                            <input type="tex" name="txt_twitter" class="form-control" placeholder="ejemplo: lieison (sin arroba '@')" onkeyup="verificar_twitter(this.value);">
+                                                                                            <span class="help-block" id="verificar_twitter">
+                                                                                            
+                                                                                            </span>
 											</div>
 										</div>
 									</div>
@@ -350,6 +365,8 @@
 		<i class="icon-arrow-up"></i>
 	</div>
 </div>
+
+
 
 <?php AdminHeader::GetJs(); ?>
 
@@ -432,6 +449,18 @@
                       }
               });
     }
+    
+  function verificar_facebook(fb)
+  {
+      
+      document.getElementById("verificar_facebook").innerHTML='<iframe src="//www.facebook.com/plugins/likebox.php?href=' + fb + ';width&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=644055289044788" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:62px;" allowTransparency="true"></iframe>';
+  }
+  
+  function verificar_twitter(tw)
+  {
+      
+      document.getElementById("verificar_twitter").innerHTML='<iframe src="//platform.twitter.com/widgets/follow_button.html?screen_name=' + tw + '" style="width: 300px; height: 20px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe>';
+  }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>

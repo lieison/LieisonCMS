@@ -12,7 +12,6 @@ foreach ($paises as $key=>$value):
          else:
           $values .= "<option value='$id'>$nombre</option>";
      endif;
-     
 endforeach;
 $values .= "</select>";
 unset($paises);
