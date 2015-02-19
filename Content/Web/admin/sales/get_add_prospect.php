@@ -16,7 +16,7 @@
         $imagen = "avatar.png";
     endif;
     
-    
+     
     
     
 ?>
