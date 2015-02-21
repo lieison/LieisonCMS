@@ -37,6 +37,12 @@ class FunctionsController {
         return date('d');
     }
     
+    public static function  get_date()
+    {
+        return  date("Y-m-d");
+    }
+
+
     public static function get_directory_tree($directory , $pattern = null)
     {
         $directory = self::GetRootUrl($directory);

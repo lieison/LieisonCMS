@@ -16,7 +16,17 @@
         $imagen = "avatar.png";
     endif;
     
-     
+    
+    if(!isset($_REQUEST['cmd_guardar'])):
+       // $header = new Http\Header();
+       // $header->redirect("dashboard_add_prospecto.php");
+    endif;
+    
+ 
+    
+   $fb = $_REQUEST['txt_facebook'];
+   $tw = $_REQUEST['txt_twitter'];
+
     
     
 ?>
@@ -42,6 +52,22 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
+
+<input type="hidden" value="<?php echo $_REQUEST['txt_nombre']; ?>" id="nombre" />
+<input type="hidden" value="<?php echo $_REQUEST['txt_direccion1']; ?>" id="direccion1"  />
+<input type="hidden" value="<?php echo $_REQUEST['txt_direccion2']; ?>" id="direccion2" />
+<input type="hidden" value="<?php echo $_REQUEST['txt_provincia']; ?>" id="provincia" />
+<input type="hidden" value="<?php echo $_REQUEST['txt_ciudad']; ?>" id="ciudad" />
+<input type="hidden" value="<?php echo $_REQUEST['combo_pais']; ?>" id="pais" />
+<input type="hidden" value="<?php echo $_REQUEST['txt_zip']; ?>" id="zip"  />
+<input type="hidden" value="<?php echo $_REQUEST['txt_telefono']; ?>" id="telefono" />
+<input type="hidden" value="<?php echo $_REQUEST['txt_fax']; ?>" id="fax"  />
+<input type="hidden" value="<?php echo $_REQUEST['txt_email']; ?>" id="mail"  />
+<input type="hidden" value="<?php echo $_REQUEST['txt_web']; ?>" id="web"  />
+<input type="hidden" value="<?php echo $fb; ?>" id="facebook"  />
+<input type="hidden" value="<?php echo $tw; ?>" id="twitter"  />
+<input type="hidden" value="<?php echo $_REQUEST['txt_notas']; ?>" id="notas"  />
+
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
@@ -134,7 +160,10 @@
 					<div class="portlet box blue-hoki">
 						<div class="portlet-title">
 							<div class="caption">
-                                                            <i class="fa fa-gift"></i>El Prospecto <b><?php  ?></b> Se registro con exito !!
+                                                            <i class="fa fa-adjust" id="registrando"></i>
+                                                            <div id="guardando_p">
+                                                               
+                                                            </div>
 							</div>
 							<div class="actions">
 								<a href="dashboard_edit_prospecto.php?id=<?php ?>" class="btn btn-default btn-sm">
@@ -142,18 +171,54 @@
 								<a href="dashboard_add_prospecto.php" class="btn btn-default btn-sm">
 								<i class="fa fa-plus"></i> Agregar Otro </a>
 							</div>
+                           
 						</div>
 						<div class="portlet-body">
 							
 						</div>
-					</div>
+                                           
+                                    
 					<!-- END Portlet PORTLET-->
+                                        
+                           
+  
 				</div>
+                            
+                                             <div class="row">
+				<div class="col-md-12">
+					<table id="user" class="table table-bordered table-striped">
+					<tbody>
+					<tr>  <td style="width:15%">
+                                        <div id="guardando_loading">
+                                          
+							
+                                            
+                                        </div></td>
+						<td style="width:50%">
+							<a href="#"  data-type="text" data-pk="1" data-original-title="Enter username">
+                                                            Prospecto </a>: <?php echo $_REQUEST['txt_nombre']; ?><br>
+                                                    <a href="#"  data-type="text" data-pk="1" data-original-title="Enter username">
+							Estado </a>: Activo por defecto.
+                                                        <br>
+                                                        <div id="save_ok">
+                                                            
+                                                        </div>
+						</td>
+					
+					</tr>
+					
+					</tbody>
+					</table>
+                            
                         </div>
-			
-		</div>
+                        
+                        
 	</div>
-	
+                                </div>
+                            
+                            
+                            
+                        </div>
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
@@ -174,15 +239,76 @@
    Layout.init(); // init layout
    QuickSidebar.init(); // init quick sidebar
    Demo.init(); // init demo features 
-   Index.init();   
-   Index.initDashboardDaterange();
-   Index.initJQVMAP(); // init index page's custom scripts
-   Index.initCalendar(); // init index page's custom scripts
-  // Index.initCharts(); // init index page's custom scripts
-   Index.initChat();
-   Index.initMiniCharts();
+
    Tasks.initDashboardWidget();
    
+   var guardar_prospecto = function()
+   {
+       
+       
+       var n = document.getElementById("nombre").value;
+       var d = document.getElementById("direccion1").value;
+       var d2 = document.getElementById("direccion2").value;
+          
+       
+       var p = document.getElementById("provincia").value;
+       var c = document.getElementById("ciudad").value;
+        
+       var ps = document.getElementById("pais").value;
+       var z= document.getElementById("zip").value;
+       
+       var t = document.getElementById("telefono").value;
+       var f = document.getElementById("fax").value;
+        
+       var e = document.getElementById("mail").value;
+       var w = document.getElementById("web").value;
+       
+       var fb = document.getElementById("facebook").value;
+       var tw = document.getElementById("twitter").value;
+       var nt = document.getElementById("notas").value;
+       
+       
+        
+           var parametros = {
+                    "nombre" : n,
+                    "direccion1":d,
+                    "direccion2":d2,
+                    "provincia":p,
+                    "ciudad":c,
+                    "pais":ps,
+                    "zip":z,
+                    "telefono":t,
+                    "fax":f,
+                    "mail":e,
+                    "web":w,
+                    "facebook":fb,
+                    "twitter":tw,
+                    "notas":nt
+                 };
+
+                $.ajax({
+                      type: "POST",
+                      url: "ajax_add_prospect.php",
+                      data: parametros,
+                      beforeSend: function()
+                      {
+                           
+                          $("#guardando_p").html(" Guardando Prospecto");
+                          $("#guardando_loading").html("<img src='../img/assert/loading.gif' width='100' height='100' />");
+                         
+                      },
+                      success: function(value){
+                          $("#guardando_p").html("");
+                          $("#guardando_loading").html("<img src='../img/assert/checkok.png' width='100' height='100' />");
+                          $("#save_ok").html( '<a href="#"  data-type="text" data-pk="1" data-original-title="Enter username">Prospecto Guardado </a>: <a href="dashboard_add_prospecto.php">Agregar Otro</a>.');
+                      }
+              });
+       
+   }
+   
+   guardar_prospecto();
+    
+
    
 });
 </script>

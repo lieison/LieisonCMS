@@ -122,8 +122,10 @@
 				</li>
                                 <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
+                                     ob_start();
                                      $dashboard = new DashboardController();
                                      echo $dashboard->get_dashboard_sidebar_menu($rol, "Principal");
+                                     ob_end_flush();
                                 ?>
 				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>

@@ -30,5 +30,14 @@ class ProspectController extends MysqlConection {
     }
     
     
+    public function Add_Prospect($params )
+    {
+        if(is_array($params))
+        {
+            return $this->Insert("sales_prospect" , $params);
+        }
+    }
+    
+    
     
 }

@@ -45,6 +45,8 @@ class DashboardController extends MysqlConection {
      */
     public function get_dashboard_sidebar_menu($privilegios , $puntero = null )
     {
+      
+        
         $array_seccion = array();
         
         $this->puntero = $puntero;

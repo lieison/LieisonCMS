@@ -287,7 +287,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-dashboard"></i>
 												</span>
-                                                                                            <input type="url" name="txt_paginaweb" class="form-control" placeholder="http://">
+                                                                                            <input type="url" name="txt_web" class="form-control" placeholder="http://">
 											</div>
 										</div>
 									</div>
@@ -299,7 +299,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-facebook"></i>
 												</span>
-                                                                                            <input type="text" class="form-control" name="txt_facebook" placeholder="https://"  onkeyup="verificar_facebook(this.value);">
+                                                                                            <input type="text" value="" class="form-control" name="txt_facebook" placeholder="https://"  onkeyup="verificar_facebook(this.value);">
                                                                                             <span class="help-block" id="verificar_facebook">
                                                                                             
                                                                                             </span>
@@ -313,7 +313,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-twitter"></i>
 												</span>
-                                                                                            <input type="tex" name="txt_twitter" class="form-control" placeholder="ejemplo: lieison (sin arroba '@')" onkeyup="verificar_twitter(this.value);">
+                                                                                            <input type="tex" value="" name="txt_twitter" class="form-control" placeholder="ejemplo: lieison (sin arroba '@')" onkeyup="verificar_twitter(this.value);">
                                                                                             <span class="help-block" id="verificar_twitter">
                                                                                             
                                                                                             </span>
@@ -327,7 +327,7 @@
 												<span class="input-group-addon">
 												
 												</span>
-                                                                                           <textarea class="ckeditor form-control" name="editor2" rows="6" data-error-container="#editor2_error"></textarea>
+                                                                                           <textarea class="ckeditor form-control" name="txt_notas" id="txt_notas" rows="6" data-error-container="#editor2_error"></textarea>
 											</div>
 										</div>
 									</div>
