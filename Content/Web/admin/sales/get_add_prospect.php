@@ -18,8 +18,8 @@
     
     
     if(!isset($_REQUEST['cmd_guardar'])):
-       // $header = new Http\Header();
-       // $header->redirect("dashboard_add_prospecto.php");
+        $header = new Http\Header();
+        $header->redirect("dashboard_add_prospecto.php");
     endif;
     
  
