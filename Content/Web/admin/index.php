@@ -26,6 +26,7 @@
     endif;
     
     $adminc = new AdminController();
+    $page_name = "Principal";
  
 ?>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -50,6 +51,11 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
+    
+<input type="hidden" id="rol_value" value="<?php echo $rol; ?>" />
+<input type="hidden" id="page_value" value="<?php echo $page_name; ?>" />
+<input type="hidden" id="route_value" value="<?php echo AdminHeader::$relative_route; ?>" />
+
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
@@ -108,26 +114,12 @@
 	<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
-			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+			<ul id="dashboard_sidebar_load" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-				<li class="sidebar-toggler-wrapper">
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<div class="sidebar-toggler">
-					</div>
-					<!-- END SIDEBAR TOGGLER BUTTON -->
-				</li>
-				<!-- PUENTE -->
-				<li class="sidebar-search-wrapper">
-                                    <br><br>
-				</li>
-                                <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
-                                     ob_start();
-                                     $dashboard = new DashboardController();
-                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Principal");
-                                     ob_end_flush();
+                                   
+                                    /*SE ACTUALIZO EL SIDEBAR POR AJAX SIDEBAR ...**/
                                 ?>
-				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
@@ -188,8 +180,37 @@
    Index.initMiniCharts();
    Tasks.initDashboardWidget();
    
+   var load_dashboard_sidebar = function()
+   {
+     
+       var rol = document.getElementById("rol_value").value;
+       var page = document.getElementById("page_value").value;
+       var route = document.getElementById("route_value").value;
+       
+       var d_params = {
+                       "rol" : rol,
+                       "page": page
+         };
+
+          $.ajax({
+                    type: "POST",
+                    url: route  + "admin/ControlPage/GetDashboardSidebar.php",
+                    data: d_params,
+                    beforeSend: function()
+                    {
+                         $("#dashboard_sidebar_load").html("<br><br><br><br><li><img src='" + route + "/admin/img/assert/loading.gif' width='40' height='40' /></li>");
+                    },
+                    success: function(value){
+                          $("#dashboard_sidebar_load").html(value);
+                          
+                     }
+             });
+   }
+   load_dashboard_sidebar();
    
-    var iniciargraficos_visita = function () {
+   
+   
+    /*var iniciargraficos_visita = function () {
             if (!jQuery.plot) {
                 return;
             }
@@ -316,9 +337,9 @@
             }
             
                 getresponsivedata();
-        }
+        }*/
    
-   iniciargraficos_visita();
+   // iniciargraficos_visita();
    
 });
 </script>

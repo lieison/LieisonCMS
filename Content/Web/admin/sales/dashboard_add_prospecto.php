@@ -27,13 +27,8 @@
     
 
     $adminc = new AdminController();
-    $priv = $adminc->get_permission_page($rol, FunctionsController::get_actual_page());
-  
-    if(isset($_REQUEST['id'])):
-        
-    elseif(!$priv && $rol != "admin"):
-        $header->redirect("../index.php");
-    endif;
+    $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
+    
     
    
 ?>
@@ -69,6 +64,12 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
 <!-- BEGIN HEADER -->
+
+<input type="hidden" id="rol_value" value="<?php echo $rol; ?>" />
+<input type="hidden" id="page_value" value="<?php echo $page_name; ?>" />
+<input type="hidden" id="route_value" value="<?php echo AdminHeader::$relative_route; ?>" />
+
+
 <div class="page-header navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner">
@@ -126,16 +127,7 @@
 		<div class="page-sidebar navbar-collapse collapse">
 			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-				<li class="sidebar-toggler-wrapper">
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<div class="sidebar-toggler">
-					</div>
-					<!-- END SIDEBAR TOGGLER BUTTON -->
-				</li>
-				<!-- PUENTE -->
-				<li class="sidebar-search-wrapper">
-                                    <br><br>
-				</li>
+				
                                 <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
                                      $dashboard = new DashboardController();

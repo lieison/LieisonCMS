@@ -82,7 +82,17 @@ class DashboardController extends MysqlConection {
             $array_seccion[$key] = array($value , $result);
         }
 
-        $this->format = "";
+        $this->format = '<li class="sidebar-toggler-wrapper">
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<div class="sidebar-toggler">
+					</div>
+					<!-- END SIDEBAR TOGGLER BUTTON -->
+				</li>
+				<!-- PUENTE -->
+				<li class="sidebar-search-wrapper">
+                                    <br><br>
+				</li>';
+        
         foreach ($array_seccion as $key=>$value)
         {
             

@@ -56,9 +56,9 @@ class FunctionsController {
         $data_server = explode("/" , $data_server);
         if (count($data_server) < 2) {
             $data_server = explode("\\" , $data_server);
-            if(count($data_server) < 2)
+            if (count($data_server) < 2) {
                 return $data_server[0];
-            else
+            } else
                 return $data_server[count($data_server) - 1];
         } else {
             return $data_server[count($data_server) - 1];

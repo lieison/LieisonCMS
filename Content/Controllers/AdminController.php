@@ -217,7 +217,7 @@ class AdminController extends MysqlConection {
            $page_rol = explode(',' , $v['privilegios']);
            if(count($page_rol) >=2)
            {
-               foreach($page_rol as $rol)
+                foreach($page_rol as $rol)
                {
                     if((int)$rol_value == (int) $rol)
                     {
@@ -246,6 +246,44 @@ class AdminController extends MysqlConection {
     {
         $this->query = "SELECT nivel , nombre FROM privilegios";
         return $this->RawQuery($this->query);
+    }
+    
+    
+    /**
+     *@todo Funcion para otorgar permisos a la pagina , esta funcion requiere de parametros especiales
+     *@version 1.0
+     *@since 1.0 
+     *@depends get_permission_page , get_option_permission
+     *@return mixed bool/redirect 
+     * 
+     * 
+     */
+
+    public function Get_Permission($rol , $dashboard_page , $redirect =
+                    array("redirect"=> "../index.php" , 
+                           "activate" => true) 
+            )
+    {
+        $is_priv = $this->get_permission_page($rol, $dashboard_page);
+        if(!$is_priv && $rol != "admin" )
+        {
+            if ($redirect['activate'] == true) {
+                ob_start();
+                $header = new \Http\Header();
+                $header->redirect($redirect['redirect']);
+                unset($header);
+                ob_end_clean();
+            } else {
+                return $is_priv;
+            }
+        }
+    }
+    
+        
+    public static function get_option_permission($redirect = ".../index.php" , $activate=true )
+    {
+        return array("redirect"=> $redirect , 
+                           "activate" => $activate);
     }
     
     
