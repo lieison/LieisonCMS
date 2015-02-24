@@ -29,7 +29,7 @@
     $adminc = new AdminController();
     $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
     
-    
+    $page_name="Agregar Prospecto";
    
 ?>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -125,13 +125,13 @@
 	<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
-			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+			<ul id="dashboard_sidebar_load" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
 				
                                 <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
-                                     $dashboard = new DashboardController();
-                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Agregar Prospecto");
+                                     //$dashboard = new DashboardController();
+                                     //echo $dashboard->get_dashboard_sidebar_menu($rol, "Agregar Prospecto");
                                 ?>
 				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>
@@ -379,6 +379,34 @@
    Index.initChat();
    Index.initMiniCharts();
    Tasks.initDashboardWidget();*/
+        
+      var load_dashboard_sidebar = function()
+   {
+     
+       var rol = document.getElementById("rol_value").value;
+       var page = document.getElementById("page_value").value;
+       var route = document.getElementById("route_value").value;
+       
+       var d_params = {
+                       "rol" : rol,
+                       "page": page
+         };
+
+          $.ajax({
+                    type: "POST",
+                    url: route  + "admin/ControlPage/GetDashboardSidebar.php",
+                    data: d_params,
+                    beforeSend: function()
+                    {
+                         $("#dashboard_sidebar_load").html("<br><br><br><br><li><img src='" + route + "/admin/img/assert/loading.gif' width='40' height='40' /></li>");
+                    },
+                    success: function(value){
+                          $("#dashboard_sidebar_load").html(value);
+                          
+                     }
+             });
+   }
+   load_dashboard_sidebar();
         
    var get_paises = function()
    {

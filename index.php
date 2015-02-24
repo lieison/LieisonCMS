@@ -40,9 +40,9 @@
      header("Pragma: no-cache");
     
      //NOMBRE DEL ARCHIVO EN LA CUAL INICIARA , GENERALMENTE ES UN INDEX.PHP    
-     header("Location: http://$SERVER__/$DIR_NAME/Content/Web/index.php" );  
+     //header("Location: http://$SERVER__/$DIR_NAME/Content/Web/index.php" );  
 
-     
+     header("Location: http://$SERVER__/$DIR_NAME/Content/Web/admin/index.php" );  
      
 ?>
 
