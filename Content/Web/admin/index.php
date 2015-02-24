@@ -121,7 +121,11 @@
 				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                                 <?php
                                    
-                                    /*SE ACTUALIZO EL SIDEBAR POR AJAX SIDEBAR ...**/
+                                    /*SE ACTUALIZO EL SIDEBAR POR AJAX SIDEBAR ...
+                                     * 
+                                     * id="dashboard_sidebar_load"
+                                     * 
+                                     * **/
                                 ?>
 			</ul>
 			<!-- END SIDEBAR MENU -->
