@@ -41,7 +41,11 @@ class FunctionsController {
     {
         return  date("Y-m-d");
     }
-
+    
+    public static function get_time()
+    {
+        return date("H:i:s",time()-3600);
+    }
 
     public static function get_directory_tree($directory , $pattern = null)
     {
