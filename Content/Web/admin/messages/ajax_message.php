@@ -34,7 +34,7 @@
      echo '</a><ul class="dropdown-menu">';
      echo '<li class="external">
             <h3>No Hay <span class="bold">Mensajes</span> Recientes  </h3>
-		<a href="../admin/messages/inbox.php">Ver Todos</a>
+		<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php">Ver Todos</a>
 	    </li>';
  }
  else{
@@ -43,12 +43,12 @@
      if($count == 1){
         echo '<li class="external">
             <h3>' . $count . ' <span class="bold">Mensaje</span> Reciente  </h3>
-		<a href="../admin/messages/inbox.php">Ver Todos</a>
+		<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php">Ver Todos</a>
 	    </li>';
      }else{
            echo '<li class="external">
             <h3>' . $count . ' <span class="bold">Mensajes</span> Recientes </h3>
-		<a href="../admin/messages/inbox.php">Ver Todos</a>
+		<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php">Ver Todos</a>
 	    </li>';
      }
  }
@@ -56,16 +56,14 @@
  echo '<li>';
  foreach ($msjto as $key=>$value)
  {
-    
-     
      echo '<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">';
      echo '<li>';
-     echo '<a href="../admin/messages/inbox.php?id_mensaje=' . $value['id_mensaje'] . '">';
+     echo '<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php?id_mensaje=' . $value['id_mensaje'] . '">';
      echo '<span class="photo">';
      if ($value['imagen'] == null) {
-        echo '<img src="../admin/img/users/avatar.png" class="img-circle" alt="">';
+        echo '<img src="' . FunctionsController::GetUrl("img") . '/users/avatar.png" class="img-circle" alt="">';
      } else {
-        echo '<img src="../admin/img/users/' . $value['imagen'] . '" class="img-circle" alt="">';
+        echo '<img src="' . FunctionsController::GetUrl("img") . '/users/' . $value['imagen'] . '" class="img-circle" alt="">';
      }
      echo '</span>';
      echo '<span class="subject">';
