@@ -80,6 +80,24 @@ class AdminHeader
         }
     }
     
+    static function GetMessageContent()
+    {
+        echo '<li id="load_message" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+					
+		</li>';
+    }
+    
+    static function GetNotificationContent()
+    {
+        echo '';
+    }
+    
+    
+    static function GetTaskContent()
+    {
+        echo '';
+    }
+    
     static function GetCss()
     {
         echo '<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
@@ -106,6 +124,9 @@ class AdminHeader
                 <link href="'. self::$relative_route . 'assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
 
                 <link href="'. self::$relative_route . 'assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>';
+        
+        echo '<input type="hidden" id="route_value" value=" ' .  AdminHeader::$relative_route . '" />';
+        
     }
     
     static function GetJs()
@@ -151,6 +172,8 @@ class AdminHeader
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/pages/scripts/index.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>';
+            
+            echo '<script src="' . self::$relative_route  . 'admin/js/AjaxFunctions.js" type="text/javascript"></script>';
     }
     
     static function Get_ImgSesion($imagen)

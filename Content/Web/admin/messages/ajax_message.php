@@ -35,7 +35,7 @@
      }
  }
  
- $msjto = $messagecontroller->GetMessageFrom($id_user);
+ $msjto = $messagecontroller->GetMessageFrom($id_user , 5);
  echo '<li>';
  foreach ($msjto as $key=>$value)
  {

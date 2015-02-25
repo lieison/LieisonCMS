@@ -42,13 +42,16 @@ class MessageController extends MessageModel {
          return $result[0]['count'];
     }
 
-    public function GetMessageFrom($id_u_para) {
+    public function GetMessageFrom($id_u_para , $limit = null) {
+        
         $query = "SELECT lieisoft_mensajeria.id_mensaje ,  lieisoft_mensajeria.asunto ,"
                 . " lieisoft_mensajeria.fecha , lieisoft_mensajeria.hora , lieisoft_mensajeria.mensaje ,"
                 . " concat(usuario.nombre , ' ' , usuario.apellido) as nombre , usuario.imagen "
                 . " FROM lieisoft_mensajeria INNER JOIN usuario ON lieisoft_mensajeria.id_usuario_de=usuario.id_usuario"
-                . " WHERE lieisoft_mensajeria.id_usuario_para LIKE '$id_u_para' ORDER BY lieisoft_mensajeria.hora ASC"
-                . " LIMIT 5 ";
+                . " WHERE lieisoft_mensajeria.id_usuario_para LIKE '$id_u_para' ORDER BY lieisoft_mensajeria.hora ASC";
+        if($limit != null){
+            $query .= " LIMIT $limit ";
+        }        
         
         return $result = $this->RawQuery($query); 
     }
