@@ -13,8 +13,7 @@ class AdminHeader
 			</h3>';
     }
     
-    
-    
+   
     static function Get_DropDown()
     {
         echo '<ul class="dropdown-menu dropdown-menu-default">
@@ -37,17 +36,19 @@ class AdminHeader
     
     static function GetLogo($width = null , $height = null)
     {
+        $logo = "ls_logo_white.png";
+        $dir = 'img/logo/';
         if(SivarApi\Tools\Validation::Is_Empty_OrNull($width) || SivarApi\Tools\Validation::Is_Empty_OrNull($height)){
             echo '<a href="' . self::$relative_route . 'admin/index.php">
-                <img src="' . self::$relative_route . 'img/logo/ls_logo_white.png" 
-                    width="86" height="35" alt="logo" class="logo-default"/>
+                <img src="' . self::$relative_route . $dir . $logo . '"' .
+                    'width="86" height="35" alt="logo" class="logo-default"/>
               </a>';
         }
         else
         {
              echo '<a href="' . self::$relative_route . 'admin/index.php">
-                <img src="' . self::$relative_route . 'img/logo/ls_logo_white.png" 
-                    width="' . $width .'" height="' . $height .'" alt="logo" class="logo-default"/>
+                <img src="' . self::$relative_route . $dir . $logo . '"' .
+                    'width="' . $width .'" height="' . $height .'" alt="logo" class="logo-default"/>
               </a>';
         }
     }

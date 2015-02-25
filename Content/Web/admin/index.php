@@ -90,7 +90,7 @@
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                            <?php AdminHeader::Get_ImgSesion($imagen);?>
+                                         <?php AdminHeader::Get_ImgSesion($imagen);?>
 					<span class="username username-hide-on-mobile">
 					 <?php echo $usuario; ?>
                                         </span>
