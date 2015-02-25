@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/CurlAccess.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_gestion_usuarios.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Models/UserModel.php</file>
@@ -14,6 +15,26 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/lock.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/UserController.php</file>
+=======
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/UserModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/SliderModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/ajax_message.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/AjaxFunctions.js</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_admin_prospecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/FunctionsController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/ViewHeader.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_edit_prospecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/GetVisits.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/MessageController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/inbox.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/DashboardController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/MessageModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_add_prospecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_add_prospect.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/UserController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_paises.php</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>

@@ -366,46 +366,10 @@
 
 <script>
     
-    jQuery(document).ready(function() {    
-   //Metronic.init(); // init metronic core componets
-   Layout.init(); // init layout
-   //QuickSidebar.init(); // init quick sidebar
-   //Demo.init(); // init demo features 
-   /*Index.init();   
-   Index.initDashboardDaterange();
-   Index.initJQVMAP(); // init index page's custom scripts
-   Index.initCalendar(); // init index page's custom scripts
-  // Index.initCharts(); // init index page's custom scripts
-   Index.initChat();
-   Index.initMiniCharts();
-   Tasks.initDashboardWidget();*/
-        
-      var load_dashboard_sidebar = function()
-   {
-     
-       var rol = document.getElementById("rol_value").value;
-       var page = document.getElementById("page_value").value;
-       var route = document.getElementById("route_value").value;
-       
-       var d_params = {
-                       "rol" : rol,
-                       "page": page
-         };
+  jQuery(document).ready(function() {    
+   
+  Layout.init(); // init layout
 
-          $.ajax({
-                    type: "POST",
-                    url: route  + "admin/ControlPage/GetDashboardSidebar.php",
-                    data: d_params,
-                    beforeSend: function()
-                    {
-                         $("#dashboard_sidebar_load").html("<br><br><br><br><li><img src='" + route + "/admin/img/assert/loading.gif' width='40' height='40' /></li>");
-                    },
-                    success: function(value){
-                          $("#dashboard_sidebar_load").html(value);
-                          
-                     }
-             });
-   }
    load_dashboard_sidebar();
         
    var get_paises = function()
