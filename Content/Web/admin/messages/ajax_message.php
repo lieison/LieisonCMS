@@ -77,7 +77,7 @@
      if($value['fecha'] == FunctionsController::get_date()){
         echo '<span class="time">' .$value['hora'] . '</span>';
      }else{
-          echo '<span class="time">' . $value['fecha'] . "a las " . $value['hora'] . '</span>';
+          echo '<span class="time">' . $value['fecha'] . " a las " . $value['hora'] . '</span>';
      }
      echo '</span>';
      echo '<br><span class="message">';
