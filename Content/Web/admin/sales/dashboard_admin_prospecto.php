@@ -35,6 +35,7 @@
         $header->redirect("../index.php");
     endif;
     
+    
    
 ?>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -48,6 +49,7 @@
 
 <?php 
 
+    $page_name = "Admin Prospectos";
     
     AdminHeader::$relative_route = "../../";
     AdminHeader::GetTitle("Lieison Dashboard");
@@ -55,10 +57,16 @@
     AdminHeader::GetCss();
     
 ?>
+    
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
+    
+<?php AdminHeader::GetHiddenData(); ?>
+<input type="hidden" id="rol_value" value="<?php echo $rol; ?>" />
+<input type="hidden" id="page_value" value="<?php echo $page_name; ?>" />
+
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
@@ -78,20 +86,29 @@
 		<!-- BEGIN TOP NAVIGATION MENU -->
 		<div class="top-menu">
 			<ul class="nav navbar-nav pull-right">
+                            
+  
+                                <?php 
+                                    /**
+                                     *  ESTA FUNCION SE AGREGARAN LOS DROPDOWN 
+                                     *  COMO INBOX , TASK , NOTIFICACIONES ETC .
+                                     */
+                                     AdminHeader::GetSystemContent();
+                                ?>
+                                
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                            <img alt="" class="img-circle" src="../img/users/<?php echo $imagen; ?>"/>
+                                         <?php AdminHeader::Get_ImgSesion($imagen);?>
 					<span class="username username-hide-on-mobile">
-					 <?php
-                                           echo $usuario;
-                                         ?>
+					 <?php echo $usuario; ?>
                                         </span>
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<?php AdminHeader::Get_DropDown(); ?>
 				</li>
+ 
 				<!-- END USER LOGIN DROPDOWN -->
 				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -115,14 +132,16 @@
 	<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
-			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+			<ul id="dashboard_sidebar_load" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-                                <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
-                                     $dashboard = new DashboardController();
-                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Sales");
+                                   
+                                    /*SE ACTUALIZO EL SIDEBAR POR AJAX SIDEBAR ...
+                                     * 
+                                     * id="dashboard_sidebar_load"
+                                     * 
+                                     * **/
                                 ?>
-				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
@@ -134,16 +153,16 @@
 			
 			
 			<!-- BEGIN PAGE HEADER-->
-			<?php AdminHeader::Get_CMS_Title("PROSPECTOS" , " | ADMINISTRAR PROSPECTOS"); ?>
+			<?php AdminHeader::Get_CMS_Title("Dashboard"); ?>
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="#">Home</a>
+						<a href="index.html"></a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Prospectos</a>
+                                            <a href="#"></a>
 					</li>
 				</ul>
 				
@@ -169,10 +188,32 @@
 <?php AdminHeader::GetJs(); ?>
 
 <script>
-    jQuery(document).ready(function() {    
+    
+ 
+  jQuery(document).ready(function() {    
+      
+   <?php
+   /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
+   AdminHeader::GetJsSystemLoad();
+   ?>   
+   
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
+   QuickSidebar.init(); // init quick sidebar
+   Demo.init(); // init demo features 
+   Index.init();   
+   Index.initDashboardDaterange();
+   Index.initJQVMAP(); // init index page's custom scripts
+   Index.initCalendar(); // init index page's custom scripts
+   Index.initChat();
+   Index.initMiniCharts();
+   Tasks.initDashboardWidget();
 
+
+   /**
+    * INICIA LOS GRAFICOS DE VISITAS EN EL FRONT END --- DESHABILITADO
+    * */
+   // iniciargraficos_visita();
    
 });
 </script>
