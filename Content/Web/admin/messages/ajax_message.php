@@ -80,7 +80,7 @@
           echo '<span class="time">' . $value['fecha'] . "a las " . $value['hora'] . '</span>';
      }
      echo '</span>';
-     echo '<span class="message">';
+     echo '<br><span class="message">';
      echo '<b>' . $value['asunto'] . "</b><br>"; 
      if(strlen($value['mensaje'])  >= 65)
      {
