@@ -13,6 +13,8 @@ class AdminHeader
 			</h3>';
     }
     
+    
+    
     static function Get_DropDown()
     {
         echo '<ul class="dropdown-menu dropdown-menu-default">
@@ -80,23 +82,41 @@ class AdminHeader
         }
     }
     
-    static function GetMessageContent()
+    static function GetSystemContent()
     {
         echo '<li id="load_message" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
 					
-		</li>';
+               </li>';
     }
     
-    static function GetNotificationContent()
+    
+    static function GetJsSystemLoad()
     {
-        echo '';
+        /**
+          * CARGA LOS  MENSAJES 
+         **/
+   
+        echo ' load_message();';
+        echo "setInterval('load_message()',1000*10);";
+        
+         /**CARGA LAS NOTIFICACIONES */
+   
+        echo 'load_notify();';
+        echo "setInterval('load_notify()' , 1000*10);";    
+        
+          /**
+            * CARGA EL DASHBOARD SIDEBAR
+           * */
+        echo 'load_dashboard_sidebar();';
+             
     }
     
-    
-    static function GetTaskContent()
+    static function GetHiddenData()
     {
-        echo '';
+         echo '<input type="hidden" id="route_value" value=" ' .  AdminHeader::$relative_route . '" />';
+       
     }
+ 
     
     static function GetCss()
     {
@@ -125,12 +145,25 @@ class AdminHeader
 
                 <link href="'. self::$relative_route . 'assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>';
         
-        echo '<input type="hidden" id="route_value" value=" ' .  AdminHeader::$relative_route . '" />';
+       
         
     }
     
     static function GetJs()
     {
+        
+        /**
+         *          <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
+                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
+                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
+                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
+         * 
+         */
+        
+        
             echo '<!--[if lt IE 9]>
                     <script src="'. self::$relative_route . 'assets/global/plugins/respond.min.js"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/excanvas.min.js"></script> 
@@ -148,13 +181,7 @@ class AdminHeader
                     <script src="'. self::$relative_route . 'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
                 <!-- END CORE PLUGINS -->
                 <!-- BEGIN PAGE LEVEL PLUGINS -->
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
+           
                     <script src="'. self::$relative_route . 'assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>

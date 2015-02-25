@@ -53,9 +53,9 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
     
+<?php AdminHeader::GetHiddenData(); ?>
 <input type="hidden" id="rol_value" value="<?php echo $rol; ?>" />
 <input type="hidden" id="page_value" value="<?php echo $page_name; ?>" />
-
 
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
@@ -78,11 +78,13 @@
 			<ul class="nav navbar-nav pull-right">
                             
   
-                                <?php AdminHeader::GetMessageContent(); ?>
-
-                                <?php AdminHeader::GetNotificationContent(); ?>
-                                
-                                 <?php AdminHeader::GetTaskContent(); ?>
+                                <?php 
+                                    /**
+                                     *  ESTA FUNCION SE AGREGARAN LOS DROPDOWN 
+                                     *  COMO INBOX , TASK , NOTIFICACIONES ETC .
+                                     */
+                                     AdminHeader::GetSystemContent();
+                                ?>
                                 
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -146,11 +148,11 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						<a href="index.html"></a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Dashboard</a>
+                                            <a href="#"></a>
 					</li>
 				</ul>
 				
@@ -179,6 +181,11 @@
     
  
   jQuery(document).ready(function() {    
+      
+   <?php
+   /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
+   AdminHeader::GetJsSystemLoad();
+   ?>   
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
@@ -191,23 +198,8 @@
    Index.initChat();
    Index.initMiniCharts();
    Tasks.initDashboardWidget();
-   /**
-    * CARGA LOS  MENSAJES 
-    * */
-   load_message();
-   setInterval('load_message()',1000*10);
-   
-   /**CARGA LAS NOTIFICACIONES */
-   
-   load_notify();
-   setInterval('load_notify()' , 1000*10);  
-   
-   /**
-    * CARGA EL DASHBOARD SIDEBAR
-    * */
-   load_dashboard_sidebar();
-   
-   
+
+
    /**
     * INICIA LOS GRAFICOS DE VISITAS EN EL FRONT END --- DESHABILITADO
     * */
