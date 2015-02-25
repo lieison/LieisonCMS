@@ -74,9 +74,14 @@
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN TOP NAVIGATION MENU -->
 		<div class="top-menu">
-                        
-                    
 			<ul class="nav navbar-nav pull-right">
+                            
+                               <!-- BEGIN INBOX DROPDOWN -->
+				<!-- AJAX CARGAR MENSAJES -->
+                                <li id="load_message" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+					<?php /** CARGANDO LOS MENSAJES EXISTENTES DEL USUARIO */ ?>
+				</li>
+				<!-- END INBOX DROPDOWN -->
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
@@ -173,7 +178,22 @@
 <?php AdminHeader::GetJs(); ?>
 
 <script>
-    jQuery(document).ready(function() {    
+    
+    
+   function load_message()
+   {
+       var route = document.getElementById("route_value").value;
+        $.ajax({
+                    type: "POST",
+                    url: route  + "admin/messages/ajax_message.php",
+                    success: function(value){
+                          $("#load_message").html(value);
+                     }
+             });
+   }
+    
+   jQuery(document).ready(function() {    
+   
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
    QuickSidebar.init(); // init quick sidebar
@@ -182,11 +202,17 @@
    Index.initDashboardDaterange();
    Index.initJQVMAP(); // init index page's custom scripts
    Index.initCalendar(); // init index page's custom scripts
-  // Index.initCharts(); // init index page's custom scripts
    Index.initChat();
    Index.initMiniCharts();
    Tasks.initDashboardWidget();
-   
+   /**
+    * CARGA LOS  MENSAJES 
+    * */
+   load_message();
+   setInterval('load_message()',1000*10);
+   /**
+    * CARGA EL DASHBOARD SIDEBAR
+    * */
    var load_dashboard_sidebar = function()
    {
      
@@ -215,6 +241,7 @@
    }
    load_dashboard_sidebar();
    
+    
    
    
     /*var iniciargraficos_visita = function () {
