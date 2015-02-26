@@ -209,6 +209,17 @@ class AdminHeader
         echo '<img alt="" class="img-circle" src="' . self::$relative_route . 'admin/img/users/' . $imagen . '" />';
     }
     
+    static function Get_Quick_Sidebar()
+    {
+        echo '<a href="javascript:;" class="page-quick-sidebar-toggler"><i class="icon-close"></i></a>';
+        echo '<div class="page-quick-sidebar-wrapper">';
+        
+        echo '</div>';
+    }
+    
+    
+ 
+    
 }
 
 ?>

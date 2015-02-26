@@ -155,7 +155,6 @@
                                             <a href="#"></a>
 					</li>
 				</ul>
-				
 			</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN DASHBOARD STATS -->
@@ -165,6 +164,9 @@
 	
 </div>
 <!-- END CONTAINER -->
+<!-- BEGIN QUICK SIDEBAR -->
+<?php AdminHeader::Get_Quick_Sidebar(); ?> 
+<!-- END QUICK SIDEBAR -->
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
 	<div class="page-footer-inner">
