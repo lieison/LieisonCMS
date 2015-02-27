@@ -14,4 +14,6 @@ if(isset($_SESSION['login'])):
     $admin = new AdminController();
     $admin->Update_log($id_log, $hora_salida);
     $header->redirect(FunctionsController::GetUrl("login.php"));
+else:
+    $header->redirect(FunctionsController::GetUrl("login.php"));
 endif;

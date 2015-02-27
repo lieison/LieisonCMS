@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 
 <?php 
+   
+    /**
+     *@todo LIEISOFT CMS SCRIPT AUTOGENERACION
+     *@author Rolando Arriaza <rmarroquin@lieison.com>
+     *@version 1.x
+     *@since 0.1
+     */
+
+    //INICIAMOS SESION 
     session_start();
+    
+    //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
+    
+    //INSTANCIAMOS UN NUEVO HEADER DE REDIRECCIONAMIENTO
     $header = new Http\Header();
     
+    //VERIFICAMOS SI LA SESION EXISTE
     if(!isset($_SESSION['login'])):
         $header->redirect("Login.php");
     endif;
     
+    //EN CASO DE QUE LA PANTALLA ESTE BLOQUEADA REVISAMOS SI LA SESION DE BLOQUEO EXISTE
+    //LUEGO DE ESO VERIFICAMOS SI EL BLOQUEO CONTINUA O SE HA DESHABILITADO
+     if(isset($_SESSION['lock'])):
+        if($_SESSION['lock']== true):
+            $header->redirect("lock.php");
+        endif; 
+    endif;
+    
+    //VARIABLES DE SESION
     $usuario = $_SESSION['login']['user'];
     $rol = $_SESSION['login']['rol'];
     $nombre = $_SESSION['login']['nombre'];
@@ -16,11 +39,10 @@
     $activo = $_SESSION['login']['activo'];
     $id_user = $_SESSION['login']['id'];
     
-    $imagen = $_SESSION['login']['imagen'];
-    if(\SivarApi\Tools\Validation::Is_Empty_OrNull($imagen)):
-        $imagen = "avatar.png";
-    endif;
+    //VERIFICAR SI EL AVATA ESTA VACIO (ASIGNARLE AVATAR EMPTY) O SI EXISTE AVATAR (EN IMAGEN)
+    $imagen = UserController::Verify_Avatar();
     
+    //VER SI LA CUENTA ACTUAL ESTA ACTIVA
     if($activo == 0):
         $header->redirect("cuenta_desactivada.php");
     endif;
@@ -36,7 +58,6 @@
     endif;
     
     
-   
 ?>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->

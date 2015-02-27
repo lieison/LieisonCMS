@@ -1,9 +1,21 @@
 <?php
 
+/**
+ * clase en la cual se encarga de la mensajeria cliente servidor 
+ * 
+ */
+
 
 class MessageController extends MessageModel {
     
     
+    /**
+     * @todo Agrega nuevos permisos a quien se le puede enviar mensajes
+     * @version 0.1
+     * @param string/key $id_usuario usuario receptor
+     * @param String/key $id_usuario_permission usuario emisor o quien emitira el permiso
+     * @return null no hay valor de retorno
+     */
     public function SetPermisssionMessage($id_usuario , $id_usuario_permission)
     {
         $this->Insert("lieisoft_mensajes_permisos", array(
@@ -11,6 +23,7 @@ class MessageController extends MessageModel {
             "id_usuario_permiso"=>$id_usuario_permission
         ));
     }
+    
     
     public function GetUsersPermission($id_usuario)
     {

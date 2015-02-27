@@ -20,12 +20,7 @@ class FunctionsController {
     
     public static function GetUrl($link)
     {
-        if(!isset($_COOKIE['SERVER']))
-        {
-            return null;
-        }else{
-            return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";
-        }
+       return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";
     }
     
     public static function get_year(){
@@ -83,12 +78,13 @@ class FunctionsController {
     
     
     public static function Get_TimeAgo($datetime, $full = false) {
-    $now = new DateTime;
-    $ago = new DateTime($datetime);
-    $diff = $now->diff($ago);
+   
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $now->diff($ago);
 
-    $diff->w = floor($diff->d / 7);
-    $diff->d -= $diff->w * 7;
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
 
     $string = array(
         'y' => 'year',
@@ -107,10 +103,9 @@ class FunctionsController {
         }
     }
 
-    if (!$full) $string = array_slice($string, 0, 1);
-    return $string ? implode(', ', $string) . ' ago ' : 'Este momento';
-    
-    
+     if (!$full) $string = array_slice($string, 0, 1);
+        return $string ? implode(', ', $string) . ' ago ' : ' Just Moment';
+
     }
      
     public static function get_actual_page()
