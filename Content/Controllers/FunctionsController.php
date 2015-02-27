@@ -20,7 +20,12 @@ class FunctionsController {
     
     public static function GetUrl($link)
     {
-        return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";
+        if(!isset($_COOKIE['SERVER']))
+        {
+            return null;
+        }else{
+            return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";
+        }
     }
     
     public static function get_year(){
