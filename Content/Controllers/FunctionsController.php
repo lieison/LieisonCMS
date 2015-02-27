@@ -89,7 +89,7 @@ class FunctionsController {
         'y' => 'year',
         'm' => 'month',
         'w' => 'week',
-        'd' => 'dia',
+        'd' => 'day',
         'h' => 'hour',
         'i' => 'minute',
         's' => 'second',
