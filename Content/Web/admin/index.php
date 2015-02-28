@@ -47,6 +47,7 @@
         $header->redirect("cuenta_desactivada.php");
     endif;
 ?>
+
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -55,6 +56,8 @@
 <!-- BEGIN HEAD -->
 
 <head>
+    
+    <meta name="google-translate-customization" content="f93064b84c026e43-56e6eb7a0108f43a-g592f3f3b223f149c-f"></meta>
 
 <?php 
 
@@ -67,6 +70,7 @@
     $page_name = "Principal";
 ?>
     
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -103,7 +107,9 @@
                                      *  COMO INBOX , TASK , NOTIFICACIONES ETC .
                                      */
                                      AdminHeader::GetSystemContent();
+                                     
                                 ?>
+                                
                                 
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -163,13 +169,9 @@
 			<?php AdminHeader::Get_CMS_Title("Lieisoft <b>" . $rol .  "</b> Dashboard"); ?>
 			<div class="page-bar">
 				<?php AdminHeader::Get_Sublinks("Home" , $usuario); ?>
-			</div>
-			<!-- END PAGE HEADER-->
-			<!-- BEGIN DASHBOARD STATS -->
-		</div>
-	</div>
-	
-</div>
+			</div>          
+
+     </div></div>
 <!-- END CONTAINER -->
 <!-- BEGIN QUICK SIDEBAR -->
 <?php AdminHeader::Get_Quick_Sidebar(); ?> 
@@ -194,8 +196,9 @@
   jQuery(document).ready(function() {    
       
    <?php
-   /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
-   AdminHeader::GetJsSystemLoad();
+        /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
+        AdminHeader::GetJsSystemLoad();
+    
    ?>   
    
    Metronic.init(); // init metronic core componets
@@ -219,6 +222,7 @@
 });
 </script>
 <!-- END JAVASCRIPTS -->
+
 </body>
 <!-- END BODY -->
 </html>

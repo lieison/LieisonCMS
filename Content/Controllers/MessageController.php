@@ -16,8 +16,7 @@ class MessageController extends MessageModel {
      * @param String/key $id_usuario_permission usuario emisor o quien emitira el permiso
      * @return null no hay valor de retorno
      */
-    public function SetPermisssionMessage($id_usuario , $id_usuario_permission)
-    {
+    public function SetPermisssionMessage($id_usuario , $id_usuario_permission){
         $this->Insert("lieisoft_mensajes_permisos", array(
             "id_usuario"=>$id_usuario,
             "id_usuario_permiso"=>$id_usuario_permission
@@ -25,8 +24,7 @@ class MessageController extends MessageModel {
     }
     
     
-    public function GetUsersPermission($id_usuario)
-    {
+    public function GetUsersPermission($id_usuario){
          $result = $this->RawQuery("SELECT usuario.id_usuario , concat(usuario.nombre , ' ' , usuario.apellido) as nombre"
                  . " usuario.imagen FROM usuario INNER JOIN lieisoft_mensajes_permisos ON "
                  . " usuario.id_usuario=lieisoft_mensajes_permisos.id_usuario_permiso WHERE "

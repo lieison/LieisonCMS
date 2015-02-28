@@ -23,7 +23,7 @@
      $count_submsj += count($r);
  }
  
- $count = $count + $count_submsj;
+ $count += $count_submsj;
  
  echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">';
  echo '<i class="icon-envelope-open"></i>';
