@@ -12,7 +12,12 @@
  
     $_SESSION['page_name']  = "Principal";
     
+    if(isset($_SESSION['home'])):
+        unset($_SESSION['home']);
+        unset( $_SESSION['title']);
+    endif;
+ 
     ViewClass::PrepareView("View.phtml", "Admin");
-    ViewClass::SetView(ViewClass::SetParamsString(""));
+    ViewClass::SetView(ViewClass::SetParamsString("" ,"" , "" , ""));
     
 ?>

@@ -9,8 +9,7 @@
 
 <head>
     
-   <meta name="google-translate-customization" content="f93064b84c026e43-56e6eb7a0108f43a-g592f3f3b223f149c-f"></meta>
-
+ 
 <?php 
 
     //VARIABLES DE SESION
@@ -154,9 +153,23 @@
 	<div class="page-content-wrapper">
 		<div class="page-content">
 			<!-- BEGIN PAGE HEADER-->
-			<?php AdminHeader::Get_CMS_Title("Lieisoft <b>" . $rol .  "</b> Dashboard"); ?>
+			<?php 
+                            if(isset($_SESSION['title'])):
+                                AdminHeader::Get_CMS_Title($_SESSION['title']); 
+                            else:
+                                AdminHeader::Get_CMS_Title("Lieisoft <b>" . $rol .  "</b> Dashboard"); 
+                            endif;
+                            
+                        ?>
 			<div class="page-bar">
-				<?php AdminHeader::Get_Sublinks("Home" , $usuario); ?>
+				<?php 
+                                     if(isset($_SESSION['home'])):
+                                         AdminHeader::Get_Sublinks("Home" , $_SESSION['home']);
+                                     else:
+                                         AdminHeader::Get_Sublinks("Home" , $usuario);
+                                     endif;
+                                     
+                                ?>
 			</div>          
                     %{BODY_CLASS_VIEW}%
                 </div>

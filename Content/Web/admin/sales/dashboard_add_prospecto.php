@@ -16,6 +16,8 @@
     include   '../../../Conf/Include.php';
     
     $_SESSION['page_name']  = "Agregar Prospecto";
+    $_SESSION['home'] = "Sales";
+    $_SESSION['title'] = "Sales <b> Nuevo Prospecto</b>";
     
     $header = '<div id="fb-root"></div>
             <script>(function(d, s, id) {
@@ -53,12 +55,13 @@
 
 
     $rol = $_SESSION['login']['rol'];
-   
+    
     $adminc = new AdminController();
     $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
     
     ViewClass::PrepareView("View.phtml", "Admin");
     ViewClass::SetView(ViewClass::SetParamsString("<?php include 'ViewAddProspecto.php'; ?>" , $header , $footer, $footer_end));
+    
     
    
 ?>
