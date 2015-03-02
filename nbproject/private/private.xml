@@ -5,10 +5,14 @@
         <group>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/AdminController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Models/UserModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Conf/Include.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Models/SliderModel.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/front_inbox.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/View/Admin/View.phtml</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_gestion_usuarios.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/AjaxFunctions.js</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/FunctionsController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/ViewHeader.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/ProspectController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
@@ -18,8 +22,10 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_control_paginas.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Database/Class.Mysql.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/inbox.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/View/ViewClass.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PageController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/UserController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/view_prueba.php</file>
         </group>
     </open-files>
 </project-private>
