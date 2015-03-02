@@ -125,7 +125,7 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php
         VIEWS O VISTAS
   *   */
  require $GLOBAL_ROOT . $FOLDER . '/Content/Web/admin/ViewPage/ViewHeader.php';
-
+ require $GLOBAL_ROOT . $FOLDER . '/Content/View/ViewClass.php';
 
 /**
  * Controladores | Controllers

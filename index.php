@@ -33,12 +33,16 @@
      if(isset($_COOKIE['FOLDER'])):
          unset($_COOKIE['FOLDER']);
      endif;
+     
      if(isset($_COOKIE['SERVER'])):
          unset($_COOKIE['SERVER']);
      endif;
      
+     
+     
      setcookie("FOLDER" , $DIR_NAME);
      setcookie("SERVER" , $SERVER__);
+     setcookie("HOST" , $_SERVER['HTTP_HOST']);
     
      //OPCIONAL
      header("Cache-Control: no-cache");
