@@ -207,7 +207,7 @@ class AdminController extends MysqlConection {
     
     
         
-      public function get_permission_page($rol , $dashboard_page)
+    public function get_permission_page($rol , $dashboard_page)
     {
         $this->query = "SELECT privilegios FROM dashboard WHERE link LIKE '%$dashboard_page%'";
         $result = $this->RawQuery($this->query);

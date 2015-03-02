@@ -73,6 +73,8 @@ class AdminHeader
         echo '<meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport"/>';
+        //meta para google translate
+        echo '<meta name="google-translate-customization" content="f93064b84c026e43-56e6eb7a0108f43a-g592f3f3b223f149c-f"></meta>';
     }
     
     static function GetMetaContent($array_conent)
@@ -87,7 +89,13 @@ class AdminHeader
     {
         echo '<li id="load_message" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
 					
-               </li>';
+              </li>';
+        echo '';
+    }
+    
+    static function GetBasePlugin()
+    {
+        
     }
     
     
@@ -110,6 +118,12 @@ class AdminHeader
            * */
         echo 'load_dashboard_sidebar();';
              
+    }
+    
+    
+    static function GetJsAfterLoad()
+    {
+        
     }
     
     static function GetHiddenData()
@@ -208,6 +222,39 @@ class AdminHeader
     {
         echo '<img alt="" class="img-circle" src="' . self::$relative_route . 'admin/img/users/' . $imagen . '" />';
     }
+    
+    static function Get_Quick_Sidebar()
+    {
+        echo '<a href="javascript:;" class="page-quick-sidebar-toggler"><i class="icon-close"></i></a>';
+        echo '<div class="page-quick-sidebar-wrapper">';
+        
+        echo '</div>';
+    }
+    
+    
+    static function Get_Sublinks($link= null , $link1 = null)
+    {
+        echo '<ul class="page-breadcrumb">
+					<li>
+                                                <i class="fa fa-home"></i>
+						<a href="' . self::$relative_route . 'admin/index.php"> ' . $link . '</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+                                            <a href="#">' . $link1 . '</a>
+					</li>               
+		</ul>';
+        echo ' <div class="page-toolbar">
+			<div id="google_translate_element"></div><script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({pageLanguage: "es", includedLanguages: "de,en,es,pt", layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, "google_translate_element");
+                        }
+                         </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                 </div>';
+    }
+    
+    
+ 
     
 }
 

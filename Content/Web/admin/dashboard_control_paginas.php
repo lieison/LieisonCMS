@@ -194,7 +194,7 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="#">Monitoreo</a>
+						<a href="#">Paginacion</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
@@ -206,7 +206,7 @@
 			
 			<div class="clearfix">
 			</div>
-                        <!--CONTROL DE MONITOREO -->
+                
                         <div class="row">
                               <!-- PRIMERA TABLA ENTRADA Y SALIDA -->
                                 <div class="col-md-12">
@@ -235,17 +235,61 @@
 								</div>
 							</div>
                                                     <div id="div_monitoring">
-                                                          <!--CARGA LOS DATOS AJAX PARA LA TABLA MONITOREO ENTRADA Y SALIDA-->
+                                                         
                                                         <table class="table table-striped table-bordered table-hover" id="io_1">
                                                             <thead>
-                                                                
                                                             </thead>
                                                             <tbody>
-                                                                
                                                             </tbody>
                                                         </table>
-                                                    </div>	
+                                                    </div>
+                                      
+					</div>
+					<!-- FIN-->
+				</div>
+                              <!-- FIN DE LA PRIMERA TABLA -->
+			</div>
+                                 <div class="col-md-12">
+					<!--MONITOREO ENTRADA TABLA Y SALIDA-->
+					<div class="portlet box grey-cascade">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-globe"></i>
+                                                               Seccion y Paginas 
+							</div>
 						</div>
+						<div class="portlet-body">
+							<div class="table-toolbar">
+								<div class="row">
+									<div class="col-md-6">
+                                                                           
+									</div>
+									<div class="col-md-6">
+									
+									</div>
+								</div>
+							</div>
+                                                    <div >
+                                                         
+                                                        <table class="table table-striped table-bordered table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <td>Seccion</td>
+                                                                    <td>Paginas</td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                  <tr>
+                                                                      <td>
+                                                                          <div id="seccion_standar"><button class="btn btn-default navbar-btn" onclick="nueva_seccion();">Nueva Seccion</button></div>
+                                    
+                                                                      </td>
+                                                                      <td><a href="">Nueva Pagina</a></td>
+                                                                  </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                      
 					</div>
 					<!-- FIN-->
 				</div>
@@ -324,6 +368,21 @@
 
 <script >
     
+    
+    function nueva_seccion()
+    {
+         $.ajax({
+                    type: "POST",
+                    url: "controlpagina/LoadAddseccion.php",
+                    beforeSend:function(){
+                         $('#seccion_standar').html('<img src="../admin/img/assert/loadingd.gif" width="50" height="50" />');
+                    },
+                    success: function(valor){
+                        $('#seccion_standar').html(valor);
+                     }
+           });    
+    }
+    
     var loading = "<p><span>Cargando ...</span></p>";
     /*FUNCION PARA BUSCAR EN CUALQUIER LOG DESARROLLADO 
      * POR MEDIO DE UN PARAMETRO NUMERICO**/
@@ -359,7 +418,7 @@
 
           $.ajax({
                     type: "POST",
-                    url: "ControlPage/ResponsiveControlPaginas.php",
+                    url: "controlpagina/ResponsiveControlPaginas.php",
                     data: parametros,
                     beforeSend:function(){
                             $("#" + div_data).html(loading);
@@ -380,7 +439,7 @@
     }
     
      jQuery(document).ready( function() {
-                    console.log("Preparando monitoreo de datos ...");
+                    console.log("Preparando paginas ...");
                         Metronic.init(); // init metronic core components
                         Layout.init(); // init current layout
                         QuickSidebar.init(); // init quick sidebar

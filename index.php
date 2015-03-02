@@ -21,7 +21,6 @@
 
      $SERVER_DIR = getcwd();
      $ARRAY_DIR = explode("\\", $SERVER_DIR);
-     
      if(!is_array($ARRAY_DIR)):
          $ARRAY_DIR = explode("/", $SERVER_DIR);
      endif;
@@ -31,8 +30,19 @@
      $SERVER__ = $_SERVER["SERVER_NAME"];
      //Agrega el directorio inicial del proyecto 
      //si se borra la cookie favor agregar el folder de forma manual en Conf/Config.php
+     if(isset($_COOKIE['FOLDER'])):
+         unset($_COOKIE['FOLDER']);
+     endif;
+     
+     if(isset($_COOKIE['SERVER'])):
+         unset($_COOKIE['SERVER']);
+     endif;
+     
+     
+     
      setcookie("FOLDER" , $DIR_NAME);
      setcookie("SERVER" , $SERVER__);
+     setcookie("HOST" , $_SERVER['HTTP_HOST']);
     
      //OPCIONAL
      header("Cache-Control: no-cache");

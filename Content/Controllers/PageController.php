@@ -38,6 +38,19 @@ class PageController extends MysqlConection {
         return $result;
     }
     
+    
+    public function get_numbers_seccion()
+    {
+        $numeros = array();
+        $this->QUERY = "SELECT numero FROM seccion_dashboard";
+        $result = $this->RawQuery($this->QUERY);
+        foreach ($result as $k=>$v)
+        {
+            $numeros[] = $v['numero'];
+        }
+        return $numeros;
+    }
+    
     public function set_dashboard_page($page , $directory)
     {
         

@@ -23,7 +23,7 @@
      $count_submsj += count($r);
  }
  
- $count = $count + $count_submsj;
+ $count += $count_submsj;
  
  echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">';
  echo '<i class="icon-envelope-open"></i>';
@@ -74,11 +74,7 @@
      }
      echo '<span class="from">';
      echo  $value['nombre'] . '</span>';
-     if($value['fecha'] == FunctionsController::get_date()){
-        echo '<span class="time">' .$value['hora'] . '</span>';
-     }else{
-          echo '<span class="time">' . $value['fecha'] . "a las " . $value['hora'] . '</span>';
-     }
+     echo '<span class="time">'  . FunctionsController::Get_TimeAgo($value['fecha']. " " . $value['hora']) .'</span>';
      echo '</span>';
      echo '<br><span class="message">';
      echo '<b>' . $value['asunto'] . "</b><br>"; 

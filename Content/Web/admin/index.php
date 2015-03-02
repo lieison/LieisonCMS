@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 
 <?php 
+
+    /**
+     *@todo LIEISOFT CMS SCRIPT AUTOGENERACION
+     *@author Rolando Arriaza <rmarroquin@lieison.com>
+     *@version 1.x
+     *@since 0.1
+     */
+
+    //INICIAMOS SESION 
     session_start();
+    
+    //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../Conf/Include.php';
+    
+    //INSTANCIAMOS UN NUEVO HEADER DE REDIRECCIONAMIENTO
     $header = new Http\Header();
     
+    //VERIFICAMOS SI LA SESION EXISTE
     if(!isset($_SESSION['login'])):
         $header->redirect("Login.php");
     endif;
     
+    //EN CASO DE QUE LA PANTALLA ESTE BLOQUEADA REVISAMOS SI LA SESION DE BLOQUEO EXISTE
+    //LUEGO DE ESO VERIFICAMOS SI EL BLOQUEO CONTINUA O SE HA DESHABILITADO
+     if(isset($_SESSION['lock'])):
+        if($_SESSION['lock']== true):
+            $header->redirect("lock.php");
+        endif; 
+    endif;
+    
+    //VARIABLES DE SESION
     $usuario = $_SESSION['login']['user'];
     $rol = $_SESSION['login']['rol'];
     $nombre = $_SESSION['login']['nombre'];
@@ -16,19 +39,15 @@
     $activo = $_SESSION['login']['activo'];
     $id_user = $_SESSION['login']['id'];
     
-    $imagen = $_SESSION['login']['imagen'];
-    if(\SivarApi\Tools\Validation::Is_Empty_OrNull($imagen)):
-        $imagen = "avatar.png";
-    endif;
+    //VERIFICAR SI EL AVATA ESTA VACIO (ASIGNARLE AVATAR EMPTY) O SI EXISTE AVATAR (EN IMAGEN)
+    $imagen = UserController::Verify_Avatar();
     
+    //VER SI LA CUENTA ACTUAL ESTA ACTIVA
     if($activo == 0):
         $header->redirect("cuenta_desactivada.php");
     endif;
-    
-    $adminc = new AdminController();
-    $page_name = "Principal";
- 
 ?>
+
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -37,6 +56,8 @@
 <!-- BEGIN HEAD -->
 
 <head>
+    
+    <meta name="google-translate-customization" content="f93064b84c026e43-56e6eb7a0108f43a-g592f3f3b223f149c-f"></meta>
 
 <?php 
 
@@ -46,8 +67,10 @@
     AdminHeader::GetMeta();
     AdminHeader::GetCss();
     
+    $page_name = "Principal";
 ?>
     
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -84,7 +107,9 @@
                                      *  COMO INBOX , TASK , NOTIFICACIONES ETC .
                                      */
                                      AdminHeader::GetSystemContent();
+                                     
                                 ?>
+                                
                                 
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -140,31 +165,17 @@
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">
-			
-			
 			<!-- BEGIN PAGE HEADER-->
-			<?php AdminHeader::Get_CMS_Title("Dashboard"); ?>
+			<?php AdminHeader::Get_CMS_Title("Lieisoft <b>" . $rol .  "</b> Dashboard"); ?>
 			<div class="page-bar">
-				<ul class="page-breadcrumb">
-					<li>
-						<i class="fa fa-home"></i>
-						<a href="index.html"></a>
-						<i class="fa fa-angle-right"></i>
-					</li>
-					<li>
-                                            <a href="#"></a>
-					</li>
-				</ul>
-				
-			</div>
-			<!-- END PAGE HEADER-->
-			<!-- BEGIN DASHBOARD STATS -->
-			
-		</div>
-	</div>
-	
-</div>
+				<?php AdminHeader::Get_Sublinks("Home" , $usuario); ?>
+			</div>          
+
+     </div></div>
 <!-- END CONTAINER -->
+<!-- BEGIN QUICK SIDEBAR -->
+<?php AdminHeader::Get_Quick_Sidebar(); ?> 
+<!-- END QUICK SIDEBAR -->
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
 	<div class="page-footer-inner">
@@ -179,12 +190,15 @@
 
 <script>
     
+   <?php AdminHeader::GetJsAfterLoad(); ?>
+    
  
   jQuery(document).ready(function() {    
       
    <?php
-   /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
-   AdminHeader::GetJsSystemLoad();
+        /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
+        AdminHeader::GetJsSystemLoad();
+    
    ?>   
    
    Metronic.init(); // init metronic core componets
@@ -208,6 +222,7 @@
 });
 </script>
 <!-- END JAVASCRIPTS -->
+
 </body>
 <!-- END BODY -->
 </html>
