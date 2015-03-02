@@ -64,6 +64,8 @@
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
+    
+        
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
@@ -92,6 +94,7 @@
                                 ?>
                                 
                                 
+                                
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
@@ -115,6 +118,8 @@
 				</li>
 				<!-- END QUICK SIDEBAR TOGGLER -->
 			</ul>
+                    
+                        %{HEADER_CLASS_VIEW}%
 		</div>
 		<!-- END TOP NAVIGATION MENU -->
 	</div>
@@ -151,9 +156,9 @@
 			<div class="page-bar">
 				<?php AdminHeader::Get_Sublinks("Home" , $usuario); ?>
 			</div>          
-
+                    
                 </div>
-                %{BODY_CLASS_VIEW}%
+               
         </div>
 <!-- END CONTAINER -->
 <!-- BEGIN QUICK SIDEBAR -->
@@ -163,6 +168,7 @@
 <div class="page-footer">
 	<div class="page-footer-inner">
 		 <?php AdminHeader::GetCopyRight(); ?>
+                 %{FOOTER_CLASS_VIEW}%
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>

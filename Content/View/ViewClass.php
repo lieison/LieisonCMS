@@ -40,23 +40,27 @@
              if(count($params) >= 1)
              {
                  
-                 $temp_file = file_get_contents($route);
-                 copy($route, $route . ".bak");
-               /*  switch ($params['type'])
-                 {
-                     case 'include';
-                         break;
-                     case 'string':
+                 if(file_exists($route . ".bak")){
+                     copy($route . ".bak" , $route);
+                 }else{
+                    copy($route, $route . ".bak");
+                 }
+                 
+                        $temp_file = file_get_contents($route);
+
                          if($params['B'] != "%{BODY_CLASS_VIEW}%"){
-                            $temp_file = str_replace("%{BODY_CLASS_VIEW}%", $temp_file);
+                           $temp_file = str_replace("%{BODY_CLASS_VIEW}%", $params['B'] , $temp_file);
                          }
-                         break;
-                     default:
-                         break;
-                 }*/
+                         if($params['H'] != "%{HEADER_CLASS_VIEW}%"){
+                           $temp_file = str_replace("%{HEADER_CLASS_VIEW}%", $params['H'] , $temp_file);
+                         }
+                         if($params['F'] != "%{FOOTER_CLASS_VIEW}%"){
+                           $temp_file = str_replace("%{FOOTER_CLASS_VIEW}%", $params['F'] , $temp_file);
+                         }
+                         
+                 file_put_contents($route, $temp_file);
+                 include $route;
                  
-                 
-             
              }else{
                 include $route;
              }
@@ -67,10 +71,10 @@
      /**
       * TYPE = INCLUDE , STRING minusculas
       */
-     public static function SetParamsString($type = "include" , $body ="%{BODY_CLASS_VIEW}%" ,
-             $header = "{HEADER_CLASS_VIEW}", $footer = "{FOOTER_CLASS_VIEW}")
+     public static function SetParamsString( $body ="%{BODY_CLASS_VIEW}%" ,
+             $header = "%{HEADER_CLASS_VIEW}%", $footer = "%{FOOTER_CLASS_VIEW}%")
      {
-         return array( "type"=>$type  , "B"=>$body , "H"=>$header , "F"=>$footer);
+         return array(  "B"=>$body , "H"=>$header , "F"=>$footer);
      }
      
 
