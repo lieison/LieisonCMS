@@ -57,6 +57,9 @@
                          if($params['F'] != "%{FOOTER_CLASS_VIEW}%"){
                            $temp_file = str_replace("%{FOOTER_CLASS_VIEW}%", $params['F'] , $temp_file);
                          }
+                          if($params['F'] != "%{FOOTER_CLASS_VIEW_END}%"){
+                           $temp_file = str_replace("%{FOOTER_CLASS_VIEW_END}%", $params['FE'] , $temp_file);
+                         }
                          
                  file_put_contents($route, $temp_file);
                  include $route;
@@ -72,9 +75,10 @@
       * TYPE = INCLUDE , STRING minusculas
       */
      public static function SetParamsString( $body ="%{BODY_CLASS_VIEW}%" ,
-             $header = "%{HEADER_CLASS_VIEW}%", $footer = "%{FOOTER_CLASS_VIEW}%")
+             $header = "%{HEADER_CLASS_VIEW}%", $footer = "%{FOOTER_CLASS_VIEW}%" , 
+             $footer_end = "%{FOOTER_CLASS_VIEW_END}%")
      {
-         return array(  "B"=>$body , "H"=>$header , "F"=>$footer);
+         return array(  "B"=>$body , "H"=>$header , "F"=>$footer , "FE"=>$footer_end);
      }
      
 

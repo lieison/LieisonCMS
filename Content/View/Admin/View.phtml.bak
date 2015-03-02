@@ -53,6 +53,8 @@
     
 
 </head>
+
+%{HEADER_CLASS_VIEW}%
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
@@ -119,7 +121,7 @@
 				<!-- END QUICK SIDEBAR TOGGLER -->
 			</ul>
                     
-                        %{HEADER_CLASS_VIEW}%
+                        
 		</div>
 		<!-- END TOP NAVIGATION MENU -->
 	</div>
@@ -168,7 +170,6 @@
 <div class="page-footer">
 	<div class="page-footer-inner">
 		 <?php AdminHeader::GetCopyRight(); ?>
-                 %{FOOTER_CLASS_VIEW}%
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
@@ -188,7 +189,9 @@
         /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
         AdminHeader::GetJsSystemLoad();
     
-   ?>   
+   ?> 
+           
+   %{FOOTER_CLASS_VIEW}%         
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
@@ -211,6 +214,8 @@
 });
 </script>
 <!-- END JAVASCRIPTS -->
+
+%{FOOTER_CLASS_VIEW_END}% 
 
 </body>
 <!-- END BODY -->

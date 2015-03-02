@@ -53,6 +53,15 @@
     
 
 </head>
+
+<div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&appId=271330856288382&version=v2.0";
+                fjs.parentNode.insertBefore(js, fjs);
+        }(document, "script", "facebook-jssdk"));</script>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
@@ -119,7 +128,7 @@
 				<!-- END QUICK SIDEBAR TOGGLER -->
 			</ul>
                     
-                        %{HEADER_CLASS_VIEW}%
+                        
 		</div>
 		<!-- END TOP NAVIGATION MENU -->
 	</div>
@@ -156,7 +165,7 @@
 			<div class="page-bar">
 				<?php AdminHeader::Get_Sublinks("Home" , $usuario); ?>
 			</div>          
-                    
+                    <?php include 'ViewAddProspecto.php'; ?>
                 </div>
                
         </div>
@@ -168,7 +177,6 @@
 <div class="page-footer">
 	<div class="page-footer-inner">
 		 <?php AdminHeader::GetCopyRight(); ?>
-                 %{FOOTER_CLASS_VIEW}%
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
@@ -188,7 +196,29 @@
         /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
         AdminHeader::GetJsSystemLoad();
     
-   ?>   
+   ?> 
+           
+      var get_paises = function()
+   {
+        $.ajax({
+                      type: "POST",
+                      url: "get_paises.php",
+                      beforeSend: function()
+                      {
+                          $("#drown_pais").html("<p>Cargando datos ...</p>");
+                      },
+                      success: function(value){
+                          document.getElementById("drown_pais").innerHTML = value;
+                      },
+                      error: function()
+                      {
+                          $("#combo_pais").html("Error al cargar");
+                      }
+                      
+              });
+   }
+   
+   get_paises();         
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
@@ -211,6 +241,8 @@
 });
 </script>
 <!-- END JAVASCRIPTS -->
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script><script src="AjaxAddSales.js"></script> 
 
 </body>
 <!-- END BODY -->
