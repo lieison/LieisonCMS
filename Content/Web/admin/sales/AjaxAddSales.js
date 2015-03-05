@@ -1,5 +1,5 @@
  function verificar_prospecto(nombre)
-    {
+  {
          
          var parametros = {
                     "nombre" : nombre
