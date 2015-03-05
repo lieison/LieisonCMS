@@ -29,13 +29,25 @@ class ProspectController extends MysqlConection {
         }
     }
     
-    
     public function Add_Prospect($params )
     {
         if(is_array($params))
         {
             return $this->Insert("sales_prospect" , $params);
         }
+    }
+    
+    /**
+     * $activate (0,1,2)
+     */
+    public function Get_All_Prospect($activate = 1)
+    {
+        if($activate == 2){
+            $this->QUERY = "SELECT * FROM sales_prospect";
+        }else{
+             $this->QUERY = "SELECT * FROM sales_prospect WHERE estado LIKE $activate";
+        }
+        return parent::RawQuery($this->QUERY);
     }
     
     
