@@ -12,6 +12,11 @@
  
 <?php 
 
+    $header = new Http\Header();
+    if(!isset($_SESSION['login'])):
+       $header->redirect("login.php");
+    endif;
+
     //VARIABLES DE SESION
     $usuario = $_SESSION['login']['user'];
     $rol = $_SESSION['login']['rol'];
@@ -171,7 +176,7 @@
                                      
                                 ?>
 			</div>          
-                    <?php include 'ViewAdminProspecto.php' ?>
+                    
                 </div>
                
         </div>
@@ -204,7 +209,7 @@
     
    ?> 
            
-   FormValidation.init();cargar_prospectos();         
+            
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
@@ -228,7 +233,7 @@
 </script>
 <!-- END JAVASCRIPTS -->
 
-<script src="AjaxAdminSales.js"></script> 
+ 
 
 </body>
 <!-- END BODY -->

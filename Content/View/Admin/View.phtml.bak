@@ -12,6 +12,11 @@
  
 <?php 
 
+    $header = new Http\Header();
+    if(!isset($_SESSION['login'])):
+       $header->redirect("login.php");
+    endif;
+
     //VARIABLES DE SESION
     $usuario = $_SESSION['login']['user'];
     $rol = $_SESSION['login']['rol'];
