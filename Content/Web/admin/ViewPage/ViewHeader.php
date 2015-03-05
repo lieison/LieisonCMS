@@ -160,6 +160,10 @@ class AdminHeader
 
                 <link href="'. self::$relative_route . 'assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>';
         
+        echo '<link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/select2/select2.css"/>
+              <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css"/>
+              <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
+              <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>';
        
         
     }
@@ -208,6 +212,7 @@ class AdminHeader
                     <script src="'. self::$relative_route . 'assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>';
             
+            
             echo '<script src="'. self::$relative_route . '/assets/global/scripts/metronic.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
@@ -216,6 +221,21 @@ class AdminHeader
                   <script src="'. self::$relative_route . 'assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>';
             
             echo '<script src="' . self::$relative_route  . 'admin/js/AjaxFunctions.js" type="text/javascript"></script>';
+            echo '<script src="' . self::$relative_route  . 'assets/admin/pages/scripts/form-validation.js"></script>';
+            
+            echo '<script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/select2/select2.min.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/ckeditor/ckeditor.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>';
+            
+            
+            
+            
     }
     
     static function Get_ImgSesion($imagen)

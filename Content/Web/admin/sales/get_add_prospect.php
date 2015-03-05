@@ -17,7 +17,7 @@
     endif;
     
     
-    if(!isset($_REQUEST['cmd_guardar'])):
+    if(!isset($_REQUEST['cmd_enviar'])):
         $header = new Http\Header();
         $header->redirect("dashboard_add_prospecto.php");
     endif;
@@ -27,7 +27,6 @@
    $fb = $_REQUEST['txt_facebook'];
    $tw = $_REQUEST['txt_twitter'];
 
-    
     
 ?>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->

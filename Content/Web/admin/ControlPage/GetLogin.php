@@ -21,12 +21,12 @@
  $user = $_POST['username'];
  $pass = $_POST['password'];
  
- 
-if (ereg("[^A-Za-z0-9]+", $user) || ereg("[^A-Za-z0-9]+", $pass) ):
-     $header->redirect($url . "/Content/Web/admin/login.php?error=true");
-     exit();
+if ( preg_match("/[^A-Za-z0-9]/", $user) ||  preg_match("/[^A-Za-z0-9]/", $pass) ):
+    if(!\SivarApi\Tools\Validation::CheckEmail($user)):
+             $header->redirect($url . "/Content/Web/admin/login.php?error=true");
+             exit();
+    endif;
 endif;
-
 
  $admin_controller = new AdminController();
  $is_user = $admin_controller->GetLogin($user, $pass);
