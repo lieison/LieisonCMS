@@ -1,27 +1,49 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
+ * CLASE PROSPECTCONTROLLER 
+ * 
+ * ESTA CLASE SE UTILIZA PARA CONTROLAR TODO ACERCA DE SALES EN PROSPECTOS 
+ * CADA FUNCION ESTA PREDETERMINADA  Y POR LO CUAL NO NECESITA UN MODELO A SEGUIR
+ * 
+ * ULTIMA VERSION 0.1 :
+ * 
+ * 
+ * VERSIONES ANTERIORES :
+ * 
+ * 
+ * MEJORAS:
+ * 
+ * 
  */
 
-/**
- * Description of ProspectController
- *
- * @author rolandoantonio
- */
+
+
 class ProspectController extends MysqlConection {
     
+    /**
+     * VARIABLE QUERY PROTEGIDA
+     */
     protected  $QUERY = null;
             
+    /**
+     * CONSTRUCTOR HERENCIA PADRE MYSQLCONECTION
+     */
     function __construct() {
         parent::__construct();
     }
 
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo Funcion de busqueda un prospecto por nombre 
+     *@param String $prospect_name nombre del prospecto 
+     *@return int devuelve la cantidad de prospectos encontrados.
+     */
     public function Find_Prospect($prospect_name)
     {
-        $this->QUERY = "SELECT count(*) as contador FROM sales_prospect WHERE nombre LIKE '$prospect_name'";
+        $this->QUERY = "SELECT count(*) as contador FROM sales_prospect WHERE nombre LIKE '$prospect_name%'";
         $result = parent::RawQuery($this->QUERY);
         if($result)
         {
@@ -29,6 +51,19 @@ class ProspectController extends MysqlConection {
         }
     }
     
+     /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo Funcion agregar un nuevo prospecto
+     *@param array $params arreglo de campos a add prospectos 
+      *<code>
+      * 
+      * $params= array("campo1"=>valor , "campo2"=>valor);
+      * 
+      * </code> 
+      *
+     *@return boolean true si se guardo correctamente
+     */
     public function Add_Prospect($params )
     {
         if(is_array($params))
@@ -37,8 +72,13 @@ class ProspectController extends MysqlConection {
         }
     }
     
+   
     /**
-     * $activate (0,1,2)
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo Obtiene todos los prospectos y devuelve un arreglo de ellos
+     *@param int optional , $activate : 1=solo prospectos activos , 2=todos los prospectos , 0=prospectos inactivos
+     *@return int devuelve la cantidad de prospectos encontrados.
      */
     public function Get_All_Prospect($activate = 1)
     {
@@ -49,6 +89,26 @@ class ProspectController extends MysqlConection {
         }
         return parent::RawQuery($this->QUERY);
     }
+    
+   /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo ontiene un prospecto por su ID 
+     *@param int/string $id 
+     *@return array , devuelve un arreglo
+     */
+    public function Get_Prospect_ById($id)
+    {
+        $R = parent::RawQuery("SELECT * FROM sales_prospect WHERE id_prospect LIKE $id");
+        return $R[0];
+    }
+    
+    public function Get_ContactProspect($id)
+    {
+        
+    }
+    
+    
     
     
     

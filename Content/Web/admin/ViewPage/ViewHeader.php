@@ -36,8 +36,8 @@ class AdminHeader
     
     static function GetLogo($width = null , $height = null)
     {
-        $logo = "ls_logo_white.png";
-        $dir = 'img/logo/';
+        $logo = "LogoB.png";
+        $dir = 'admin/img/assert/logos/';
         if(SivarApi\Tools\Validation::Is_Empty_OrNull($width) || SivarApi\Tools\Validation::Is_Empty_OrNull($height)){
             echo '<a href="' . self::$relative_route . 'admin/index.php">
                 <img src="' . self::$relative_route . $dir . $logo . '"' .
@@ -65,7 +65,7 @@ class AdminHeader
     
     static function GetIcon()
     {
-        echo '<link rel="shortcut icon" href="' . self::$relative_route . 'img/logo/favicon.png"/>';
+        echo '<link rel="shortcut icon" href="' . self::$relative_route . 'admin/img/assert/favicon.ico"/>';
     }
     
     static function GetMeta()

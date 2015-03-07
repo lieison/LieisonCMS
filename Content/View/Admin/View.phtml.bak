@@ -12,12 +12,14 @@
  
 <?php 
 
-    $header = new Http\Header();
-    if(!isset($_SESSION['login'])):
-       $header->redirect("login.php");
+    
+    $header = new Http\Header(); //clase header , ver en documentacion
+    
+    if(!isset($_SESSION['login'])): //verifica si existe sesion 
+       $header->redirect("login.php"); //dado caso no exista retorna a login
     endif;
 
-    //VARIABLES DE SESION
+    //VARIABLES DE SESION , ESTAS VARIABLES SE DECLARAN AL INICIAR EL LOGUEO 
     $usuario = $_SESSION['login']['user'];
     $rol = $_SESSION['login']['rol'];
     $nombre = $_SESSION['login']['nombre'];
@@ -42,22 +44,25 @@
     endif;
 
     
+    //INGRESA LA RUTA , ESTE CASO SE HA DEJADO COMO RUTA ABSOLUTA , PERO TAMBIEN APLICA RELATIVAS
     AdminHeader::$relative_route =  "http://" . $_COOKIE['HOST'] . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
-    AdminHeader::GetTitle("Lieison Dashboard");
-    AdminHeader::GetMeta();
-    AdminHeader::GetCss();
+    AdminHeader::GetTitle("Lieison Dashboard"); //TITULO INICIAL DEL DASHBOARD
+    AdminHeader::GetMeta(); //OBTIENE LOS METAS UTILIZADOS 
+    AdminHeader::GetCss();//OBTIENE LAS OJAS DE ESTILO UTILIZADAS
     
-    if(isset($_SESSION['page_name'])):
+    if(isset($_SESSION['page_name'])): //VERIFICA SI EL NOMBRE DE LA PAGINA HA CAMBIADO , APLICA PARA TODAS LAS PAGINAS
         $page_name = $_SESSION['page_name'];
     else:
-        $page_name = "Principal";
+        $page_name = "Principal"; //DADO CASO NO EXISTA EL NOMBRE DE LA PAGINA SE TOMA COMO PRINCIPAL
     endif;
+    
+    //OBTENEMOS EL ICONO DEL KIWI :3
+    AdminHeader::GetIcon();
     
 ?>
     
-
 </head>
-
+<!-- ESTABLECIENDO EL HEADER  -->
 %{HEADER_CLASS_VIEW}%
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -75,7 +80,7 @@
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
-			<?php AdminHeader::GetLogo();  ?>
+			<?php AdminHeader::GetLogo(177,49); //OBTIENE EL LOGO ESQUINA SUPERIOR IZQUIERDA  ?>
 			<div class="menu-toggler sidebar-toggler hide">
                             <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
 			</div>
@@ -94,6 +99,8 @@
                                     /**
                                      *  ESTA FUNCION SE AGREGARAN LOS DROPDOWN 
                                      *  COMO INBOX , TASK , NOTIFICACIONES ETC .
+                                     * 
+                                     *   ADEMAS SE AGREGARAN LOS DISPARADORES DE CADA SISTEMA
                                      */
                                      AdminHeader::GetSystemContent();
                                      
@@ -105,13 +112,13 @@
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                         <?php AdminHeader::Get_ImgSesion($imagen);?>
+                                         <?php AdminHeader::Get_ImgSesion($imagen); //OBTENEMOS LA IMAGEN DEL USUARIO?>
 					<span class="username username-hide-on-mobile">
-					 <?php echo $usuario; ?>
+					 <?php echo $usuario; //NOMBRE DEL USUARIO ?>
                                         </span>
 					<i class="fa fa-angle-down"></i>
 					</a>
-					<?php AdminHeader::Get_DropDown(); ?>
+					<?php AdminHeader::Get_DropDown(); //OBTENEMOS LAS OPCIONES COMO , PERFIL , CERRAR SESION ETC. ?>
 				</li>
  
 				<!-- END USER LOGIN DROPDOWN -->
@@ -159,20 +166,20 @@
 		<div class="page-content">
 			<!-- BEGIN PAGE HEADER-->
 			<?php 
-                            if(isset($_SESSION['title'])):
+                            if(isset($_SESSION['title'])): //AGREGA EL TITULO EN LA CABECERA
                                 AdminHeader::Get_CMS_Title($_SESSION['title']); 
                             else:
                                 AdminHeader::Get_CMS_Title("Lieisoft <b>" . $rol .  "</b> Dashboard"); 
-                            endif;
+                            endif; //EN DADO CASO NO EXISTA LA SESION DE TITULO SE DEFINE POR DEFECTO UNO.
                             
                         ?>
 			<div class="page-bar">
 				<?php 
-                                     if(isset($_SESSION['home'])):
+                                     if(isset($_SESSION['home'])): // DEFINIR EL HOME 
                                          AdminHeader::Get_Sublinks("Home" , $_SESSION['home']);
                                      else:
                                          AdminHeader::Get_Sublinks("Home" , $usuario);
-                                     endif;
+                                     endif; // 
                                      
                                 ?>
 			</div>          

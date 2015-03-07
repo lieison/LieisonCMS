@@ -29,12 +29,12 @@ function buscar_prospecto()
                             );
                       },
                       success: function(value){
-                            $("#cargar_admin").html( '<div class="form-body">' 
-                                  + '<div class="form-group"><br> <br> <br> <br> <br> <br> <br> <br>'
-                                  + '<label class="control-label col-md-3"></label>'
-                                  + '<div class="col-md-4">'
-                                  + value
-                                  + '</div></div></div>' 
+                            $("#cargar_admin").html(// '<div class="form-body">' 
+                                 // + '<div class="form-group"><br> <br> <br> <br> <br> <br> <br> <br>'
+                                 // + '<label class="control-label col-md-3"></label>'
+                                //  + '<div class="col-md-4">'
+                                   value
+                                //  + '</div></div></div>' 
                             ); 
                           
                       }

@@ -17,8 +17,26 @@
     echo $val;
  }
  else if(isset($_REQUEST['id']))
- {
+{
+     $sales = new ProspectController();
+     $prospect_data = $sales->Get_Prospect_ById($_REQUEST['id']);
      
- }
+     if (count($prospect_data) == 0) {
+        exit();
+     }
+     
+     ViewClass::PrepareView("ViewAdmin.phtml", "Admin/Sales");
+     $params = ViewClass::SetParamsString("" , "" , "" , "");
+     ViewClass::SetView($params);
+    
+    // echo '<div class="row">';
+     
+    //echo '</div>'; 
+}
+
+
+
+
+
  
  
