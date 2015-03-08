@@ -46,7 +46,7 @@
     
     //INGRESA LA RUTA , ESTE CASO SE HA DEJADO COMO RUTA ABSOLUTA , PERO TAMBIEN APLICA RELATIVAS
     AdminHeader::$relative_route =  "http://" . $_COOKIE['HOST'] . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
-    AdminHeader::GetTitle("Lieison Dashboard"); //TITULO INICIAL DEL DASHBOARD
+    AdminHeader::GetTitle("Lieisoft"); //TITULO INICIAL DEL DASHBOARD
     AdminHeader::GetMeta(); //OBTIENE LOS METAS UTILIZADOS 
     AdminHeader::GetCss();//OBTIENE LAS OJAS DE ESTILO UTILIZADAS
     
@@ -183,7 +183,7 @@
                                      
                                 ?>
 			</div>          
-                    <?php include 'ViewAdminProspecto.php' ?>
+                    
                 </div>
                
         </div>
@@ -216,7 +216,7 @@
     
    ?> 
            
-   FormValidation.init();cargar_prospectos();         
+            
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
@@ -240,7 +240,7 @@
 </script>
 <!-- END JAVASCRIPTS -->
 
-<script src="AjaxAdminSales.js"></script> 
+ 
 
 </body>
 <!-- END BODY -->

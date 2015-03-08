@@ -26,15 +26,10 @@ class PageController extends MysqlConection {
     
     public function get_dashboard_database()
     {
-        $this->QUERY = "SELECT dashboard.id_dashboard as id, "
-                . " dashboard.titulo as dash_titulo , seccion_dashboard.titulo as sec_titulo"
-                . ", dashboard.link , dashboard.icono  "
-                . ", privilegios.nombre as 'priv_nombre'  FROM dashboard"
-                . " INNER JOIN seccion_dashboard ON dashboard.id_seccion=seccion_dashboard.id_seccion"
-                . " INNER JOIN privilegios ON dashboard.privilegios=privilegios.nivel "
-                . "WHERE dashboard.link LIKE '%dashboard%'";
-        
-        $result = parent::RawQuery($this->QUERY);
+        /**
+         * SENTENCIA SQL ES UN VIEW
+         */
+        $result = parent::RawQuery("SELECT * FROM VIEW_DASHBOARD_DB");
         return $result;
     }
     

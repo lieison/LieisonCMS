@@ -123,7 +123,7 @@ class MessageController extends MessageModel {
                 . " WHERE lieisoft_submensajeria.id_mensajeria LIKE '$id_mensaje' and lieisoft_submensajeria.id_usuario NOT LIKE '$id_user'";
         
          if($not_read == true){
-              $query .= " AND lieisoft_submensajeria.leido=0";
+           $query .= " AND lieisoft_submensajeria.leido=0";
          }
          
          $result = $this->RawQuery($query);

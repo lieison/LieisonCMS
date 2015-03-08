@@ -3,7 +3,7 @@
 /** 
  * @author Rolando Arriaza <rolignu90@gmail.com>
  * @copyright (c) 2015, ROLIGNU
- * @version 1.2
+ * @version 1.3
  * @license GPL
  * @link https://github.com/rolignu2/SivarApi github del proyecto
  * --------------------------------------------------------------
@@ -30,6 +30,10 @@
  *      -->SE MEJORO LA FUNCION Update , Insert y Delete
  *      -->SE DEPRECO LA FUNCION CreateTransaction
  * --------------------------------------------------------------
+ * EDICIONES Y FUNCTIONES VERSION 1.3
+ *      -->SE AGREGO EL METODO DE PREPARACION DE QUERYS 
+ *      -->LA FUNCION PREPARE_QUERY
+ *      -->LA FUNCION EXECUTE_QUERY 
  */
 
 
@@ -212,6 +216,8 @@ class MysqlConection extends PDO
      *  //usuario , password , activo == campos 
      * 
      * </code>
+     * 
+     * @return bool true si se ejeuto con exito la sentencia
      */
     public function Insert($table , $params = array())
     {
@@ -437,6 +443,40 @@ class MysqlConection extends PDO
          if (!is_int($key)) return true;
      }
      return false;
+    }
+    
+    
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 1.3
+     *@todo Prepara una sentencia sql antes de ejecutarla
+     *@param String $statement Sentencia sql donde se sustituiran los parametros
+     *@example  <code> 
+     *          $statemente = SELECT * FROM TABLA WHERE VALOR='::VAL'
+     *          $params = array("::VAL"=>"HOLA MUNDO")
+     * </code>
+     *@param array $params arreglo de parametros a iniciar
+     *@param array $driver_options opciones del arreglo
+     *@return null 
+     */
+    public function prepare_query( $statement ,  $params , $driver_options = 'array()') {
+        
+        $this->response = parent::prepare($statement , $driver_options);
+        foreach ($params as $k=>$v){
+            $this->response->bindParam($k, $v);
+        }
+    }
+    
+  
+   /**
+     *@author Rolando Arriaza
+    * @version 1.3
+    * @todo Ejecuta la query que se preparo al inicio
+    * @return type Description
+     */
+    public function execute_query()
+    {
+       return $this->response->execute();
     }
     
    

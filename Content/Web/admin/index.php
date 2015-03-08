@@ -13,6 +13,7 @@
  
     $_SESSION['page_name']  = "Principal";
     
+    //Condicion ... x+y=Z
     if(isset($_SESSION['title'])):
         unset( $_SESSION['title']);
         if(isset($_SESSION['home'])):
@@ -21,7 +22,8 @@
     endif;
  
     
+    //PREPARANDO LA VISTA ...
     ViewClass::PrepareView("View.phtml", "Admin");
+    //LLAMANDO LA VISTA ... OBTENIENDO DATOS
     ViewClass::SetView(ViewClass::SetParamsString("" ,"" , "" , ""));
     
-?>
