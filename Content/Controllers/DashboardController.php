@@ -1,16 +1,13 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CLASE DASHBOARD CONTROLLER 
+ * ESTA CLASE ES PRIMORDIAL EN LA CUAL MOSTRARA LOS ELEMENTOS U OBJETOS DEL 
+ * DASHBOARD SIDEBAR
+ * 
+ * VERSION ESTABLE 1.4 
  */
 
-/**
- * Description of DashboardController
- *
- * @author rolandoantonio
- */
 class DashboardController extends MysqlConection {
     
     protected $format;
@@ -40,7 +37,7 @@ class DashboardController extends MysqlConection {
      * @version 1.4
      *  -Muy pronto , se agregara la opcion de $privilegios por nivel ...
      * 
-     * @return Mixed devuelve el dashboard menu sidebar
+     * @return Mixed devuelve el dashboard menu sidebar en fortmato HTML
      *
      */
     public function get_dashboard_sidebar_menu($privilegios , $puntero = null )

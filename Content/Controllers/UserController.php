@@ -2,7 +2,7 @@
 
 class UserController extends UserModel  {
     
-   protected $array_file = null;
+    protected $array_file = null;
     
     public function __construct($id_user = null) {
         if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($id_user))
@@ -12,8 +12,7 @@ class UserController extends UserModel  {
         parent::__construct();
     }
     
-    public function set_idUser($id_user)
-    {
+    public function set_idUser($id_user){
       $this->ID_USER = $id_user;
     }
 
@@ -56,13 +55,11 @@ class UserController extends UserModel  {
         }
     }
     
-    public function get_file_name()
-    {
+    public function get_file_name()  {
         return $this->array_file;
     }
     
-    public function find_contract($dir , $id_user = null)
-    {
+    public function find_contract($dir , $id_user = null)  {
         $contract_array = array();
         $directory = new _Directory();
         
@@ -108,8 +105,7 @@ class UserController extends UserModel  {
         return  $contract_array;
     }
     
-    public function set_contract($id_contrato)
-    {
+    public function set_contract($id_contrato){
         $fecha = date("y-m-d");
         $update = parent::Update("contrato", array("aceptado"=>"1" ,
                 "fecha_contrato"=>$fecha) , "id_contrato LIKE $id_contrato");
@@ -119,6 +115,25 @@ class UserController extends UserModel  {
     public function Update_user($fields) {
         $update_ = parent::Update("usuario" , $fields , " id_usuario LIKE '$this->ID_USER'");
         return $update_;
+    }
+    
+    
+    /**
+     * FUNCIONES ESTATICAS DEL CONTROLADOR DE USUARIOS
+     */
+    
+    public static function Verify_Avatar($avatar = null)
+    {
+        if($avatar == null  && isset($_SESSION['login'])){
+             $avatar = $_SESSION['login']['imagen'];
+        }
+        
+       if(\SivarApi\Tools\Validation::Is_Empty_OrNull($avatar)){
+          return "avatar.png";
+        }else{
+          return $avatar;
+       }
+      
     }
 
 }

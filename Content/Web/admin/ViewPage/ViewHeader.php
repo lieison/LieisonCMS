@@ -36,8 +36,8 @@ class AdminHeader
     
     static function GetLogo($width = null , $height = null)
     {
-        $logo = "ls_logo_white.png";
-        $dir = 'img/logo/';
+        $logo = "LogoB.png";
+        $dir = 'admin/img/assert/logos/';
         if(SivarApi\Tools\Validation::Is_Empty_OrNull($width) || SivarApi\Tools\Validation::Is_Empty_OrNull($height)){
             echo '<a href="' . self::$relative_route . 'admin/index.php">
                 <img src="' . self::$relative_route . $dir . $logo . '"' .
@@ -65,7 +65,7 @@ class AdminHeader
     
     static function GetIcon()
     {
-        echo '<link rel="shortcut icon" href="' . self::$relative_route . 'img/logo/favicon.png"/>';
+        echo '<link rel="shortcut icon" href="' . self::$relative_route . 'admin/img/assert/favicon.ico"/>';
     }
     
     static function GetMeta()
@@ -73,6 +73,8 @@ class AdminHeader
         echo '<meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport"/>';
+        //meta para google translate
+        echo '<meta name="google-translate-customization" content="f93064b84c026e43-56e6eb7a0108f43a-g592f3f3b223f149c-f"></meta>';
     }
     
     static function GetMetaContent($array_conent)
@@ -87,7 +89,13 @@ class AdminHeader
     {
         echo '<li id="load_message" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
 					
-               </li>';
+              </li>';
+        echo '';
+    }
+    
+    static function GetBasePlugin()
+    {
+        
     }
     
     
@@ -110,6 +118,12 @@ class AdminHeader
            * */
         echo 'load_dashboard_sidebar();';
              
+    }
+    
+    
+    static function GetJsAfterLoad()
+    {
+        
     }
     
     static function GetHiddenData()
@@ -146,6 +160,10 @@ class AdminHeader
 
                 <link href="'. self::$relative_route . 'assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>';
         
+        echo '<link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/select2/select2.css"/>
+              <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css"/>
+              <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
+              <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>';
        
         
     }
@@ -194,6 +212,7 @@ class AdminHeader
                     <script src="'. self::$relative_route . 'assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>';
             
+            
             echo '<script src="'. self::$relative_route . '/assets/global/scripts/metronic.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
@@ -202,6 +221,21 @@ class AdminHeader
                   <script src="'. self::$relative_route . 'assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>';
             
             echo '<script src="' . self::$relative_route  . 'admin/js/AjaxFunctions.js" type="text/javascript"></script>';
+            echo '<script src="' . self::$relative_route  . 'assets/admin/pages/scripts/form-validation.js"></script>';
+            
+            echo '<script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/select2/select2.min.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/ckeditor/ckeditor.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>';
+            
+            
+            
+            
     }
     
     static function Get_ImgSesion($imagen)
@@ -215,6 +249,28 @@ class AdminHeader
         echo '<div class="page-quick-sidebar-wrapper">';
         
         echo '</div>';
+    }
+    
+    
+    static function Get_Sublinks($link= null , $link1 = null)
+    {
+        echo '<ul class="page-breadcrumb">
+					<li>
+                                                <i class="fa fa-home"></i>
+						<a href="' . self::$relative_route . 'admin/index.php"> ' . $link . '</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+                                            <a href="#">' . $link1 . '</a>
+					</li>               
+		</ul>';
+        echo ' <div class="page-toolbar">
+			<div id="google_translate_element"></div><script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({pageLanguage: "es", includedLanguages: "de,en,es,pt", layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, "google_translate_element");
+                        }
+                         </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                 </div>';
     }
     
     

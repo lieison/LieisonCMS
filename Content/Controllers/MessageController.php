@@ -1,19 +1,30 @@
 <?php
 
+/**
+ * clase en la cual se encarga de la mensajeria cliente servidor 
+ * 
+ */
+
 
 class MessageController extends MessageModel {
     
     
-    public function SetPermisssionMessage($id_usuario , $id_usuario_permission)
-    {
+    /**
+     * @todo Agrega nuevos permisos a quien se le puede enviar mensajes
+     * @version 0.1
+     * @param string/key $id_usuario usuario receptor
+     * @param String/key $id_usuario_permission usuario emisor o quien emitira el permiso
+     * @return null no hay valor de retorno
+     */
+    public function SetPermisssionMessage($id_usuario , $id_usuario_permission){
         $this->Insert("lieisoft_mensajes_permisos", array(
             "id_usuario"=>$id_usuario,
             "id_usuario_permiso"=>$id_usuario_permission
         ));
     }
     
-    public function GetUsersPermission($id_usuario)
-    {
+    
+    public function GetUsersPermission($id_usuario){
          $result = $this->RawQuery("SELECT usuario.id_usuario , concat(usuario.nombre , ' ' , usuario.apellido) as nombre"
                  . " usuario.imagen FROM usuario INNER JOIN lieisoft_mensajes_permisos ON "
                  . " usuario.id_usuario=lieisoft_mensajes_permisos.id_usuario_permiso WHERE "
@@ -112,7 +123,7 @@ class MessageController extends MessageModel {
                 . " WHERE lieisoft_submensajeria.id_mensajeria LIKE '$id_mensaje' and lieisoft_submensajeria.id_usuario NOT LIKE '$id_user'";
         
          if($not_read == true){
-              $query .= " AND lieisoft_submensajeria.leido=0";
+           $query .= " AND lieisoft_submensajeria.leido=0";
          }
          
          $result = $this->RawQuery($query);

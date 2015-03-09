@@ -15,8 +15,11 @@
     
     if(isset($_REQUEST['password'])):
          if(strcmp($password,$_REQUEST['password']) ==0):
+             $_SESSION['lock'] = false;
              $http->redirect("index.php");
          endif;
+    else:
+        $_SESSION['lock'] = true;
     endif;
 ?>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->

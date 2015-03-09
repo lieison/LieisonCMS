@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    
+ 
+<?php 
+
+    
+    $header = new Http\Header(); //clase header , ver en documentacion
+    
+    if(!isset($_SESSION['login'])): //verifica si existe sesion 
+       $header->redirect("login.php"); //dado caso no exista retorna a login
+    endif;
+
+    //VARIABLES DE SESION , ESTAS VARIABLES SE DECLARAN AL INICIAR EL LOGUEO 
+    $usuario = $_SESSION['login']['user'];
+    $rol = $_SESSION['login']['rol'];
+    $nombre = $_SESSION['login']['nombre'];
+    $mail = $_SESSION['login']['email'];
+    $activo = $_SESSION['login']['activo'];
+    $id_user = $_SESSION['login']['id'];
+    
+    //VERIFICAR SI EL AVATA ESTA VACIO (ASIGNARLE AVATAR EMPTY) O SI EXISTE AVATAR (EN IMAGEN)
+    $imagen = UserController::Verify_Avatar();
+    
+    //EN CASO DE QUE LA PANTALLA ESTE BLOQUEADA REVISAMOS SI LA SESION DE BLOQUEO EXISTE
+    //LUEGO DE ESO VERIFICAMOS SI EL BLOQUEO CONTINUA O SE HA DESHABILITADO
+     if(isset($_SESSION['lock'])):
+        if($_SESSION['lock']== true):
+            $header->redirect("lock.php");
+        endif; 
+    endif;
+    
+    //VER SI LA CUENTA ACTUAL ESTA ACTIVA
+    if($activo == 0):
+        $header->redirect("cuenta_desactivada.php");
+    endif;
+
+    
+    //INGRESA LA RUTA , ESTE CASO SE HA DEJADO COMO RUTA ABSOLUTA , PERO TAMBIEN APLICA RELATIVAS
+    AdminHeader::$relative_route =  "http://" . $_COOKIE['HOST'] . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
+    AdminHeader::GetTitle("Lieisoft"); //TITULO INICIAL DEL DASHBOARD
+    AdminHeader::GetMeta(); //OBTIENE LOS METAS UTILIZADOS 
+    AdminHeader::GetCss();//OBTIENE LAS OJAS DE ESTILO UTILIZADAS
+    
+    if(isset($_SESSION['page_name'])): //VERIFICA SI EL NOMBRE DE LA PAGINA HA CAMBIADO , APLICA PARA TODAS LAS PAGINAS
+        $page_name = $_SESSION['page_name'];
+    else:
+        $page_name = "Principal"; //DADO CASO NO EXISTA EL NOMBRE DE LA PAGINA SE TOMA COMO PRINCIPAL
+    endif;
+    
+    //OBTENEMOS EL ICONO DEL KIWI :3
+    AdminHeader::GetIcon();
+    
+?>
+    
+</head>
+<!-- ESTABLECIENDO EL HEADER  -->
+
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
+    
+<?php AdminHeader::GetHiddenData(); ?>
+<input type="hidden" id="rol_value" value="<?php echo $rol; ?>" />
+<input type="hidden" id="page_value" value="<?php echo $page_name; ?>" />
+
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+    
+        
+	<div class="page-header-inner">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+			<?php AdminHeader::GetLogo(177,49); //OBTIENE EL LOGO ESQUINA SUPERIOR IZQUIERDA  ?>
+			<div class="menu-toggler sidebar-toggler hide">
+                            <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+			</div>
+		</div>
+		<!-- END LOGO -->
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+		</a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+		<!-- BEGIN TOP NAVIGATION MENU -->
+		<div class="top-menu">
+			<ul class="nav navbar-nav pull-right">
+                            
+  
+                                <?php 
+                                    /**
+                                     *  ESTA FUNCION SE AGREGARAN LOS DROPDOWN 
+                                     *  COMO INBOX , TASK , NOTIFICACIONES ETC .
+                                     * 
+                                     *   ADEMAS SE AGREGARAN LOS DISPARADORES DE CADA SISTEMA
+                                     */
+                                     AdminHeader::GetSystemContent();
+                                     
+                                ?>
+                                
+                                
+                                
+				<!-- BEGIN USER LOGIN DROPDOWN -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				<li class="dropdown dropdown-user">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                         <?php AdminHeader::Get_ImgSesion($imagen); //OBTENEMOS LA IMAGEN DEL USUARIO?>
+					<span class="username username-hide-on-mobile">
+					 <?php echo $usuario; //NOMBRE DEL USUARIO ?>
+                                        </span>
+					<i class="fa fa-angle-down"></i>
+					</a>
+					<?php AdminHeader::Get_DropDown(); //OBTENEMOS LAS OPCIONES COMO , PERFIL , CERRAR SESION ETC. ?>
+				</li>
+ 
+				<!-- END USER LOGIN DROPDOWN -->
+				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
+				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+				<li class="dropdown dropdown-quick-sidebar-toggler">
+					<a href="javascript:;" class="dropdown-toggle">
+					<i class="icon-logout"></i>
+					</a>
+				</li>
+				<!-- END QUICK SIDEBAR TOGGLER -->
+			</ul>
+                    
+                        
+		</div>
+		<!-- END TOP NAVIGATION MENU -->
+	</div>
+	<!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar-wrapper">
+		<div class="page-sidebar navbar-collapse collapse">
+			<ul id="dashboard_sidebar_load" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                                <?php
+                                   
+                                    /*SE ACTUALIZO EL SIDEBAR POR AJAX SIDEBAR ...
+                                     * 
+                                     * id="dashboard_sidebar_load"
+                                     * 
+                                     * **/
+                                ?>
+			</ul>
+			<!-- END SIDEBAR MENU -->
+		</div>
+	</div>
+	<!-- END SIDEBAR -->
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<!-- BEGIN PAGE HEADER-->
+			<?php 
+                            if(isset($_SESSION['title'])): //AGREGA EL TITULO EN LA CABECERA
+                                AdminHeader::Get_CMS_Title($_SESSION['title']); 
+                            else:
+                                AdminHeader::Get_CMS_Title("Lieisoft <b>" . $rol .  "</b> Dashboard"); 
+                            endif; //EN DADO CASO NO EXISTA LA SESION DE TITULO SE DEFINE POR DEFECTO UNO.
+                            
+                        ?>
+			<div class="page-bar">
+				<?php 
+                                     if(isset($_SESSION['home'])): // DEFINIR EL HOME 
+                                         AdminHeader::Get_Sublinks("Home" , $_SESSION['home']);
+                                     else:
+                                         AdminHeader::Get_Sublinks("Home" , $usuario);
+                                     endif; // 
+                                     
+                                ?>
+			</div>          
+                    
+                </div>
+               
+        </div>
+<!-- END CONTAINER -->
+<!-- BEGIN QUICK SIDEBAR -->
+<?php AdminHeader::Get_Quick_Sidebar(); ?> 
+<!-- END QUICK SIDEBAR -->
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+	<div class="page-footer-inner">
+		 <?php AdminHeader::GetCopyRight(); ?>
+	</div>
+	<div class="scroll-to-top">
+		<i class="icon-arrow-up"></i>
+	</div>
+</div>
+
+<?php AdminHeader::GetJs(); ?>
+
+<script>
+    
+   <?php AdminHeader::GetJsAfterLoad(); ?>
+    
+ 
+  jQuery(document).ready(function() {    
+      
+   <?php
+        /*INICIA TODOS LOS AJAX COMO INBOX , NOTIFICACIONES ETC*/
+        AdminHeader::GetJsSystemLoad();
+    
+   ?> 
+           
+            
+   
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+   QuickSidebar.init(); // init quick sidebar
+   Demo.init(); // init demo features 
+   Index.init();   
+   Index.initDashboardDaterange();
+   Index.initJQVMAP(); // init index page's custom scripts
+   Index.initCalendar(); // init index page's custom scripts
+   Index.initChat();
+   Index.initMiniCharts();
+   Tasks.initDashboardWidget();
+
+
+   /**
+    * INICIA LOS GRAFICOS DE VISITAS EN EL FRONT END --- DESHABILITADO
+    * */
+   // iniciargraficos_visita();
+   
+});
+</script>
+<!-- END JAVASCRIPTS -->
+
+ 
+
+</body>
+<!-- END BODY -->
+</html>
