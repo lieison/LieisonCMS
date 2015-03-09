@@ -34,6 +34,7 @@
  *      -->SE AGREGO EL METODO DE PREPARACION DE QUERYS 
  *      -->LA FUNCION PREPARE_QUERY
  *      -->LA FUNCION EXECUTE_QUERY 
+ *      -->NUEVA FUNCION CONSTRUCTOR 
  */
 
 
@@ -50,34 +51,60 @@ class MysqlConection extends PDO
      * **/
     
     protected $response = null;
-    protected $dns = null;
-    protected $query=null;
+    protected $dsn = null;
+    private $query=null;
     protected $count = 0;
    
     /**
+     * @author Rolando Antonio Arriaza
      * @todo Constructor de la clase mysqlconection
-     * @version 1.1
+     * @version 1.3
+     * @param Array $conect_dsn Conecta un dsn nuevo fuera del la conexion principal
+     * @param string $directory directorio del config (Option en vez del $conect_dsn)
      * @since 1.1
      */
-    public function __construct()
+    public function __construct($conect_dsn = array() , $directory = null)
     {
-        $root = $_SERVER['DOCUMENT_ROOT'];
-        include $root . $_COOKIE['FOLDER'] . '/Content/Conf/Config.php';
-        $this->dns = $CONFIG_["DB_MYSQL"]["driver"].
+        
+    if(count($conect_dsn) ==0){
+        
+        if($directory != null){
+            include $directory . '/Config.php';
+        }else{
+            $root = $_SERVER['DOCUMENT_ROOT'];
+            include $root . $_COOKIE['FOLDER'] . '/Content/Conf/Config.php';
+        }
+        
+        $this->dsn = $CONFIG_["DB_MYSQL"]["driver"].
                 ':host='.$CONFIG_["DB_MYSQL"]["host"].
                 ';dbname='.$CONFIG_["DB_MYSQL"]["database"].
                 ';port='.$CONFIG_["DB_MYSQL"]["port"];
         try{
-                 parent::__construct( $this->dns, 
+                 parent::__construct( $this->dsn, 
                          $CONFIG_["DB_MYSQL"]["user"]
                         ,$CONFIG_["DB_MYSQL"]["password"]); 
                 parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $ex) {
-                if($ex->getMessage() == "could not find driver")
+            if($ex->getMessage() == "could not find driver") {
                     echo "No se pudo encontrar el driver , esta desactivado ...";
-        }
-
+                }
+            }
     }
+    else{
+         try{
+               $this->dsn = "mysql:host=" . $conect_dsn['host'] 
+                       . ";dbname=" . $conect_dsn['db']
+                       . ";port=" . $conect_dsn['port'];
+               parent::__construct($this->dsn , $conect_dsn['user'] , $conect_dsn['pwd']);
+               parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $ex) {
+                if($ex->getMessage() === "could not find driver"){
+                    echo "No se pudo encontrar el driver , esta desactivado ...";
+                }
+        }
+    }
+    
+   }
     
     /**
      * @todo Destructor de la clase 

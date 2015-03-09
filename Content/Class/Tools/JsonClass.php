@@ -30,7 +30,6 @@ class Json_class {
          
      }
     
-     
      /**
       * @version 1.0
       * @todo funcion en la cual establece el archivo a llamar .json 

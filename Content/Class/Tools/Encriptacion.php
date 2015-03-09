@@ -12,12 +12,6 @@ class Encriptacion {
     
    private static $llave= "LieisonData%%@Work??group256788";
   
-    
-   function __construct() {
-        
-   }
-    
-    
    public static function CrearLLave($auto_crear = false , $llave = null)
    {
         if($auto_crear != false)
