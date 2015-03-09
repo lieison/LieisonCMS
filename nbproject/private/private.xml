@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/View/ViewLoader.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/BaseCaptcha.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/CurlAccess.php</file>
@@ -19,6 +20,22 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/JsonClass.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/Validation.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/Encriptacion.php</file>
+=======
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/CurlAccess.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/UserModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_monitor.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/perfil.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/lock.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/UserController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_gestion_usuarios.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/FunctionsController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/DashboardController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/AdminController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/LogoutPage.php</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>
