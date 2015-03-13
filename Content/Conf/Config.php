@@ -26,10 +26,11 @@ if(!is_array($ARRAY_DIR)):
  * no exita eliminar dicha condicion o dejarla (No importa ), agregando el folder 
  * inicial manualmente  $FOLDER_ = "SivarPlugin";
  */
-if(isset($_COOKIE['FOLDER']))
+if (isset($_COOKIE['FOLDER'])) {
     $FOLDER_ = $_COOKIE['FOLDER'];
-else
+} else {
     $FOLDER_ = "LieisonCMS";
+}
 
 $CONFIG_ = array(
     

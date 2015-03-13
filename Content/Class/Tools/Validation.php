@@ -84,9 +84,12 @@ class Validation  {
 	$urlregex .= "(\?[a-z+&\$_.-][a-z0-9;:@/&%=+\$_.-]*)?";
 	$urlregex .= "(#[a-z_.-][a-z0-9+\$_.-]*)?\$";
 	
-	if(eregi($urlregex, $url)) return true;
-	else return false;
-   }
+	if (eregi($urlregex, $url)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
   
     public static function Is_mobile_device()
    {
