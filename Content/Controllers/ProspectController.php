@@ -111,6 +111,13 @@ class ProspectController extends MysqlConection {
     }
     
     
+    public function Get_Country($id_coutry){
+        $this->QUERY = "SELECT PAI_NOMBRE as pais from pais WHERE PAI_PK like $id_coutry";
+        $r = parent::RawQuery($this->QUERY);
+        return $r[0]['pais'];
+    }
+    
+    
     
     
     

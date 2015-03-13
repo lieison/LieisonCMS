@@ -117,6 +117,8 @@ class AdminHeader
             * CARGA EL DASHBOARD SIDEBAR
            * */
         echo 'load_dashboard_sidebar();';
+        
+        echo '';
              
     }
     
@@ -164,8 +166,9 @@ class AdminHeader
               <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css"/>
               <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
               <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>';
-       
         
+         echo '<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/amcharts.js"></script>';
+         echo '<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/pie.js"></script>';
     }
     
     static function GetJs()
@@ -232,10 +235,7 @@ class AdminHeader
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/ckeditor/ckeditor.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>';
-            
-            
-            
-            
+      
     }
     
     static function Get_ImgSesion($imagen)

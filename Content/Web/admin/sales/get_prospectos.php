@@ -20,7 +20,7 @@
 {
      $sales = new ProspectController();
      $prospect_data = $sales->Get_Prospect_ById($_REQUEST['id']);
-     
+
      if (count($prospect_data) == 0) {
         exit();
      }
@@ -38,12 +38,20 @@
          $prospect_body .= '<div class="form-body"><i class="fa fa-map-marker"></i> <b>Direccion 2: </b>' . $prospect_data['direccion2']  . '</div>';
      }
      
-     $prospect_body .= '<div class="form-body"><i class="fa fa-globe"></i> <b>Provincia : </b>' . 
-             $prospect_data['provincia']  . '<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Ciudad: </b>' . $prospect_data['ciudad'] . '</div>';
      
-     $field_count = count($prospect_data) - 1;
+     $pais = $sales->Get_Country($prospect_data['id_pais']);
+     $prospect_body .= '<div class="form-body"><i class="fa fa-globe"></i> <b>Provincia : </b>' . 
+             $prospect_data['provincia']  . 
+             '<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Ciudad: </b>' . $prospect_data['ciudad'] . 
+              '<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Pais: </b>' . $pais .'</div>';
+     
+     
+     
+     $field_count = count($prospect_data) - 4;
      $field_empty = 0;
      $right_form = null;
+     $right_title_form = null;
+     
      foreach($prospect_data as $k)
      {
          if(SivarApi\Tools\Validation::Is_Empty_OrNull($k)){
@@ -53,17 +61,22 @@
      
      if($field_empty != 0)
      {
-         $right_form = get_chart($field_count, $field_empty);
-         $right_form .= '<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>';
+         //$right_form = get_chart($field_count, $field_empty);
+        // $right_form .= ' <div  class="form-body"><div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div></div>';
+        // $right_title_form = "Perfil Completado:  " . ($field_empty/ $field_count)* 100 . "%";
+         $right_title_form = "Perfil Completado:  " . round((($field_empty/$field_count) * 100), 2) . "%";
      }else
      {
          
      }
      
-
+   
+     
      $patterns = array(
-         "%{prospecto}%" => $prospect_data['nombre'],
-         "%{cuerpo_prospecto}%" => $prospect_body 
+         "%{prospecto}%" => "Direccion ",
+         "%{cuerpo_prospecto}%" => $prospect_body,
+         "%{title_right_form}%" => $right_title_form,
+         "%{right_form}%"=>$right_form
      );
      
      ViewClass::PrepareView("ViewAdmin.phtml", "Admin/Sales");
@@ -86,7 +99,7 @@ function get_chart($total , $empty)
 {
     $progress = $total - $empty;
     $rest = $empty;
-    return '<script type="text/javascript">
+    return '<script type="text/javascript"> 
 			AmCharts.makeChart("chartdiv",
 				{
 					"type": "pie",
@@ -114,7 +127,7 @@ function get_chart($total , $empty)
 						}
 					]
 				}
-			);
+		);
 		</script>';
 }
 

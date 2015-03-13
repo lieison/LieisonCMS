@@ -7,7 +7,7 @@
  $arrayp= array(
      
      "nombre" => $_REQUEST['nombre'],
-     "direccion" => $_REQUEST['direccion'],
+     "direccion" => $_REQUEST['direccion1'],
      "direccion2" => $_REQUEST['direccion2'],
      "provincia" => $_REQUEST['provincia'],
      "ciudad" => $_REQUEST['ciudad'],

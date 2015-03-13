@@ -8,6 +8,9 @@
     include   '../../../Conf/Include.php';
 
     $rol = $_SESSION['login']['rol'];
+    $_SESSION['page_name']  = "Admin Prospectos";
+    $_SESSION['home'] = "Sales";
+    $_SESSION['title'] = "Sales <b> Administrar Prospectos</b>";
     
     $adminc = new AdminController();
     $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
@@ -22,8 +25,6 @@
                 fjs.parentNode.insertBefore(js, fjs);
       }(document, "script", "facebook-jssdk"));</script>';
     
-    $header .= '<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/amcharts.js"></script>';
-    $header .= '<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/pie.js"></script>';
     
     $body = "<?php include 'ViewAdminProspecto.php' ?>";
     $footer = 'FormValidation.init();';
