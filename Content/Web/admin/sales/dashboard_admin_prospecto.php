@@ -22,10 +22,13 @@
                 fjs.parentNode.insertBefore(js, fjs);
       }(document, "script", "facebook-jssdk"));</script>';
     
+    $header .= '<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/amcharts.js"></script>';
+    $header .= '<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/pie.js"></script>';
     
     $body = "<?php include 'ViewAdminProspecto.php' ?>";
     $footer = 'FormValidation.init();';
     $footer .= 'cargar_prospectos();';
+    
     $footer_end = '<script src="AjaxAdminSales.js"></script>';
     
     ViewClass::PrepareView("View.phtml", "Admin");
