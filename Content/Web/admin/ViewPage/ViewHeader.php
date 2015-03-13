@@ -8,7 +8,7 @@ class AdminHeader
     
     static function Get_CMS_Title($title , $version = null)
     {
-        echo '<h3 class="page-title">
+        echo '<h3 class="page-title" id="id_title" >
 			' . $title . ' <small> ' . $version . '</small>
 			</h3>';
     }
