@@ -101,7 +101,7 @@ class _Directory {
      * 
      *   busca archivos con el nombre inicial dashboard y extencion php
      *   $pattern = array("name"=>"dashboard" , "extend"=>"php");
-
+            $pattern = array("name"=>"dashboard" , "extend"=>"php" , "pattern"=>false);
      * </code>
      *@return bool | array false si no existe directorio 
      */
@@ -135,9 +135,16 @@ class _Directory {
             
             if(is_array($pattern))
             {
-                 $p = $pattern["name"];
-                 $ext = $pattern["extend"];
-                 $preg = "/^($p\w+\.$ext)$/";
+                if(isset($pattern['pattern']))
+                {
+                    $p = $pattern["name"];
+                    $ext = $pattern["extend"];
+                    $preg = "/^($p\.$ext)$/";
+                }else{
+                    $p = $pattern["name"];
+                    $ext = $pattern["extend"];
+                    $preg = "/^($p\w+\.$ext)$/";
+                }
             }
             else
             {

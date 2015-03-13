@@ -124,12 +124,8 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php
      require $val['root'] . '/' . $val['filename'];
  }
 
-//require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Plugins/TinyMce/TinyMce.php';
- 
 /**
  * Modelos | Models
- *
- * 
  */
  $Dir_ = new _Directory();
  $path_model = $Dir_->FindDataDirectory($GLOBAL_ROOT . $FOLDER ."/Content/Models/");
@@ -137,21 +133,18 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php
  {
      require $val['root'] . '/' . $val['filename'];
  }
- /*require $GLOBAL_ROOT . $FOLDER . '/Content/Models/SliderModel.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Models/UserModel.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Models/MessageModel.php';*/
- 
+
  
  /**
-     VIEWS O VISTAS AGREGADAS FUERA DEL CORE
-  **/
- require $GLOBAL_ROOT . $FOLDER . '/Content/Web/admin/ViewPage/ViewHeader.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/View/ViewClass.php';
-
-/**
+  * View del sistema
+  */
+ 
+  require $GLOBAL_ROOT . $FOLDER . '/Content/View/ViewClass.php';
+ 
+  
+  
+ /**
  * Controladores | Controllers
- *
- * 
  */
 $Dir_ = new _Directory();
 $path_controller = $Dir_->FindDataDirectory($GLOBAL_ROOT . $FOLDER ."/Content/Controllers/");
@@ -160,15 +153,12 @@ foreach ($path_controller as $k=>$val)
      require $val['root'] . '/' . $val['filename'];
 }
 
-
- /*require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/AdminController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/DashboardController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FrontEndController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FunctionsController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/PageController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/UserController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/ProspectController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/MessageController.php';*/
+  
+ /**
+  * ACA SE AGREGARAN LOS SCRIPTS FUERA DEL NUCLEO DEL SISTEMA ...
+  * **/
+  
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Web/admin/ViewPage/ViewHeader.php';
 
 
 
