@@ -1,16 +1,6 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of ViewClass
- *
- * @author rolandoantonio
- */
  class ViewClass {
      
      static $pointer = null;
@@ -53,20 +43,26 @@
                     copy($route, $route . ".bak");
                  }
                  
-                        $temp_file = file_get_contents($route);
-
-                         if($params['B'] != "%{BODY_CLASS_VIEW}%"){
-                           $temp_file = str_replace("%{BODY_CLASS_VIEW}%", $params['B'] , $temp_file);
-                         }
-                         if($params['H'] != "%{HEADER_CLASS_VIEW}%"){
-                           $temp_file = str_replace("%{HEADER_CLASS_VIEW}%", $params['H'] , $temp_file);
-                         }
-                         if($params['F'] != "%{FOOTER_CLASS_VIEW}%"){
-                           $temp_file = str_replace("%{FOOTER_CLASS_VIEW}%", $params['F'] , $temp_file);
-                         }
-                          if($params['F'] != "%{FOOTER_CLASS_VIEW_END}%"){
-                           $temp_file = str_replace("%{FOOTER_CLASS_VIEW_END}%", $params['FE'] , $temp_file);
-                         }
+                 $temp_file = file_get_contents($route);
+                if(isset($params['B'])){       
+                    if($params['B'] != "%{BODY_CLASS_VIEW}%"){
+                        $temp_file = str_replace("%{BODY_CLASS_VIEW}%", $params['B'] , $temp_file);
+                    }
+                    if($params['H'] != "%{HEADER_CLASS_VIEW}%"){
+                        $temp_file = str_replace("%{HEADER_CLASS_VIEW}%", $params['H'] , $temp_file);
+                    }
+                    if($params['F'] != "%{FOOTER_CLASS_VIEW}%"){
+                        $temp_file = str_replace("%{FOOTER_CLASS_VIEW}%", $params['F'] , $temp_file);
+                    }
+                    if($params['F'] != "%{FOOTER_CLASS_VIEW_END}%"){
+                        $temp_file = str_replace("%{FOOTER_CLASS_VIEW_END}%", $params['FE'] , $temp_file);
+                    }
+                }
+                else if(isset($params['pattern'])){
+                    foreach ($params['pattern']  as $key=>$value){
+                        $temp_file = str_replace($key, $value, $temp_file);
+                    }
+                }
                          
                  file_put_contents($route, $temp_file);
                  include $route;
@@ -86,6 +82,11 @@
              $footer_end = "%{FOOTER_CLASS_VIEW_END}%")
      {
          return array(  "B"=>$body , "H"=>$header , "F"=>$footer , "FE"=>$footer_end);
+     }
+     
+     
+     public static function SetPatternString($patterns){
+         return array("pattern" => $patterns);
      }
      
 
