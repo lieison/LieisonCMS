@@ -13,6 +13,7 @@
  */
 class FunctionsController {
     
+    
     public static function GetRootUrl($directory)
     {
         return $url = $_SERVER['DOCUMENT_ROOT'] .  "/" . $_COOKIE['FOLDER'] . "/Content/Web/$directory/";

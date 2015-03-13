@@ -31,7 +31,14 @@
      
      public static function SetView($params = array())
      {
-         $route = $_SERVER['DOCUMENT_ROOT'] .  "/" . $_COOKIE['FOLDER'] . 
+         $folder = null;
+         if (!isset($_COOKIE['FOLDER'])) {
+            $folder = \SivarApi\Tools\Validation::PrimaryFolderPath();
+        } else {
+            $folder = $_COOKIE['FOLDER'];
+        }
+        
+        $route = $_SERVER['DOCUMENT_ROOT'] .  "/" . $folder  . 
                  self::$relative_route . 
                  self::$end_route . "/" . self::$pointer ? : "/" . self::$pointer;
 

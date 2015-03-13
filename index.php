@@ -4,9 +4,9 @@
 
       /**
        *@author Rolando <rmarroquin@lieison.com>
-       *@version 1.0 
+       *@version 1.1
        *@copyright (c) Lieison, Working Together
-       *@since 1.0 , index.php
+       *@since 1.1, index.php
        */
 
      /**
@@ -38,8 +38,6 @@
          unset($_COOKIE['SERVER']);
      endif;
      
-     
-     
      setcookie("FOLDER" , $DIR_NAME);
      setcookie("SERVER" , $SERVER__);
      setcookie("HOST" , $_SERVER['HTTP_HOST']);
@@ -54,5 +52,7 @@
 
      header("Location: http://$SERVER__/$DIR_NAME/Content/Web/admin/index.php" );  
      
+
+ 
 ?>
 
