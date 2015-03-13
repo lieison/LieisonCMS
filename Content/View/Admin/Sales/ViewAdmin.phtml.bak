@@ -1,13 +1,14 @@
+%{script_form}%
 <div class="row">
-    <div class="col-md-6 ">
+<div class="col-md-6 ">
 <div class="portlet box blue">
 <div class="portlet-title">
 <div class="caption">
-  <i class="fa fa-globe"></i> %{prospecto}%
+  <i class="fa fa-globe"></i> %{title_dir_prospecto}%
  </div>
 </div>
 <div class="portlet-body form">
-    %{cuerpo_prospecto}%
+    %{dir_prospecto}%
 </div>
 </div>
 				
@@ -243,7 +244,6 @@
 						</div>
 						<div class="portlet-body form">
                                                     %{right_form}%      
-		
 						</div>
 					</div>
 					<!-- END SAMPLE FORM PORTLET-->
