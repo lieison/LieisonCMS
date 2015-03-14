@@ -2,25 +2,32 @@
 
  include   '../../../Conf/Include.php';
  
- if(!isset($_REQUEST['id'])){
-
-    $sales = new ProspectController();
-    $result = $sales->Get_All_Prospect();
+ $sales = new ProspectController();//constructor nuevo sales en el controlador
  
-    $val = '';
-    foreach($result as $k=>$v)
+ if(isset($_REQUEST['meta_estado'])){
+    
+    $id_p = $_REQUEST['id_prospect'];
+    $print_status = '<div id="meta_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Arranque Del Prospecto:</b>';
+    if($sales->Set_MetaStatus($_REQUEST['meta_estado']+1, $id_p) == true)
     {
-        $id = $v['id_prospect'];
-        $name = $v['nombre'];
-        $val .= "<option value='$id'>$name</option>";
+        switch($_REQUEST['meta_estado'])
+        {
+            case 0:
+                $print_status .= " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' value='Terminar Proceso' id='cmdmeta_estado' />";
+                break;
+            case 1:
+                break;
+        }
     }
-    echo $val;
+    else{
+        $print_status .= "Opps!! Hubo algun error , Intente Luego";
+    }
+    $print_status .= "</div>";
+    echo $print_status;
  }
  else if(isset($_REQUEST['id']))
 {
-     
-     
-     $sales = new ProspectController();//constructor nuevo sales en el controlador
+
      $prospect_data = $sales->Get_Prospect_ById($_REQUEST['id']);//obtener los datos por medio del id
 
      //verifica si los datos del prospecto existe
@@ -72,13 +79,47 @@
      $script_title = "<script>$('#id_title').html('<p><b>" . strtoupper($prospect_data['nombre']) . "</b>"
              . "&nbsp&nbsp <small>" . $complete_profile . "</small></p>')</script>";
 
-     
-     
+     /*INICIO DE LA INFORMACION DEL PROSPECTO */
+     $title_info = "Informacion Del Prospecto";
+     $prospect_info = "";
+     $prospect_info .= '<div class="form-body"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Nombre:</b> '
+             . $prospect_data['nombre'] . '<br><br>' ;
+     $prospect_info .= '<i class="fa fa-building-o"></i>&nbsp&nbsp <b>Telefono:</b> '
+             . "(" . $prospect_data['zip'] . ") " . $prospect_data['telefono'] . '<br><br>' ;
+     $prospect_info .= '<i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fax:</b> '
+             . $prospect_data['fax'] . '<br><br>' ;
+     $prospect_info .= '<i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fecha de Entrada:</b> '
+             . $prospect_data['fecha'] . '<br><br>' ;
+     $prospect_info .= '<i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado:</b> ';
+            if($prospect_data['estado'] == 1){
+                $prospect_info .= "Activo";
+            }else{
+                $prospect_info .= "No Activo";
+            }
+     $prospect_info .= "<br><br>";
+     $prospect_info .= '<div id="meta_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Arranque Del Prospecto:</b> ';
+     switch ($prospect_data['meta_estado']){
+         case 0:
+             $prospect_info .= "No iniciado &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(0 ," 
+                 . $prospect_data['id_prospect']  . ");' value='Iniciar Proceso' id='cmdmeta_estado' />";
+             break;
+         case 1:
+             $prospect_info .= " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1);' value='Terminar Proceso' id='cmdmeta_estado' />";
+             break;
+         case 2:
+             $prospect_info .= "Terminado";
+             break;
+     }
+     $prospect_info .= '</div>';
+     $prospect_info .= '</div>';
+     //FIN DE LA INFORMACION DEL PROSPECTO 
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
      $patterns = array(
          "%{script_form}%"=>$script_title,
          "%{title_dir_prospecto}%" => "Direccion ",
          "%{dir_prospecto}%" => $prospect_body_dir,
+         "%{title_info}%" => $title_info,
+         "%{prospect_info}%" => $prospect_info,
          "%{title_right_form}%" => "",
          "%{right_form}%"=> ""
      );
@@ -88,6 +129,19 @@
      $params = ViewClass::SetPatternString($patterns);
      ViewClass::SetView($params);
    
+}
+else{
+
+    $result = $sales->Get_All_Prospect();
+ 
+    $val = '';
+    foreach($result as $k=>$v)
+    {
+        $id = $v['id_prospect'];
+        $name = $v['nombre'];
+        $val .= "<option value='$id'>$name</option>";
+    }
+    echo $val;
 }
 
 ?>

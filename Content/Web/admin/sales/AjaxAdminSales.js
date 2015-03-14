@@ -49,7 +49,26 @@ function cargar_prospectos()
 }
 
 
-									
+function ProspectInitProcess(meta_estado , id_prospect)
+{
+      var parametros = {
+          "meta_estado" : meta_estado,
+          "id_prospect" : id_prospect
+      };
+    
+      $.ajax({
+                      type: "POST",
+                      url: "get_prospectos.php",
+                      data: parametros,
+                      beforeSend: function()
+                      {
+                          $("#meta_estado").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
+                      },
+                      success: function(value){
+                          $("#meta_estado").html(value);
+                      }
+              });
+}
 									
 									
                                                                                    

@@ -118,6 +118,12 @@ class ProspectController extends MysqlConection {
     }
     
     
+    public function Set_MetaStatus($new_status , $id_prospect)
+    {
+        return parent::Update("sales_prospect", array("meta_estado"=>$new_status ) , "id_prospect LIKE $id_prospect");
+    }
+    
+    
     
     
     
