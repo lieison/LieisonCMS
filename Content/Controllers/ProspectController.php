@@ -104,13 +104,14 @@ class ProspectController extends MysqlConection {
     }
     
     
-    
-    public function Get_ContactProspect($id)
-    {
-        
-    }
-    
-    
+
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo obtiene el pais por medio del ID en la base de datos
+     *@param string $id_coutry
+     *@return array , devuelve el pais (Nombre)
+     */
     public function Get_Country($id_coutry){
         $this->QUERY = "SELECT PAI_NOMBRE as pais from pais WHERE PAI_PK like $id_coutry";
         $r = parent::RawQuery($this->QUERY);
@@ -118,17 +119,41 @@ class ProspectController extends MysqlConection {
     }
     
     
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo establece un nuevo meta estado 
+     *      Los Meta estados Sirven para verificar si un prospecto esta:
+     *      0->No iniciado
+     *      1->En Proceso
+     *      2->Terminado
+     *      n->Algun otro ?
+     *@return bool
+     */
     public function Set_MetaStatus($new_status , $id_prospect)
     {
         return parent::Update("sales_prospect", array("meta_estado"=>$new_status ) , "id_prospect LIKE $id_prospect");
     }
     
     
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo establece el estado (activo->1 , inactivo->0)
+     *@param string $id_coutry
+     *@return bool
+     */
     public function Set_Estatus($new_status , $id_prospect)
     {
          return parent::Update("sales_prospect", array("estado"=>$new_status ) , "id_prospect LIKE $id_prospect");
     }
     
+    
+       
+    public function Get_ContactProspect($id)
+    {
+        
+    }
     
     
     

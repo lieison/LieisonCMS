@@ -255,12 +255,12 @@ class AdminHeader
     static function Get_Sublinks($link= null , $link1 = null)
     {
         echo '<ul class="page-breadcrumb">
-					<li>
+					<li id="id_sublinks_1">
                                                 <i class="fa fa-home"></i>
 						<a href="' . self::$relative_route . 'admin/index.php"> ' . $link . '</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
-					<li>
+					<li id="id_sublinks_2">
                                             <a href="#">' . $link1 . '</a>
 					</li>               
 		</ul>';

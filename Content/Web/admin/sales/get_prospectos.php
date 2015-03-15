@@ -27,8 +27,8 @@
     $print_status .= "</div>";
     echo $print_status;
  }
- else if(isset ($_REQUEST['estado'])){
-     //CAMBIAR ESTADO DEL PROSPECTO
+ else if(isset ($_REQUEST['estado'])){ //CAMBIAR ESTADO DEL PROSPECTO
+    
      
     $id_p = $_REQUEST['id_prospect'];
     $print_status = '<div id="prospect_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado: </b>';
@@ -103,12 +103,12 @@
      
      //cambia el titulo del dashboard por el nombre del prospecto , agrega el perfil completado
      $script_title = "<script>$('#id_title').html('<p><b>" . strtoupper($prospect_data['nombre']) . "</b>"
-             . "&nbsp&nbsp <small>" . $complete_profile . "</small></p>')</script>";
+             . "&nbsp&nbsp <small>" . $complete_profile . "</small></p>');</script>";
 
      /*INICIO DE LA INFORMACION DEL PROSPECTO */
      $title_info = "Informacion Del Prospecto";
-     $prospect_info = "";
-     $prospect_info .= '<div class="form-body"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Nombre:</b> '
+     $prospect_info = '<div class="form-body">';
+     $prospect_info .= '<i class="fa fa-building-o"></i>&nbsp&nbsp <b>Nombre:</b> '
              . $prospect_data['nombre'] . '<br><br>' ;
      $prospect_info .= '<i class="fa fa-building-o"></i>&nbsp&nbsp <b>Telefono:</b> '
              . "(" . $prospect_data['zip'] . ") " . $prospect_data['telefono'] . '<br><br>' ;
@@ -142,15 +142,36 @@
      $prospect_info .= '</div>';
      $prospect_info .= '</div>';
      //FIN DE LA INFORMACION DEL PROSPECTO 
-   
+     
+     //INICIO DE LAS REDES SOCIALES DEL PROSPECTO ...
+    $social_title = " Redes Sociales";
+    $social_info = '<div class="form-body">';
+    $social_info .= '<i  class="fa fa-globe"></i>&nbsp&nbsp<b>Pagina Web: </b>'
+            . '<a target="_blank" href="' . $prospect_data['pagina_web'] . '">' 
+            . $prospect_data['pagina_web'] . '</a>' ;
+    $social_info .= "<br><br>";
+    $social_info .= '<i class="fa fa-facebook"></i>&nbsp&nbsp<b>Facebook: </b>';
+    $social_info .= '<a target="_blank" href="' . $prospect_data['facebook'] . '">' 
+            . $prospect_data['facebook'] . '</a>' ;
+    $social_info .= "<br><br>";
+    $social_info .= '<i class="fa fa-twitter"></i>&nbsp&nbsp<b>Twitter: </b>';
+    $social_info .= '<a target="_blank" href="https://twitter.com/' . $prospect_data['twitter'] . '">@' 
+            . $prospect_data['twitter'] . '</a>' ;
+    $social_info .= "<br>";
+    $social_info .= "</div>";
+     //FIN DE LAS REDES SOCIALES
+     
+    
      
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
      $patterns = array(
          "%{script_form}%"=>$script_title,
-         "%{title_dir_prospecto}%" => "Direccion ",
+         "%{title_dir_prospecto}%" => "Direccion " ,
          "%{dir_prospecto}%" => $prospect_body_dir,
          "%{title_info}%" => $title_info,
          "%{prospect_info}%" => $prospect_info,
+         "%{social_title}%" => $social_title,
+         "%{social_info}%"=>$social_info,
          "%{title_right_form}%" => "",
          "%{right_form}%"=> ""
      );

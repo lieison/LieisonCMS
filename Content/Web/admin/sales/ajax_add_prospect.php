@@ -15,7 +15,7 @@
      "zip" => $_REQUEST['zip'],
      "telefono" => $_REQUEST['telefono'],
      "fax" => $_REQUEST['fax'],
-     "pagina_web" => $_REQUEST['nombre'],
+     "pagina_web" => $_REQUEST['web'],
      "email" => $_REQUEST['mail'],
      "facebook" => $_REQUEST['facebook'],
      "twitter" => $_REQUEST['twitter'],
