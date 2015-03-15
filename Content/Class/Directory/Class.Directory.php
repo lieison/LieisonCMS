@@ -3,13 +3,12 @@
 
 class _Directory {
     
-    var $array_dir = array();
     
+    /*@var arreglo de rutas de direccion*/
+    protected $array_dir = array();
+    /*@var arreglo de acrhivos de direccion*/
     protected $array_file = array();
     
-    public function __construct() {
-        
-    }
     
     public function Get_Extension($file)
     {
@@ -87,6 +86,8 @@ class _Directory {
     }
     
     public function Get_UploadFiles(){ return $this->array_file; }
+    
+    
     
     /**
      *@version 1.0

@@ -4,6 +4,7 @@
  
  $sales = new ProspectController();//constructor nuevo sales en el controlador
  
+ //CAMBIAR PROCESO DEL PROSPECTO
  if(isset($_REQUEST['meta_estado'])){
     
     $id_p = $_REQUEST['id_prospect'];
@@ -13,9 +14,33 @@
         switch($_REQUEST['meta_estado'])
         {
             case 0:
-                $print_status .= " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' value='Terminar Proceso' id='cmdmeta_estado' />";
+                $print_status .=  " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' value='Terminar Proceso' id='cmdmeta_estado' />";
                 break;
             case 1:
+                 $print_status .=  " Proceso Terminado ";
+                break;
+        }
+    }
+    else{
+        $print_status .= "Opps!! Hubo algun error , Intente Luego";
+    }
+    $print_status .= "</div>";
+    echo $print_status;
+ }
+ else if(isset ($_REQUEST['estado'])){
+     //CAMBIAR ESTADO DEL PROSPECTO
+     
+    $id_p = $_REQUEST['id_prospect'];
+    $print_status = '<div id="prospect_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado: </b>';
+    if($sales->Set_Estatus($_REQUEST['estado'], $id_p) == true)
+    {
+        switch($_REQUEST['estado'])
+        {
+            case 0:
+                $print_status .=  " No Activo  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectActivate(1 ,$id_p);' value='Activar' id='cmd_estado' />";
+                break;
+            case 1:
+                 $print_status .= " Activo  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectActivate(0 ,$id_p);' value='Desactivar' id='cmd_estado' />";
                 break;
         }
     }
@@ -27,6 +52,7 @@
  }
  else if(isset($_REQUEST['id']))
 {
+     //INICIAR PROSPECTO ... IMPRIMIR TODOS LOS DATOS
 
      $prospect_data = $sales->Get_Prospect_ById($_REQUEST['id']);//obtener los datos por medio del id
 
@@ -90,13 +116,15 @@
              . $prospect_data['fax'] . '<br><br>' ;
      $prospect_info .= '<i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fecha de Entrada:</b> '
              . $prospect_data['fecha'] . '<br><br>' ;
-     $prospect_info .= '<i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado:</b> ';
+     $prospect_info .= '<div id="prospect_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado:</b> ';
             if($prospect_data['estado'] == 1){
-                $prospect_info .= "Activo";
+                $prospect_info .= "Activo &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectActivate(0 ," 
+                 . $prospect_data['id_prospect']  . ");' value='Desactivar' id='cmd_estado' />";
             }else{
-                $prospect_info .= "No Activo";
+                $prospect_info .= "No Activo &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectActivate(1 ," 
+                 . $prospect_data['id_prospect']  . ");' value='Activar' id='cmd_estado' />";
             }
-     $prospect_info .= "<br><br>";
+     $prospect_info .= "</div><br><br>";
      $prospect_info .= '<div id="meta_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Arranque Del Prospecto:</b> ';
      switch ($prospect_data['meta_estado']){
          case 0:
@@ -104,7 +132,8 @@
                  . $prospect_data['id_prospect']  . ");' value='Iniciar Proceso' id='cmdmeta_estado' />";
              break;
          case 1:
-             $prospect_info .= " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1);' value='Terminar Proceso' id='cmdmeta_estado' />";
+             $prospect_info .= " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 , " 
+                 . $prospect_data['id_prospect']  . ");' value='Terminar Proceso' id='cmdmeta_estado' />";
              break;
          case 2:
              $prospect_info .= "Terminado";
@@ -113,6 +142,8 @@
      $prospect_info .= '</div>';
      $prospect_info .= '</div>';
      //FIN DE LA INFORMACION DEL PROSPECTO 
+   
+     
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
      $patterns = array(
          "%{script_form}%"=>$script_title,
@@ -131,6 +162,8 @@
    
 }
 else{
+    
+    //CARGA TODOS LOS PROSPECTOS EN EL PRINCIPAL
 
     $result = $sales->Get_All_Prospect();
  

@@ -31,7 +31,8 @@
     $footer .= 'cargar_prospectos();';
     
     $footer_end = '<script src="AjaxAdminSales.js"></script>';
-
+    $footer_end .= '<script src="../js/bootbox.js"></script>';
+    $footer_end .= '<script src="../js/bootbox.min.js"></script>';
     
     ViewClass::PrepareView("View.phtml", "Admin");
     ViewClass::SetView(ViewClass::SetParamsString($body , $header , $footer , $footer_end));

@@ -76,6 +76,8 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/CurlAccess.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/JsonClass.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/JSON.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/Calendar.php';
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/RegexClass.php';
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/UrlClass.php';
 /**
  * LLAMADA DE LAS CLASES EN EL DIRECTORIO VIEW 
  * 

@@ -1,4 +1,5 @@
 %{script_form}%
+
 <div class="row">
 <div class="col-md-6 ">
 <div class="portlet box blue">
@@ -1077,3 +1078,6 @@
 					</div>
 				</div>
 			</div>
+<div id="dialog-confirm" title="Empty the recycle bin?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>
