@@ -58,11 +58,11 @@
 					<div class="portlet box green ">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-gift"></i> %{title_right_form}%
+								<i class="fa fa-info"></i> %{title_action_form}%
 							</div>
 						</div>
 						<div class="portlet-body form">
-                                                    %{right_form}%      
+                                                    %{action_form}%      
 						</div>
 					</div>
 					<!-- END SAMPLE FORM PORTLET-->

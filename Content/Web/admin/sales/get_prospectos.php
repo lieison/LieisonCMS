@@ -175,6 +175,17 @@
     
     //FIN DE NOTAS
     
+    //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES
+     $action_title = "Acciones";
+     $action_form = '<div class="form-body">'; 
+     $action_form .= '<div class="form-actions">';
+     $action_form .= '<div class="col-md-offset-4 col-md-8">';
+     $action_form .= '<a href="" target="_blank" class="btn blue" >Editar</a>';
+     $action_form .= '</div>';
+     $action_form .= '</div>';
+     $action_form .= '</div>';
+     
+    //FIN DE TODAS LAS ACCIONES
     
    
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
@@ -188,8 +199,8 @@
          "%{social_info}%"=>$social_info,
          "%{notes_title}%" => $notes_title,
          "%{notes_info}%"=>$notes_info,
-         "%{title_right_form}%" => "",
-         "%{right_form}%"=> ""
+         "%{title_action_form}%" => $action_title,
+         "%{action_form}%"=> $action_form
      );
      
      

@@ -1,4 +1,5 @@
 
+
 function buscar_prospecto()
 {
     
@@ -113,7 +114,44 @@ function ProspectEditNotes(id_prospect)
     var notes_html = $('#id_notes').html();
     if(notes_html === '<b>No Existen notas</b>')
              notes_html = "";
-   $('#id_notes').html('<textarea class="ckeditor form-control" name="update_notes" id="update_note" rows="6" data-error-container="#editor2_error">' +  notes_html + '</textarea>');
+   $('#id_notes').html('<textarea class="ckeditor form-control" name="update_note" id="update_note" rows="6" >'
+           +  notes_html + '</textarea>');
+   var actions = "<button type='button' class='btn blue' onclick='SaveNotes(" + id_prospect + ");' value='Guardar'>Guardar Notas</button>";
+   actions += "&nbsp&nbsp&nbsp<button type='button' class='btn red' value='Cancelar' onclick='CancelNotes(" + id_prospect + ");'>Cancelar Notas</button>";
+   $('#id_notes_actions').html(actions);
+}
+
+
+function SaveNotes(id_prospect)
+{
+    var new_html =  document.getElementById('update_note').value;
+    if(new_html !== null || new_html !== "undefined"){
+       
+        var parametros = {
+            "new_notes" : new_html,
+            "id_prospect" : id_prospect
+        };
+    
+        $.ajax({
+                      type: "POST",
+                      url: "edit_prospect.php",
+                      data: parametros,
+                      beforeSend: function()
+                      {
+                           $('#id_notes').html('<div align="center"><img src="../img/assert/loadingd.gif" width="60" height="60" /></div>');
+                      },
+                      success: function(value){
+                           $('#id_notes').html(new_html);
+                      }
+              });
+    }
+    $('#id_notes_actions').html('<button type="button" onclick="ProspectEditNotes(' + id_prospect + ');" class="btn blue">Agregar Notas </button>');
+}
+
+
+function CancelNotes(id_prospect){
+    $('#id_notes').html( document.getElementById('update_note').value);
+    $('#id_notes_actions').html('<button type="button" onclick="ProspectEditNotes(' + id_prospect + ');" class="btn blue">Agregar Notas </button>');
 }
 
 

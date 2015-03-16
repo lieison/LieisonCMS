@@ -149,7 +149,12 @@ class ProspectController extends MysqlConection {
     }
     
     
-       
+    public function Set_NewNotes($notes , $id_prospect){
+        return parent::Update("sales_prospect", array("notas"=>$notes ) , "id_prospect LIKE $id_prospect");
+    }
+    
+    
+    
     public function Get_ContactProspect($id)
     {
         
