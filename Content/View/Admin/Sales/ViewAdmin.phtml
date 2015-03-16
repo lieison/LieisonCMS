@@ -1,4 +1,4 @@
-<script>$('#id_title').html('<p><b>PRUEBA</b>&nbsp&nbsp <small>(Perfil Completado:  50%)</small></p>');</script>
+<script>$('#id_title').html('<p><b>LIEISON</b>&nbsp&nbsp <small>(Perfil Completado:  42.86%)</small></p>');</script>
 
 <div class="row">
 <div class="col-md-6 ">
@@ -9,7 +9,7 @@
  </div>
 </div>
 <div class="portlet-body form">
-    <div class="form-body"><i class="fa fa-map-marker"></i><b>Direccion: </b>75 Avenida Norte, San Salvador, El Salvador</div><div class="form-body"><i class="fa fa-map-marker"></i> <b>Direccion 2: </b></div><div class="form-body"><i class="fa fa-globe"></i> <b>Provincia : </b>san salvador<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Ciudad: </b>san salvador<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Pais: </b>El Salvador</div>
+    <div class="form-body"><i class="fa fa-map-marker"></i>  <b>Direccion: </b> Sin Direccion </div><div class="form-body"><i class="fa fa-map-marker"></i> <b>Direccion 2: </b> Sin Direccion </div><div class="form-body"><i class="fa fa-globe"></i> <b>Provincia : </b>san salvador<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Ciudad: </b>san salvador<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Pais: </b>El Salvador</div>
 </div>
 </div>
 				
@@ -21,12 +21,12 @@
 						
     </div>
 	<div class="portlet-body form">
-		<div class="form-body"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Nombre:</b> prueba<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Telefono:</b> () 22520882<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fax:</b> <br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fecha de Entrada:</b> 2015-03-13<br><br><div id="prospect_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado:</b> Activo &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectActivate(0 ,10);' value='Desactivar' id='cmd_estado' /></div><br><br><div id="meta_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Arranque Del Prospecto:</b>  En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 , 10);' value='Terminar Proceso' id='cmdmeta_estado' /></div></div>
+		<div class="form-body"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Nombre:</b> Lieison<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Telefono:</b> (503) 22451015<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fax:</b> <br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fecha de Entrada:</b> 2015-03-04<br><br><div id="prospect_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado:</b> Activo &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectActivate(0 ,8);' value='Desactivar' id='cmd_estado' /></div><br><br><div id="meta_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Arranque Del Prospecto:</b> No iniciado &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(0 ,8);' value='Iniciar Proceso' id='cmdmeta_estado' /></div></div>
 	</div>
 </div>
 					<!-- END SAMPLE FORM PORTLET-->
 					<!-- BEGIN SAMPLE FORM PORTLET-->
-					<div class="portlet box blue">
+                        <div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="fa fa-share-square-o"></i>  Redes Sociales
@@ -35,11 +35,23 @@
 						</div>
 						<div class="portlet-body form">
                                                     <form class="form-horizontal" role="form">
-                                                        <div class="form-body"><i  class="fa fa-globe"></i>&nbsp&nbsp<b>Pagina Web: </b><a target="_blank" href="prueba">prueba</a><br><br><i class="fa fa-facebook"></i>&nbsp&nbsp<b>Facebook: </b><a target="_blank" href=""></a><br><br><i class="fa fa-twitter"></i>&nbsp&nbsp<b>Twitter: </b><a target="_blank" href="https://twitter.com/">@</a><br></div>
+                                                        <div class="form-body"><i  class="fa fa-globe"></i>&nbsp&nbsp<b>Pagina Web: </b><a target="_blank" href="Lieison">Lieison</a><br><br><i class="fa fa-facebook"></i>&nbsp&nbsp<b>Facebook: </b><a target="_blank" href="https://www.facebook.com/Lieison?ref=ts&fref=ts">https://www.facebook.com/Lieison?ref=ts&fref=ts</a><br><br><i class="fa fa-twitter"></i>&nbsp&nbsp<b>Twitter: </b><a target="_blank" href="https://twitter.com/lieison">@lieison</a><br></div>
                                                      </form>
 						</div>
 					</div>
-					<!-- END SAMPLE FORM PORTLET-->
+				<div class="portlet box green">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-book"></i> Notas
+							</div>
+							
+						</div>
+						<div class="portlet-body form">
+                                                    <form class="form-horizontal" role="form">
+                                                        <div id="id_notes" class="form-body"><b>No Existen notas</b></div><div class="form-actions"><div class="row"><div id="id_notes_actions" class="col-md-offset-4 col-md-8"><button type="button" onclick="ProspectEditNotes(8);" class="btn blue">Agregar Notas </button></div></div></div>
+                                                     </form>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-6 ">
 					<!-- BEGIN SAMPLE FORM PORTLET-->

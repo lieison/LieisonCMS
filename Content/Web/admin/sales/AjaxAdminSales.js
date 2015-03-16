@@ -108,6 +108,14 @@ function ProspectActivate(status , id_prospect){
               });
 }
 
+function ProspectEditNotes(id_prospect)
+{
+    var notes_html = $('#id_notes').html();
+    if(notes_html === '<b>No Existen notas</b>')
+             notes_html = "";
+   $('#id_notes').html('<textarea class="ckeditor form-control" name="update_notes" id="update_note" rows="6" data-error-container="#editor2_error">' +  notes_html + '</textarea>');
+}
+
 
 
 									

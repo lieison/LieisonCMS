@@ -161,8 +161,22 @@
     $social_info .= "</div>";
      //FIN DE LAS REDES SOCIALES
      
+    //INICIO DE NOTAS
     
-     
+    $notes_title = "Notas";
+    $notes_info = '<div id="id_notes" class="form-body">';
+    $notes_info .= $prospect_data['notas'] ?: "<b>No Existen notas</b>";
+    $notes_info .= '</div>';
+    $notes_info .= '<div class="form-actions"><div class="row">';
+    $notes_info .= '<div id="id_notes_actions" class="col-md-offset-4 col-md-8">';
+    $notes_info .= '<button type="button" onclick="ProspectEditNotes(' . $prospect_data['id_prospect'] . ');" class="btn blue">Agregar Notas </button>';
+    $notes_info .= '</div></div>';
+    $notes_info .= '</div>';
+    
+    //FIN DE NOTAS
+    
+    
+   
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
      $patterns = array(
          "%{script_form}%"=>$script_title,
@@ -172,6 +186,8 @@
          "%{prospect_info}%" => $prospect_info,
          "%{social_title}%" => $social_title,
          "%{social_info}%"=>$social_info,
+         "%{notes_title}%" => $notes_title,
+         "%{notes_info}%"=>$notes_info,
          "%{title_right_form}%" => "",
          "%{right_form}%"=> ""
      );
