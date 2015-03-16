@@ -3,13 +3,16 @@
 /**
  * @author Rolando Arriaza
  * @access public
- * @version 1.0
+ * @version 1.2
  * @since 2015
  * 
  * INCLUDE.PHP
  * SE INCLUIRAN TODOS LOS SCRIPTS DEL PLUGIN 
  * SI REMUEVE ALGUN SCRIPT PUEDE QUE EL PLUGIN NO FUNCIONE COMO DEBE
  * DADO CASO NO FUNCIONE , REVISAR LAS RUTAS DEL SCRIPT
+ * 
+ * NOTA: 
+ *      LOS SCRIPTS DENTRO DE LA CARPETA MODEL Y CONTROLLER SE AGREGARAN AUTOMATICAMENTE
  * 
  */
 
@@ -73,6 +76,8 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/CurlAccess.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/JsonClass.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/JSON.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/Calendar.php';
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/RegexClass.php';
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/UrlClass.php';
 /**
  * LLAMADA DE LAS CLASES EN EL DIRECTORIO VIEW 
  * 
@@ -110,43 +115,53 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Pdf/exportPDF.class.php';
 //require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/GoPaypal.class.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php';
 
- /**
- * Modelos | Models
- *
- * 
- */
- 
- require $GLOBAL_ROOT . $FOLDER . '/Content/Models/SliderModel.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Models/UserModel.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Models/MessageModel.php';
- 
- 
- /**
-        VIEWS O VISTAS
-  *   */
- require $GLOBAL_ROOT . $FOLDER . '/Content/Web/admin/ViewPage/ViewHeader.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/View/ViewClass.php';
-
-/**
- * Controladores | Controllers
- *
- * 
- */
-
-
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/AdminController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/DashboardController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FrontEndController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/FunctionsController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/PageController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/UserController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/ProspectController.php';
- require $GLOBAL_ROOT . $FOLDER . '/Content/Controllers/MessageController.php';
-
 
 /**AGREGANDO PLUGINS**/
 
-require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Plugins/TinyMce/TinyMce.php';
+ $Dir_ = new _Directory();
+ $path_plugins = $Dir_->FindDataDirectory($GLOBAL_ROOT . $FOLDER ."/Content/Class/Plugins/" , 
+         array("name"=>"index" , "extend"=> "php" ,  "pattern"=>false));
+ foreach ($path_plugins as $k=>$val)
+ {
+     require $val['root'] . '/' . $val['filename'];
+ }
+
+/**
+ * Modelos | Models
+ */
+ $Dir_ = new _Directory();
+ $path_model = $Dir_->FindDataDirectory($GLOBAL_ROOT . $FOLDER ."/Content/Models/");
+ foreach ($path_model as $k=>$val)
+ {
+     require $val['root'] . '/' . $val['filename'];
+ }
+
+ 
+ /**
+  * View del sistema
+  */
+ 
+  require $GLOBAL_ROOT . $FOLDER . '/Content/View/ViewClass.php';
+ 
+  
+  
+ /**
+ * Controladores | Controllers
+ */
+$Dir_ = new _Directory();
+$path_controller = $Dir_->FindDataDirectory($GLOBAL_ROOT . $FOLDER ."/Content/Controllers/");
+foreach ($path_controller as $k=>$val)
+{
+     require $val['root'] . '/' . $val['filename'];
+}
+
+  
+ /**
+  * ACA SE AGREGARAN LOS SCRIPTS FUERA DEL NUCLEO DEL SISTEMA ...
+  * **/
+  
+ require $GLOBAL_ROOT . $FOLDER . '/Content/Web/admin/ViewPage/ViewHeader.php';
+
 
 
 ?>

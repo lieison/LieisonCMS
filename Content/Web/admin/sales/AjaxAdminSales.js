@@ -49,7 +49,75 @@ function cargar_prospectos()
 }
 
 
-									
+function ProspectInitProcess(meta_estado , id_prospect)
+{
+      var flag = false;
+    
+      var parametros = {
+          "meta_estado" : meta_estado,
+          "id_prospect" : id_prospect
+      };
+    
+      if(meta_estado ===1 )
+      {
+         bootbox.confirm("¿Desea Terminar el Proceso ... Una vez terminado bla bla?", function(result) {
+               flag = result;
+        }); 
+      }
+      else{
+          flag = true;
+      }
+      
+      if(flag===true){
+       $.ajax({
+                      type: "POST",
+                      url: "get_prospectos.php",
+                      data: parametros,
+                      beforeSend: function()
+                      {
+                          $("#meta_estado").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
+                      },
+                      success: function(value){
+                          $("#meta_estado").html(value);
+                      }
+              });
+       }
+      
+}
+
+
+
+function ProspectActivate(status , id_prospect){
+     var parametros = {
+          "estado" : status,
+          "id_prospect" : id_prospect
+      };
+    
+    
+    $.ajax({
+                      type: "POST",
+                      url: "get_prospectos.php",
+                      data: parametros,
+                      beforeSend: function()
+                      {
+                          $("#prospect_estado").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
+                      },
+                      success: function(value){
+                          $("#prospect_estado").html(value);
+                      }
+              });
+}
+
+function ProspectEditNotes(id_prospect)
+{
+    var notes_html = $('#id_notes').html();
+    if(notes_html === '<b>No Existen notas</b>')
+             notes_html = "";
+   $('#id_notes').html('<textarea class="ckeditor form-control" name="update_notes" id="update_note" rows="6" data-error-container="#editor2_error">' +  notes_html + '</textarea>');
+}
+
+
+
 									
 									
                                                                                    

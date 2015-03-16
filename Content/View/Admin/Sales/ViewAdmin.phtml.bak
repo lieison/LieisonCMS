@@ -1,237 +1,57 @@
+%{script_form}%
+
 <div class="row">
-    <div class="col-md-6 ">
+<div class="col-md-6 ">
 <div class="portlet box blue">
 <div class="portlet-title">
 <div class="caption">
-  <i class="fa fa-globe"></i> %{prospecto}%
+  <i class="fa fa-globe"></i> %{title_dir_prospecto}%
  </div>
 </div>
 <div class="portlet-body form">
-    %{cuerpo_prospecto}%
+    %{dir_prospecto}%
 </div>
 </div>
 				
 <div class="portlet box red">
     <div class="portlet-title">
 		<div class="caption">
-                    <i class="fa fa-gift"></i> Default Form Height Sizing
+                   <i class="fa fa-building-o"></i> %{title_info}%
 		</div>
 						
     </div>
 	<div class="portlet-body form">
-		<form role="form">
-								
-		</form>
+		%{prospect_info}%
 	</div>
 </div>
 					<!-- END SAMPLE FORM PORTLET-->
 					<!-- BEGIN SAMPLE FORM PORTLET-->
-					<div class="portlet box blue">
+                        <div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-gift"></i> Form Input Width Sizing
+								<i class="fa fa-share-square-o"></i> %{social_title}%
 							</div>
-							<div class="tools">
-								<a href="" class="collapse">
-								</a>
-								<a href="#portlet-config" data-toggle="modal" class="config">
-								</a>
-								<a href="" class="reload">
-								</a>
-								<a href="" class="remove">
-								</a>
-							</div>
+							
 						</div>
 						<div class="portlet-body form">
-							<form role="form">
-								<div class="form-body">
-									<div class="form-group">
-										<label>Fluid Input</label>
-										<input type="text" class="form-control" placeholder="fluid">
-										<div class="input-icon right margin-top-10">
-											<i class="fa fa-check"></i>
-											<input type="text" class="form-control" placeholder="fluid">
-										</div>
-										<div class="input-icon margin-top-10">
-											<i class="fa fa-user"></i>
-											<input type="text" class="form-control" placeholder="fluid">
-										</div>
-										<div class="input-group margin-top-10">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-											<input type="email" class="form-control" placeholder=".input-xlarge">
-										</div>
-										<div class="input-group margin-top-10">
-											<input type="email" class="form-control" placeholder=".input-xlarge">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-										</div>
-										<hr>
-									</div>
-									<div class="form-group">
-										<label>Extra Large Input</label>
-										<input type="text" class="form-control input-xlarge" placeholder=".input-xlarge">
-										<div class="input-icon right input-xlarge margin-top-10">
-											<i class="fa fa-check"></i>
-											<input type="text" class="form-control" placeholder=".input-xlarge">
-										</div>
-										<div class="input-icon input-xlarge margin-top-10">
-											<i class="fa fa-user"></i>
-											<input type="text" class="form-control" placeholder=".input-xlarge">
-										</div>
-										<div class="input-group input-xlarge margin-top-10">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-											<input type="email" class="form-control" placeholder=".input-xlarge">
-										</div>
-										<div class="input-group input-xlarge margin-top-10">
-											<input type="email" class="form-control" placeholder=".input-xlarge">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-										</div>
-										<hr>
-									</div>
-									<div class="form-group">
-										<label>Large Input</label>
-										<input type="text" class="form-control input-large" placeholder=".input-large">
-										<div class="input-icon right input-large margin-top-10">
-											<i class="fa fa-check"></i>
-											<input type="text" class="form-control" placeholder=".input-large">
-										</div>
-										<div class="input-icon input-large margin-top-10">
-											<i class="fa fa-user"></i>
-											<input type="text" class="form-control" placeholder=".input-large">
-										</div>
-										<div class="input-group input-large margin-top-10">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-											<input type="email" class="form-control" placeholder=".input-large">
-										</div>
-										<div class="input-group input-large margin-top-10">
-											<input type="email" class="form-control" placeholder=".input-large">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-										</div>
-										<hr>
-									</div>
-									<div class="form-group">
-										<label>Medium Input</label>
-										<input type="text" class="form-control input-medium" placeholder=".input-medium">
-										<div class="input-icon right input-medium margin-top-10">
-											<i class="fa fa-check"></i>
-											<input type="text" class="form-control" placeholder=".input-medium">
-										</div>
-										<div class="input-icon input-medium margin-top-10">
-											<i class="fa fa-user"></i>
-											<input type="text" class="form-control" placeholder=".input-medium">
-										</div>
-										<div class="input-group input-medium margin-top-10">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-											<input type="email" class="form-control" placeholder=".input-medium">
-										</div>
-										<div class="input-group input-medium margin-top-10">
-											<input type="email" class="form-control" placeholder=".input-medium">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-										</div>
-										<hr>
-									</div>
-									<div class="form-group">
-										<label>Small Input</label>
-										<input type="text" class="form-control input-small" placeholder=".input-small">
-										<div class="input-icon right input-small margin-top-10">
-											<i class="fa fa-check"></i>
-											<input type="text" class="form-control" placeholder=".input-small">
-										</div>
-										<div class="input-icon input-small margin-top-10">
-											<i class="fa fa-user"></i>
-											<input type="text" class="form-control" placeholder=".input-small">
-										</div>
-										<div class="input-group input-small margin-top-10">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-											<input type="email" class="form-control" placeholder=".input-small">
-										</div>
-										<div class="input-group input-small margin-top-10">
-											<input type="email" class="form-control" placeholder=".input-small">
-											<span class="input-group-addon">
-											<i class="fa fa-envelope"></i>
-											</span>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Extra Small Input</label>
-										<input type="text" class="form-control input-xsmall" placeholder=".input-xsmall">
-									</div>
-									<div class="form-group">
-										<label>Extra Large Select</label>
-										<select class="form-control input-xlarge">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-											<option>Option 5</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Large Select</label>
-										<select class="form-control input-large">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-											<option>Option 5</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Medium Select</label>
-										<select class="form-control input-medium">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-											<option>Option 5</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Small Select</label>
-										<select class="form-control input-small">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-											<option>Option 5</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>Extra Small Select</label>
-										<select class="form-control input-xsmall">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-											<option>Option 4</option>
-											<option>Option 5</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-actions right">
-									<button type="button" class="btn default">Cancel</button>
-									<button type="submit" class="btn green">Submit</button>
-								</div>
-							</form>
+                                                    <form class="form-horizontal" role="form">
+                                                        %{social_info}%
+                                                     </form>
 						</div>
 					</div>
-					<!-- END SAMPLE FORM PORTLET-->
+				<div class="portlet box green">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-book"></i> %{notes_title}%
+							</div>
+							
+						</div>
+						<div class="portlet-body form">
+                                                    <form class="form-horizontal" role="form">
+                                                        %{notes_info}%
+                                                     </form>
+						</div>
+					</div>
 				</div>
 				<div class="col-md-6 ">
 					<!-- BEGIN SAMPLE FORM PORTLET-->
@@ -243,7 +63,6 @@
 						</div>
 						<div class="portlet-body form">
                                                     %{right_form}%      
-		
 						</div>
 					</div>
 					<!-- END SAMPLE FORM PORTLET-->
@@ -1079,3 +898,6 @@
 					</div>
 				</div>
 			</div>
+<div id="dialog-confirm" title="Empty the recycle bin?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+</div>

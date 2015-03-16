@@ -5,7 +5,7 @@
       /**
        *@author Rolando <rmarroquin@lieison.com>
        *@version 1.1
-       *@copyright (c) Lieison, Working Together
+       *@copyright (c) SV API 2014
        *@since 1.1, index.php
        */
 

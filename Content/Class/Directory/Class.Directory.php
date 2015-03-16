@@ -3,13 +3,12 @@
 
 class _Directory {
     
-    var $array_dir = array();
     
+    /*@var arreglo de rutas de direccion*/
+    protected $array_dir = array();
+    /*@var arreglo de acrhivos de direccion*/
     protected $array_file = array();
     
-    public function __construct() {
-        
-    }
     
     public function Get_Extension($file)
     {
@@ -88,6 +87,8 @@ class _Directory {
     
     public function Get_UploadFiles(){ return $this->array_file; }
     
+    
+    
     /**
      *@version 1.0
      *@author Rolando Arriaza , ultima version
@@ -101,7 +102,7 @@ class _Directory {
      * 
      *   busca archivos con el nombre inicial dashboard y extencion php
      *   $pattern = array("name"=>"dashboard" , "extend"=>"php");
-
+            $pattern = array("name"=>"dashboard" , "extend"=>"php" , "pattern"=>false);
      * </code>
      *@return bool | array false si no existe directorio 
      */
@@ -135,9 +136,16 @@ class _Directory {
             
             if(is_array($pattern))
             {
-                 $p = $pattern["name"];
-                 $ext = $pattern["extend"];
-                 $preg = "/^($p\w+\.$ext)$/";
+                if(isset($pattern['pattern']))
+                {
+                    $p = $pattern["name"];
+                    $ext = $pattern["extend"];
+                    $preg = "/^($p\.$ext)$/";
+                }else{
+                    $p = $pattern["name"];
+                    $ext = $pattern["extend"];
+                    $preg = "/^($p\w+\.$ext)$/";
+                }
             }
             else
             {
