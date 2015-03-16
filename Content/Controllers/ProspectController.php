@@ -154,6 +154,23 @@ class ProspectController extends MysqlConection {
     }
     
     
+    public function Get_ProspectProgress($id_prospect)
+    {
+        $this->QUERY = "SELECT nombre , direccion , direccion2 , provincia , ciudad , id_pais "
+                . ", zip , telefono , fax , pagina_web , email , facebook , twitter , notas FROM sales_prospect"
+                . " WHERE id_prospect LIKE $id_prospect";
+        $result = parent::RawQuery($this->QUERY);
+        $total = count($result[0]);
+        $empty = 0;
+        foreach ($result[0] as $value){
+            if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($value)){
+                $empty += 1;
+            }
+        }
+        return round(($empty/$total)*100, 2);
+    }
+    
+    
     
     public function Get_ContactProspect($id)
     {

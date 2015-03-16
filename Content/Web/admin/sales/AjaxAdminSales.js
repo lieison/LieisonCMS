@@ -1,12 +1,19 @@
 
 
-function buscar_prospecto()
+function buscar_prospecto(id_prospect)
 {
+    var id = "";
     
-    var id = document.getElementById('propecto_buscar').value;
-    if(id === -1){
+    if(id_prospect != null )
+    {
+        id = id_prospect;
+    }
+    else{
+       id = document.getElementById('propecto_buscar').value;
+       if(id === -1){
         alert("SELECCIONE UN PROSPECTO POR FAVOR ....");
-        return null;
+            return null;
+        }
     }
     
     var parametros = {
@@ -153,6 +160,9 @@ function CancelNotes(id_prospect){
     $('#id_notes').html( document.getElementById('update_note').value);
     $('#id_notes_actions').html('<button type="button" onclick="ProspectEditNotes(' + id_prospect + ');" class="btn blue">Agregar Notas </button>');
 }
+
+
+
 
 
 
