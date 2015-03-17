@@ -43,7 +43,7 @@ class ProspectController extends MysqlConection {
      */
     public function Find_Prospect($prospect_name)
     {
-        $this->QUERY = "SELECT count(*) as contador FROM sales_prospect WHERE nombre LIKE '$prospect_name%'";
+        $this->QUERY = "SELECT count(*) as contador FROM sales_prospect WHERE nombre LIKE '%$prospect_name%'";
         $result = parent::RawQuery($this->QUERY);
         if($result)
         {
@@ -151,6 +151,23 @@ class ProspectController extends MysqlConection {
     
     public function Set_NewNotes($notes , $id_prospect){
         return parent::Update("sales_prospect", array("notas"=>$notes ) , "id_prospect LIKE $id_prospect");
+    }
+    
+    
+    public function Get_ProspectProgress($id_prospect)
+    {
+        $this->QUERY = "SELECT nombre , direccion , direccion2 , provincia , ciudad , id_pais "
+                . ", zip , telefono , fax , pagina_web , email , facebook , twitter , notas FROM sales_prospect"
+                . " WHERE id_prospect LIKE $id_prospect";
+        $result = parent::RawQuery($this->QUERY);
+        $total = count($result[0]);
+        $empty = 0;
+        foreach ($result[0] as $value){
+            if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($value)){
+                $empty += 1;
+            }
+        }
+        return round(($empty/$total)*100, 2);
     }
     
     

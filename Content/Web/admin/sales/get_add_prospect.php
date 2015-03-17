@@ -65,7 +65,7 @@
 <input type="hidden" value="<?php echo $_REQUEST['txt_web']; ?>" id="web"  />
 <input type="hidden" value="<?php echo $fb; ?>" id="facebook"  />
 <input type="hidden" value="<?php echo $tw; ?>" id="twitter"  />
-<input type="hidden" value="<?php echo $_REQUEST['txt_notas']; ?>" id="notas"  />
+<input type="hidden" value="<?php echo htmlspecialchars($_REQUEST['txt_notas'] , ENT_QUOTES); ?>" id="notas"  />
 
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
@@ -235,7 +235,7 @@
    var guardar_prospecto = function()
    {
        
-       
+      
        var n = document.getElementById("nombre").value;
        var d = document.getElementById("direccion1").value;
        var d2 = document.getElementById("direccion2").value;
@@ -255,8 +255,8 @@
        
        var fb = document.getElementById("facebook").value;
        var tw = document.getElementById("twitter").value;
+          
        var nt = document.getElementById("notas").value;
-       
        
         
            var parametros = {
@@ -291,6 +291,7 @@
                           $("#guardando_p").html("");
                           $("#guardando_loading").html("<img src='../img/assert/checkok.png' width='100' height='100' />");
                           $("#save_ok").html( '<a href="#"  data-type="text" data-pk="1" data-original-title="Enter username">Prospecto Guardado </a>: <a href="dashboard_add_prospecto.php">Agregar Otro</a>.');
+                          setTimeout('redirect_();' , 1000);
                       }
               });
        
@@ -301,6 +302,12 @@
 
    
 });
+function redirect_()
+                          {
+                             
+                              window.location.replace("../sales/dashboard_admin_prospecto.php");
+                          }
+
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

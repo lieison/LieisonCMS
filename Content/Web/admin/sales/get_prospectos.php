@@ -75,7 +75,8 @@
          $prospect_body_dir .= '<div class="form-body"><i class="fa fa-map-marker"></i> <b>Direccion 2: </b>' . $prospect_data['direccion2']  . '</div>';
      }
      
-    
+     $title_dir = "Direccion " ;
+     $action_button = '' ;
      $pais = $sales->Get_Country($prospect_data['id_pais']); //obtiene el pais
      $prospect_body_dir .= '<div class="form-body"><i class="fa fa-globe"></i> <b>Provincia : </b>' . 
              $prospect_data['provincia']  . 
@@ -83,27 +84,17 @@
               '<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Pais: </b>' . $pais .'</div>';//agrega los datos de la direccion
      
      
-     
-     $field_count = count($prospect_data) - 4; //cuenta los campos necesarios para completar el perfil
-     $field_empty = 0;//campos vacios
-    
-     
-     foreach($prospect_data as $k)
-     {
-         if(SivarApi\Tools\Validation::Is_Empty_OrNull($k)){
-             $field_empty += 1;
-         }
-     }//verifica cuantos campos vacios hay 
-      
-     //si existen campos vacios dara un procentaje de progreso
-     $complete_profile = "(Perfil Completado:  " . round((($field_empty/$field_count) * 100), 2) . "%)";
-     if($complete_profile >= 100){
+     //perfil o progreso del prospecto completado
+     $propect_progress = $sales->Get_ProspectProgress($prospect_data['id_prospect']);
+     $complete_profile = "(Perfil Completado:  " . $propect_progress . "%)";
+     if($propect_progress >= 100){
          $complete_profile = "";
      }//si esta al 100% el progreso desaparece
      
      //cambia el titulo del dashboard por el nombre del prospecto , agrega el perfil completado
+     $action_edit =  '<a class="btn red"  href="../sales/dashboard_edit_prospecto.php?id=' . $prospect_data['id_prospect']  . '"' . '>Editar Prospecto</a>' ;
      $script_title = "<script>$('#id_title').html('<p><b>" . strtoupper($prospect_data['nombre']) . "</b>"
-             . "&nbsp&nbsp <small>" . $complete_profile . "</small></p>');</script>";
+             . "&nbsp&nbsp " . $action_edit . " <small>" . $complete_profile . "</small>" . "</p>');</script>";
 
      /*INICIO DE LA INFORMACION DEL PROSPECTO */
      $title_info = "Informacion Del Prospecto";
@@ -176,11 +167,11 @@
     //FIN DE NOTAS
     
     //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES
-     $action_title = "Acciones";
+     $action_title = "Bitacora";
      $action_form = '<div class="form-body">'; 
      $action_form .= '<div class="form-actions">';
      $action_form .= '<div class="col-md-offset-4 col-md-8">';
-     $action_form .= '<a href="" target="_blank" class="btn blue" >Editar</a>';
+     $action_form .= '';
      $action_form .= '</div>';
      $action_form .= '</div>';
      $action_form .= '</div>';
@@ -191,7 +182,8 @@
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
      $patterns = array(
          "%{script_form}%"=>$script_title,
-         "%{title_dir_prospecto}%" => "Direccion " ,
+         "%{title_dir_prospecto}%" => $title_dir,
+         "%{action_button}%" => $action_button,
          "%{dir_prospecto}%" => $prospect_body_dir,
          "%{title_info}%" => $title_info,
          "%{prospect_info}%" => $prospect_info,

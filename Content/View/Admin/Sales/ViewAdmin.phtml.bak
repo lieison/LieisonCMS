@@ -7,6 +7,9 @@
 <div class="caption">
   <i class="fa fa-globe"></i> %{title_dir_prospecto}%
  </div>
+<div class="tools">
+%{action_button}%
+</div>
 </div>
 <div class="portlet-body form">
     %{dir_prospecto}%
@@ -58,7 +61,7 @@
 					<div class="portlet box green ">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-info"></i> %{title_action_form}%
+								<i class="fa fa-book"></i> %{title_action_form}%
 							</div>
 						</div>
 						<div class="portlet-body form">
@@ -70,7 +73,7 @@
 					<div class="portlet box purple ">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-gift"></i> Horizontal Form Height Sizing
+								<i class="fa fa-phone"></i> %{title_phone}%
 							</div>
 							<div class="tools">
 								<a href="" class="collapse">
