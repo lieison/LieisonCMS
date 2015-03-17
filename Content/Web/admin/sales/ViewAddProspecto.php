@@ -65,7 +65,7 @@
 												<span class="input-group-addon">
 												<i class="fa fa-inbox"></i>
 												</span>
-                                                                                             <input type="text" name="txt_zip" class="form-control" placeholder="+503">
+                                                                                             <input type="text" value="503" name="txt_zip" class="form-control" placeholder="+503">
 				
                                                                                         </div>
                                                                                         

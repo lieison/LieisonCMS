@@ -43,7 +43,7 @@ class ProspectController extends MysqlConection {
      */
     public function Find_Prospect($prospect_name)
     {
-        $this->QUERY = "SELECT count(*) as contador FROM sales_prospect WHERE nombre LIKE '$prospect_name%'";
+        $this->QUERY = "SELECT count(*) as contador FROM sales_prospect WHERE nombre LIKE '%$prospect_name%'";
         $result = parent::RawQuery($this->QUERY);
         if($result)
         {
