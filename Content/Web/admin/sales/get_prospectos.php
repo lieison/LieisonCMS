@@ -204,15 +204,18 @@
          $contact = $paginacion->GetPagination();
          $nav = $paginacion->Getnavigate();        
          foreach ($contact as $c_k=>$c_v){
-              $id_contact = $c_v['id_prospect_contact'];
+             
+             $id_contact = $c_v['id_prospect_contact'];
               $phone_contact = $sales->Get_PhonesContact($id_contact);
               $json_phone_contact = null;
+              
               if(count($phone_contact) != 0){
                  $json_class = new SivarApi\Tools\Services_JSON();
                  $json_phone_contact  =$json_class->encode($phone_contact);
-                 //$json_phone_contact = str_replace("[", "", $json_phone_contact);
-                // $json_phone_contact = str_replace("]", "", $json_phone_contact);
+              }else{
+                  $id_contact = $prospect_data['id_prospect'];
               }
+              
               
               $body_contact .= "<input type='hidden' name='" . $id_contact . "' id='" . $id_contact . "' value='" . $json_phone_contact . "' />";
               $body_contact .= '<tr class="odd gradeX">';
@@ -227,6 +230,7 @@
          }
          $body_contact .= "</tbody>";
      }
+     $nav = null; //ahorita la navegacion estara desactivada
      $body_contact .= '</table><div class="form-actions">' . $nav ?: "" . '</div>';
     //FIN SISTEMA DE AGENDA
     
