@@ -165,6 +165,8 @@ function CancelNotes(id_prospect){
 function ProspectPhones(contacts)
 {
     var data_contact =$("#" + contacts).val();
+    
+    alert(data_contact);
     var data_message = '';
         data_message += '<table class="table table-hover">';
         data_message += '<thead>';
