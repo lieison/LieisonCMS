@@ -162,6 +162,50 @@ function CancelNotes(id_prospect){
 }
 
 
+function ProspectPhones(contacts)
+{
+    var data_contact =$("#" + contacts).val();
+    var data_message = '';
+        data_message += '<table class="table table-hover">';
+        data_message += '<thead>';
+        data_message += '<tr>';
+        data_message += '<th>Contacto</th>';
+        data_message += '<th>Telefono</th>';
+        data_message += '<th></th>';
+        data_message += '</tr></thead><tbody>';
+        
+   var decode_  = eval('(' + data_contact  + ')');   
+   $.each(decode_, function(k,v){
+        data_message += '<tr>';
+        data_message += '<td>' + v.phone_name + '</td>';
+        data_message += '<td>' + v.number + '</td>';
+        data_message += '<td><button onclick="EditPhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-pencil"></i></button>';
+         data_message += '<button onclick="DeletePhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-trash-o"></i></button></td>';
+        data_message += '</tr>';
+    });     
+
+    data_message += '</tbody></table>';
+    bootbox.dialog({
+        title: "Agenda",
+        message: data_message
+    });
+    
+}
+
+function EditPhone(id_phone)
+{
+    alert();
+}
+
+
+function DeletePhone(id_phone)
+{
+    alert();
+}
+
+
+
+
 
 
 

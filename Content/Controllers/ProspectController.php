@@ -18,14 +18,13 @@
  * 
  */
 
-
-
 class ProspectController extends MysqlConection {
     
     /**
      * VARIABLE QUERY PROTEGIDA
      */
     protected  $QUERY = null;
+    protected $CONTACT_COUNT = 0;
             
     /**
      * CONSTRUCTOR HERENCIA PADRE MYSQLCONECTION
@@ -136,19 +135,28 @@ class ProspectController extends MysqlConection {
     }
     
     
-    /**
+   /**
      *@author Rolando Antonio Arriaza
      *@version 0.1
      *@todo establece el estado (activo->1 , inactivo->0)
      *@param string $id_coutry
      *@return bool
-     */
+     */ 
     public function Set_Estatus($new_status , $id_prospect)
     {
          return parent::Update("sales_prospect", array("estado"=>$new_status ) , "id_prospect LIKE $id_prospect");
     }
     
     
+      
+   /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo actualiza las notas del contacto
+     *@param string $notes las notas dentro del textarea o textbox
+    * @param string $id_prospect id del prospecto
+     *@return bool
+     */ 
     public function Set_NewNotes($notes , $id_prospect){
         return parent::Update("sales_prospect", array("notas"=>$notes ) , "id_prospect LIKE $id_prospect");
     }
@@ -171,13 +179,28 @@ class ProspectController extends MysqlConection {
     }
     
     
+    /**
+     * SALES CONTACT 
+     */
     
-    public function Get_ContactProspect($id)
+    
+    public function Get_ContactProspect($id_prospect)
     {
-        
+        $this->QUERY = "SELECT * FROM  sales_prospect_contact WHERE id_prospect LIKE $id_prospect";
+        $result = parent::RawQuery($this->QUERY);
+        $this->CONTACT_COUNT = count($result);
+        return $result;
     }
     
     
+    public function Get_ContactCount(){
+        return $this->CONTACT_COUNT;
+    }
     
+    public function Get_PhonesContact($id_contact){
+        $this->QUERY = "SELECT * FROM sales_phone_contact WHERE id_prospect_contact LIKE $id_contact";
+        return parent::RawQuery($this->QUERY);
+    }
+
     
 }

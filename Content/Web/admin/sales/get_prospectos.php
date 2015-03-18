@@ -166,7 +166,7 @@
     
     //FIN DE NOTAS
     
-    //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES
+    //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
      $action_title = "Bitacora";
      $action_form = '<div class="form-body">'; 
      $action_form .= '<div class="form-actions">';
@@ -176,7 +176,59 @@
      $action_form .= '</div>';
      $action_form .= '</div>';
      
-    //FIN DE TODAS LAS ACCIONES
+    //FIN DE TODAS LAS ACCIONES BITACORA
+     
+     
+     
+    //INICIO DEL SISTEMA AGENDA
+     $title_contact = "Contactos ";
+     $body_contact .= '<br><table class="table table-striped table-bordered table-hover">';
+     $nav = null;
+     $contact = $sales->Get_ContactProspect($prospect_data['id_prospect']);
+     if($sales->Get_ContactCount() == 0){
+         $body_contact .= ' <thead> <tr><th></th></tr></thead>';
+         $body_contact .= ' <tbody><tr class="odd gradeX"><td><span class="label label-warning">No tienes Contactos</span></td></tr></tbody>';
+     }
+     else{
+         $body_contact .= '<th>Nombres</th>';
+         $body_contact .= '<th>Titulo</th>';
+         $body_contact .= '<th>E-mail</th>';
+         $body_contact .= '<th>Notas</th>';
+         $body_contact .= '<th></th>';
+         $body_contact .= '</tr></thead>';
+         $body_contact .= "<tbody>";
+         
+         $paginacion  = new BasePagination();
+         $paginacion->porPagina(1);
+         $paginacion->SetPagArrayData($contact);
+         $contact = $paginacion->GetPagination();
+         $nav = $paginacion->Getnavigate();        
+         foreach ($contact as $c_k=>$c_v){
+              $id_contact = $c_v['id_prospect_contact'];
+              $phone_contact = $sales->Get_PhonesContact($id_contact);
+              $json_phone_contact = null;
+              if(count($phone_contact) != 0){
+                 $json_class = new SivarApi\Tools\Services_JSON();
+                 $json_phone_contact  =$json_class->encode($phone_contact);
+                 //$json_phone_contact = str_replace("[", "", $json_phone_contact);
+                // $json_phone_contact = str_replace("]", "", $json_phone_contact);
+              }
+              
+              $body_contact .= "<input type='hidden' name='" . $id_contact . "' id='" . $id_contact . "' value='" . $json_phone_contact . "' />";
+              $body_contact .= '<tr class="odd gradeX">';
+              $body_contact .= "<td>" . $c_v['nombres'] . " " . $c_v['apellidos'] . "</td>";
+              $body_contact .= "<td>" . $c_v['titulo'] .  "</td>";
+              $body_contact .= "<td>" . $c_v['email'] . "</td>";
+              $body_contact .= "<td>" . $c_v['notas'] . "</td>";
+              $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn orange"><i class="fa fa-phone"></i></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="" class="btn orange"><i class="fa fa-pencil"></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="" class="btn red"><i class="fa fa-trash-o"></i></button>'  .  "</td>";
+              $body_contact .= '</tr>'; 
+         }
+         $body_contact .= "</tbody>";
+     }
+     $body_contact .= '</table><div class="form-actions">' . $nav ?: "" . '</div>';
+    //FIN SISTEMA DE AGENDA
     
    
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
@@ -192,7 +244,9 @@
          "%{notes_title}%" => $notes_title,
          "%{notes_info}%"=>$notes_info,
          "%{title_action_form}%" => $action_title,
-         "%{action_form}%"=> $action_form
+         "%{action_form}%"=> $action_form, 
+         "%{title_contact}%"=> $title_contact,
+         "%{body_contact}%"=> $body_contact
      );
      
      
