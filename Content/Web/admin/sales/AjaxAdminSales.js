@@ -168,30 +168,7 @@ function ProspectPhones(contacts)
     var data_message = '';
     
     if(data_contact === ""){
-        
-         data_message += '<table class="table table-hover">';
-         data_message += '<thead>';
-         data_message += '<tr><th></th><th></th></tr>';
-         data_message += '</thead>';
-         data_message += '<tbody>';
-         data_message += '<tr><td><label class="col-md-4 control-label" for="name">Contacto</label>';
-         data_message += '<input id="phone_name" name="phone_name" type="text" placeholder="Nombre contacto" class="form-control input-md"></td>';
-         data_message += '<td><label class="col-md-4 control-label" for="name">Telefono</label>';
-         data_message += '<input id="phone_number" name="phone_number" type="text" placeholder="El numero telefonico" class="form-control input-md"></td>';
-         data_message += '</td></tr></tbody>';
-         data_message += '</table>';
-         bootbox.dialog({
-            title: "Guardar Telefono ",
-            message: data_message,
-            buttons:{
-                success: {
-                    label: "Guardar",
-                    className: "btn-success",
-                        callback: function() {
-                        
-                    }
-                }}
-        }); 
+           NewContact(contacts); 
     }
     else{
         
@@ -221,6 +198,35 @@ function ProspectPhones(contacts)
         }); 
     }   
    
+}
+
+
+function NewContact(id_prospect)
+{
+         var data_message = '';
+         data_message += '<table class="table table-hover">';
+         data_message += '<thead>';
+         data_message += '<tr><th></th><th></th></tr>';
+         data_message += '</thead>';
+         data_message += '<tbody>';
+         data_message += '<tr><td><label class="col-md-4 control-label" for="name">Contacto</label>';
+         data_message += '<input id="phone_name" name="phone_name" type="text" placeholder="Nombre contacto" class="form-control input-md"></td>';
+         data_message += '<td><label class="col-md-4 control-label" for="name">Telefono</label>';
+         data_message += '<input id="phone_number" name="phone_number" type="text" placeholder="El numero telefonico" class="form-control input-md"></td>';
+         data_message += '</td></tr></tbody>';
+         data_message += '</table>';
+         bootbox.dialog({
+            title: "Guardar Telefono ",
+            message: data_message,
+            buttons:{
+                success: {
+                    label: "Guardar",
+                    className: "btn-success",
+                        callback: function() {
+                        
+                    }
+                }}
+        }); 
 }
 
 
