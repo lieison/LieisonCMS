@@ -224,6 +224,7 @@
               $body_contact .= "<td>" . $c_v['email'] . "</td>";
               $body_contact .= "<td>" . $c_v['notas'] . "</td>";
               $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn orange"><i class="fa fa-phone"></i></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="NewContact(' . $prospect_data['id_prospect'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";
               $body_contact .= "" . '<button type="button" onclick="" class="btn orange"><i class="fa fa-pencil"></i></button>'  .  "";
               $body_contact .= "" . '<button type="button" onclick="" class="btn red"><i class="fa fa-trash-o"></i></button>'  .  "</td>";
               $body_contact .= '</tr>'; 
