@@ -20,7 +20,7 @@
 							</div>
 						</div>
 						<div class="portlet-body form">
-                                                    <form class="form-horizontal" role="form" action="get_add_prospect.php" method="get">
+                                                    <form class="form-horizontal" role="form" action="get_edit_prospect.php" method="get">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Nombre del Prospecto *</label>
@@ -179,7 +179,7 @@
 								<div class="form-actions">
 									<div class="row">
 										<div class="col-md-offset-3 col-md-9">
-                                                                                    <button type="submit" name="cmd_enviar" id="cmd_enviar" class="btn green">Guardar Prospecto</button>
+                                                                                    <button type="submit" name="cmd_enviar" id="cmd_enviar" class="btn green">Editar Prospecto</button>
                                                                                     <label class=" control-label alert-warning" id="txt_error"></label>
 										</div>
 									</div>

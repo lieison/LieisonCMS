@@ -26,7 +26,7 @@
                 fjs.parentNode.insertBefore(js, fjs);
         }(document, "script", "facebook-jssdk"));</script>';
     
-    $footer = '   var get_paises = function()
+    $footer = 'var get_paises = function()
    {
         $.ajax({
                       type: "POST",
@@ -53,8 +53,6 @@
 
 
     $rol = $_SESSION['login']['rol'];
-    
-    
     $adminc = new AdminController();
     $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
     
