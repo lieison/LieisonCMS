@@ -36,7 +36,7 @@
                                                                                     </div>
                                                                                        <?php else: ?>
                                                                                         <p><img src="../img/assert/logos/LogoA.png" /></p>
-                                                                                        <div class="alert alert-success" role="alert">Computando .. Espere por favor</div>
+                                                                                        <div class="alert alert-success" role="alert">CARGANDO , ESPERE POR FAVOR ...</div>
                                                                                      <?php endif; ?>
 										</div>
                                                                                 
