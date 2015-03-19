@@ -168,7 +168,7 @@ function ProspectPhones(contacts)
     var data_message = '';
     
     if(data_contact === ""){
-           NewContact(contacts); 
+           NewPhoneContact(contacts); 
     }
     else{
         
@@ -201,7 +201,7 @@ function ProspectPhones(contacts)
 }
 
 
-function NewContact(id_prospect)
+function NewPhoneContact(id_prospect)
 {
          var data_message = '';
          data_message += '<table class="table table-hover">';
@@ -229,6 +229,22 @@ function NewContact(id_prospect)
         }); 
 }
 
+function NewContact()
+{
+   alert();
+}
+
+function EditContact(id)
+{
+     var contact =$("#" + id).val();
+     alert(contact);
+}
+
+function DeleteContact(id)
+{
+   var contact =$("#" + id).val();
+   alert(contact);
+}
 
 
 

@@ -92,7 +92,7 @@
      }//si esta al 100% el progreso desaparece
      
      //cambia el titulo del dashboard por el nombre del prospecto , agrega el perfil completado
-     $action_edit =  '<a class="btn red"  href="../sales/dashboard_edit_prospecto.php?id=' . $prospect_data['id_prospect']  . '"' . '>Editar Prospecto</a>' ;
+     $action_edit =  '<a class="btn blue"  href="../sales/dashboard_edit_prospecto.php?id=' . $prospect_data['id_prospect']  . '"' . '><i class="fa fa-pencil"></i></a>' ;
      $script_title = "<script>$('#id_title').html('<p><b>" . strtoupper($prospect_data['nombre']) . "</b>"
              . "&nbsp&nbsp " . $action_edit . " <small>" . $complete_profile . "</small>" . "</p>');</script>";
 
@@ -205,18 +205,20 @@
          $nav = $paginacion->Getnavigate();        
          foreach ($contact as $c_k=>$c_v){
              
-             $id_contact = $c_v['id_prospect_contact'];
+              $id_contact = $c_v['id_prospect_contact'];
               $phone_contact = $sales->Get_PhonesContact($id_contact);
               $json_phone_contact = null;
               
+              $json_class = new SivarApi\Tools\Services_JSON();
               if(count($phone_contact) != 0){
-                 $json_class = new SivarApi\Tools\Services_JSON();
                  $json_phone_contact  =$json_class->encode($phone_contact);
               }else{
                   $id_contact = $prospect_data['id_prospect'];
               }
               
-              
+              $val_id = "Ctl" . (string) $id_contact;
+              $json_contact = $json_class->encode($c_v);
+              $body_contact .= "<input type='hidden' name='" . $val_id . "' id='" . $val_id. "' value='" . $json_contact . "' />";
               $body_contact .= "<input type='hidden' name='" . $id_contact . "' id='" . $id_contact . "' value='" . $json_phone_contact . "' />";
               $body_contact .= '<tr class="odd gradeX">';
               $body_contact .= "<td>" . $c_v['nombres'] . " " . $c_v['apellidos'] . "</td>";
@@ -224,15 +226,16 @@
               $body_contact .= "<td>" . $c_v['email'] . "</td>";
               $body_contact .= "<td>" . $c_v['notas'] . "</td>";
               $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn orange"><i class="fa fa-phone"></i></i></button>'  .  "";
-              $body_contact .= "" . '<button type="button" onclick="NewContact(' . $prospect_data['id_prospect'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";
-              $body_contact .= "" . '<button type="button" onclick="" class="btn orange"><i class="fa fa-pencil"></i></button>'  .  "";
-              $body_contact .= "" . '<button type="button" onclick="" class="btn red"><i class="fa fa-trash-o"></i></button>'  .  "</td>";
+              $body_contact .= "" . '<button type="button" onclick="NewPhoneContact(' . $prospect_data['id_prospect'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="EditContact(' . "'" . $val_id . "'" . ');" class="btn orange"><i class="fa fa-pencil"></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="DeleteContact(' . "'" . $val_id . "'" . ');" class="btn red"><i class="fa fa-trash-o"></i></button>'  .  "</td>";
               $body_contact .= '</tr>'; 
          }
          $body_contact .= "</tbody>";
      }
      $nav = null; //ahorita la navegacion estara desactivada
      $body_contact .= '</table><div class="form-actions">' . $nav ?: "" . '</div>';
+     $action_contact ='<button type="button" onclick="NewContact();" class="btn blue"><i class="fa fa-plus"></i></button>';
     //FIN SISTEMA DE AGENDA
     
    
@@ -251,7 +254,8 @@
          "%{title_action_form}%" => $action_title,
          "%{action_form}%"=> $action_form, 
          "%{title_contact}%"=> $title_contact,
-         "%{body_contact}%"=> $body_contact
+         "%{body_contact}%"=> $body_contact,
+         "%{actions_contact}%" => $action_contact
      );
      
      
