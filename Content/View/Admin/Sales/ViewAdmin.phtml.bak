@@ -70,20 +70,13 @@
 					</div>
 					<!-- END SAMPLE FORM PORTLET-->
 					<!-- BEGIN SAMPLE FORM PORTLET-->
-					<div class="portlet box purple ">
+					<div class="portlet box blue ">
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="fa fa-phone"></i> %{title_contact}%
 							</div>
 							<div class="tools">
-								<a href="" class="collapse">
-								</a>
-								<a href="#portlet-config" data-toggle="modal" class="config">
-								</a>
-								<a href="" class="reload">
-								</a>
-								<a href="" class="remove">
-								</a>
+								%{actions_contact}%
 							</div>
 						</div>
 						<div class="portlet-body form">
