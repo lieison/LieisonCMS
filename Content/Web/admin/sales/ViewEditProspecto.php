@@ -1,8 +1,18 @@
-  <div class="page-bar"><div class="col-md-12 ">
+<?php 
+  if(isset($_REQUEST['id']))
+  {
+      
+  }else{
+      $header = new \Http\Header();
+      $header->redirect("index.php");
+      exit();
+  }
+?>
+<div class="page-bar"><div class="col-md-12 ">
                             <div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-user"></i> Agrega un nuevo prospecto ...
+								<i class="fa fa-user"></i> HOLA MUNDO
 							</div>
 							<div class="tools">
 								<a href="" class="collapse">
@@ -10,7 +20,7 @@
 							</div>
 						</div>
 						<div class="portlet-body form">
-                                                    <form class="form-horizontal" role="form" action="get_add_prospect.php" method="get">
+                                                    <form class="form-horizontal" role="form" action="get_edit_prospect.php" method="get">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Nombre del Prospecto *</label>
@@ -169,7 +179,7 @@
 								<div class="form-actions">
 									<div class="row">
 										<div class="col-md-offset-3 col-md-9">
-                                                                                    <button type="submit" name="cmd_enviar" id="cmd_enviar" class="btn green">Guardar Prospecto</button>
+                                                                                    <button type="submit" name="cmd_enviar" id="cmd_enviar" class="btn green">Editar Prospecto</button>
                                                                                     <label class=" control-label alert-warning" id="txt_error"></label>
 										</div>
 									</div>

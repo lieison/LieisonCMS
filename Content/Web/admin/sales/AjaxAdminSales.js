@@ -1,12 +1,19 @@
 
 
-function buscar_prospecto()
+function buscar_prospecto(id_prospect)
 {
+    var id = "";
     
-    var id = document.getElementById('propecto_buscar').value;
-    if(id === -1){
+    if(id_prospect != null )
+    {
+        id = id_prospect;
+    }
+    else{
+       id = document.getElementById('propecto_buscar').value;
+       if(id === -1){
         alert("SELECCIONE UN PROSPECTO POR FAVOR ....");
-        return null;
+            return null;
+        }
     }
     
     var parametros = {
@@ -153,6 +160,109 @@ function CancelNotes(id_prospect){
     $('#id_notes').html( document.getElementById('update_note').value);
     $('#id_notes_actions').html('<button type="button" onclick="ProspectEditNotes(' + id_prospect + ');" class="btn blue">Agregar Notas </button>');
 }
+
+
+function ProspectPhones(contacts)
+{
+    var data_contact =$("#" + contacts).val();
+    var data_message = '';
+    
+    if(data_contact === ""){
+           NewPhoneContact(contacts); 
+    }
+    else{
+        
+            data_message += '<table class="table table-hover">';
+            data_message += '<thead>';
+            data_message += '<tr>';
+            data_message += '<th>Contacto</th>';
+            data_message += '<th>Telefono</th>';
+            data_message += '<th></th>';
+            data_message += '</tr></thead><tbody>';
+        
+        var decode_  = eval('(' + data_contact  + ')');   
+        $.each(decode_, function(k,v){
+            data_message += '<tr>';
+            data_message += '<td><div id="' + v.id_phone_contact + '">' + v.phone_name + '</div></td>';
+            data_message += '<td><div id="' + v.id_phone_contact + '">' + v.number + '</div></td>';
+            data_message += '<td><button onclick="EditPhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-pencil"></i></button>';
+            data_message += '<button onclick="DeletePhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-trash-o"></i></button></td>';
+            data_message += '</tr>';
+        });   
+    
+        data_message += '</tbody></table>';
+        
+         bootbox.dialog({
+            title: "Agenda",
+            message: data_message
+        }); 
+    }   
+   
+}
+
+
+function NewPhoneContact(id_prospect)
+{
+         var data_message = '';
+         data_message += '<table class="table table-hover">';
+         data_message += '<thead>';
+         data_message += '<tr><th></th><th></th></tr>';
+         data_message += '</thead>';
+         data_message += '<tbody>';
+         data_message += '<tr><td><label class="col-md-4 control-label" for="name">Contacto</label>';
+         data_message += '<input id="phone_name" name="phone_name" type="text" placeholder="Nombre contacto" class="form-control input-md"></td>';
+         data_message += '<td><label class="col-md-4 control-label" for="name">Telefono</label>';
+         data_message += '<input id="phone_number" name="phone_number" type="text" placeholder="El numero telefonico" class="form-control input-md"></td>';
+         data_message += '</td></tr></tbody>';
+         data_message += '</table>';
+         bootbox.dialog({
+            title: "Guardar Telefono ",
+            message: data_message,
+            buttons:{
+                success: {
+                    label: "Guardar",
+                    className: "btn-success",
+                        callback: function() {
+                        
+                    }
+                }}
+        }); 
+}
+
+function NewContact()
+{
+   alert();
+}
+
+function EditContact(id)
+{
+     var contact =$("#" + id).val();
+     alert(contact);
+}
+
+function DeleteContact(id)
+{
+   var contact =$("#" + id).val();
+   alert(contact);
+}
+
+
+
+function EditPhone(id_phone)
+{
+    alert();
+}
+
+
+function DeletePhone(id_phone)
+{
+    alert();
+}
+
+
+
+
+
 
 
 

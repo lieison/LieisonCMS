@@ -75,7 +75,8 @@
          $prospect_body_dir .= '<div class="form-body"><i class="fa fa-map-marker"></i> <b>Direccion 2: </b>' . $prospect_data['direccion2']  . '</div>';
      }
      
-    
+     $title_dir = "Direccion " ;
+     $action_button = '' ;
      $pais = $sales->Get_Country($prospect_data['id_pais']); //obtiene el pais
      $prospect_body_dir .= '<div class="form-body"><i class="fa fa-globe"></i> <b>Provincia : </b>' . 
              $prospect_data['provincia']  . 
@@ -83,27 +84,17 @@
               '<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Pais: </b>' . $pais .'</div>';//agrega los datos de la direccion
      
      
-     
-     $field_count = count($prospect_data) - 4; //cuenta los campos necesarios para completar el perfil
-     $field_empty = 0;//campos vacios
-    
-     
-     foreach($prospect_data as $k)
-     {
-         if(SivarApi\Tools\Validation::Is_Empty_OrNull($k)){
-             $field_empty += 1;
-         }
-     }//verifica cuantos campos vacios hay 
-      
-     //si existen campos vacios dara un procentaje de progreso
-     $complete_profile = "(Perfil Completado:  " . round((($field_empty/$field_count) * 100), 2) . "%)";
-     if($complete_profile >= 100){
+     //perfil o progreso del prospecto completado
+     $propect_progress = $sales->Get_ProspectProgress($prospect_data['id_prospect']);
+     $complete_profile = "(Perfil Completado:  " . $propect_progress . "%)";
+     if($propect_progress >= 100){
          $complete_profile = "";
      }//si esta al 100% el progreso desaparece
      
      //cambia el titulo del dashboard por el nombre del prospecto , agrega el perfil completado
+     $action_edit =  '<a class="btn blue"  href="../sales/dashboard_edit_prospecto.php?id=' . $prospect_data['id_prospect']  . '"' . '><i class="fa fa-pencil"></i></a>' ;
      $script_title = "<script>$('#id_title').html('<p><b>" . strtoupper($prospect_data['nombre']) . "</b>"
-             . "&nbsp&nbsp <small>" . $complete_profile . "</small></p>');</script>";
+             . "&nbsp&nbsp " . $action_edit . " <small>" . $complete_profile . "</small>" . "</p>');</script>";
 
      /*INICIO DE LA INFORMACION DEL PROSPECTO */
      $title_info = "Informacion Del Prospecto";
@@ -175,23 +166,84 @@
     
     //FIN DE NOTAS
     
-    //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES
-     $action_title = "Acciones";
+    //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
+     $action_title = "Bitacora";
      $action_form = '<div class="form-body">'; 
      $action_form .= '<div class="form-actions">';
      $action_form .= '<div class="col-md-offset-4 col-md-8">';
-     $action_form .= '<a href="" target="_blank" class="btn blue" >Editar</a>';
+     $action_form .= '';
      $action_form .= '</div>';
      $action_form .= '</div>';
      $action_form .= '</div>';
      
-    //FIN DE TODAS LAS ACCIONES
+    //FIN DE TODAS LAS ACCIONES BITACORA
+     
+     
+     
+    //INICIO DEL SISTEMA AGENDA
+     $title_contact = "Contactos ";
+     $body_contact .= '<br><table class="table table-striped table-bordered table-hover">';
+     $nav = null;
+     $contact = $sales->Get_ContactProspect($prospect_data['id_prospect']);
+     if($sales->Get_ContactCount() == 0){
+         $body_contact .= ' <thead> <tr><th></th></tr></thead>';
+         $body_contact .= ' <tbody><tr class="odd gradeX"><td><span class="label label-warning">No tienes Contactos</span></td></tr></tbody>';
+     }
+     else{
+         $body_contact .= '<th>Nombres</th>';
+         $body_contact .= '<th>Titulo</th>';
+         $body_contact .= '<th>E-mail</th>';
+         $body_contact .= '<th>Notas</th>';
+         $body_contact .= '<th></th>';
+         $body_contact .= '</tr></thead>';
+         $body_contact .= "<tbody>";
+         
+         $paginacion  = new BasePagination();
+         $paginacion->porPagina(1);
+         $paginacion->SetPagArrayData($contact);
+         $contact = $paginacion->GetPagination();
+         $nav = $paginacion->Getnavigate();        
+         foreach ($contact as $c_k=>$c_v){
+             
+              $id_contact = $c_v['id_prospect_contact'];
+              $phone_contact = $sales->Get_PhonesContact($id_contact);
+              $json_phone_contact = null;
+              
+              $json_class = new SivarApi\Tools\Services_JSON();
+              if(count($phone_contact) != 0){
+                 $json_phone_contact  =$json_class->encode($phone_contact);
+              }else{
+                  $id_contact = $prospect_data['id_prospect'];
+              }
+              
+              $val_id = "Ctl" . (string) $id_contact;
+              $json_contact = $json_class->encode($c_v);
+              $body_contact .= "<input type='hidden' name='" . $val_id . "' id='" . $val_id. "' value='" . $json_contact . "' />";
+              $body_contact .= "<input type='hidden' name='" . $id_contact . "' id='" . $id_contact . "' value='" . $json_phone_contact . "' />";
+              $body_contact .= '<tr class="odd gradeX">';
+              $body_contact .= "<td>" . $c_v['nombres'] . " " . $c_v['apellidos'] . "</td>";
+              $body_contact .= "<td>" . $c_v['titulo'] .  "</td>";
+              $body_contact .= "<td>" . $c_v['email'] . "</td>";
+              $body_contact .= "<td>" . $c_v['notas'] . "</td>";
+              $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn orange"><i class="fa fa-phone"></i></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="NewPhoneContact(' . $prospect_data['id_prospect'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="EditContact(' . "'" . $val_id . "'" . ');" class="btn orange"><i class="fa fa-pencil"></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="DeleteContact(' . "'" . $val_id . "'" . ');" class="btn red"><i class="fa fa-trash-o"></i></button>'  .  "</td>";
+              $body_contact .= '</tr>'; 
+         }
+         $body_contact .= "</tbody>";
+     }
+     $nav = null; //ahorita la navegacion estara desactivada
+     $body_contact .= '</table><div class="form-actions">' . $nav ?: "" . '</div>';
+     $action_contact ='<button type="button" onclick="NewContact();" class="btn blue"><i class="fa fa-plus"></i></button>';
+    //FIN SISTEMA DE AGENDA
     
    
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
      $patterns = array(
          "%{script_form}%"=>$script_title,
-         "%{title_dir_prospecto}%" => "Direccion " ,
+         "%{title_dir_prospecto}%" => $title_dir,
+         "%{action_button}%" => $action_button,
          "%{dir_prospecto}%" => $prospect_body_dir,
          "%{title_info}%" => $title_info,
          "%{prospect_info}%" => $prospect_info,
@@ -200,7 +252,10 @@
          "%{notes_title}%" => $notes_title,
          "%{notes_info}%"=>$notes_info,
          "%{title_action_form}%" => $action_title,
-         "%{action_form}%"=> $action_form
+         "%{action_form}%"=> $action_form, 
+         "%{title_contact}%"=> $title_contact,
+         "%{body_contact}%"=> $body_contact,
+         "%{actions_contact}%" => $action_contact
      );
      
      
