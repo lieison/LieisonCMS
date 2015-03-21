@@ -8,13 +8,13 @@
  * CADA FUNCION ESTA PREDETERMINADA  Y POR LO CUAL NO NECESITA UN MODELO A SEGUIR
  * 
  * ULTIMA VERSION 0.1 :
- * 
+ *  VERSION ESTABLE
  * 
  * VERSIONES ANTERIORES :
- * 
+ *  SIN VERSION ANTERIOR
  * 
  * MEJORAS:
- * 
+ *  SIN MEJORAS
  * 
  */
 
@@ -184,6 +184,13 @@ class ProspectController extends MysqlConection {
      */
     
     
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo obtiene todos los contactos del prospecto asignado en el ID
+     *@params $id_prospect , el id del prospecto a obtener
+     *@return Array devuelve un arreglo del los contactos mediante ese ID (Arreglo asociado)
+     */
     public function Get_ContactProspect($id_prospect)
     {
         $this->QUERY = "SELECT * FROM  sales_prospect_contact WHERE id_prospect LIKE $id_prospect";
@@ -192,14 +199,82 @@ class ProspectController extends MysqlConection {
         return $result;
     }
     
-    
+     /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo obtiene la cantidad de contactos encontrados despues de ejecutarse Get_ContactProspect
+     *@return INT 
+     */
     public function Get_ContactCount(){
         return $this->CONTACT_COUNT;
     }
     
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo obtiene los telefonos mediante el id_contact asignado
+     *@param string $id_contact el id del contacto 
+     *@return array
+     */
     public function Get_PhonesContact($id_contact){
         $this->QUERY = "SELECT * FROM sales_phone_contact WHERE id_prospect_contact LIKE $id_contact";
         return parent::RawQuery($this->QUERY);
+    }
+    
+    
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo establece un nuevo telefono al contacto mediante su ID
+     *@param string $id_contact el id del contacto
+     *@param string $name nombre o titulo del telefono
+     *@param string $phone telefono asignado
+     *@return bool
+     */
+    public function SetContactPhone($id_contact , $name , $phone)
+    {
+        return parent::Insert("sales_phone_contact" , array(
+            "id_prospect_contact"=>$id_contact,
+            "phone_name"=>$name,
+            "number"=>$phone
+        ));
+    }
+    
+    
+     /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo establece un nuevo contacto a base de un arreglo
+     *@param array $params
+     *@test $params =array(
+            "id_prospect"=> $id,
+            "nombres"=>$name,
+            "apellidos"=>$name2,
+            "titulo"=>$title,
+            "email"=>$mail,
+            "notas"=>$notes
+          ));
+     *@return bool
+     */
+    public  function SetContact( array $params)
+    {
+        return parent::Insert("sales_prospect_contact" , $params );
+    }
+    
+     /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo elimina un contacto y todos los telefono agregados en la agenda
+     *@param string $id_contact el id del contacto
+     *@return bool
+     */
+    public function DestroyContact($id_contact)
+    {
+        $phones = $this->Get_PhonesContact($id_contact);
+        if(count($phones) >= 1){
+            parent::Delete("sales_phone_contact", " id_prospect_contact LIKE $id_contact");
+        }
+        return parent::Delete("sales_prospect_contact", " id_prospect_contact LIKE $id_contact");
     }
 
     

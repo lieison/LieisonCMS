@@ -201,8 +201,9 @@ function ProspectPhones(contacts)
 }
 
 
-function NewPhoneContact(id_prospect)
+function NewPhoneContact(id_contact)
 {
+       
          var data_message = '';
          data_message += '<table class="table table-hover">';
          data_message += '<thead>';
@@ -212,7 +213,7 @@ function NewPhoneContact(id_prospect)
          data_message += '<tr><td><label class="col-md-4 control-label" for="name">Contacto</label>';
          data_message += '<input id="phone_name" name="phone_name" type="text" placeholder="Nombre contacto" class="form-control input-md"></td>';
          data_message += '<td><label class="col-md-4 control-label" for="name">Telefono</label>';
-         data_message += '<input id="phone_number" name="phone_number" type="text" placeholder="El numero telefonico" class="form-control input-md"></td>';
+         data_message += '<input id="phone_number" name="phone_number" type="number" placeholder="El numero telefonico" class="form-control input-md"></td>';
          data_message += '</td></tr></tbody>';
          data_message += '</table>';
          bootbox.dialog({
@@ -220,18 +221,114 @@ function NewPhoneContact(id_prospect)
             message: data_message,
             buttons:{
                 success: {
-                    label: "Guardar",
+                    label: "Guardar Telefono",
                     className: "btn-success",
                         callback: function() {
-                        
+                         
+                         var params = {
+                            "id" : id_contact,
+                            "name": $("#phone_name").val(),
+                            "tel": $("#phone_number").val(),
+                            "type": "add_contact"
+                         };
+                         
+                       $.ajax({
+                                type: "POST",
+                                url: "ajax_contact.php",
+                                data: params,
+                            success: function(value){
+                                $("#" + id_contact).val(value);
+                            }
+                      });
+                         
                     }
                 }}
         }); 
 }
 
-function NewContact()
+function NewContact(id_prospect)
 {
-   alert();
+     var data_message = '';
+         data_message += '<table class="table table-hover">';
+         data_message += '<thead>';
+         data_message += '<tr><th></th><th></th></tr>';
+         data_message += '</thead>';
+         data_message += '<tbody>';
+         data_message += '<tr><td><label class="col-md-4 control-label" for="name">Nombre</label>';
+         data_message += '<input required  id="name" name="name" type="text" placeholder="" class="form-control input-md"></td>';
+         data_message += '<td><label class="col-md-4 control-label" for="name">Apellido</label>';
+         data_message += '<input required id="name2" name="name2" type="text" placeholder="" class="form-control input-md"></td>';
+         data_message += '</tr><tr><td><label class="col-md-4 control-label" for="name">Titulo</label>';
+         data_message += '<input required id="title" name="title" type="text" placeholder="" class="form-control input-md"></td>';
+         data_message += '<td><label class="col-md-4 control-label" for="name">E-Mail</label>';
+         data_message += '<input required  id="mail" name="mail" type="email" placeholder="" class="form-control input-md"></td></tr>';
+         data_message += '<tr><td><label class="col-md-4 control-label" for="name">Notas</label>';
+         data_message += '<textarea id="notes" name="notes" placeholder="Digite alguna Nota ..." class="form-control input-md"></textarea></td>';
+         data_message += '</tr></tbody>';
+         data_message += '</table>';
+         bootbox.dialog({
+            title: "Nuevo Contacto ... ",
+            message: data_message,
+            buttons:{
+                success: {
+                    label: "Guardar Telefono",
+                    className: "btn-success",
+                        callback: function() {
+                            
+                         var name = $("#name").val();
+                         var name2 = $("#name2").val();
+                         var title = $("#name2").val();
+                         var mail = $("#name2").val();
+                         var notes = $("#name2").val();
+                         var notes = $("#name2").val();
+                         
+                         var table_add = '<tr class="odd gradeX">';
+                         table_add += '<td>'  + name + " " + name2 + '</td>';
+                         table_add += '<td>'  + title + '</td>';
+                         table_add += '<td>'  + mail + '</td>';
+                         table_add += '<td>'  + notes + '</td>';
+                         table_add += '<td><a class="btn default" href="dashboard_admin_prospecto.php?id='  + id_prospect + '"><i class="fa fa-refresh"></i></a></td>';
+                         table_add += '</tr>';
+                         
+                         var params = {
+                            "id" : id_prospect,
+                            "name": name,
+                            "name2": name2,
+                            "title": title,
+                            "mail":  mail,
+                            "notes": notes,
+                            "type": "add"
+                         };
+                         
+                       $.ajax({
+                                type: "POST",
+                                url: "ajax_contact.php",
+                                data: params,
+                            success: function(value){
+                                var response = $.trim(value);
+                                if(response === "first"){
+                                    var new_table = "";
+                                    new_table += '<thead><th>Nombres</th>';
+                                    new_table += '<th>Titulo</th>';
+                                    new_table += '<th>E-mail</th>';
+                                    new_table += '<th>Notas</th>';
+                                    new_table += '<th></th>';
+                                    new_table += '</tr></thead>';
+                                    new_table += "<tbody id='table_contacts' name='table_contacts'>";
+                                    new_table += table_add;
+                                    new_table += "</tbody>";
+                                    $("#tabla_agenda").html(new_table);
+                                }else if(response === "more")
+                                {
+                                     $("#table_contacts").append(table_add);
+                                }
+                             
+                            }
+                      });
+                         
+                    }
+                }}
+        }); 
 }
 
 function EditContact(id)
@@ -242,8 +339,30 @@ function EditContact(id)
 
 function DeleteContact(id)
 {
-   var contact =$("#" + id).val();
-   alert(contact);
+    var conf = '<div class="alert alert-danger" role="alert">';
+        conf += '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
+        conf += '<span class="sr-only">No Hay Vuelta atras ...</span>';
+        conf += ' Este Contacto se eliminara permanente mente  <b>¿DESEA ELIMINARLO?</b>';
+        conf += "</div>";
+    bootbox.confirm(conf, function(result) {
+        if(result === true){
+            var params = {
+          "id" : id,
+          "type": "delete"
+        };
+                         
+        $.ajax({
+           type: "POST",
+           url: "ajax_contact.php",
+           data: params,
+           success: function(){
+               $("#child" + id).remove();
+            }
+         });
+    
+        }
+    }); 
+    
 }
 
 

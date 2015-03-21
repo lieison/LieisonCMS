@@ -182,7 +182,8 @@
      
     //INICIO DEL SISTEMA AGENDA
      $title_contact = "Contactos ";
-     $body_contact .= '<br><table class="table table-striped table-bordered table-hover">';
+     //$body_contact = $body_contact .= "<input type='hidden' name='master_id_prospect' id='master_id_prospect' value='" . $prospect_data['id_prospect']. "'  />";
+     $body_contact .= '<br><table id="tabla_agenda" class="table table-striped table-bordered table-hover">';
      $nav = null;
      $contact = $sales->Get_ContactProspect($prospect_data['id_prospect']);
      if($sales->Get_ContactCount() == 0){
@@ -190,13 +191,13 @@
          $body_contact .= ' <tbody><tr class="odd gradeX"><td><span class="label label-warning">No tienes Contactos</span></td></tr></tbody>';
      }
      else{
-         $body_contact .= '<th>Nombres</th>';
+         $body_contact .= '<thead><th>Nombres</th>';
          $body_contact .= '<th>Titulo</th>';
          $body_contact .= '<th>E-mail</th>';
          $body_contact .= '<th>Notas</th>';
          $body_contact .= '<th></th>';
          $body_contact .= '</tr></thead>';
-         $body_contact .= "<tbody>";
+         $body_contact .= "<tbody id='table_contacts' name='table_contacts'>";
          
          $paginacion  = new BasePagination();
          $paginacion->porPagina(1);
@@ -220,22 +221,22 @@
               $json_contact = $json_class->encode($c_v);
               $body_contact .= "<input type='hidden' name='" . $val_id . "' id='" . $val_id. "' value='" . $json_contact . "' />";
               $body_contact .= "<input type='hidden' name='" . $id_contact . "' id='" . $id_contact . "' value='" . $json_phone_contact . "' />";
-              $body_contact .= '<tr class="odd gradeX">';
+              $body_contact .= '<tr id="child' . (string) $c_v['id_prospect_contact']  . '" class="odd gradeX">';
               $body_contact .= "<td>" . $c_v['nombres'] . " " . $c_v['apellidos'] . "</td>";
               $body_contact .= "<td>" . $c_v['titulo'] .  "</td>";
               $body_contact .= "<td>" . $c_v['email'] . "</td>";
               $body_contact .= "<td>" . $c_v['notas'] . "</td>";
               $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn orange"><i class="fa fa-phone"></i></i></button>'  .  "";
-              $body_contact .= "" . '<button type="button" onclick="NewPhoneContact(' . $prospect_data['id_prospect'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="NewPhoneContact(' . $c_v['id_prospect_contact'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";
               $body_contact .= "" . '<button type="button" onclick="EditContact(' . "'" . $val_id . "'" . ');" class="btn orange"><i class="fa fa-pencil"></i></button>'  .  "";
-              $body_contact .= "" . '<button type="button" onclick="DeleteContact(' . "'" . $val_id . "'" . ');" class="btn red"><i class="fa fa-trash-o"></i></button>'  .  "</td>";
+              $body_contact .= "" . '<button type="button" onclick="DeleteContact(' . "'" . $c_v['id_prospect_contact'] . "'" . ');" class="btn red"><i class="fa fa-trash-o"></i></button>'  .  "</td>";
               $body_contact .= '</tr>'; 
          }
-         $body_contact .= "</tbody>";
+              $body_contact .= "</tbody>";
      }
      $nav = null; //ahorita la navegacion estara desactivada
      $body_contact .= '</table><div class="form-actions">' . $nav ?: "" . '</div>';
-     $action_contact ='<button type="button" onclick="NewContact();" class="btn blue"><i class="fa fa-plus"></i></button>';
+     $action_contact ='<button type="button" onclick="NewContact(' . "'" . $prospect_data['id_prospect'] . "'" . ');" class="btn blue"><i class="fa fa-plus"></i></button>';
     //FIN SISTEMA DE AGENDA
     
    
