@@ -277,10 +277,10 @@ function NewContact(id_prospect)
                             
                          var name = $("#name").val();
                          var name2 = $("#name2").val();
-                         var title = $("#name2").val();
-                         var mail = $("#name2").val();
-                         var notes = $("#name2").val();
-                         var notes = $("#name2").val();
+                         var title = $("#title").val();
+                         var mail = $("#mail").val();
+                         var notes = $("#notes").val();
+                         
                          
                          var table_add = '<tr class="odd gradeX">';
                          table_add += '<td>'  + name + " " + name2 + '</td>';
@@ -333,9 +333,73 @@ function NewContact(id_prospect)
 
 function EditContact(id)
 {
-     var contact =$("#" + id).val();
-     alert(contact);
+      var contact = JSON.parse($("#" + id).val());
+      var data_message = '';
+         data_message += '<table class="table table-hover">';
+         data_message += '<thead>';
+         data_message += '<tr><th></th><th></th></tr>';
+         data_message += '</thead>';
+         data_message += '<tbody>';
+         data_message += '<tr><td><label class="col-md-4 control-label" for="name">Nombre</label>';
+         data_message += '<input required  id="name" name="name" type="text" placeholder="" class="form-control input-md" value="' + contact.nombres + '" /></td>';
+         data_message += '<td><label class="col-md-4 control-label" for="name">Apellido</label>';
+         data_message += '<input required id="name2" name="name2" type="text" placeholder="" class="form-control input-md" value ="' + contact.apellidos + '" /></td>';
+         data_message += '</tr><tr><td><label class="col-md-4 control-label" for="name">Titulo</label>';
+         data_message += '<input required id="title" name="title" type="text" placeholder="" class="form-control input-md" value ="' + contact.titulo + '"/></td>';
+         data_message += '<td><label class="col-md-4 control-label" for="name">E-Mail</label>';
+         data_message += '<input required  id="mail" name="mail" type="email" placeholder="" class="form-control input-md"  value ="' + contact.email + '"/></td></tr>';
+         data_message += '<tr><td><label class="col-md-4 control-label" for="name">Notas</label>';
+         data_message += '<textarea id="notes" name="notes" placeholder="Digite alguna Nota ..." class="form-control input-md" >' + contact.notas  + '</textarea></td>';
+         data_message += '</tr></tbody>';
+         data_message += '</table>';
+         bootbox.dialog({
+            title: "Edita este contacto... ",
+            message: data_message,
+            buttons:{
+                success: {
+                    label: "Guardar Telefono",
+                    className: "btn-success",
+                        callback: function() {
+                         
+                         var id_c = contact.id_prospect_contact;
+                         var id_p = contact.id_prospect;
+                         var name = $("#name").val();
+                         var name2 = $("#name2").val();
+                         var title = $("#title").val();
+                         var mail = $("#mail").val();
+                         var notes = $("#notes").val();
+                         
+                         var params = {
+                            "id" : id_c,
+                            "name": name,
+                            "name2": name2,
+                            "title": title,
+                            "mail":  mail,
+                            "notes": notes,
+                            "type": "edit"
+                         };
+                         
+                       $.ajax({
+                                type: "POST",
+                                url: "ajax_contact.php",
+                                data: params,
+                            success: function(){
+                               var table_add = '';
+                               table_add += '<td>'  + name + " " + name2 + '</td>';
+                               table_add += '<td>'  + title + '</td>';
+                               table_add += '<td>'  + mail + '</td>';
+                               table_add += '<td>'  + notes + '</td>';
+                               table_add += '<td><a class="btn default" href="dashboard_admin_prospecto.php?id='  + id_p + '"><i class="fa fa-refresh"></i></a></td>';
+                               table_add += '';
+                               $("#child" + id_c  ).html(table_add);
+                            }
+                      });
+                         
+                    }
+                }}
+        }); 
 }
+
 
 function DeleteContact(id)
 {

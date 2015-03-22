@@ -59,5 +59,21 @@ switch ($type)
         $id = $_REQUEST['id'];
         $prospect->DestroyContact($id);
         break;
+    case "edit":
+        $id = $_REQUEST['id'];
+        $name = $_REQUEST['name'];
+        $name2 = $_REQUEST['name2'];
+        $title = $_REQUEST['title'];
+        $mail = $_REQUEST['mail'];
+        $notes = $_REQUEST['notes'];
+        $prospect->EditContact($id, $name, $name2, $title, $mail, $notes);
+        unset($id);
+        unset($name);
+        unset($name2);
+        unset($title);
+        unset($mail);
+        unset($notes);
+        unset($result);
+        break;
 }
 

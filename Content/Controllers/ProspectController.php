@@ -276,6 +276,18 @@ class ProspectController extends MysqlConection {
         }
         return parent::Delete("sales_prospect_contact", " id_prospect_contact LIKE $id_contact");
     }
+    
+    
+    public function EditContact($id_contact , $name , $name2 , $title , $mail , $notes){
+        $array_c = array(
+            "nombres"=>$name,
+            "apellidos"=>$name2,
+            "titulo"=>$title,
+            "email"=>$mail,
+            "notas"=>$notes
+        );
+        return parent::Update("sales_prospect_contact" , $array_c , " id_prospect_contact LIKE $id_contact");
+    }
 
     
 }
