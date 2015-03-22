@@ -180,7 +180,10 @@ class ProspectController extends MysqlConection {
     
     
     /**
-     * SALES CONTACT 
+     * ----------------------------------------------------------------------------
+     * SALES CONTACT y CONTACT PHONE
+     * ----------------------------------------------------------------------------
+     * 
      */
     
     
@@ -288,6 +291,23 @@ class ProspectController extends MysqlConection {
         );
         return parent::Update("sales_prospect_contact" , $array_c , " id_prospect_contact LIKE $id_contact");
     }
+    
+    
+     
+    /**
+     * ----------------------------------------------------------------------------
+     * BITACORA 
+     * ----------------------------------------------------------------------------
+     * 
+     */
+    
+    
+    public function GetBitacora($id_prospect){
+        
+    }
+    
+    
+    
 
     
 }

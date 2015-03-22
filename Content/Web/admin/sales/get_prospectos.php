@@ -168,19 +168,40 @@
     
     //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
      $action_title = "Bitacora";
-     $action_form = '<div class="form-body">'; 
-     $action_form .= '<div class="form-actions">';
-     $action_form .= '<div class="col-md-offset-4 col-md-8">';
-     $action_form .= '';
-     $action_form .= '</div>';
-     $action_form .= '</div>';
-     $action_form .= '</div>';
+     $button_init_bitacora = '<button type="button" class="btn btn-success " ><i class="fa fa-play">&nbspINICIAR</i></button>';
+     
+     
+     $bitacora = $sales->GetBitacora($prospect_data['id_prospect']);
+     if(count($bitacora) == 0){
+
+        $action_form = '<div class="form-body">';  
+        $action_form .= '<div class="alert alert-danger" role="alert">';
+        $action_form .= '<i class="fa fa-exclamation-triangle"></i>';
+        $action_form .= '<span>&nbsp&nbsp<b>NO SE HA INICIADO LA BITACORA</b>'
+                . '&nbsp&nbsp<img src="../img/assert/flechaderecha_naranja.png" width="50" height="20" />'
+                . '&nbsp&nbsp&nbsp' . $button_init_bitacora . '</span>';
+        $action_form .= "</div>";
+        $action_form .= '</div>';
+
+     }
+     else{
+         
+        $action_form = '<div class="form-body">'; 
+        $action_form .= '<div class="form-actions">';
+        $action_form .= '<div class="col-md-offset-4 col-md-8">';
+        $action_form .= '</div>';
+        $action_form .= '</div>';
+        $action_form .= '</div>';
+     }
+    
      
     //FIN DE TODAS LAS ACCIONES BITACORA
      
      
      
     //INICIO DEL SISTEMA AGENDA
+     
+     
      $title_contact = "Contactos ";
      //$body_contact = $body_contact .= "<input type='hidden' name='master_id_prospect' id='master_id_prospect' value='" . $prospect_data['id_prospect']. "'  />";
      $body_contact .= '<br><table id="tabla_agenda" class="table table-striped table-bordered table-hover">';
@@ -225,10 +246,10 @@
               $body_contact .= "<td>" . $c_v['nombres'] . " " . $c_v['apellidos'] . "</td>";
               $body_contact .= "<td>" . $c_v['titulo'] .  "</td>";
               $body_contact .= "<td>" . $c_v['email'] . "</td>";
-              $body_contact .= "<td>" . $c_v['notas'] . "</td>";
-              $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn orange"><i class="fa fa-phone"></i></i></button>'  .  "";
+              $body_contact .= "<td><button type='button' class='btn btn-success' " .  'onclick="ShowNotes('   . "'" . htmlspecialchars($c_v['notas'])  . "'" . ');"' . ">" . '<i class="fa fa-comment"></i>' ."</button></td>";
+              $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn btn-info"><i class="fa fa-phone"></i></i></button>'  .  "";
               $body_contact .= "" . '<button type="button" onclick="NewPhoneContact(' . $c_v['id_prospect_contact'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";
-              $body_contact .= "" . '<button type="button" onclick="EditContact(' . "'" . $val_id . "'" . ');" class="btn orange"><i class="fa fa-pencil"></i></button>'  .  "";
+              $body_contact .= "" . '<button type="button" onclick="EditContact(' . "'" . $val_id . "'" . ');" class="btn btn-primary"><i class="fa fa-pencil"></i></button>'  .  "";
               $body_contact .= "" . '<button type="button" onclick="DeleteContact(' . "'" . $c_v['id_prospect_contact'] . "'" . ');" class="btn red"><i class="fa fa-trash-o"></i></button>'  .  "</td>";
               $body_contact .= '</tr>'; 
          }

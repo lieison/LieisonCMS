@@ -93,8 +93,6 @@ function ProspectInitProcess(meta_estado , id_prospect)
       
 }
 
-
-
 function ProspectActivate(status , id_prospect){
      var parametros = {
           "estado" : status,
@@ -129,6 +127,11 @@ function ProspectEditNotes(id_prospect)
 }
 
 
+function CancelNotes(id_prospect){
+    $('#id_notes').html( document.getElementById('update_note').value);
+    $('#id_notes_actions').html('<button type="button" onclick="ProspectEditNotes(' + id_prospect + ');" class="btn blue">Agregar Notas </button>');
+}
+
 function SaveNotes(id_prospect)
 {
     var new_html =  document.getElementById('update_note').value;
@@ -152,12 +155,6 @@ function SaveNotes(id_prospect)
                       }
               });
     }
-    $('#id_notes_actions').html('<button type="button" onclick="ProspectEditNotes(' + id_prospect + ');" class="btn blue">Agregar Notas </button>');
-}
-
-
-function CancelNotes(id_prospect){
-    $('#id_notes').html( document.getElementById('update_note').value);
     $('#id_notes_actions').html('<button type="button" onclick="ProspectEditNotes(' + id_prospect + ');" class="btn blue">Agregar Notas </button>');
 }
 
@@ -200,6 +197,9 @@ function ProspectPhones(contacts)
    
 }
 
+function ShowNotes(notes){
+   bootbox.alert(notes, function() {});
+}
 
 function NewPhoneContact(id_contact)
 {
@@ -245,6 +245,7 @@ function NewPhoneContact(id_contact)
                 }}
         }); 
 }
+
 
 function NewContact(id_prospect)
 {
@@ -430,7 +431,6 @@ function DeleteContact(id)
 }
 
 
-
 function EditPhone(id_phone)
 {
     alert();
@@ -440,6 +440,14 @@ function EditPhone(id_phone)
 function DeletePhone(id_phone)
 {
     alert();
+}
+
+
+/**FUNCIONES DE LA BITACORA **/
+
+
+function InitBitacora(){
+    
 }
 
 
