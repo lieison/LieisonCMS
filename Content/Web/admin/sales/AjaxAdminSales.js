@@ -57,6 +57,8 @@ function cargar_prospectos()
 }
 
 
+/*FUNCIONES LUEGO DE LA CARGA DEL PROSPECTO A VER**/
+
 function ProspectInitProcess(meta_estado , id_prospect)
 {
       var flag = false;
@@ -93,7 +95,6 @@ function ProspectInitProcess(meta_estado , id_prospect)
       
 }
 
-
 function ProspectActivate(status , id_prospect){
      var parametros = {
           "estado" : status,
@@ -114,7 +115,6 @@ function ProspectActivate(status , id_prospect){
                       }
               });
 }
-
 
 function ProspectEditNotes(id_prospect)
 {
@@ -175,7 +175,7 @@ function ProspectPhones(contacts)
             data_message += '<table class="table table-hover">';
             data_message += '<thead>';
             data_message += '<tr>';
-            data_message += '<th>Contacto</th>';
+            data_message += '<th>Tipo</th>';
             data_message += '<th>Telefono</th>';
             data_message += '<th></th>';
             data_message += '</tr></thead><tbody>';
@@ -465,7 +465,18 @@ function SaveEditPhone(id_phone)
            type: "POST",
            url: "ajax_contact.php",
            data: params,
-           success: function(){
+           success: function(result){
+               var id_c = $.trim(result);
+               var data_contact =$("#" + id_c ).val();
+               var decode_  = eval('(' + data_contact  + ')');  
+               $.each(decode_ , function(k,v){
+                   if(v.id_phone_contact == id_phone)
+                   {
+                       v.phone_name = n;
+                       v.number = p;
+                   }
+               });
+               $("#" + id_c ).val(JSON.stringify(decode_));
                var action = '<button onclick="EditPhone( ' + id_phone + ')" class="btn default"><i class="fa fa-pencil"></i></button>';
                action += '<button onclick="DeletePhone( ' + id_phone + ')" class="btn default"><i class="fa fa-trash-o"></i></button></td>';
                $("#Pname" + id_phone).html(n); 
@@ -494,7 +505,17 @@ function DeletePhone(id_phone)
            type: "POST",
            url: "ajax_contact.php",
            data: params,
-           success: function(){
+           success: function(result){
+               var id_c = $.trim(result);
+               var data_contact =$("#" + id_c ).val();
+               var decode_  = eval('(' + data_contact  + ')');  
+               $.each(decode_ , function(k,v){
+                   if(v.id_phone_contact == id_phone)
+                   {
+                      decode_.splice(k,1);
+                   }
+               });
+               $("#" + id_c ).val(JSON.stringify(decode_));
                $("#Phone" + id_phone).remove();
             }
          });

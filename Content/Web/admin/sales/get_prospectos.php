@@ -289,7 +289,6 @@ else{
     //CARGA TODOS LOS PROSPECTOS EN EL PRINCIPAL
 
     $result = $sales->Get_All_Prospect();
- 
     $val = '';
     foreach($result as $k=>$v)
     {
@@ -297,6 +296,7 @@ else{
         $name = $v['nombre'];
         $val .= "<option value='$id'>$name</option>";
     }
+  
     echo $val;
 }
 

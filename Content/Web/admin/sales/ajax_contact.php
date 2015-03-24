@@ -77,7 +77,19 @@ switch ($type)
         break;
     case "delete_phone":
         $id = $_REQUEST['id'];
-        $prospect->DestroyPhoneContact($id);
+        $id_c = $prospect->GetIdContactByPhoneContact($id);
+        if($prospect->DestroyPhoneContact($id)){
+            echo $id_c["id"];
+        }
+        break;
+    case "edit_phone":
+        $id = $_REQUEST['id'];
+        $name = $_REQUEST['name'];
+        $phone = $_REQUEST['phone'];
+        if($prospect->EditPhoneContact($id, $name, $phone)){
+            $id_c = $prospect->GetIdContactByPhoneContact($id);
+            echo $id_c["id"];
+        }
         break;
 }
 

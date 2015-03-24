@@ -300,7 +300,16 @@ class ProspectController extends MysqlConection {
     
     
     public function EditPhoneContact($id_phone , $name , $number){
-        
+        return parent::Update("sales_phone_contact" ,
+                array("phone_name"=>$name , "number"=> $number) , 
+                "id_phone_contact LIKE $id_phone");
+    }
+    
+    
+    public function GetIdContactByPhoneContact($id_phone){
+        $this->QUERY = "SELECT id_prospect_contact as id FROM sales_phone_contact WHERE id_phone_contact LIKE $id_phone ";
+        $result = parent::RawQuery($this->QUERY);
+        return $result[0];
     }
      
     /**
