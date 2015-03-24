@@ -234,8 +234,6 @@
               $json_class = new SivarApi\Tools\Services_JSON();
               if(count($phone_contact) != 0){
                  $json_phone_contact  =$json_class->encode($phone_contact);
-              }else{
-                  $id_contact = $prospect_data['id_prospect'];
               }
               
               $val_id = "Ctl" . (string) $id_contact;

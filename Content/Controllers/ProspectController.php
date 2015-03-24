@@ -299,6 +299,9 @@ class ProspectController extends MysqlConection {
     }
     
     
+    public function EditPhoneContact($id_phone , $name , $number){
+        
+    }
      
     /**
      * ----------------------------------------------------------------------------
