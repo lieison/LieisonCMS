@@ -1,5 +1,10 @@
 <?php 
 
+ /**
+  * IMPORTANTE FUNCION MIEMBRO DE CARGA POR METODO GET O POST 
+  * VERIFICA SI EXISTE UN ID DEL PROSPECTO A REFLESCAR
+  * ESTO SIRVE PARA OPTIMIZAR LOS TIEMPOS EN EL VIEW
+  */
  if(isset($_REQUEST['id']))
  {
      sleep(2);
@@ -12,13 +17,13 @@
  }
 
 ?>
-<div  class="row">
-				<div class="col-md-12">
+<div class="row" id="cargar_admin">
+			<div class="col-md-12" >
 					<!-- BEGIN VALIDATION STATES-->
 					
-                                        <div  style="alignment-adjust: central;" class="portlet-body form" id="cargar_admin">
-							
-								<div class="form-body">
+                                        <div  style="alignment-adjust: central;"  >	
+								
+                                            <div class="form-body">
 									<div class="form-group">
                                                                             <br> <br> <br> <br> <br> <br> <br> <br>
 										<label class="control-label col-md-3">
@@ -42,13 +47,11 @@
                                                                                 
 									</div>
 								
-								</div>
-		
-							
-							<!-- END FORM-->
 						</div>
-
-						<!-- END VALIDATION STATES-->
-				
-				</div>
+		
+					  
+                                         
+                                        </div>
+                                
+			</div>
 </div>
