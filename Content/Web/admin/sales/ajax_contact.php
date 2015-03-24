@@ -75,5 +75,9 @@ switch ($type)
         unset($notes);
         unset($result);
         break;
+    case "delete_phone":
+        $id = $_REQUEST['id'];
+        $prospect->DestroyPhoneContact($id);
+        break;
 }
 
