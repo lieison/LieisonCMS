@@ -79,13 +79,21 @@ class ProspectController extends MysqlConection {
      *@param int optional , $activate : 1=solo prospectos activos , 2=todos los prospectos , 0=prospectos inactivos
      *@return int devuelve la cantidad de prospectos encontrados.
      */
-    public function Get_All_Prospect($activate = 1)
+    public function Get_All_Prospect($inactivate = FALSE , $finish = FALSE)
     {
-        if($activate == 2){
-            $this->QUERY = "SELECT * FROM sales_prospect";
-        }else{
-             $this->QUERY = "SELECT * FROM sales_prospect WHERE estado LIKE $activate";
+        $this->QUERY = "SELECT * FROM sales_prospect ";
+        
+        if($inactivate == false && $finish == false){
+            $this->QUERY .= " WHERE estado LIKE 1 and meta_estado >= 0 and meta_estado <= 1";
         }
+        else if($inactivate && !$finish ){
+           $this->QUERY .= " WHERE  meta_estado >= 0 and meta_estado <= 1";
+        }
+        else if(!$inactivate && $finish){
+             $this->QUERY .= " WHERE estado LIKE 1 ";
+        }
+
+        $this->QUERY .= " ORDER BY fecha DESC";
         return parent::RawQuery($this->QUERY);
     }
     
@@ -281,6 +289,7 @@ class ProspectController extends MysqlConection {
     }
     
     
+    
     public function EditContact($id_contact , $name , $name2 , $title , $mail , $notes){
         $array_c = array(
             "nombres"=>$name,
@@ -293,6 +302,23 @@ class ProspectController extends MysqlConection {
     }
     
     
+    public function DestroyPhoneContact($id_phone){
+        return parent::Delete("sales_phone_contact", " id_phone_contact LIKE $id_phone");
+    }
+    
+    
+    public function EditPhoneContact($id_phone , $name , $number){
+        return parent::Update("sales_phone_contact" ,
+                array("phone_name"=>$name , "number"=> $number) , 
+                "id_phone_contact LIKE $id_phone");
+    }
+    
+    
+    public function GetIdContactByPhoneContact($id_phone){
+        $this->QUERY = "SELECT id_prospect_contact as id FROM sales_phone_contact WHERE id_phone_contact LIKE $id_phone ";
+        $result = parent::RawQuery($this->QUERY);
+        return $result[0];
+    }
      
     /**
      * ----------------------------------------------------------------------------
@@ -301,13 +327,67 @@ class ProspectController extends MysqlConection {
      * 
      */
     
+    public function InitBitacora($id_prospect){
+        $this->QUERY = "SELECT * FROM sales_prospect_bitacora WHERE id_prospect LIKE $id_prospect";
+        $result = parent::RawQuery($this->QUERY);
+        if(count($result)==0){
+            
+        }
+    }
+    
     
     public function GetBitacora($id_prospect){
-        
+          
     }
     
     
     
-
+    /**
+     * -------------------------------------------------------------------------------
+     * REGISTRO DE ENTRADAS 
+     * -------------------------------------------------------------------------------
+     */
+    
+    public function NewEntrance($id_user , $id_prospect , $date , $time){
+        $this->QUERY = "SELECT COUNT(*) as 'count' , id_entrada as 'id' "
+                . "FROM sales_entradas WHERE id_usuario LIKE '$id_user'"
+                . " and id_prospecto LIKE $id_prospect";
+        
+        $result = parent::RawQuery($this->QUERY);
+        if($result[0]['count'] == 0 ){
+            return parent::Insert("sales_entradas" , array( 
+                "id_usuario"=>$id_user,
+                "id_prospecto"=>$id_prospect,
+                "fecha"=>$date,
+                "hora"=>$time
+           ));
+        }else{
+            $id = $result[0]['id'];
+            return parent::Update("sales_entradas" , 
+                array(
+                    "fecha"=>$date ,
+                    "hora"=>$time
+                 ), 
+             " id_entrada LIKE $id");
+        }
+    }
+    
+    public function GetEntrance(){
+        //PROCEDIMIENTO ALMACENADO FAVOR VER LA BASE DE DATOS ....
+       
+        $this->CheckOldEntrances();
+        return parent::RawQuery("call ProcGetEntrance()");
+    }
+    
+    protected function CheckOldEntrances(){
+         $conn = new MysqlConection();
+         $result = $conn->RawQuery("call ProcGetOldEntrace()");
+         if(count($result) >= 1){
+            foreach ($result as $key=>$value){
+                parent::Delete("sales_entradas", "id_entrada LIKE " . $value['id_entrada']);
+            }
+         }
+    }
+    
     
 }

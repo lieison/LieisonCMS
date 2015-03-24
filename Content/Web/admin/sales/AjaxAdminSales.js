@@ -1,4 +1,35 @@
 
+ /**
+ *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
+ *@copyright (c) 2015, Lieison
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE. 
+ * 
+ *@version 1.0
+ *@todo Lieison S.A de C.V 
+ * 
+ * 
+ * 
+ */
+
+
+/*FUNCIONES PROSPECTO**/
 
 function buscar_prospecto(id_prospect)
 {
@@ -35,6 +66,7 @@ function buscar_prospecto(id_prospect)
                             );
                       },
                       success: function(value){
+                             console.log(value)
                             $("#cargar_admin").html(value); 
                       }
               });
@@ -42,20 +74,43 @@ function buscar_prospecto(id_prospect)
 
 function cargar_prospectos()
 {
-                $.ajax({
-                      type: "POST",
-                      url: "get_prospectos.php",
-                      beforeSend: function()
-                      {
-                          $("#propecto_buscar").html( "<option value='-1'>Seleccione Prospecto</option>");
-                      },
-                      success: function(value){
-                          $("#propecto_buscar").html( value );
-                          $("#cmd_buscar").html( ' <button type="button" class="btn default" onclick="buscar_prospecto();" value="" name="Enviar Datos">Enviar Datos</button>' );
-                      }
-              });
+    var params_check = {
+        "inactivo": $("#check_inactivos").is(':checked'),
+        "terminados": $("#check_terminado").is(':checked')
+    };
+
+   $.ajax({
+       type: "POST",
+       url: "get_prospectos.php",
+       data: params_check,
+       beforeSend: function()
+       {
+           $("#propecto_buscar").html( "<option value='-1'>Seleccione Prospecto</option>");
+       },
+        success: function(value){
+           $("#propecto_buscar").html( value );
+           $("#cmd_buscar").html( ' <button type="button" class="btn btn-primary" onclick="buscar_prospecto();" value="" name="Enviar Datos"><i class="fa fa-paper-plane"></i>&nbspEnviar</button>' );
+        }
+   });
 }
 
+function cargar_entradas(){
+    $.ajax({
+       type: "POST",
+       url: "get_entradas.php",
+       beforeSend:function()
+       {
+           $("#carga_entradas").html('<div align="center"><img src="../img/assert/search.gif" /></div>');
+       },
+       success:function(value){
+          $("#carga_entradas").html(value);
+       }
+   });
+}
+
+
+
+/*FUNCIONES LUEGO DE LA CARGA DEL PROSPECTO A VER**/
 
 function ProspectInitProcess(meta_estado , id_prospect)
 {
@@ -119,13 +174,12 @@ function ProspectEditNotes(id_prospect)
     var notes_html = $('#id_notes').html();
     if(notes_html === '<b>No Existen notas</b>')
              notes_html = "";
-   $('#id_notes').html('<textarea class="ckeditor form-control" name="update_note" id="update_note" rows="6" >'
+   $('#id_notes').html('<textarea class="wysihtml5 form-control"  name="update_note" id="update_note" rows="6" >'
            +  notes_html + '</textarea>');
    var actions = "<button type='button' class='btn blue' onclick='SaveNotes(" + id_prospect + ");' value='Guardar'>Guardar Notas</button>";
    actions += "&nbsp&nbsp&nbsp<button type='button' class='btn red' value='Cancelar' onclick='CancelNotes(" + id_prospect + ");'>Cancelar Notas</button>";
    $('#id_notes_actions').html(actions);
 }
-
 
 function CancelNotes(id_prospect){
     $('#id_notes').html( document.getElementById('update_note').value);
@@ -159,6 +213,8 @@ function SaveNotes(id_prospect)
 }
 
 
+/**FUNCIONES PARA CONTACTO */
+
 function ProspectPhones(contacts)
 {
     var data_contact =$("#" + contacts).val();
@@ -172,17 +228,17 @@ function ProspectPhones(contacts)
             data_message += '<table class="table table-hover">';
             data_message += '<thead>';
             data_message += '<tr>';
-            data_message += '<th>Contacto</th>';
+            data_message += '<th>Tipo</th>';
             data_message += '<th>Telefono</th>';
             data_message += '<th></th>';
             data_message += '</tr></thead><tbody>';
         
         var decode_  = eval('(' + data_contact  + ')');   
         $.each(decode_, function(k,v){
-            data_message += '<tr>';
-            data_message += '<td><div id="' + v.id_phone_contact + '">' + v.phone_name + '</div></td>';
-            data_message += '<td><div id="' + v.id_phone_contact + '">' + v.number + '</div></td>';
-            data_message += '<td><button onclick="EditPhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-pencil"></i></button>';
+            data_message += '<tr id="Phone' + v.id_phone_contact + '">';
+            data_message += '<td><div id="Pname' + v.id_phone_contact + '">' + v.phone_name + '</div></td>';
+            data_message += '<td><div id="Pnumber' + v.id_phone_contact + '">' + v.number + '</div></td>';
+            data_message += '<td id="Action' + v.id_phone_contact + '"><button onclick="EditPhone( ' + v.id_phone_contact + '' + "" + ');" class="btn default"><i class="fa fa-pencil"></i></button>';
             data_message += '<button onclick="DeletePhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-trash-o"></i></button></td>';
             data_message += '</tr>';
         });   
@@ -245,7 +301,6 @@ function NewPhoneContact(id_contact)
                 }}
         }); 
 }
-
 
 function NewContact(id_prospect)
 {
@@ -431,15 +486,94 @@ function DeleteContact(id)
 }
 
 
-function EditPhone(id_phone)
+function EditPhone(id_phone )
 {
-    alert();
+ 
+   var name = $("#Pname" + id_phone).html(); 
+   var number = $("#Pnumber" + id_phone).html(); 
+   
+   var Iname = "<input class='form-control' id='EditPname" + id_phone + "' type='text' value='"  + name  +"' />";
+   var Inumber = "<input  class='form-control' id='EditPnumber" + id_phone + "' type='text' value='"  + number  +"' />";
+   var IAction = "<button class='btn btn-primary' id='SaveEditPhone' onclick='SaveEditPhone(" + id_phone + ");'>" + '<i class="fa fa-floppy-o"></i>' + "</button>";
+   
+   $("#Pname" + id_phone).html(Iname); 
+   $("#Pnumber" + id_phone).html(Inumber); 
+   $("#Action" + id_phone).html(IAction); 
+   
+}
+
+function SaveEditPhone(id_phone)
+{
+        var n = $("#EditPname" + id_phone).val();
+        var p =  $("#EditPnumber" + id_phone).val();
+    
+        var params = {
+          "id" : id_phone,
+          "name": n,
+          "phone" : p,
+          "type": "edit_phone"
+        };
+                         
+        $.ajax({
+           type: "POST",
+           url: "ajax_contact.php",
+           data: params,
+           success: function(result){
+               var id_c = $.trim(result);
+               var data_contact =$("#" + id_c ).val();
+               var decode_  = eval('(' + data_contact  + ')');  
+               $.each(decode_ , function(k,v){
+                   if(v.id_phone_contact == id_phone)
+                   {
+                       v.phone_name = n;
+                       v.number = p;
+                   }
+               });
+               $("#" + id_c ).val(JSON.stringify(decode_));
+               var action = '<button onclick="EditPhone( ' + id_phone + ')" class="btn default"><i class="fa fa-pencil"></i></button>';
+               action += '<button onclick="DeletePhone( ' + id_phone + ')" class="btn default"><i class="fa fa-trash-o"></i></button></td>';
+               $("#Pname" + id_phone).html(n); 
+               $("#Pnumber" + id_phone).html(p); 
+               $("#Action" + id_phone).html(action); 
+            }
+         });
 }
 
 
 function DeletePhone(id_phone)
 {
-    alert();
+    var conf = '<div class="alert alert-danger" role="alert">';
+        conf += '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
+        conf += '<span class="sr-only">No Hay Vuelta atras ...</span>';
+        conf += ' Este Telefono se eliminara permanente mente  <b>¿DESEA ELIMINARLO?</b>';
+        conf += "</div>";
+    bootbox.confirm(conf, function(result) {
+        if(result === true){
+            var params = {
+          "id" : id_phone,
+          "type": "delete_phone"
+        };
+                         
+        $.ajax({
+           type: "POST",
+           url: "ajax_contact.php",
+           data: params,
+           success: function(result){
+               var id_c = $.trim(result);
+               var data_contact =$("#" + id_c ).val();
+               var decode_  = eval('(' + data_contact  + ')');  
+               $.each(decode_ , function(k,v){
+                   if(v.id_phone_contact == id_phone)
+                   {
+                      decode_.splice(k,1);
+                   }
+               });
+               $("#" + id_c ).val(JSON.stringify(decode_));
+               $("#Phone" + id_phone).remove();
+            }
+         });
+        }
+    }); 
 }
 
 

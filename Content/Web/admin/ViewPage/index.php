@@ -1,6 +1,5 @@
-<?php 
+<?php
 
-  
  /**
  *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
  *@copyright (c) 2015, Lieison
@@ -29,24 +28,9 @@
  * 
  * 
  */
+
     session_start();
     
-    //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
-    include   '../../Conf/Include.php';
- 
-    $_SESSION['page_name']  = "Principal";
-    
-    //Condicion ... x+y=Z
-    if(isset($_SESSION['title'])):
-        unset( $_SESSION['title']);
-        if(isset($_SESSION['home'])):
-              unset($_SESSION['home']);
-        endif;
-    endif;
- 
-    
-    //PREPARANDO LA VISTA ...
-    ViewClass::PrepareView("View.phtml", "Admin");
-    //LLAMANDO LA VISTA ... OBTENIENDO DATOS
-    ViewClass::SetView(ViewClass::SetParamsString("" ,"" , "" , ""));
-    
+    include   '../../../Conf/Include.php';
+    $header = new Http\Header();
+    $header->redirect("../index.php");

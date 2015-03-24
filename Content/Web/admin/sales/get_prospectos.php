@@ -1,5 +1,35 @@
 <?php
 
+
+ /**
+ *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
+ *@copyright (c) 2015, Lieison
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE. 
+ * 
+ *@version 1.0
+ *@todo Lieison S.A de C.V 
+ * 
+ * 
+ * 
+ */
+
  include   '../../../Conf/Include.php';
  
  $sales = new ProspectController();//constructor nuevo sales en el controlador
@@ -53,9 +83,19 @@
  else if(isset($_REQUEST['id']))
 {
      //INICIAR PROSPECTO ... IMPRIMIR TODOS LOS DATOS
+     
+     //REGISTRA LA ENTRADA DEL USUARIO HACIA EL PROSPECTO
+        session_start();
+        $id_user = $_SESSION['login']['id'];
+        $date = FunctionsController::get_date();
+        $time = FunctionsController::get_time();
+        $id_p =$_REQUEST['id'];
+        $sales->NewEntrance($id_user, $id_p, $date, $time);
+       
+     //TERMINA EL REGISTRO DE ENTRADA
 
-     $prospect_data = $sales->Get_Prospect_ById($_REQUEST['id']);//obtener los datos por medio del id
-
+     $prospect_data = $sales->Get_Prospect_ById($id_p);//obtener los datos por medio del id
+     
      //verifica si los datos del prospecto existe
      if (count($prospect_data) == 0) {
         exit();
@@ -201,15 +241,21 @@
      
     //INICIO DEL SISTEMA AGENDA
      
-     
      $title_contact = "Contactos ";
-     //$body_contact = $body_contact .= "<input type='hidden' name='master_id_prospect' id='master_id_prospect' value='" . $prospect_data['id_prospect']. "'  />";
-     $body_contact .= '<br><table id="tabla_agenda" class="table table-striped table-bordered table-hover">';
+     $action_contact ='<button type="button" onclick="NewContact(' . "'" . $prospect_data['id_prospect'] . "'" . ');" class="btn blue"><i class="fa fa-plus"></i></button>';    
+     $body_contact .= '<br><table id="tabla_agenda" class="table table-striped  table-hover">';
      $nav = null;
      $contact = $sales->Get_ContactProspect($prospect_data['id_prospect']);
      if($sales->Get_ContactCount() == 0){
-         $body_contact .= ' <thead> <tr><th></th></tr></thead>';
-         $body_contact .= ' <tbody><tr class="odd gradeX"><td><span class="label label-warning">No tienes Contactos</span></td></tr></tbody>';
+        $button_contact = "";
+        $body_contact = '<div class="form-body">';  
+        $body_contact .= '<div class="alert alert-danger" role="alert">';
+        $body_contact .= '<i class="fa fa-exclamation-triangle"></i>';
+        $body_contact .= '<span>&nbsp&nbsp<b>NO EXISTEN CONTACTOS </b>'
+                . '&nbsp&nbsp<img src="../img/assert/flechaderecha_naranja.png" width="50" height="20" />'
+                . '&nbsp&nbsp&nbsp' . $action_contact . '</span>';
+        $body_contact .= "</div>";
+        $body_contact .= '</div>';
      }
      else{
          $body_contact .= '<thead><th>Nombres</th>';
@@ -234,8 +280,6 @@
               $json_class = new SivarApi\Tools\Services_JSON();
               if(count($phone_contact) != 0){
                  $json_phone_contact  =$json_class->encode($phone_contact);
-              }else{
-                  $id_contact = $prospect_data['id_prospect'];
               }
               
               $val_id = "Ctl" . (string) $id_contact;
@@ -257,11 +301,11 @@
      }
      $nav = null; //ahorita la navegacion estara desactivada
      $body_contact .= '</table><div class="form-actions">' . $nav ?: "" . '</div>';
-     $action_contact ='<button type="button" onclick="NewContact(' . "'" . $prospect_data['id_prospect'] . "'" . ');" class="btn blue"><i class="fa fa-plus"></i></button>';
+    
     //FIN SISTEMA DE AGENDA
     
    
-     //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
+     //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml.bak"
      $patterns = array(
          "%{script_form}%"=>$script_title,
          "%{title_dir_prospecto}%" => $title_dir,
@@ -289,16 +333,25 @@
 else{
     
     //CARGA TODOS LOS PROSPECTOS EN EL PRINCIPAL
-
-    $result = $sales->Get_All_Prospect();
- 
+    $inactivos = trim($_REQUEST['inactivo']);
+    $terminados = trim($_REQUEST['terminados']);
+    
+    if($inactivos == "false"){ $inactivos= false;}
+    else { $inactivos= true;}
+    
+    if($terminados == "false"){ $terminados= false;}
+    else { $terminados= true;}
+    
+    $result = $sales->Get_All_Prospect($inactivos , $terminados );
     $val = '';
+
     foreach($result as $k=>$v)
     {
         $id = $v['id_prospect'];
         $name = $v['nombre'];
-        $val .= "<option value='$id'>$name</option>";
+        $val .= "<option value='$id'><b>$name</b></option>";
     }
+  
     echo $val;
 }
 
