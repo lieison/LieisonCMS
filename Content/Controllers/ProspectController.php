@@ -281,6 +281,7 @@ class ProspectController extends MysqlConection {
     }
     
     
+    
     public function EditContact($id_contact , $name , $name2 , $title , $mail , $notes){
         $array_c = array(
             "nombres"=>$name,
@@ -290,6 +291,11 @@ class ProspectController extends MysqlConection {
             "notas"=>$notes
         );
         return parent::Update("sales_prospect_contact" , $array_c , " id_prospect_contact LIKE $id_contact");
+    }
+    
+    
+    public function DestroyPhoneContact($id_phone){
+        return parent::Delete("sales_phone_contact", " id_phone_contact LIKE $id_phone");
     }
     
     

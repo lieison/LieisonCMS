@@ -1,4 +1,4 @@
-
+/*FUNCIONES PROSPECTO**/
 
 function buscar_prospecto(id_prospect)
 {
@@ -93,6 +93,7 @@ function ProspectInitProcess(meta_estado , id_prospect)
       
 }
 
+
 function ProspectActivate(status , id_prospect){
      var parametros = {
           "estado" : status,
@@ -114,6 +115,7 @@ function ProspectActivate(status , id_prospect){
               });
 }
 
+
 function ProspectEditNotes(id_prospect)
 {
     var notes_html = $('#id_notes').html();
@@ -125,7 +127,6 @@ function ProspectEditNotes(id_prospect)
    actions += "&nbsp&nbsp&nbsp<button type='button' class='btn red' value='Cancelar' onclick='CancelNotes(" + id_prospect + ");'>Cancelar Notas</button>";
    $('#id_notes_actions').html(actions);
 }
-
 
 function CancelNotes(id_prospect){
     $('#id_notes').html( document.getElementById('update_note').value);
@@ -159,6 +160,8 @@ function SaveNotes(id_prospect)
 }
 
 
+/**FUNCIONES PARA CONTACTO */
+
 function ProspectPhones(contacts)
 {
     var data_contact =$("#" + contacts).val();
@@ -179,9 +182,9 @@ function ProspectPhones(contacts)
         
         var decode_  = eval('(' + data_contact  + ')');   
         $.each(decode_, function(k,v){
-            data_message += '<tr>';
-            data_message += '<td><div id="' + v.id_phone_contact + '">' + v.phone_name + '</div></td>';
-            data_message += '<td><div id="' + v.id_phone_contact + '">' + v.number + '</div></td>';
+            data_message += '<tr id="Phone' + v.id_phone_contact + '">';
+            data_message += '<td><div id="Pname' + v.id_phone_contact + '">' + v.phone_name + '</div></td>';
+            data_message += '<td><div id="Pnumber' + v.id_phone_contact + '">' + v.number + '</div></td>';
             data_message += '<td><button onclick="EditPhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-pencil"></i></button>';
             data_message += '<button onclick="DeletePhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-trash-o"></i></button></td>';
             data_message += '</tr>';
@@ -245,7 +248,6 @@ function NewPhoneContact(id_contact)
                 }}
         }); 
 }
-
 
 function NewContact(id_prospect)
 {
@@ -433,13 +435,35 @@ function DeleteContact(id)
 
 function EditPhone(id_phone)
 {
-    alert();
+    
+    
 }
 
 
 function DeletePhone(id_phone)
 {
-    alert();
+    var conf = '<div class="alert alert-danger" role="alert">';
+        conf += '<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>';
+        conf += '<span class="sr-only">No Hay Vuelta atras ...</span>';
+        conf += ' Este Telefono se eliminara permanente mente  <b>¿DESEA ELIMINARLO?</b>';
+        conf += "</div>";
+    bootbox.confirm(conf, function(result) {
+        if(result === true){
+            var params = {
+          "id" : id_phone,
+          "type": "delete_phone"
+        };
+                         
+        $.ajax({
+           type: "POST",
+           url: "ajax_contact.php",
+           data: params,
+           success: function(){
+               $("#Phone" + id_phone).remove();
+            }
+         });
+        }
+    }); 
 }
 
 
