@@ -185,7 +185,7 @@ function ProspectPhones(contacts)
             data_message += '<tr id="Phone' + v.id_phone_contact + '">';
             data_message += '<td><div id="Pname' + v.id_phone_contact + '">' + v.phone_name + '</div></td>';
             data_message += '<td><div id="Pnumber' + v.id_phone_contact + '">' + v.number + '</div></td>';
-            data_message += '<td><button onclick="EditPhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-pencil"></i></button>';
+            data_message += '<td id="Action' + v.id_phone_contact + '"><button onclick="EditPhone( ' + v.id_phone_contact + '' + "" + ');" class="btn default"><i class="fa fa-pencil"></i></button>';
             data_message += '<button onclick="DeletePhone( ' + v.id_phone_contact + ')" class="btn default"><i class="fa fa-trash-o"></i></button></td>';
             data_message += '</tr>';
         });   
@@ -433,10 +433,46 @@ function DeleteContact(id)
 }
 
 
-function EditPhone(id_phone)
+function EditPhone(id_phone )
 {
+ 
+   var name = $("#Pname" + id_phone).html(); 
+   var number = $("#Pnumber" + id_phone).html(); 
+   
+   var Iname = "<input class='form-control' id='EditPname" + id_phone + "' type='text' value='"  + name  +"' />";
+   var Inumber = "<input  class='form-control' id='EditPnumber" + id_phone + "' type='text' value='"  + number  +"' />";
+   var IAction = "<button class='btn btn-primary' id='SaveEditPhone' onclick='SaveEditPhone(" + id_phone + ");'>" + '<i class="fa fa-floppy-o"></i>' + "</button>";
+   
+   $("#Pname" + id_phone).html(Iname); 
+   $("#Pnumber" + id_phone).html(Inumber); 
+   $("#Action" + id_phone).html(IAction); 
+   
+}
+
+function SaveEditPhone(id_phone)
+{
+        var n = $("#EditPname" + id_phone).val();
+        var p =  $("#EditPnumber" + id_phone).val();
     
-    
+        var params = {
+          "id" : id_phone,
+          "name": n,
+          "phone" : p,
+          "type": "edit_phone"
+        };
+                         
+        $.ajax({
+           type: "POST",
+           url: "ajax_contact.php",
+           data: params,
+           success: function(){
+               var action = '<button onclick="EditPhone( ' + id_phone + ')" class="btn default"><i class="fa fa-pencil"></i></button>';
+               action += '<button onclick="DeletePhone( ' + id_phone + ')" class="btn default"><i class="fa fa-trash-o"></i></button></td>';
+               $("#Pname" + id_phone).html(n); 
+               $("#Pnumber" + id_phone).html(p); 
+               $("#Action" + id_phone).html(action); 
+            }
+         });
 }
 
 
