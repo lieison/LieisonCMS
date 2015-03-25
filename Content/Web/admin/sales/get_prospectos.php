@@ -203,13 +203,20 @@
      
      
      $title_contact = "Contactos ";
-     //$body_contact = $body_contact .= "<input type='hidden' name='master_id_prospect' id='master_id_prospect' value='" . $prospect_data['id_prospect']. "'  />";
+     $action_contact ='<button type="button" onclick="NewContact(' . "'" . $prospect_data['id_prospect'] . "'" . ');" class="btn blue"><i class="fa fa-plus"></i></button>';    
      $body_contact .= '<br><table id="tabla_agenda" class="table table-striped table-bordered table-hover">';
      $nav = null;
      $contact = $sales->Get_ContactProspect($prospect_data['id_prospect']);
      if($sales->Get_ContactCount() == 0){
-         $body_contact .= ' <thead> <tr><th></th></tr></thead>';
-         $body_contact .= ' <tbody><tr class="odd gradeX"><td><span class="label label-warning">No tienes Contactos</span></td></tr></tbody>';
+        $button_contact = "";
+        $body_contact = '<div class="form-body">';  
+        $body_contact .= '<div class="alert alert-danger" role="alert">';
+        $body_contact .= '<i class="fa fa-exclamation-triangle"></i>';
+        $body_contact .= '<span>&nbsp&nbsp<b>NO EXISTEN CONTACTOS </b>'
+                . '&nbsp&nbsp<img src="../img/assert/flechaderecha_naranja.png" width="50" height="20" />'
+                . '&nbsp&nbsp&nbsp' . $action_contact . '</span>';
+        $body_contact .= "</div>";
+        $body_contact .= '</div>';
      }
      else{
          $body_contact .= '<thead><th>Nombres</th>';
@@ -255,7 +262,7 @@
      }
      $nav = null; //ahorita la navegacion estara desactivada
      $body_contact .= '</table><div class="form-actions">' . $nav ?: "" . '</div>';
-     $action_contact ='<button type="button" onclick="NewContact(' . "'" . $prospect_data['id_prospect'] . "'" . ');" class="btn blue"><i class="fa fa-plus"></i></button>';
+    
     //FIN SISTEMA DE AGENDA
     
    
