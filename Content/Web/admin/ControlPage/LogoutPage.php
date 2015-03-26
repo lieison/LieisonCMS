@@ -10,7 +10,7 @@ if(isset($_SESSION['login'])):
     $id_log = $_SESSION['log'];
     unset($_SESSION['log']);
     session_destroy();
-    $hora_salida =date("H:i:s",time()-3600);
+    $hora_salida = FunctionsController::get_time();
     $admin = new AdminController();
     $admin->Update_log($id_log, $hora_salida);
     $header->redirect(FunctionsController::GetUrl("login.php"));

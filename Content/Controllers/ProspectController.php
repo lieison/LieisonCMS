@@ -342,7 +342,7 @@ class ProspectController extends MysqlConection {
     
     public function NewEntrance($id_user , $id_prospect , $date , $time){
         $this->QUERY = "SELECT COUNT(*) as 'count' , id_entrada as 'id' "
-                . "FROM sales_entradas WHERE fecha LIKE '$date' and id_usuario LIKE '$id_user'"
+                . "FROM sales_entradas WHERE id_usuario LIKE '$id_user'"
                 . " and id_prospecto LIKE $id_prospect";
         
         $result = parent::RawQuery($this->QUERY);
@@ -355,7 +355,12 @@ class ProspectController extends MysqlConection {
            ));
         }else{
             $id = $result[0]['id'];
-            return parent::Update("sales_entradas" , array("hora"=>$time), " id_entrada LIKE $id");
+            return parent::Update("sales_entradas" , 
+                array(
+                    "fecha"=>$date ,
+                    "hora"=>$time
+                 ), 
+             " id_entrada LIKE $id");
         }
     }
     
