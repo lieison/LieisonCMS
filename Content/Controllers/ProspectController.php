@@ -79,13 +79,21 @@ class ProspectController extends MysqlConection {
      *@param int optional , $activate : 1=solo prospectos activos , 2=todos los prospectos , 0=prospectos inactivos
      *@return int devuelve la cantidad de prospectos encontrados.
      */
-    public function Get_All_Prospect($activate = 1)
+    public function Get_All_Prospect($inactivate = FALSE , $finish = FALSE)
     {
-        if($activate == 2){
-            $this->QUERY = "SELECT * FROM sales_prospect";
-        }else{
-             $this->QUERY = "SELECT * FROM sales_prospect WHERE estado LIKE $activate";
+        $this->QUERY = "SELECT * FROM sales_prospect ";
+        
+        if($inactivate == false && $finish == false){
+            $this->QUERY .= " WHERE estado LIKE 1 and meta_estado >= 0 and meta_estado <= 1";
         }
+        else if($inactivate && !$finish ){
+           $this->QUERY .= " WHERE  meta_estado >= 0 and meta_estado <= 1";
+        }
+        else if(!$inactivate && $finish){
+             $this->QUERY .= " WHERE estado LIKE 1 ";
+        }
+
+        $this->QUERY .= " ORDER BY fecha DESC";
         return parent::RawQuery($this->QUERY);
     }
     
@@ -324,6 +332,42 @@ class ProspectController extends MysqlConection {
         
     }
     
+    
+    
+    /**
+     * -------------------------------------------------------------------------------
+     * REGISTRO DE ENTRADAS 
+     * -------------------------------------------------------------------------------
+     */
+    
+    public function NewEntrance($id_user , $id_prospect , $date , $time){
+        $this->QUERY = "SELECT COUNT(*) as 'count' , id_entrada as 'id' "
+                . "FROM sales_entradas WHERE fecha LIKE '$date' and id_usuario LIKE '$id_user'"
+                . " and id_prospecto LIKE $id_prospect";
+        
+        $result = parent::RawQuery($this->QUERY);
+        if($result[0]['count'] == 0 ){
+            return parent::Insert("sales_entradas" , array( 
+                "id_usuario"=>$id_user,
+                "id_prospecto"=>$id_prospect,
+                "fecha"=>$date,
+                "hora"=>$time
+           ));
+        }else{
+            $id = $result[0]['id'];
+            return parent::Update("sales_entradas" , array("hora"=>$time), " id_entrada LIKE $id");
+        }
+    }
+    
+    public function GetEntrance($dateFrom = null , $dateTo = null){
+        
+        return parent::RawQuery("call ProcGetEntrance()");
+    }
+    
+    
+    public function DestroyEntrance($id_entrance){
+        
+    }
     
     
 

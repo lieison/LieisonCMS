@@ -35,6 +35,7 @@ function buscar_prospecto(id_prospect)
                             );
                       },
                       success: function(value){
+                             console.log(value)
                             $("#cargar_admin").html(value); 
                       }
               });
@@ -42,19 +43,41 @@ function buscar_prospecto(id_prospect)
 
 function cargar_prospectos()
 {
-                $.ajax({
-                      type: "POST",
-                      url: "get_prospectos.php",
-                      beforeSend: function()
-                      {
-                          $("#propecto_buscar").html( "<option value='-1'>Seleccione Prospecto</option>");
-                      },
-                      success: function(value){
-                          $("#propecto_buscar").html( value );
-                          $("#cmd_buscar").html( ' <button type="button" class="btn default" onclick="buscar_prospecto();" value="" name="Enviar Datos">Enviar Datos</button>' );
-                      }
-              });
+    var params_check = {
+        "inactivo": $("#check_inactivos").is(':checked'),
+        "terminados": $("#check_terminado").is(':checked')
+    };
+
+   $.ajax({
+       type: "POST",
+       url: "get_prospectos.php",
+       data: params_check,
+       beforeSend: function()
+       {
+           $("#propecto_buscar").html( "<option value='-1'>Seleccione Prospecto</option>");
+       },
+        success: function(value){
+           $("#propecto_buscar").html( value );
+           $("#cmd_buscar").html( ' <button type="button" class="btn btn-primary" onclick="buscar_prospecto();" value="" name="Enviar Datos"><i class="fa fa-paper-plane"></i>&nbspEnviar</button>' );
+        }
+   });
 }
+
+
+function cargar_entradas(){
+    $.ajax({
+       type: "POST",
+       url: "get_entradas.php",
+       beforeSend: function()
+       {
+           //$("#carga_entradas").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
+       },
+       success: function(value){
+          $("#carga_entradas").html(value);
+       }
+   });
+}
+
 
 
 /*FUNCIONES LUEGO DE LA CARGA DEL PROSPECTO A VER**/

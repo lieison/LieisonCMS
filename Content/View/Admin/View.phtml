@@ -69,7 +69,7 @@
     
 </head>
 <!-- ESTABLECIENDO EL HEADER  -->
-
+<link href="../../assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css"/>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
@@ -189,7 +189,7 @@
                                      
                                 ?>
 			</div>          
-                    
+                    <?php include 'ViewAdminProspecto.php' ?>
                 </div>
                
         </div>
@@ -222,7 +222,7 @@
     
    ?> 
            
-            
+   FormValidation.init();cargar_prospectos();cargar_entradas();         
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
@@ -246,7 +246,7 @@
 </script>
 <!-- END JAVASCRIPTS -->
 
- 
+<script src="AjaxAdminSales.js"></script><script src="../js/bootbox.js"></script><script src="../js/bootbox.min.js"></script> 
 
 </body>
 <!-- END BODY -->

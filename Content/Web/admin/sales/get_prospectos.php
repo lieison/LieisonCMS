@@ -53,9 +53,19 @@
  else if(isset($_REQUEST['id']))
 {
      //INICIAR PROSPECTO ... IMPRIMIR TODOS LOS DATOS
+     
+     //REGISTRA LA ENTRADA DEL USUARIO HACIA EL PROSPECTO
+        session_start();
+        $id_user = $_SESSION['login']['id'];
+        $date = FunctionsController::get_date();
+        $time = FunctionsController::get_time();
+        $id_p =$_REQUEST['id'];
+        $sales->NewEntrance($id_user, $id_p, $date, $time);
+       
+     //TERMINA EL REGISTRO DE ENTRADA
 
-     $prospect_data = $sales->Get_Prospect_ById($_REQUEST['id']);//obtener los datos por medio del id
-
+     $prospect_data = $sales->Get_Prospect_ById($id_p);//obtener los datos por medio del id
+     
      //verifica si los datos del prospecto existe
      if (count($prospect_data) == 0) {
         exit();
@@ -294,14 +304,23 @@
 else{
     
     //CARGA TODOS LOS PROSPECTOS EN EL PRINCIPAL
-
-    $result = $sales->Get_All_Prospect();
+    $inactivos = trim($_REQUEST['inactivo']);
+    $terminados = trim($_REQUEST['terminados']);
+    
+    if($inactivos == "false"){ $inactivos= false;}
+    else { $inactivos= true;}
+    
+    if($terminados == "false"){ $terminados= false;}
+    else { $terminados= true;}
+    
+    $result = $sales->Get_All_Prospect($inactivos , $terminados );
     $val = '';
+
     foreach($result as $k=>$v)
     {
         $id = $v['id_prospect'];
         $name = $v['nombre'];
-        $val .= "<option value='$id'>$name</option>";
+        $val .= "<option value='$id'><b>$name</b></option>";
     }
   
     echo $val;

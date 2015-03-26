@@ -15,11 +15,13 @@
     $adminc = new AdminController();
     $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
     
-    $header = "";
+   
+    $header .= '<link href="../../assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css"/>';
     
     $body = "<?php include 'ViewAdminProspecto.php' ?>";
     $footer = 'FormValidation.init();';
     $footer .= 'cargar_prospectos();';
+    $footer .= 'cargar_entradas();';
     
     $footer_end = '<script src="AjaxAdminSales.js"></script>';
     $footer_end .= '<script src="../js/bootbox.js"></script>';

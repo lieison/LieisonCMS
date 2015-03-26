@@ -1,3 +1,18 @@
+<style>
+  .class_tr {
+        width: 100%;
+        display: inline-table;
+  }
+  .class_tbody
+  {
+    overflow-y: scroll;
+    overflow-wrap: scroll;
+    height: 400px;
+    width: 100%;
+    position: absolute;
+  }
+</style>
+
 <?php 
 
  /**
@@ -18,42 +33,74 @@
 
 ?>
 <div class="row" id="cargar_admin">
-    <div class="col-md-12" >		
-               <div class="form-body">
-		<div class="form-group">
-                        <br> <br> <br> <br> <br> <br> <br> <br>
-			<label class="control-label col-md-3">
-			</label>
-			<div class="col-md-4" align="center">
-                            
-                               <?php if(!isset($_REQUEST['id'])): ?>    
+<?php if(!isset($_REQUEST['id'])): ?>        
+<div class="col-md-4 ">
+<div class="portlet">
+<div class="portlet-title">
+		<div class="caption" >
+                       <i class="fa fa-users"></i>Busca Un prospecto
+		</div>
+</div>
+<div class="portlet-body form" align="center">
+    <br>
+     <div class="form-body">
+         <label class="control-label col-md-4">
+            
+	 </label>
+                              
                                <select class="form-control select2me" name="options2" id="propecto_buscar">
 												
                                </select>
+         <br><br>
+					<div class="input-group">
+						<div class="icheck-inline">
+						<label>
+                                                    <input type="checkbox" id="check_inactivos" onclick="cargar_prospectos();" class="icheck"> Inactivos </label>
+						<label>
+                                                    <input type="checkbox" id="check_terminado" onclick="cargar_prospectos();" class="icheck"> Terminados </label>
+						
+						</div>
+						</div>
+					</div>
                                <br>                                                  
                               <div id="cmd_buscar">
-                                    <button type="button" class="btn default"  onclick="buscar_prospecto(null);" value="" name="Enviar Datos">Enviar Datos</button>
+                                    
                               </div>
-                              <?php else: ?>
-                                 <p><img src="../img/assert/logos/LogoA.png" /></p>
-                                 <div class="alert alert-success" role="alert">CARGANDO , ESPERE POR FAVOR ...</div>
-                             <?php endif; ?>
-			</div> 
-                        <div class="col-md-4" align="centert">
-                        <div class="">
-                        <div class="portlet-title">
-                        <div class="caption">
-                            <i class="fa fa-globe"></i> Prospectos Inactivos
-                        </div>
-                        </div>
-                            <div class="portlet-body form">
-                                
-                            </div>
-                        </div>
-                            
-                        </div>
-                       
-                    </div>					
-		</div>
+                               <br><br>
     </div>
 </div>
+</div>
+
+<div class="col-md-8 ">
+<div class="portlet ">
+	<div class="portlet-title">
+		<div class="caption" >
+                        <i class="fa fa-eye"></i> Ultimas Visitas 
+		</div>
+        </div>
+    <table >
+     <thead><tr class="tr_d"><th></th></thead>   
+     <tbody class="class_tbody">
+         <tr class="class_tr">
+         <td> 
+            <div class="portlet-body form">
+                <div class="timeline" id="carga_entradas">
+                        
+		</div>
+             </div>
+           </td>
+         </tr>
+    </tbody>
+    </table>
+</div>
+</div>
+</div>
+   <?php else: ?>
+    <div class="col-md-12 " align="center">
+        <br><br><br><br><br><br><br>
+               <p><img src="../img/assert/logos/LogoA.png" /></p>
+                <div class="alert alert-success" role="alert">CARGANDO , ESPERE POR FAVOR ...</div>
+    </div>            
+    <?php endif; ?>   
+</div>
+
