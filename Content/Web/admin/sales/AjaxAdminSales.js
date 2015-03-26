@@ -63,7 +63,6 @@ function cargar_prospectos()
    });
 }
 
-
 function cargar_entradas(){
     $.ajax({
        type: "POST",
@@ -144,7 +143,7 @@ function ProspectEditNotes(id_prospect)
     var notes_html = $('#id_notes').html();
     if(notes_html === '<b>No Existen notas</b>')
              notes_html = "";
-   $('#id_notes').html('<textarea class="ckeditor form-control" name="update_note" id="update_note" rows="6" >'
+   $('#id_notes').html('<textarea class="wysihtml5 form-control"  name="update_note" id="update_note" rows="6" >'
            +  notes_html + '</textarea>');
    var actions = "<button type='button' class='btn blue' onclick='SaveNotes(" + id_prospect + ");' value='Guardar'>Guardar Notas</button>";
    actions += "&nbsp&nbsp&nbsp<button type='button' class='btn red' value='Cancelar' onclick='CancelNotes(" + id_prospect + ");'>Cancelar Notas</button>";
