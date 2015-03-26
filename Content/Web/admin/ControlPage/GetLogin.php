@@ -33,8 +33,8 @@ endif;
  $date = new DateTime();
  
  if($is_user):
-      $hora_entrada =date("H:i:s",time()-3600);
-      $fecha = date("Y-m-d");
+      $hora_entrada =  FunctionsController::get_time();
+      $fecha = FunctionsController::get_date();
       $id_user = $_SESSION['login']["id"];
       $id_log = $admin_controller->Create_Log($id_user, $hora_entrada, $fecha);
       $_SESSION['log'] = $id_log;
