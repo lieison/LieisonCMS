@@ -39,12 +39,12 @@ foreach($result as $key=>$value){
             $print .= '<div class="timeline-body-content">';
             $print .= '<span class="font-grey-cascade">';
             if($value['Uid'] == $id_user){
-                 $print .= '<b>Tú</b> Entraste A <b>' . $value['Pname'] . 
-                         '</b>&nbsp&nbsp(' . $translate->translate($time_ago) . ')';
+                 $print .= '<b>Tú</b> Entrastes A <b>  ' . $value['Pname'] . 
+                         '</b> Aproximadamente&nbsp&nbsp(' . $translate->translate($time_ago) . ')';
             }else{
                  $print .= 'El Usuario <b>' . $value['Uname'] 
                          . '</b> Entro A <b>' . $value['Pname'] 
-                         . '</b>' . '  (' . $translate->translate($time_ago)  . ')';
+                         . '</b>' . ' Aproximadamente (' . $translate->translate($time_ago)  . ')';
             }
             $print .= '</span>';
             $print .= '</div>';
