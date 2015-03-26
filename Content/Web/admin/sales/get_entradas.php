@@ -24,12 +24,13 @@ foreach($result as $key=>$value){
              }
             $print .= '</div>';
     $print.= '<div class="timeline-body">';
+            $translate = new GoogleTranslate("en", "es");
             $time_ago = FunctionsController::Get_TimeAgo($value['date']. " " . $value['hour']);
             $print .= '<div class="timeline-body-arrow"></div>';
             $print .= '<div class="timeline-body-head">';
             $print .= '<div class="timeline-body-head-caption">';
             $print .= '<a href="#" class="timeline-body-title font-blue-madison">' . $value['Uname'] .'</a>';
-            $print .= '<span class="timeline-body-time font-grey-cascade">' . $time_ago  . '</span>';
+            $print .= '<span class="timeline-body-time font-grey-cascade">' . $translate->translate($time_ago)  . '</span>';
             $print .= '</div>';
             $print .= '</div>';
             $print .= '<div class="timeline-body-head-actions">';
@@ -38,11 +39,12 @@ foreach($result as $key=>$value){
             $print .= '<div class="timeline-body-content">';
             $print .= '<span class="font-grey-cascade">';
             if($value['Uid'] == $id_user){
-                 $print .= '<b>Tú</b> Entraste A <b>' . $value['Pname'] . '</b> ' . $time_ago;
+                 $print .= '<b>Tú</b> Entraste A <b>' . $value['Pname'] . 
+                         '</b>&nbsp&nbsp(' . $translate->translate($time_ago) . ')';
             }else{
                  $print .= 'El Usuario <b>' . $value['Uname'] 
                          . '</b> Entro A <b>' . $value['Pname'] 
-                         . '</b>' . ' ' . $time_ago ;
+                         . '</b>' . '  (' . $translate->translate($time_ago)  . ')';
             }
             $print .= '</span>';
             $print .= '</div>';

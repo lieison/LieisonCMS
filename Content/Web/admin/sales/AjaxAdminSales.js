@@ -68,11 +68,11 @@ function cargar_entradas(){
     $.ajax({
        type: "POST",
        url: "get_entradas.php",
-       beforeSend: function()
+       beforeSend:function()
        {
-           //$("#carga_entradas").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
+           $("#carga_entradas").html('<div align="center"><img src="../img/assert/search.gif" /></div>');
        },
-       success: function(value){
+       success:function(value){
           $("#carga_entradas").html(value);
        }
    });
