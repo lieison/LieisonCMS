@@ -211,10 +211,9 @@
      
     //INICIO DEL SISTEMA AGENDA
      
-     
      $title_contact = "Contactos ";
      $action_contact ='<button type="button" onclick="NewContact(' . "'" . $prospect_data['id_prospect'] . "'" . ');" class="btn blue"><i class="fa fa-plus"></i></button>';    
-     $body_contact .= '<br><table id="tabla_agenda" class="table table-striped table-bordered table-hover">';
+     $body_contact .= '<br><table id="tabla_agenda" class="table table-striped  table-hover">';
      $nav = null;
      $contact = $sales->Get_ContactProspect($prospect_data['id_prospect']);
      if($sales->Get_ContactCount() == 0){
@@ -276,7 +275,7 @@
     //FIN SISTEMA DE AGENDA
     
    
-     //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml"
+     //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml.bak"
      $patterns = array(
          "%{script_form}%"=>$script_title,
          "%{title_dir_prospecto}%" => $title_dir,
