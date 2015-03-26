@@ -364,8 +364,8 @@ class ProspectController extends MysqlConection {
         }
     }
     
-    public function GetEntrance($dateFrom = null , $dateTo = null){
-        
+    public function GetEntrance(){
+        //PROCEDIMIENTO ALMACENADO FAVOR VER LA BASE DE DATOS ....
         return parent::RawQuery("call ProcGetEntrance()");
     }
     
