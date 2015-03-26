@@ -24,12 +24,12 @@ foreach($result as $key=>$value){
              }
             $print .= '</div>';
     $print.= '<div class="timeline-body">';
-            $time_ago = FunctionsController::Get_TimeAgo($value['fecha']. " " . $value['hora']);
+            $time_ago = FunctionsController::Get_TimeAgo($value['date']. " " . $value['hour']);
             $print .= '<div class="timeline-body-arrow"></div>';
             $print .= '<div class="timeline-body-head">';
             $print .= '<div class="timeline-body-head-caption">';
             $print .= '<a href="#" class="timeline-body-title font-blue-madison">' . $value['Uname'] .'</a>';
-            $print .= '<span class="timeline-body-time font-grey-cascade">' . $time_ago . '</span>';
+            $print .= '<span class="timeline-body-time font-grey-cascade">' . $time_ago  . '</span>';
             $print .= '</div>';
             $print .= '</div>';
             $print .= '<div class="timeline-body-head-actions">';
