@@ -366,15 +366,20 @@ class ProspectController extends MysqlConection {
     
     public function GetEntrance(){
         //PROCEDIMIENTO ALMACENADO FAVOR VER LA BASE DE DATOS ....
+       
+        $this->CheckOldEntrances();
         return parent::RawQuery("call ProcGetEntrance()");
     }
     
-    
-    public function DestroyEntrance($id_entrance){
-        
+    protected function CheckOldEntrances(){
+         $conn = new MysqlConection();
+         $result = $conn->RawQuery("call ProcGetOldEntrace()");
+         if(count($result) >= 1){
+            foreach ($result as $key=>$value){
+                parent::Delete("sales_entradas", "id_entrada LIKE " . $value['id_entrada']);
+            }
+         }
     }
     
-    
-
     
 }
