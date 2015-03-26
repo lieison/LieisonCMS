@@ -38,7 +38,7 @@
 <div class="portlet">
 <div class="portlet-title">
 		<div class="caption" >
-                       <i class="fa fa-users"></i>Busca Un prospecto
+                       <i class="fa fa-users"></i>Busca Un Prospecto
 		</div>
 </div>
 <div class="portlet-body form" align="center">
@@ -75,7 +75,7 @@
 <div class="portlet ">
 	<div class="portlet-title">
 		<div class="caption" >
-                        <i class="fa fa-eye"></i> Ultimas Visitas 
+                        <i class="fa fa-eye"></i> Ultimas Visitas
 		</div>
         </div>
     <table >
