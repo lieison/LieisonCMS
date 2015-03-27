@@ -327,9 +327,17 @@ class ProspectController extends MysqlConection {
      * 
      */
     
+    public function InitBitacora($id_prospect){
+        $this->QUERY = "SELECT * FROM sales_prospect_bitacora WHERE id_prospect LIKE $id_prospect";
+        $result = parent::RawQuery($this->QUERY);
+        if(count($result)==0){
+            
+        }
+    }
+    
     
     public function GetBitacora($id_prospect){
-        
+          
     }
     
     
