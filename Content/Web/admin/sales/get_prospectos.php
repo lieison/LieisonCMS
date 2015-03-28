@@ -289,7 +289,7 @@
               $body_contact .= '<tr id="child' . (string) $c_v['id_prospect_contact']  . '" class="odd gradeX">';
               $body_contact .= "<td>" . $c_v['nombres'] . " " . $c_v['apellidos'] . "</td>";
               $body_contact .= "<td>" . $c_v['titulo'] .  "</td>";
-              $body_contact .= "<td>" . $c_v['email'] . "</td>";
+              $body_contact .= "<td>" . '<button type="button" onclick="EmailContact(' . "'" .  $c_v['email'] . "'"  .');" class=" btn btn-info"><i class="fa fa-envelope-o"></i></i></i></button>'  . "</td>";
               $body_contact .= "<td><button type='button' class='btn btn-success' " .  'onclick="ShowNotes('   . "'" . htmlspecialchars($c_v['notas'])  . "'" . ');"' . ">" . '<i class="fa fa-comment"></i>' ."</button></td>";
               $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn btn-info"><i class="fa fa-phone"></i></i></button>'  .  "";
               $body_contact .= "" . '<button type="button" onclick="NewPhoneContact(' . $c_v['id_prospect_contact'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";

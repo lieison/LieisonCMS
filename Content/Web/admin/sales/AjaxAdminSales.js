@@ -212,6 +212,26 @@ function SaveNotes(id_prospect)
     $('#id_notes_actions').html('<button type="button" onclick="ProspectEditNotes(' + id_prospect + ');" class="btn blue">Agregar Notas </button>');
 }
 
+function EmailContact(email){
+   
+   
+   
+   var mail_body = '<div class="form-group" align="center">';
+       mail_body += '<div class="input-group">';
+       mail_body += '<span class="input-group-addon"><a href="mailto:' + email + '" target="_blank" class="btn btn-primary" ><i class="fa fa-paper-plane-o"></i></a></span>';
+       mail_body += '<input type="text" value="' + email + '" id="clipmail" name="clipmail" class="form-control"/>';
+       mail_body += '</div>';
+       mail_body += '</div>';
+   
+   bootbox.dialog({
+            title: "Correo Electronico",
+            message: mail_body
+        }); 
+        
+   
+}
+
+
 
 /**FUNCIONES PARA CONTACTO */
 
