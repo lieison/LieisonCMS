@@ -114,6 +114,7 @@ function cargar_entradas(){
 
 function ProspectInitProcess(meta_estado , id_prospect)
 {
+      
       var flag = false;
     
       var parametros = {

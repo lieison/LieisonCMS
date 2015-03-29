@@ -29,6 +29,7 @@
  * 
  * 
  */
+ session_start();
 
  include   '../../../Conf/Include.php';
  
@@ -44,6 +45,12 @@
         switch($_REQUEST['meta_estado'])
         {
             case 0:
+                $id_bitacora = $sales->GetIdBitacora($id_p);
+                $id_type = 0;
+                $id_user = UserController::GetIDUser();
+                $title = "Inicio del proceso";
+                $description = "Este prospecto ha iniciado el proceso de verificacion";
+                $sales->InsertBitacora($id_bitacora, $id_user, $id_type, $title, $description);
                 $print_status .=  " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' value='Terminar Proceso' id='cmdmeta_estado' />";
                 break;
             case 1:
@@ -93,9 +100,11 @@
         $sales->NewEntrance($id_user, $id_p, $date, $time);
        
      //TERMINA EL REGISTRO DE ENTRADA
+        $prospect_data = $sales->Get_Prospect_ById($id_p);//obtener los datos por medio del id
+    
+     //CREACION DE LA BITACORA ...
+       $sales->InitBitacora($id_p);
 
-     $prospect_data = $sales->Get_Prospect_ById($id_p);//obtener los datos por medio del id
-     
      //verifica si los datos del prospecto existe
      if (count($prospect_data) == 0) {
         exit();
@@ -207,19 +216,17 @@
     //FIN DE NOTAS
     
     //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
+     
+    
      $action_title = "Bitacora";
-     $button_init_bitacora = '<button type="button" class="btn btn-success " ><i class="fa fa-play">&nbspINICIAR</i></button>';
-     
-     
-     $bitacora = $sales->GetBitacora($prospect_data['id_prospect']);
-     if(count($bitacora) == 0){
-
+     $bitacora_counter = $sales->GetBitacorLogCount($prospect_data['id_prospect']);
+     if(count($bitacora_counter) == 0){
         $action_form = '<div class="form-body">';  
         $action_form .= '<div class="alert alert-danger" role="alert">';
         $action_form .= '<i class="fa fa-exclamation-triangle"></i>';
         $action_form .= '<span>&nbsp&nbsp<b>NO SE HA INICIADO LA BITACORA</b>'
                 . '&nbsp&nbsp<img src="../img/assert/flechaderecha_naranja.png" width="50" height="20" />'
-                . '&nbsp&nbsp&nbsp' . $button_init_bitacora . '</span>';
+                . '&nbsp&nbsp&nbsp<b>INICIE EL PROCESO</b> </span>';
         $action_form .= "</div>";
         $action_form .= '</div>';
 
@@ -229,7 +236,7 @@
         $action_form = '<div class="form-body">'; 
         $action_form .= '<div class="form-actions">';
         $action_form .= '<div class="col-md-offset-4 col-md-8">';
-        $action_form .= '</div>';
+        $action_form .= 'SE HA INICIADO LA BITACORA ... ALSUAVE NO ESTA PROGRAMADA ...</div>';
         $action_form .= '</div>';
         $action_form .= '</div>';
      }
@@ -354,6 +361,8 @@ else{
   
     echo $val;
 }
+
+unset($sales);
 
 ?>
 

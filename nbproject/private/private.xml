@@ -2,11 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/edit_prospect.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_gestion_usuarios.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/login.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/FunctionsController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/GetLogin.php</file>
@@ -19,10 +17,10 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/getexist_prospect.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/inbox.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_entradas.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/DashboardController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/LogoutPage.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Google/GoogleTranslate.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/View/ViewClass.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_add_prospecto.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PageController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/UserController.php</file>
@@ -32,6 +30,7 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ajax_add_prospect.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/front_inbox.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/View/Admin/View.phtml</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/AjaxAdminSales.js</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/AjaxFunctions.js</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_prospectos.php</file>
@@ -43,9 +42,8 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/EditControlPage.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/AjaxAddSales.js</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_add_prospect.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewEditProspecto.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewAdminProspecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewEditProspecto.php</file>
         </group>
->>>>>>> origin/master
     </open-files>
 </project-private>

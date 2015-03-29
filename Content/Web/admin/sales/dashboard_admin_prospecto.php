@@ -53,6 +53,7 @@
     $footer .= 'cargar_prospectos();';
     $footer .= 'cargar_entradas();';
 
+
     
     $footer_end = '<script src="AjaxAdminSales.js"></script>';
     $footer_end .= '<script src="../js/bootbox.js"></script>';
