@@ -381,7 +381,7 @@ class ProspectController extends MysqlConection {
     public function GetBitacorLogCount($id_prospect){
         $this->QUERY = "SELECT count(*) as 'counter' FROM sales_prospect_bitacora
                         INNER JOIN sales_prospect_bitacora_log ON  
-                         sales_prospect_bitacora.id_bitacora=sales_prospect_bitacora_log.id_bitacora 
+                        sales_prospect_bitacora.id_bitacora=sales_prospect_bitacora_log.id_bitacora 
                         WHERE  sales_prospect_bitacora.id_prospecto LIKE $id_prospect";
         $result = parent::RawQuery($this->QUERY);
         return $result[0]['counter'];

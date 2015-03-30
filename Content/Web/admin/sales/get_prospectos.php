@@ -218,9 +218,10 @@
     //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
      
     
-     $action_title = "Bitacora";
+     
      $bitacora_counter = $sales->GetBitacorLogCount($prospect_data['id_prospect']);
-     if(count($bitacora_counter) == 0){
+     if($bitacora_counter == 0){
+         
         $action_form = '<div class="form-body">';  
         $action_form .= '<div class="alert alert-danger" role="alert">';
         $action_form .= '<i class="fa fa-exclamation-triangle"></i>';
@@ -229,19 +230,16 @@
                 . '&nbsp&nbsp&nbsp<b>INICIE EL PROCESO</b> </span>';
         $action_form .= "</div>";
         $action_form .= '</div>';
-
      }
      else{
          
-        $action_form = '<div class="form-body">'; 
-        $action_form .= '<div class="form-actions">';
-        $action_form .= '<div class="col-md-offset-4 col-md-8">';
-        $action_form .= 'SE HA INICIADO LA BITACORA ... ALSUAVE NO ESTA PROGRAMADA ...</div>';
-        $action_form .= '</div>';
-        $action_form .= '</div>';
+         $action_form = '<div class="scroller" style="height: 305px;" '
+                 . 'data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">'
+                 . '<div class="general-item-list">';
+         $action_form .= '</div></div>';
      }
-    
-     
+         
+     $action_title = "Bitacora  (<b>$bitacora_counter</b>)";
     //FIN DE TODAS LAS ACCIONES BITACORA
      
      

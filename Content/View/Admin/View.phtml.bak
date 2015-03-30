@@ -104,7 +104,7 @@
                                 <?php 
                                     /**
                                      *  ESTA FUNCION SE AGREGARAN LOS DROPDOWN 
-                                     *  COMO INBOX , TASK , NOTIFICACIONES ETC .
+                                     *   COMO INBOX , TASK , NOTIFICACIONES ETC .
                                      * 
                                      *   ADEMAS SE AGREGARAN LOS DISPARADORES DE CADA SISTEMA
                                      */
