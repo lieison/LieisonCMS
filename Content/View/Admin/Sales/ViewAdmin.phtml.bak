@@ -27,21 +27,19 @@
 		%{prospect_info}%
 	</div>
 </div>
-					<!-- END SAMPLE FORM PORTLET-->
-					<!-- BEGIN SAMPLE FORM PORTLET-->
-                        <div class="portlet box blue">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-share-square-o"></i> %{social_title}%
-							</div>
+<div class="portlet box blue">
+	<div class="portlet-title">
+		<div class="caption">
+                    <i class="fa fa-share-square-o"></i> %{social_title}%
+		</div>
 							
-						</div>
-						<div class="portlet-body form">
-                                                    <form class="form-horizontal" role="form">
-                                                        %{social_info}%
-                                                     </form>
-						</div>
-					</div>
+</div>
+    <div class="portlet-body form">
+         <form class="form-horizontal" role="form">
+              %{social_info}%
+         </form>
+    </div>
+</div>
 				<div class="portlet box green">
 						<div class="portlet-title">
 							<div class="caption">
@@ -57,7 +55,6 @@
 					</div>
 				</div>
 				<div class="col-md-6 ">
-					<!-- BEGIN SAMPLE FORM PORTLET-->
 					<div class="portlet box green ">
 						<div class="portlet-title">
 							<div class="caption" id='bitacora_reload'>

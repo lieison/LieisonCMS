@@ -122,7 +122,6 @@ class DashboardController extends MysqlConection {
             
             
             $side = $value[0];
-            
             if($side["numero"] == 1)
             {
                 
