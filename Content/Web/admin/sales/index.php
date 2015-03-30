@@ -25,9 +25,6 @@
  * 
  *@version 1.0
  *@todo Lieison S.A de C.V 
- * 
- * 
- * 
  */
     session_start();
     
@@ -35,6 +32,7 @@
     include   '../../../Conf/Include.php';
     $header = new Http\Header();
     $header->redirect("dashboard_admin_prospecto.php");
+
   
    
 ?>

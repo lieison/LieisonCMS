@@ -263,6 +263,7 @@ class AdminHeader
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/ckeditor/ckeditor.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>';
+           
       
     }
     

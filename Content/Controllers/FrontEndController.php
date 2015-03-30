@@ -4,6 +4,7 @@
 
 /*
  *FORNT END CONTROLLER NO SE LOGRARA TRABAJAR EN LA VERSION CMS
+ *@deprecate 
  */
 
 

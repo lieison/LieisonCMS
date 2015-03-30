@@ -170,6 +170,14 @@ class ProspectController extends MysqlConection {
     }
     
     
+    
+    /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo obtiene el progreso del prospecto en porcentaje ... %
+    * @param string $id_prospect id del prospecto
+     *@return int percent
+     */ 
     public function Get_ProspectProgress($id_prospect)
     {
         $this->QUERY = "SELECT nombre , direccion , direccion2 , provincia , ciudad , id_pais "
@@ -328,11 +336,55 @@ class ProspectController extends MysqlConection {
      */
     
     public function InitBitacora($id_prospect){
-        $this->QUERY = "SELECT * FROM sales_prospect_bitacora WHERE id_prospect LIKE $id_prospect";
+        $state = true;
+        $this->QUERY = "SELECT count(*) as count FROM sales_prospect_bitacora WHERE id_prospecto LIKE $id_prospect";
         $result = parent::RawQuery($this->QUERY);
-        if(count($result)==0){
-            
+        if($result[0]['count']==0){
+            parent::Insert("sales_prospect_bitacora" , array(
+                "id_prospecto"=>$id_prospect,
+                "fecha"=> FunctionsController::get_date(),
+                "estado"=> 1
+            ));
+            $state = false;
         }
+        return $state;
+    }
+    
+    public function GetIdBitacora($id_prospect){
+        $this->QUERY = "SELECT id_bitacora as id FROM sales_prospect_bitacora WHERE id_prospecto LIKE $id_prospect";
+        $result = parent::RawQuery($this->QUERY);
+        return $result[0]['id'];
+    }
+    
+    
+    public function InsertBitacora($id_bitacora , 
+            $id_user , $id_type , $title ,
+            $description , $date= null , $hour = null){
+        
+        if(SivarApi\Tools\Validation::Is_Empty_OrNull($date) 
+               || SivarApi\Tools\Validation::Is_Empty_OrNull($hour)){
+            $date = FunctionsController::get_date();
+            $hour = FunctionsController::get_time();
+        }
+        
+        return parent::Insert("sales_prospect_bitacora_log" , array(
+            "id_bitacora"=>$id_bitacora,
+            "id_usuario"=>$id_user,
+            "id_tipo"=>$id_type,
+            "titulo"=>$title,
+            "descripcion"=>$description,
+            "fecha"=>$date,
+            "hora"=>$hour
+        ));
+    }
+    
+    public function GetBitacorLogCount($id_prospect){
+        $this->QUERY = "SELECT count(*) as 'counter' FROM sales_prospect_bitacora
+                        INNER JOIN sales_prospect_bitacora_log ON  
+                        sales_prospect_bitacora.id_bitacora=sales_prospect_bitacora_log.id_bitacora 
+                        WHERE  sales_prospect_bitacora.id_prospecto LIKE $id_prospect";
+        $result = parent::RawQuery($this->QUERY);
+        return $result[0]['counter'];
     }
     
     
@@ -340,8 +392,9 @@ class ProspectController extends MysqlConection {
           
     }
     
-    
-    
+
+
+
     /**
      * -------------------------------------------------------------------------------
      * REGISTRO DE ENTRADAS 
@@ -374,7 +427,6 @@ class ProspectController extends MysqlConection {
     
     public function GetEntrance(){
         //PROCEDIMIENTO ALMACENADO FAVOR VER LA BASE DE DATOS ....
-       
         $this->CheckOldEntrances();
         return parent::RawQuery("call ProcGetEntrance()");
     }

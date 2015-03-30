@@ -29,6 +29,7 @@
  * 
  * 
  */
+ session_start();
 
  include   '../../../Conf/Include.php';
  
@@ -44,6 +45,12 @@
         switch($_REQUEST['meta_estado'])
         {
             case 0:
+                $id_bitacora = $sales->GetIdBitacora($id_p);
+                $id_type = 0;
+                $id_user = UserController::GetIDUser();
+                $title = "Inicio del proceso";
+                $description = "Este prospecto ha iniciado el proceso de verificacion";
+                $sales->InsertBitacora($id_bitacora, $id_user, $id_type, $title, $description);
                 $print_status .=  " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' value='Terminar Proceso' id='cmdmeta_estado' />";
                 break;
             case 1:
@@ -93,9 +100,11 @@
         $sales->NewEntrance($id_user, $id_p, $date, $time);
        
      //TERMINA EL REGISTRO DE ENTRADA
+        $prospect_data = $sales->Get_Prospect_ById($id_p);//obtener los datos por medio del id
+    
+     //CREACION DE LA BITACORA ...
+       $sales->InitBitacora($id_p);
 
-     $prospect_data = $sales->Get_Prospect_ById($id_p);//obtener los datos por medio del id
-     
      //verifica si los datos del prospecto existe
      if (count($prospect_data) == 0) {
         exit();
@@ -207,34 +216,30 @@
     //FIN DE NOTAS
     
     //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
-     $action_title = "Bitacora";
-     $button_init_bitacora = '<button type="button" class="btn btn-success " ><i class="fa fa-play">&nbspINICIAR</i></button>';
      
+    
      
-     $bitacora = $sales->GetBitacora($prospect_data['id_prospect']);
-     if(count($bitacora) == 0){
-
+     $bitacora_counter = $sales->GetBitacorLogCount($prospect_data['id_prospect']);
+     if($bitacora_counter == 0){
+         
         $action_form = '<div class="form-body">';  
         $action_form .= '<div class="alert alert-danger" role="alert">';
         $action_form .= '<i class="fa fa-exclamation-triangle"></i>';
         $action_form .= '<span>&nbsp&nbsp<b>NO SE HA INICIADO LA BITACORA</b>'
                 . '&nbsp&nbsp<img src="../img/assert/flechaderecha_naranja.png" width="50" height="20" />'
-                . '&nbsp&nbsp&nbsp' . $button_init_bitacora . '</span>';
+                . '&nbsp&nbsp&nbsp<b>INICIE EL PROCESO</b> </span>';
         $action_form .= "</div>";
         $action_form .= '</div>';
-
      }
      else{
          
-        $action_form = '<div class="form-body">'; 
-        $action_form .= '<div class="form-actions">';
-        $action_form .= '<div class="col-md-offset-4 col-md-8">';
-        $action_form .= '</div>';
-        $action_form .= '</div>';
-        $action_form .= '</div>';
+         $action_form = '<div class="scroller" style="height: 305px;" '
+                 . 'data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">'
+                 . '<div class="general-item-list">';
+         $action_form .= '</div></div>';
      }
-    
-     
+         
+     $action_title = "Bitacora  (<b>$bitacora_counter</b>)";
     //FIN DE TODAS LAS ACCIONES BITACORA
      
      
@@ -289,7 +294,7 @@
               $body_contact .= '<tr id="child' . (string) $c_v['id_prospect_contact']  . '" class="odd gradeX">';
               $body_contact .= "<td>" . $c_v['nombres'] . " " . $c_v['apellidos'] . "</td>";
               $body_contact .= "<td>" . $c_v['titulo'] .  "</td>";
-              $body_contact .= "<td>" . $c_v['email'] . "</td>";
+              $body_contact .= "<td>" . '<button type="button" onclick="EmailContact(' . "'" .  $c_v['email'] . "'"  .');" class=" btn btn-info"><i class="fa fa-envelope-o"></i></i></i></button>'  . "</td>";
               $body_contact .= "<td><button type='button' class='btn btn-success' " .  'onclick="ShowNotes('   . "'" . htmlspecialchars($c_v['notas'])  . "'" . ');"' . ">" . '<i class="fa fa-comment"></i>' ."</button></td>";
               $body_contact .= "<td>" . '<button type="button" onclick="ProspectPhones(' .  $id_contact  .');" class=" btn btn-info"><i class="fa fa-phone"></i></i></button>'  .  "";
               $body_contact .= "" . '<button type="button" onclick="NewPhoneContact(' . $c_v['id_prospect_contact'] . ')" class="btn orange"><i class="fa fa-plus"></i></button>'  .  "";
@@ -354,6 +359,8 @@ else{
   
     echo $val;
 }
+
+unset($sales);
 
 ?>
 

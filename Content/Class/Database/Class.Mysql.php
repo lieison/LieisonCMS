@@ -86,7 +86,7 @@ class MysqlConection extends PDO
                 parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $ex) {
             if($ex->getMessage() == "could not find driver") {
-                    echo "No se pudo encontrar el driver , esta desactivado ...";
+                    echo "<b>Opps !!</d> , El Servidor no <b>Responde</b>";
                 }
             }
     }
@@ -99,7 +99,7 @@ class MysqlConection extends PDO
                parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $ex) {
                 if($ex->getMessage() === "could not find driver"){
-                    echo "No se pudo encontrar el driver , esta desactivado ...";
+                     echo "<b>Opps !!</d> , El Servidor no <b>Responde</b>";
                 }
         }
     }

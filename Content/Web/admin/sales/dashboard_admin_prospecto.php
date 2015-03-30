@@ -27,9 +27,6 @@
  * 
  *@version 1.0
  *@todo Lieison S.A de C.V 
- * 
- * 
- * 
  */
  
     session_start();
@@ -53,13 +50,14 @@
     $footer .= 'cargar_prospectos();';
     $footer .= 'cargar_entradas();';
 
+
     
     $footer_end = '<script src="AjaxAdminSales.js"></script>';
     $footer_end .= '<script src="../js/bootbox.js"></script>';
     $footer_end .= '<script src="../js/bootbox.min.js"></script>';
     $footer_end .= '<script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
                     <script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>';
-    
+
    
     ViewClass::PrepareView("View.phtml", "Admin");
     ViewClass::SetView(ViewClass::SetParamsString($body , $header , $footer , $footer_end));

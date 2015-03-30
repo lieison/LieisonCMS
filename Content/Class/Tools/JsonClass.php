@@ -19,8 +19,6 @@ define("JSON_CLASS", "CLASS");
 
 class Json_class {
     
-    
-    
      private $jason_class = null; 
      private $jason_encode = null;
      

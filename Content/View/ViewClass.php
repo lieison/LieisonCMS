@@ -1,5 +1,35 @@
 <?php
+ /**
+ *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
+ *@copyright (c) 2015, Lieison
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
 
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE. 
+ * 
+ *@version 1.3
+  *     MEJORAS: *TIEMPO DE RESPUESTA EN EL SET VIEW CON LOS PATRONES INDICADOS
+  *              *ADAPTABLE A CUALQUIER VISTA
+  *@version 1.4
+  *     MEJORAS: *PARAMETROS DINAMICOS POR MEDIO DE UN ARCHIVO JSON
+  *              *AGREGA PARAMETROS NECESARIOS EN EL ARCHIVO
+  * 
+ *@todo Sivar Api 2014
+ */
 
  class ViewClass {
      
@@ -18,11 +48,12 @@
          self::$relative_route = $route;
      }
      
-     
      public static function SetView($params = array())
      {
          $folder = null;
-         if (!isset($_COOKIE['FOLDER'])) {
+         
+        /* @var $_COOKIE type Nombre del folder o archivo donde se aloja el plugin */
+        if (!isset($_COOKIE['FOLDER'])) {
             $folder = \SivarApi\Tools\Validation::PrimaryFolderPath();
         } else {
             $folder = $_COOKIE['FOLDER'];
@@ -43,22 +74,14 @@
                     copy($route, $route . ".bak");
                  }
                  
-                 $temp_file = file_get_contents($route);
-                if(isset($params['B'])){       
-                    if($params['B'] != "%{BODY_CLASS_VIEW}%"){
-                        $temp_file = str_replace("%{BODY_CLASS_VIEW}%", $params['B'] , $temp_file);
-                    }
-                    if($params['H'] != "%{HEADER_CLASS_VIEW}%"){
-                        $temp_file = str_replace("%{HEADER_CLASS_VIEW}%", $params['H'] , $temp_file);
-                    }
-                    if($params['F'] != "%{FOOTER_CLASS_VIEW}%"){
-                        $temp_file = str_replace("%{FOOTER_CLASS_VIEW}%", $params['F'] , $temp_file);
-                    }
-                    if($params['F'] != "%{FOOTER_CLASS_VIEW_END}%"){
-                        $temp_file = str_replace("%{FOOTER_CLASS_VIEW_END}%", $params['FE'] , $temp_file);
+                $temp_file = file_get_contents($route);
+                
+                if($params['type'] == "static"){  
+                    foreach($params['pattern'] as $key=>$value){
+                        $temp_file = str_replace($key, $value , $temp_file);
                     }
                 }
-                else if(isset($params['pattern'])){
+                else if($params['type'] == "dynamic"){
                     foreach ($params['pattern']  as $key=>$value){
                         $temp_file = str_replace($key, $value, $temp_file);
                     }
@@ -81,14 +104,38 @@
              $header = "%{HEADER_CLASS_VIEW}%", $footer = "%{FOOTER_CLASS_VIEW}%" , 
              $footer_end = "%{FOOTER_CLASS_VIEW_END}%")
      {
-         return array(  "B"=>$body , "H"=>$header , "F"=>$footer , "FE"=>$footer_end);
+         return array( "type"=>"static", "pattern"=>
+             array("%{BODY_CLASS_VIEW}%"=>$body ,
+                 "%{HEADER_CLASS_VIEW}%"=>$header ,
+                 "%{FOOTER_CLASS_VIEW}%"=>$footer , 
+                 "%{FOOTER_CLASS_VIEW_END}%"=>$footer_end
+               ));
      }
-     
      
      public static function SetPatternString($patterns){
-         return array("pattern" => $patterns);
+         return array( "type"=>"dynamic" , "pattern" => $patterns);
      }
      
+     
+     
+     public function CreateNewPattern($pattern_name){
 
+     }
+     
+     public function AddNewParamInPattern(string $pattern_name , array $param ){
+         
+     }
+     
+     public function DeletePattern($pattern_name){
+         
+     }
+     
+     public function DeleteParamInPatter(string $pattern_name , array $param_key ){
+         
+     }
+     
+   
     
 }
+
+

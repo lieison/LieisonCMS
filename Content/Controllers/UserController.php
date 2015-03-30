@@ -135,5 +135,9 @@ class UserController extends UserModel  {
        }
       
     }
+    
+    public static function GetIDUser(){
+        return $_SESSION['login']['id'];
+    }
 
 }
