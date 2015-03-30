@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group/>
-=======
-        <group>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/front_inbox.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/AjaxAdminSales.js</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/GetLogin.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/FunctionsController.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/login.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_prospectos.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/lock.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/ProspectController.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/perfil.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_entradas.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/inbox.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/LogoutPage.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Google/GoogleTranslate.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PageController.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewAdminProspecto.php</file>
-        </group>
->>>>>>> origin/master
     </open-files>
 </project-private>
