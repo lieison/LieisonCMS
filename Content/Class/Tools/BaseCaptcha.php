@@ -51,7 +51,6 @@ class BaseCaptcha {
      * o usa la llaves siguientes
      * 
      *  public = 6LcHKeMSAAAAAOT44ko9ABNagbFST3RAMrinllIg
-     * 
      *  private = 6LcHKeMSAAAAAOAoANaejOfQyUw5UyTpGbaeB7YX
      * </code>
      * 

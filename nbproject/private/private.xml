@@ -5,11 +5,15 @@
         <group>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/edit_prospect.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/dashboard_gestion_usuarios.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/JSON.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/FunctionsController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/Calendar.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/Captcha.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_edit_prospect.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/LogoutPage.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/UrlClass.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/View/ViewClass.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_add_prospecto.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_paises.php</file>
@@ -17,11 +21,13 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ajax_add_prospect.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/front_inbox.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/View/ImageRender.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/Time.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_edit_prospecto.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/perfil.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/EditControlPage.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_add_prospect.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/BaseCaptcha.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_admin_prospecto.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ControlPage/GetLogin.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/login.php</file>
@@ -37,8 +43,10 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PageController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/Validation.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/UserController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/Encriptacion.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/View/ViewLoader.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/View/Admin/Sales/ViewAdmin.phtml.bak</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/CurlAccess.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ajax_contact.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Conf/Include.php</file>
@@ -51,6 +59,7 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/AjaxAddSales.js</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Database/Class.Mysql.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Models/MessageModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Tools/JsonClass.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewEditProspecto.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewAdminProspecto.php</file>
         </group>
