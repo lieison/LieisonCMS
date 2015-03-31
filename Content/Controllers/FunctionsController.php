@@ -61,13 +61,14 @@ class FunctionsController {
     
     public static function  get_date()
     {
-        return  date("Y-m-d");
+        $time = new \SivarApi\Tools\Time(short);
+        return  $time->GetFormatDate();
     }
     
     public static function get_time()
     {
-         $d = new DateTime();
-         return $d->format("H:i:s");
+         $time = new \SivarApi\Tools\Time(hour);
+         return $time->GetFormatDate();
     }
 
     public static function get_directory_tree($directory , $pattern = null)
@@ -79,55 +80,14 @@ class FunctionsController {
      
     public static function DiffHour($horaini,$horafin)
     {
-	$horai=substr($horaini,0,2);
-	$mini=substr($horaini,3,2);
-	$segi=substr($horaini,6,2);
-
-	$horaf=substr($horafin,0,2);
-	$minf=substr($horafin,3,2);
-	$segf=substr($horafin,6,2);
-
-	$ini=((($horai*60)*60)+($mini*60)+$segi);
-	$fin=((($horaf*60)*60)+($minf*60)+$segf);
-
-	$dif=$fin-$ini;
-
-	$difh=floor($dif/3600);
-	$difm=floor(($dif-($difh*3600))/60);
-	$difs=$dif-($difm*60)-($difh*3600);
-	return date("H-i-s",mktime($difh,$difm,$difs));
+        \SivarApi\Tools\Time::DiffHour($horaini, $horafin);
     }
     
     public static function Get_TimeAgo($datetime, $full = false) 
     {
    
-        $now = new DateTime;
-        $ago = new DateTime($datetime);
-        $diff = $now->diff($ago);
-
-        $diff->w = floor($diff->d / 7);
-        $diff->d -= $diff->w * 7;
-
-    $string = array(
-        'y' => 'year',
-        'm' => 'month',
-        'w' => 'week',
-        'd' => 'day',
-        'h' => 'hour',
-        'i' => 'minute',
-        's' => 'second',
-    );
-    foreach ($string as $k => &$v) {
-        if ($diff->$k) {
-            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-        } else {
-            unset($string[$k]);
-        }
-    }
-
-     if (!$full) $string = array_slice($string, 0, 1);
-        return $string ? implode(', ', $string) . ' ago ' : ' Just Moment';
-
+        $timeago = new \SivarApi\Tools\Time();
+        return $timeago->GetTimeAgo($datetime, $full);
     }
      
     public static function get_actual_page()
