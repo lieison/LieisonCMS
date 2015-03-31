@@ -33,6 +33,5 @@
     $header = new Http\Header();
     $header->redirect("dashboard_admin_prospecto.php");
 
-  
-   
+    
 ?>
