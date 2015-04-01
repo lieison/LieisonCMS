@@ -116,6 +116,11 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Pdf/exportPDF.class.php';
 //require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/GoPaypal.class.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php';
 
+/**
+ * PLUGIN CLASS
+ */
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Plugins/PluginClass.php';
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Plugins/InstallClass.php';
 
 /**AGREGANDO PLUGINS**/
 
