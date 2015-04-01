@@ -6,7 +6,7 @@
 <div class="portlet-title">
 <div class="caption">
   <i class="fa fa-globe"></i> %{title_dir_prospecto}%
- </div>
+</div>
 <div class="tools">
 %{action_button}%
 </div>
@@ -60,6 +60,9 @@
 							<div class="caption" id='bitacora_reload'>
 								<i class="fa fa-book"></i> %{title_action_form}%
 							</div>
+                                                 <div class="tools">
+                                                    %{action_form_button}%
+                                                </div>           
 						</div>
 						<div class="portlet-body form">
                                                     %{action_form}%      

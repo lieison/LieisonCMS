@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en" class="no-js">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
-
 <head>
     
- 
 <?php 
-
     
+    //SivarApi\Tools\Sessions\Session::InitSession();
+
     $header = new Http\Header(); //clase header , ver en documentacion
     
     if(!isset($_SESSION['login'])): //verifica si existe sesion 
@@ -20,20 +18,22 @@
     endif;
 
     //VARIABLES DE SESION , ESTAS VARIABLES SE DECLARAN AL INICIAR EL LOGUEO 
-    $usuario = $_SESSION['login']['user'];
-    $rol = $_SESSION['login']['rol'];
-    $nombre = $_SESSION['login']['nombre'];
-    $mail = $_SESSION['login']['email'];
-    $activo = $_SESSION['login']['activo'];
-    $id_user = $_SESSION['login']['id'];
+    $SessionUser = Session::GetSession("login");
+    $usuario = $SessionUser['user'];
+    $rol = $SessionUser['rol'];
+    $nombre = $SessionUser['nombre'];
+    $mail = $SessionUser['email'];
+    $activo = $SessionUser['activo'];
+    $id_user = $SessionUser['id'];
     
     //VERIFICAR SI EL AVATA ESTA VACIO (ASIGNARLE AVATAR EMPTY) O SI EXISTE AVATAR (EN IMAGEN)
     $imagen = UserController::Verify_Avatar();
     
     //EN CASO DE QUE LA PANTALLA ESTE BLOQUEADA REVISAMOS SI LA SESION DE BLOQUEO EXISTE
     //LUEGO DE ESO VERIFICAMOS SI EL BLOQUEO CONTINUA O SE HA DESHABILITADO
-     if(isset($_SESSION['lock'])):
-        if($_SESSION['lock']== true):
+     
+     if(Session::ExistSession("lock")):
+        if(Session::GetSession("lock") == true):
             $header->redirect("lock.php");
         endif; 
     endif;
@@ -51,6 +51,7 @@
     else :
         $host = $_COOKIE['HOST'];
     endif;
+    
     AdminHeader::$relative_route =  "http://" . $host  . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
     AdminHeader::GetTitle("Lieisoft"); //TITULO INICIAL DEL DASHBOARD
     AdminHeader::GetMeta(); //OBTIENE LOS METAS UTILIZADOS 
@@ -81,8 +82,6 @@
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
-    
-        
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
@@ -180,7 +179,6 @@
                                 else:
                                     AdminHeader::Get_CMS_Title("<b>Tú</b> Tienes una <b>Sesion</b> Abierta en otro navegador"); 
                                 endif;
-                               
                             endif; //EN DADO CASO NO EXISTA LA SESION DE TITULO SE DEFINE POR DEFECTO UNO.
                             
                         ?>
@@ -236,9 +234,9 @@
    Index.init();   
    Index.initDashboardDaterange();
    Index.initJQVMAP(); // init index page's custom scripts
-   Index.initCalendar(); // init index page's custom scripts
-   Index.initChat();
-   Index.initMiniCharts();
+   //Index.initCalendar(); // init index page's custom scripts
+   //Index.initChat();
+  // Index.initMiniCharts();
    Tasks.initDashboardWidget();
 
 
