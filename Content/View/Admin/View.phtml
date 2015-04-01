@@ -175,7 +175,12 @@
                             if(isset($_SESSION['title'])): //AGREGA EL TITULO EN LA CABECERA
                                 AdminHeader::Get_CMS_Title($_SESSION['title']); 
                             else:
-                                AdminHeader::Get_CMS_Title("Lieisoft <b>" . $rol .  "</b> Dashboard"); 
+                                if(!isset($_SESSION['DUPLICATE_SESSION'])):
+                                    AdminHeader::Get_CMS_Title("Lieisoft Dashboard <b>" . $nombre .  "</b>"); 
+                                else:
+                                    AdminHeader::Get_CMS_Title("<b>Tú</b> Tienes una <b>Sesion</b> Abierta en otro navegador"); 
+                                endif;
+                               
                             endif; //EN DADO CASO NO EXISTA LA SESION DE TITULO SE DEFINE POR DEFECTO UNO.
                             
                         ?>

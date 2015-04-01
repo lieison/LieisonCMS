@@ -28,12 +28,14 @@ class PluginClass extends \_Directory {
         if(!is_array($result)){
             return null;
         }
+        
         foreach($result as $k=>$v){
             if( $v['root'] == $this->path && strtolower($v['filename']) == "install.php" ){ 
                 $flag_install = array( 0=>$v['root'] , 1=> $v['filename'] );
             }
             if( $v['root'] == $this->path && strtolower($v['filename']) == "index.php" ){ $flag_install = true;}
         }
+        
         if($flag_index == TRUE && is_array($flag_install))
         {
             return $flag_install;
