@@ -50,7 +50,7 @@ class AdminController extends MysqlConection {
         
         $password = \SivarApi\Tools\Encriptacion\Encriptacion::encrypt($password);
         
-        $this->query = "SELECT usuario.id_usuario as id , login.user , login.activo , login.rol "
+        $this->query = "SELECT login.id_login as id_log , usuario.id_usuario as id , login.user , login.activo , login.rol "
                     . ", concat(usuario.nombre , ' ' , usuario.apellido) as nombre"
                     . ", usuario.email , usuario.imagen , login.password FROM login "
                     . " INNER JOIN usuario ON login.id_usuario=usuario.id_usuario "
@@ -75,6 +75,21 @@ class AdminController extends MysqlConection {
         else {
             return FALSE;
         }
+    }
+    
+    
+    public function SessionActive($id_login){
+        $result = parent::RawQuery("SELECT sesion FROM login WHERE id_login LIKE $id_login");
+        if ($result[0]['sesion'] == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    
+    public function UpdateSession($id_login , $status){
+        parent::Update("login" , array("sesion"=>$status) , " id_login LIKE $id_login");
     }
     
     /**
