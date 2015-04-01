@@ -31,11 +31,11 @@
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
     $header = new Http\Header();
-   // $header->redirect("dashboard_admin_prospecto.php");
+    $header->redirect("dashboard_admin_prospecto.php");
     
-    $path_origin = "../";
+    /*$path_origin = "../";
     $path_plugin = "../prueba_plugin.zip";
     $plugin = new \Plugin\PluginClass($path_origin, $path_plugin);
-    print_r($plugin->UnZipPlugin());
+    print_r($plugin->UnZipPlugin());*/
     
 ?>
