@@ -1,18 +1,13 @@
 <!DOCTYPE html>
-
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en" class="no-js">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
-
 <head>
     
- 
 <?php 
-
-    
     $header = new Http\Header(); //clase header , ver en documentacion
     
     if(!isset($_SESSION['login'])): //verifica si existe sesion 
@@ -51,6 +46,7 @@
     else :
         $host = $_COOKIE['HOST'];
     endif;
+    
     AdminHeader::$relative_route =  "http://" . $host  . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
     AdminHeader::GetTitle("Lieisoft"); //TITULO INICIAL DEL DASHBOARD
     AdminHeader::GetMeta(); //OBTIENE LOS METAS UTILIZADOS 
@@ -81,8 +77,6 @@
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
 	<!-- BEGIN HEADER INNER -->
-    
-        
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
@@ -180,7 +174,6 @@
                                 else:
                                     AdminHeader::Get_CMS_Title("<b>Tú</b> Tienes una <b>Sesion</b> Abierta en otro navegador"); 
                                 endif;
-                               
                             endif; //EN DADO CASO NO EXISTA LA SESION DE TITULO SE DEFINE POR DEFECTO UNO.
                             
                         ?>
@@ -236,9 +229,9 @@
    Index.init();   
    Index.initDashboardDaterange();
    Index.initJQVMAP(); // init index page's custom scripts
-   Index.initCalendar(); // init index page's custom scripts
-   Index.initChat();
-   Index.initMiniCharts();
+   //Index.initCalendar(); // init index page's custom scripts
+   //Index.initChat();
+  // Index.initMiniCharts();
    Tasks.initDashboardWidget();
 
 

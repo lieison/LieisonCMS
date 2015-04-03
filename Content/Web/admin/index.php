@@ -47,6 +47,7 @@
     
     //PREPARANDO LA VISTA ...
     ViewClass::PrepareView("View.phtml", "Admin");
-    //LLAMANDO LA VISTA ... OBTENIENDO DATOS
+    
+    //LLAMANDO LA VISTA
     ViewClass::SetView(ViewClass::SetParamsString("" ,"" , "" , ""));
     

@@ -601,8 +601,9 @@ function DeletePhone(id_phone)
 /**FUNCIONES DE LA BITACORA **/
 
 
-function InitBitacora(){
-    
+function InsertBitacora(id_bitacora , id_user)
+{
+    alert(id_user + " -->" + id_bitacora);
 }
 
 
