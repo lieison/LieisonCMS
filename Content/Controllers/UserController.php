@@ -22,7 +22,9 @@ class UserController extends UserModel  {
         $password = $result[0]['password'];
         if (strcmp(\SivarApi\Tools\Encriptacion\Encriptacion::encrypt($actual_password), $password) == 0) {
             $new_password = \SivarApi\Tools\Encriptacion\Encriptacion::encrypt($new_password);
-            $change = parent::Update("login", array("password" => $new_password), "id_usuario LIKE '$this->ID_USER'");
+            $change = parent::Update("login", 
+                                    array("password" => $new_password), 
+                                    "id_usuario LIKE '$this->ID_USER'");
             return $change;
         } else {
             return false;
@@ -106,7 +108,7 @@ class UserController extends UserModel  {
     }
     
     public function set_contract($id_contrato){
-        $fecha = date("y-m-d");
+        $fecha = FunctionsController::get_date();
         $update = parent::Update("contrato", array("aceptado"=>"1" ,
                 "fecha_contrato"=>$fecha) , "id_contrato LIKE $id_contrato");
         return $update;

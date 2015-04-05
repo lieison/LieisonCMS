@@ -8,6 +8,9 @@
 <head>
     
 <?php 
+    
+    //SivarApi\Tools\Sessions\Session::InitSession();
+
     $header = new Http\Header(); //clase header , ver en documentacion
     
     if(!isset($_SESSION['login'])): //verifica si existe sesion 
@@ -15,20 +18,22 @@
     endif;
 
     //VARIABLES DE SESION , ESTAS VARIABLES SE DECLARAN AL INICIAR EL LOGUEO 
-    $usuario = $_SESSION['login']['user'];
-    $rol = $_SESSION['login']['rol'];
-    $nombre = $_SESSION['login']['nombre'];
-    $mail = $_SESSION['login']['email'];
-    $activo = $_SESSION['login']['activo'];
-    $id_user = $_SESSION['login']['id'];
+    $SessionUser = Session::GetSession("login");
+    $usuario = $SessionUser['user'];
+    $rol = $SessionUser['rol'];
+    $nombre = $SessionUser['nombre'];
+    $mail = $SessionUser['email'];
+    $activo = $SessionUser['activo'];
+    $id_user = $SessionUser['id'];
     
     //VERIFICAR SI EL AVATA ESTA VACIO (ASIGNARLE AVATAR EMPTY) O SI EXISTE AVATAR (EN IMAGEN)
     $imagen = UserController::Verify_Avatar();
     
     //EN CASO DE QUE LA PANTALLA ESTE BLOQUEADA REVISAMOS SI LA SESION DE BLOQUEO EXISTE
     //LUEGO DE ESO VERIFICAMOS SI EL BLOQUEO CONTINUA O SE HA DESHABILITADO
-     if(isset($_SESSION['lock'])):
-        if($_SESSION['lock']== true):
+     
+     if(Session::ExistSession("lock")):
+        if(Session::GetSession("lock") == true):
             $header->redirect("lock.php");
         endif; 
     endif;

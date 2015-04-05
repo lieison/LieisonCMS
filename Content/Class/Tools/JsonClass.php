@@ -22,8 +22,7 @@ class Json_class {
      private $jason_class = null; 
      private $jason_encode = null;
      
-     
-    
+
      public function __construct() {
          
      }
