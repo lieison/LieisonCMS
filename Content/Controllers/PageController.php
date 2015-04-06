@@ -11,7 +11,7 @@
  *
  * @author rolandoantonio
  */
-class PageController extends MysqlConection {
+class PageController extends PageModel{
     
     var $QUERY = null;
     

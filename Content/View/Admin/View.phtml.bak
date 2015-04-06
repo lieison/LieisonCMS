@@ -214,7 +214,7 @@
 
 <script>
     
-   <?php AdminHeader::GetJsAfterLoad(); ?>
+  <?php AdminHeader::GetJsAfterLoad(); ?>
     
  
   jQuery(document).ready(function() {    

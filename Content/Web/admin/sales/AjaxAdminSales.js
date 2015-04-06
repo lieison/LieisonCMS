@@ -124,8 +124,29 @@ function ProspectInitProcess(meta_estado , id_prospect)
     
       if(meta_estado ===1 )
       {
-         bootbox.confirm("¿Desea Terminar el Proceso ... Una vez terminado bla bla?", function(result) {
-               flag = result;
+         bootbox.confirm("¿Desea Terminar el Proceso ... Una vez terminado bla bla?",
+         function(result) {
+               if(result === true){
+                 
+                 var params = {
+                      "id_prospect": id_prospect
+                 };
+                  
+                  $.ajax({
+                      type: "POST",
+                      url: "get_prospectos.php",
+                      data: params,
+                      beforeSend: function()
+                      {
+                          $("#meta_estado").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
+                      },
+                      success: function(value){
+                          $("#meta_estado").html(value);
+                      }
+                  });
+                   
+               }
+               return;
         }); 
       }
       else{
@@ -254,7 +275,7 @@ function ProspectPhones(contacts)
             data_message += '<th></th>';
             data_message += '</tr></thead><tbody>';
         
-        var decode_  = eval('(' + data_contact  + ')');   
+        var decode_  = eval('(' + data_contact  + ')'); 
         $.each(decode_, function(k,v){
             data_message += '<tr id="Phone' + v.id_phone_contact + '">';
             data_message += '<td><div id="Pname' + v.id_phone_contact + '">' + v.phone_name + '</div></td>';
@@ -583,6 +604,9 @@ function DeletePhone(id_phone)
                var id_c = $.trim(result);
                var data_contact =$("#" + id_c ).val();
                var decode_  = eval('(' + data_contact  + ')');  
+               //JSON
+               //ORDENA LA DATA JSON splice 
+               //REALIZA ESTO eliminando asi el valor 
                $.each(decode_ , function(k,v){
                    if(v.id_phone_contact == id_phone)
                    {
@@ -603,8 +627,130 @@ function DeletePhone(id_phone)
 
 function InsertBitacora(id_bitacora , id_user)
 {
-    alert(id_user + " -->" + id_bitacora);
+
+   
+   var json_code = $("#BitacoraTypes").val();
+   var json_decode = eval('(' + json_code + ')');
+    
+   var type_box = '<select class="form-control" id="Btype">';
+        $.each(json_decode , function(k,v){
+            type_box += "<option value='" + v.id + "'>" + v.title + "</option>";
+        });
+        type_box += "</select>";
+
+
+    var view_ = "<br><label for='Btitle'>Titulo: </label><input class='form-control' id='Btitle' value='' />";
+        view_ += "<label for=''>Tipo:</label>";
+        view_ += type_box;
+        view_ += "<label for='Btitle'>Descripcion: </label> <textarea class='form-control' rows='5' id='Bdescription' ></textarea>";
+        
+    bootbox.confirm(view_, function(result) {
+      
+       if(result === true){
+
+            var params = {
+                "id_bitacora" : id_bitacora,
+                "id_user": id_user,
+                "id_type": $("#Btype").val(),
+                "title": $("#Btitle").val(),
+                "description": $("#Bdescription").val()
+            };
+            
+            if($("#Btitle").val().length === 0){
+                alert("Debe de contener un titulo ");
+                InsertBitacora(id_bitacora , id_user);
+                return;
+            }
+            else if($("#Bdescription").val().length === 0){
+                alert("Describa el log de la bitacora , este campo no debe estar vacio");
+                InsertBitacora(id_bitacora , id_user);
+                return;
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "set_log_bitacora.php",
+                data: params,
+                success: function(success){
+                    var view_= success;
+                    $("#bitacora_seccion").append(view_);
+                    var counter =  parseInt($("#bitacora_counter").html()) + 1;
+                    $("#bitacora_counter").html(counter);
+                }
+             });
+
+        }
+    }); 
+   
 }
+
+/*NOTIFICACIONES DE LA BITACORA */
+ 
+function notify_bitacora(id_prospect){
+    
+  
+   /**CONFIGURACIONES DEL PRIMER PLANO*/
+    
+   var html = '<div class="clearfix"></div><div><span data-notify-text/></div>';
+   
+   $.notify.addStyle('happyblue', {
+        html: html,
+        classes: {
+        base: {
+            "white-space": "nowrap",
+            "background-color": "lightblue",
+            "padding": "5px"
+        },
+        superblue: {
+            "color": "white",
+            "background-color": "blue"
+        }
+       }
+    }); 
+    
+    
+    /*CODE*/
+    
+   var counter =  parseInt($("#bitacora_counter").html());
+   if(GetcountBitacora(counter , id_prospect) === false){
+       return;
+   }
+   
+   $.notify('EL USUARIO TAL , AGREGO EN LA BITACORA', {
+        style: 'happyblue',
+        className: 'superblue',
+        autoHide: true,
+        autoHideDelay: 20000,
+        arrowSize: 5,
+        elementPosition: 'bottom left',
+        globalPosition: 'top right',
+        showAnimation: 'slideDown',
+        showDuration: 400,
+        hideAnimation: 'slideUp',
+        hideDuration: 200,
+        gap: 2
+    });
+    //$.notify("NOTIFICACIONES " + id_prospect , "success");
+}
+
+function GetcountBitacora(counter , id){
+     var params = {
+         "id_prospect": id,
+         "count": counter
+     };
+    
+     $.ajax({
+                type: "POST",
+                url: "set_log_bitacora.php",
+                data: params,
+                success: function(success){
+                    var view_= success;
+                   // $("#bitacora_seccion").append(view_);
+                   //$("#bitacora_counter").html(counter + 1);
+                }
+     });
+}
+
 
 
 
