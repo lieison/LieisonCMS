@@ -7,7 +7,7 @@
   {
     overflow-y: scroll;
     overflow-wrap: scroll;
-    height: 400px;
+    height: 320px;
     width: 100%;
     position: absolute;
   }
@@ -28,10 +28,10 @@
      . "setTimeout('buscar_prospecto(" .$_REQUEST['id'] . ");', 3000);"
      . "}initprospect();"
      . "</script>";
-     //exit();
  }
 
 ?>
+
 <div class="row" id="cargar_admin">
 <?php if(!isset($_REQUEST['id'])): ?>        
 <div class="col-md-4 ">
@@ -44,29 +44,24 @@
 <div class="portlet-body form" align="center">
     <br>
      <div class="form-body">
-         <label class="control-label col-md-4">
-            
-	 </label>
-                              
-                               <select class="form-control select2me" name="options2" id="propecto_buscar">
-												
-                               </select>
-         <br><br>
-					<div class="input-group">
-						<div class="icheck-inline">
-						<label>
-                                                    <input type="checkbox" id="check_inactivos" onclick="cargar_prospectos();" class="icheck"> Inactivos </label>
-						<label>
-                                                    <input type="checkbox" id="check_terminado" onclick="cargar_prospectos();" class="icheck"> Terminados </label>
-						
-						</div>
-						</div>
-					</div>
-                               <br>                                                  
-                              <div id="cmd_buscar">
-                                    
-                              </div>
-                               <br><br>
+        <label class="control-label col-md-4"></label>
+        <select class="form-control select2me" name="options2" id="propecto_buscar">
+            <!-- ACA CARGA EL COMBO BOX DE LOS PROSPECTOS -->
+        </select>
+        <br><br>
+	<div class="input-group">
+	<div class="icheck-inline">
+             <!-- INPUTS ESTABLECIDOS TIPO FILTRO -->
+	<label><input type="checkbox" id="check_inactivos" onclick="cargar_prospectos();" class="icheck"> Inactivos </label>
+	<label><input type="checkbox" id="check_terminado" onclick="cargar_prospectos();" class="icheck"> Terminados </label>
+	</div>
+	</div>
+	</div>
+        <br>                                                  
+        <div id="cmd_buscar">
+             <!-- ACA CARGA EL BOTON DE ENVIO HABIENDO TERMINADO LA CARGA DEL COMBO -->
+        </div>
+       <br><br>
     </div>
 </div>
 </div>
@@ -102,5 +97,5 @@
                 <div class="alert alert-success" role="alert">CARGANDO , ESPERE POR FAVOR ...</div>
     </div>            
     <?php endif; ?>   
-</div>
+
 

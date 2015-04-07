@@ -52,7 +52,7 @@ foreach($result as $key=>$value){
                   $print .= '<i class="icon-ghost font-green-haze"></i>';
                   $print .= '</div>';
              }
-            $print .= '</div>';
+    $print .= '</div>';
     $print.= '<div class="timeline-body">';
             $translate = new GoogleTranslate("en", "es");
             $time_ago = FunctionsController::Get_TimeAgo($value['date']. " " . $value['hour']);

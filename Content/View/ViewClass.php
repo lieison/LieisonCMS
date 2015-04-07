@@ -97,23 +97,26 @@
          return null;
      }   
      
-     /**
-      * TYPE = INCLUDE , STRING minusculas
-      */
+
      public static function SetParamsString( $body ="%{BODY_CLASS_VIEW}%" ,
-             $header = "%{HEADER_CLASS_VIEW}%", $footer = "%{FOOTER_CLASS_VIEW}%" , 
-             $footer_end = "%{FOOTER_CLASS_VIEW_END}%")
+             $header = "%{HEADER_CLASS_VIEW}%", $js_init = "%{FOOTER_CLASS_VIEW}%" , 
+             $js_script = "%{FOOTER_CLASS_VIEW_END}%")
      {
-         return array( "type"=>"static", "pattern"=>
-             array("%{BODY_CLASS_VIEW}%"=>$body ,
+         return array( 
+             "type"=>"static", 
+             "pattern"=>array("%{BODY_CLASS_VIEW}%"=>$body ,
                  "%{HEADER_CLASS_VIEW}%"=>$header ,
-                 "%{FOOTER_CLASS_VIEW}%"=>$footer , 
-                 "%{FOOTER_CLASS_VIEW_END}%"=>$footer_end
+                 "%{FOOTER_CLASS_VIEW}%"=>$js_init , 
+                 "%{FOOTER_CLASS_VIEW_END}%"=>$js_script
                ));
      }
      
+     
      public static function SetPatternString($patterns){
-         return array( "type"=>"dynamic" , "pattern" => $patterns);
+         return array(
+             "type"=>"dynamic" , 
+             "pattern" => $patterns
+        );
      }
      
      
