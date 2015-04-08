@@ -25,9 +25,6 @@
  * 
  *@version 1.0
  *@todo Lieison S.A de C.V 
- * 
- * 
- * 
  */
  session_start();
 
@@ -51,7 +48,10 @@
                 $title = "Inicio del proceso";
                 $description = "Este prospecto ha iniciado el proceso de verificacion";
                 $sales->InsertBitacora($id_bitacora, $id_user, $id_type, $title, $description);
-                $print_status .=  " En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' value='Terminar Proceso' id='cmdmeta_estado' />";
+                $print_status .=  " En Proceso  &nbsp&nbsp&nbsp"
+                        . " <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' "
+                        . "value='Terminar Proceso' id='cmdmeta_estado' />&nbsp<a class='btn btn-primary' href='dashboard_admin_prospecto.php?id=$id_p'>"
+                        . "<i class='fa fa-refresh'></i></a>";
                 break;
             case 1:
                  $print_status .=  " Proceso Terminado ";
@@ -100,7 +100,7 @@
         $sales->NewEntrance($id_user, $id_p, $date, $time);
        
      //TERMINA EL REGISTRO DE ENTRADA
-        $prospect_data = $sales->Get_Prospect_ById($id_p);//obtener los datos por medio del id
+       $prospect_data = $sales->Get_Prospect_ById($id_p);//obtener los datos por medio del id
     
      //CREACION DE LA BITACORA ...
        $sales->InitBitacora($id_p);
@@ -216,13 +216,20 @@
     //FIN DE NOTAS
     
     //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
-     
     
-     
+    //OBTENEMOS LOS TIPOS DE DE DATOS QUE SE MANEJAN EN LA BITACORA
+     $meta_bitacora_type = $sales->GetTypeOfBitacora();
+    //CODIFICAMOS LOS TIPOS A JSON
+     $json_encode = new \SivarApi\Tools\Services_JSON();
+     $meta_type_json = $json_encode->encode($meta_bitacora_type);
+    //LO ENVIAMOS A UN INPUT DE TIPO HIDDEN PARA LUEGO MANIPULARLO DENTRO DEL SCRIPT AjaxAdminSales.js
+     $action_form = "<input type='hidden' id='BitacoraTypes' value='" . $meta_type_json . "' />";
+     //CONTADOR DE LA BITACORA ¿CUANTOS LOGS EXISTEN?     
      $bitacora_counter = $sales->GetBitacorLogCount($prospect_data['id_prospect']);
+     //VERIFICAMOS SI EXISTEN O NO LOGS 
      if($bitacora_counter == 0){
          
-        $action_form = '<div class="form-body">';  
+        $action_form .= '<div class="form-body">';  
         $action_form .= '<div class="alert alert-danger" role="alert">';
         $action_form .= '<i class="fa fa-exclamation-triangle"></i>';
         $action_form .= '<span>&nbsp&nbsp<b>NO SE HA INICIADO LA BITACORA</b>'
@@ -231,15 +238,50 @@
         $action_form .= "</div>";
         $action_form .= '</div>';
      }
-     else{
+     else{ //IMPRIMIMOS LOS LOGS
+         $action_form_button = "<button class='btn green' onclick='InsertBitacora(" .
+                 $sales->GetIdBitacora($prospect_data['id_prospect']) . 
+                 ',"' . UserController::GetIDUser() . '"' .
+                 ");'><i class='fa fa-plus'></i></button>";
          
-         $action_form = '<div class="scroller" style="height: 305px;" '
+         //OBTENEMOS LOS VALORES DE LA BITACORA ANTES DE IMPRIMIRLOS 'POR LOGICA'
+         $result_bitacora = $sales->GetBitacora($prospect_data['id_prospect']);
+         $action_form .= '<div class="scroller" style="height: 430px;" '
                  . 'data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">'
-                 . '<div class="general-item-list">';
+                 . '<div class="general-item-list class_tbody_bitacora" id="bitacora_seccion">';
+         foreach($result_bitacora as $kb=>$vb){
+            $action_form .= '<div class="item class_tr_bitacora">';
+            $action_form .= '<div class="item-head">';
+            $action_form .= '<div class="item-details">';
+            $action_form .= '<img class="item-pic" src="../img/users/' . $vb['avatar'] . '">';
+            $action_form .= '<a href="" class="item-name primary-link">' .$vb['name'] .'</a>';
+            $action_form .= '<span class="item-label">' .
+                                FunctionsController::Get_TimeAgo($vb['date'] . " " . $vb['hour']) .
+                            '</span>';
+            $action_form .= '</div>';
+            $action_form .= '<span class="item-status">'
+                    . '<span class="badge badge-empty badge-success"></span>&nbsp&nbsp&nbsp&nbspTipo: ' .$vb['title_type']. '</span>';
+            $action_form .= '</div>';
+            $action_form .= '<div class="item-body">';
+            $action_form .= '<b>' . $vb['title']. ':</b>';
+            $action_form .= '&nbsp&nbsp' . $vb['description'];
+            $action_form .= '</div>';
+            $action_form .= '</div>';
+         }
+        /* $action_form .= '<div class="item">
+		<div class="item-head">
+		<div class="item-details">
+		</div>
+		</div>
+		<div class="item-body">
+		</div>
+		</div>';*/
          $action_form .= '</div></div>';
+         //FIN DE LA IMPRESION
      }
          
-     $action_title = "Bitacora  (<b>$bitacora_counter</b>)";
+     //TITULO DE LA BITACORA ...
+     $action_title = "Bitacora <span class='badge' id='bitacora_counter'>$bitacora_counter</span>";
     //FIN DE TODAS LAS ACCIONES BITACORA
      
      
@@ -324,6 +366,7 @@
          "%{notes_info}%"=>$notes_info,
          "%{title_action_form}%" => $action_title,
          "%{action_form}%"=> $action_form, 
+         "%{action_form_button}%"=>$action_form_button,
          "%{title_contact}%"=> $title_contact,
          "%{body_contact}%"=> $body_contact,
          "%{actions_contact}%" => $action_contact
@@ -362,7 +405,7 @@ else{
 
 unset($sales);
 
-?>
+
 
 
 

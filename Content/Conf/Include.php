@@ -79,6 +79,7 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/Calendar.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/RegexClass.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/UrlClass.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/Time.php';
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/Session.php';
 /**
  * LLAMADA DE LAS CLASES EN EL DIRECTORIO VIEW 
  * 
@@ -116,6 +117,15 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Pdf/exportPDF.class.php';
 //require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/GoPaypal.class.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php';
 
+/**
+ * PLUGIN CLASS
+ */
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Plugins/PluginClass.php';
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Plugins/InstallClass.php';
+
+
+
+
 
 /**AGREGANDO PLUGINS**/
 
@@ -126,6 +136,8 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php
  {
      require $val['root'] . '/' . $val['filename'];
  }
+ 
+ 
 
 /**
  * Modelos | Models
@@ -136,13 +148,8 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Ecommerce/ccvalidator.class.php
  {
      require $val['root'] . '/' . $val['filename'];
  }
-
  
- /**
-  * View del sistema
-  */
  
-  require $GLOBAL_ROOT . $FOLDER . '/Content/View/ViewClass.php';
  
   
   
@@ -155,6 +162,28 @@ foreach ($path_controller as $k=>$val)
 {
      require $val['root'] . '/' . $val['filename'];
 }
+
+  /**
+  * Modelo del sistema 
+  */
+  
+  //require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Model/Model.php';  
+
+  
+ /**
+  * Controlador del sistema 
+  */
+  
+  //require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Controller/Controller.php';
+
+ 
+  
+ /**
+  * View del sistema
+  */
+ 
+  require $GLOBAL_ROOT . $FOLDER . '/Content/View/ViewClass.php';
+ 
 
   
  /**

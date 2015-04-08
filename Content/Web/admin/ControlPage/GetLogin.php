@@ -36,7 +36,15 @@ endif;
       $hora_entrada =  FunctionsController::get_time();
       $fecha = FunctionsController::get_date();
       $id_user = $_SESSION['login']["id"];
-      $id_log = $admin_controller->Create_Log($id_user, $hora_entrada, $fecha);
+      
+      if(!$admin_controller->SessionActive($_SESSION['login']["id_log"])){
+          $id_log = $admin_controller->Create_Log($id_user, $hora_entrada, $fecha);
+          $admin_controller->UpdateSession($_SESSION['login']["id_log"], 1);
+      }
+      else{
+          $_SESSION['DUPLICATE_SESSION'] = true;
+      }
+      
       $_SESSION['log'] = $id_log;
       $header->redirect($url . "/Content/Web/admin/index.php");
  else:

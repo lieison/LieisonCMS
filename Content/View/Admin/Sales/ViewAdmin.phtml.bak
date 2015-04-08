@@ -1,3 +1,20 @@
+<style>
+  .class_tr_bitacora {
+        width: 100%;
+        
+  }
+  .class_tbody_bitacora
+  {
+    overflow-y: scroll;
+    overflow-wrap: scroll;
+    height: 430px;
+    width: 95%;
+    position: absolute;
+  }
+  
+</style>
+
+
 %{script_form}%
 
 <div class="row">
@@ -6,7 +23,7 @@
 <div class="portlet-title">
 <div class="caption">
   <i class="fa fa-globe"></i> %{title_dir_prospecto}%
- </div>
+</div>
 <div class="tools">
 %{action_button}%
 </div>
@@ -60,10 +77,13 @@
 							<div class="caption" id='bitacora_reload'>
 								<i class="fa fa-book"></i> %{title_action_form}%
 							</div>
+                                                 <div class="tools">
+                                                    %{action_form_button}%
+                                                </div>           
 						</div>
 						<div class="portlet-body form">
-                                                    %{action_form}%      
-						</div>
+                                                    %{action_form}%  
+                                                </div>
 					</div>
 					<!-- END SAMPLE FORM PORTLET-->
 					<!-- BEGIN SAMPLE FORM PORTLET-->

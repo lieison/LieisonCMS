@@ -34,7 +34,7 @@
  * VERSION ESTABLE 1.4 
  */
 
-class DashboardController extends MysqlConection {
+class DashboardController extends DashboardModel {
     
     protected $format;
     protected $puntero;

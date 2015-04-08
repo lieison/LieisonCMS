@@ -29,24 +29,28 @@
  * 
  * 
  */
-    session_start();
-    
+
+ 
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../Conf/Include.php';
- 
-    $_SESSION['page_name']  = "Principal";
     
-    //Condicion ... x+y=Z
-    if(isset($_SESSION['title'])):
-        unset( $_SESSION['title']);
-        if(isset($_SESSION['home'])):
-              unset($_SESSION['home']);
+    //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
+    Session::InitSession();
+    Session::InsertSession("page_name", "Principal");
+
+    //EN EL INDEX DESTRUYE TODO TIPO DE SESION DENTRO DE LOS TITULOS...
+    if(Session::ExistSession("title")):
+        Session::DestroySession("title");
+        if(Session::ExistSession("home")):
+              Session::DestroySession("home");
         endif;
     endif;
- 
-    
+
     //PREPARANDO LA VISTA ...
     ViewClass::PrepareView("View.phtml", "Admin");
-    //LLAMANDO LA VISTA ... OBTENIENDO DATOS
+    
+    //LLAMANDO LA VISTA
     ViewClass::SetView(ViewClass::SetParamsString("" ,"" , "" , ""));
+    
+ 
     

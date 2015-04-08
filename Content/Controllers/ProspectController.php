@@ -1,5 +1,32 @@
 <?php
 
+ /**
+ *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
+ *@copyright (c) 2015, Lieison
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE. 
+ * 
+ *@version 1.0
+ *@todo Lieison S.A de C.V 
+ */
+
+
 /*
  * 
  * CLASE PROSPECTCONTROLLER 
@@ -18,7 +45,7 @@
  * 
  */
 
-class ProspectController extends MysqlConection {
+class ProspectController extends ProspectModel {
     
     /**
      * VARIABLE QUERY PROTEGIDA
@@ -378,6 +405,13 @@ class ProspectController extends MysqlConection {
         ));
     }
     
+    public function GetPropspectoByBitacora($id_bitacora){
+        $this->QUERY = "SELECT id_prospecto as id "
+                . "FROM sales_prospect_bitacora WHERE id_bitacora LIKE $id_bitacora";
+        $result = parent::RawQuery($this->QUERY);
+        return $result[0]['id'];
+    }
+    
     public function GetBitacorLogCount($id_prospect){
         $this->QUERY = "SELECT count(*) as 'counter' FROM sales_prospect_bitacora
                         INNER JOIN sales_prospect_bitacora_log ON  
@@ -388,8 +422,21 @@ class ProspectController extends MysqlConection {
     }
     
     
-    public function GetBitacora($id_prospect){
-          
+    public function GetBitacora($id_prospect , $hour = null){
+          if(\SivarApi\Tools\Validation::Is_Empty_OrNull($hour)){
+             $this->QUERY= "call ProcProspectGetBitacora($id_prospect , '');";
+             return parent::RawQuery($this->QUERY);
+          }
+          else{
+              $this->QUERY = "call ProcProspectGetBitacora($id_prospect , '$hour')";
+              return parent::RawQuery($this->QUERY);
+          }
+    }
+    
+    
+    
+    public function GetTypeOfBitacora(){
+        return parent::RawQuery("SELECT id_tipo as id , titulo as title FROM sales_bitacora_tipo");
     }
     
 

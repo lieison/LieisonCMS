@@ -13,6 +13,7 @@
     $imagen = $_SESSION['login']['imagen'];
     $password = \SivarApi\Tools\Encriptacion\Encriptacion::decrypt($_SESSION['login']['password']);
     
+    
     if(isset($_REQUEST['password'])):
          if(strcmp($password,$_REQUEST['password']) ==0):
              $_SESSION['lock'] = false;
