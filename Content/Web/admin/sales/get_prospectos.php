@@ -219,7 +219,7 @@
     //FIN DE NOTAS
     
     //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
-     
+     $meta_bitacora_type = ""; 
      $bitacora_counter = $sales->GetBitacorLogCount($prospect_data['id_prospect']);
      if($bitacora_counter == 0){
          
@@ -241,7 +241,7 @@
          $result_bitacora = $sales->GetBitacora($prospect_data['id_prospect']);
          $action_form = '<div class="scroller" style="height: 305px;" '
                  . 'data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">'
-                 . '<div class="general-item-list">';
+                 . '<div class="general-item-list" id="bitacora_seccion">';
          foreach($result_bitacora as $kb=>$vb){
             $action_form .= '<div class="item">';
             $action_form .= '<div class="item-head">';
@@ -270,6 +270,7 @@
 		</div>
 		</div>';
          $action_form .= '</div></div>';
+         
      }
          
      $action_title = "Bitacora  (<b>$bitacora_counter</b>)";

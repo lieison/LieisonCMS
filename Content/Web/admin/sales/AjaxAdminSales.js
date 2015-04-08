@@ -583,6 +583,9 @@ function DeletePhone(id_phone)
                var id_c = $.trim(result);
                var data_contact =$("#" + id_c ).val();
                var decode_  = eval('(' + data_contact  + ')');  
+               //JSON
+               //ORDENA LA DATA JSON splice 
+               //REALIZA ESTO eliminando asi el valor 
                $.each(decode_ , function(k,v){
                    if(v.id_phone_contact == id_phone)
                    {
@@ -603,7 +606,25 @@ function DeletePhone(id_phone)
 
 function InsertBitacora(id_bitacora , id_user)
 {
+    
     alert(id_user + " -->" + id_bitacora);
+    var view_ = "<label for='Btitle'>Titulo: </label><input class='form-control' id='Btitle' value='' />";
+        view_ += "<label for=''>Tipo:</label>";
+        view_ += "";
+        view_ += "";
+    bootbox.confirm(view_, function(result) {
+      
+       if(result === true){
+        
+        var params = {
+            "id" : null,
+            "type": "delete_phone"
+        };
+                         
+        
+        }
+    }); 
+   
 }
 
 
