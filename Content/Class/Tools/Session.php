@@ -71,10 +71,14 @@
      *@version 0.1
      *@todo Obtiene la sesion mediante su id
      *@param String $name id o nombre de la sesion
+     *@param string $key , si la sesion tiene un arreglo $key obtiene el dato del nombre del arreglo
      *@return Mixed 
      */
-    public static function  GetSession($name){
+    public static function  GetSession($name , $key = null){
         if(self::ExistSession($name)){
+            if($key != null){
+                return $_SESSION[$name][$key];
+            }
             return $_SESSION[$name];
         }
     }
