@@ -29,14 +29,14 @@
 
 
 
-class AdminController extends MysqlConection {
+class AdminController extends AdminModel {
+    
+    
+    
     
     var $query = null;
-   
-    public function __construct() {
-        parent::__construct();
-    }
     
+
     /**
      * @todo Funcion para obtener si el usuario logueado esta dentro de la base de datos
      * @version 1.1 
@@ -394,9 +394,7 @@ class AdminController extends MysqlConection {
         
         return $delete;
     }
-    
- 
-    
-  
- 
+
+
+
 }

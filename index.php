@@ -28,6 +28,7 @@
      
      
      $SERVER__ = $_SERVER["SERVER_NAME"];
+     
      //Agrega el directorio inicial del proyecto 
      //si se borra la cookie favor agregar el folder de forma manual en Conf/Config.php
      if(isset($_COOKIE['FOLDER'])):

@@ -45,7 +45,7 @@
  * 
  */
 
-class ProspectController extends MysqlConection {
+class ProspectController extends ProspectModel {
     
     /**
      * VARIABLE QUERY PROTEGIDA
