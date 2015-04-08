@@ -420,6 +420,11 @@ class ProspectController extends ProspectModel {
           return parent::RawQuery($this->QUERY);
     }
     
+    
+    public function GetTypeOfBitacora(){
+        return parent::RawQuery("SELECT id_tipo as id , titulo as title FROM sales_bitacora_tipo");
+    }
+    
 
 
 

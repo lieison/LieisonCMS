@@ -219,11 +219,20 @@
     //FIN DE NOTAS
     
     //INICIANDO EL FORMULARIO DE TODAS LAS ACCIONES BITACORA
-     $meta_bitacora_type = ""; 
+    
+    //OBTENEMOS LOS TIPOS DE DE DATOS QUE SE MANEJAN EN LA BITACORA
+     $meta_bitacora_type = $sales->GetTypeOfBitacora();
+    //CODIFICAMOS LOS TIPOS A JSON
+     $json_encode = new \SivarApi\Tools\Services_JSON();
+     $meta_type_json = $json_encode->encode($meta_bitacora_type);
+    //LO ENVIAMOS A UN INPUT DE TIPO HIDDEN PARA LUEGO MANIPULARLO DENTRO DEL SCRIPT AjaxAdminSales.js
+     $action_form = "<input type='hidden' id='BitacoraTypes' value='" . $meta_type_json . "' />";
+     //CONTADOR DE LA BITACORA ¿CUANTOS LOGS EXISTEN?     
      $bitacora_counter = $sales->GetBitacorLogCount($prospect_data['id_prospect']);
+     //VERIFICAMOS SI EXISTEN O NO LOGS 
      if($bitacora_counter == 0){
          
-        $action_form = '<div class="form-body">';  
+        $action_form .= '<div class="form-body">';  
         $action_form .= '<div class="alert alert-danger" role="alert">';
         $action_form .= '<i class="fa fa-exclamation-triangle"></i>';
         $action_form .= '<span>&nbsp&nbsp<b>NO SE HA INICIADO LA BITACORA</b>'
@@ -232,14 +241,15 @@
         $action_form .= "</div>";
         $action_form .= '</div>';
      }
-     else{
+     else{ //IMPRIMIMOS LOS LOGS
          $action_form_button = "<button class='btn green' onclick='InsertBitacora(" .
                  $sales->GetIdBitacora($prospect_data['id_prospect']) . 
                  ',"' . UserController::GetIDUser() . '"' .
                  ");'><i class='fa fa-plus'></i></button>";
          
+         //OBTENEMOS LOS VALORES DE LA BITACORA ANTES DE IMPRIMIRLOS 'POR LOGICA'
          $result_bitacora = $sales->GetBitacora($prospect_data['id_prospect']);
-         $action_form = '<div class="scroller" style="height: 305px;" '
+         $action_form .= '<div class="scroller" style="height: 305px;" '
                  . 'data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">'
                  . '<div class="general-item-list" id="bitacora_seccion">';
          foreach($result_bitacora as $kb=>$vb){
@@ -270,10 +280,11 @@
 		</div>
 		</div>';
          $action_form .= '</div></div>';
-         
+         //FIN DE LA IMPRESION
      }
          
-     $action_title = "Bitacora  (<b>$bitacora_counter</b>)";
+     //TITULO DE LA BITACORA ...
+     $action_title = "Bitacora <span class='badge'>$bitacora_counter</span>";
     //FIN DE TODAS LAS ACCIONES BITACORA
      
      

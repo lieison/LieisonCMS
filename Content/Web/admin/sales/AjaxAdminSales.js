@@ -254,7 +254,7 @@ function ProspectPhones(contacts)
             data_message += '<th></th>';
             data_message += '</tr></thead><tbody>';
         
-        var decode_  = eval('(' + data_contact  + ')');   
+        var decode_  = eval('(' + data_contact  + ')'); 
         $.each(decode_, function(k,v){
             data_message += '<tr id="Phone' + v.id_phone_contact + '">';
             data_message += '<td><div id="Pname' + v.id_phone_contact + '">' + v.phone_name + '</div></td>';
@@ -606,22 +606,56 @@ function DeletePhone(id_phone)
 
 function InsertBitacora(id_bitacora , id_user)
 {
+
+   
+   var json_code = $("#BitacoraTypes").val();
+   var json_decode = eval('(' + json_code + ')');
     
-    alert(id_user + " -->" + id_bitacora);
-    var view_ = "<label for='Btitle'>Titulo: </label><input class='form-control' id='Btitle' value='' />";
+   var type_box = '<select class="form-control" id="Btype">';
+        $.each(json_decode , function(k,v){
+            type_box += "<option value='" + v.id + "'>" + v.title + "</option>";
+        });
+        type_box += "</select>";
+
+
+    var view_ = "<br><label for='Btitle'>Titulo: </label><input class='form-control' id='Btitle' value='' />";
         view_ += "<label for=''>Tipo:</label>";
-        view_ += "";
-        view_ += "";
+        view_ += type_box;
+        view_ += "<label for='Btitle'>Descripcion: </label> <textarea class='form-control' rows='5' id='Bdescription' ></textarea>";
+        
     bootbox.confirm(view_, function(result) {
       
        if(result === true){
-        
-        var params = {
-            "id" : null,
-            "type": "delete_phone"
-        };
-                         
-        
+
+            var params = {
+                "id_bitacora" : id_bitacora,
+                "id_user": id_user,
+                "id_type": $("#Btype").val(),
+                "title": $("#Btitle").val(),
+                "description": $("#Bdescription").val()
+            };
+            
+            if($("#Btitle").val().length === 0){
+                alert("Debe de contener un titulo ");
+                InsertBitacora(id_bitacora , id_user);
+                return;
+            }
+            else if($("#Bdescription").val().length === 0){
+                alert("Describa el log de la bitacora , este campo no debe estar vacio");
+                InsertBitacora(id_bitacora , id_user);
+                return;
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "set_log_bitacora.php",
+                data: params,
+                success: function(success){
+                    var is_ok = $.trim(success);
+                    alert(is_ok);
+                }
+             });
+
         }
     }); 
    
