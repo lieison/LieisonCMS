@@ -11,6 +11,7 @@
     width: 100%;
     position: absolute;
   }
+  
 </style>
 
 <?php 

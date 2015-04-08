@@ -246,11 +246,11 @@
          
          //OBTENEMOS LOS VALORES DE LA BITACORA ANTES DE IMPRIMIRLOS 'POR LOGICA'
          $result_bitacora = $sales->GetBitacora($prospect_data['id_prospect']);
-         $action_form .= '<div class="scroller" style="height: 305px;" '
+         $action_form .= '<div class="scroller" style="height: 430px;" '
                  . 'data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">'
-                 . '<div class="general-item-list" id="bitacora_seccion">';
+                 . '<div class="general-item-list class_tbody_bitacora" id="bitacora_seccion">';
          foreach($result_bitacora as $kb=>$vb){
-            $action_form .= '<div class="item">';
+            $action_form .= '<div class="item class_tr_bitacora">';
             $action_form .= '<div class="item-head">';
             $action_form .= '<div class="item-details">';
             $action_form .= '<img class="item-pic" src="../img/users/' . $vb['avatar'] . '">';
@@ -268,20 +268,20 @@
             $action_form .= '</div>';
             $action_form .= '</div>';
          }
-         $action_form .= '<div class="item">
+        /* $action_form .= '<div class="item">
 		<div class="item-head">
 		<div class="item-details">
 		</div>
 		</div>
 		<div class="item-body">
 		</div>
-		</div>';
+		</div>';*/
          $action_form .= '</div></div>';
          //FIN DE LA IMPRESION
      }
          
      //TITULO DE LA BITACORA ...
-     $action_title = "Bitacora <span class='badge'>$bitacora_counter</span>";
+     $action_title = "Bitacora <span class='badge' id='bitacora_counter'>$bitacora_counter</span>";
     //FIN DE TODAS LAS ACCIONES BITACORA
      
      

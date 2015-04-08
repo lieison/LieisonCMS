@@ -26,3 +26,70 @@
  *@todo Lieison S.A de C.V 
  */
 
+/** 
+ *  "id_bitacora" : id_bitacora,
+     "id_user": id_user,
+      "id_type": $("#Btype").val(),
+      "title": $("#Btitle").val(),
+      "description": $("#Bdescription").val()
+ * 
+ * funcion javascript donde lo llama
+ * InsertBitacora(id_bitacora , id_user);
+ */
+
+include   '../../../Conf/Include.php';
+
+
+if(!isset($_REQUEST['id_bitacora'])){
+    exit();
+}
+
+$sales = new ProspectController();
+
+$date = FunctionsController::get_date();
+$time = FunctionsController::get_time();
+$id_bitacora = $_REQUEST['id_bitacora'];
+$id_user = $_REQUEST['id_user'];
+$id_type =$_REQUEST['id_type'];
+$title = $_REQUEST['title'];
+$description = $_REQUEST['description'];
+
+$is_insert = $sales->InsertBitacora($id_bitacora, 
+        $id_user, $id_type, $title,
+        $description, $date, $time);
+
+if($is_insert){
+    $id_prospect = $sales->GetPropspectoByBitacora($id_bitacora);
+    $result_bitacora = $sales->GetBitacora($id_prospect, $time);
+    
+    foreach($result_bitacora as $kb=>$vb){
+            $action_form .= '<div class="item class_tr_bitacora">';
+            $action_form .= '<div class="item-head">';
+            $action_form .= '<div class="item-details">';
+            $action_form .= '<img class="item-pic" src="../img/users/' . $vb['avatar'] . '">';
+            $action_form .= '<a href="" class="item-name primary-link">' .$vb['name'] .'</a>';
+            $action_form .= '<span class="item-label">' .
+                                FunctionsController::Get_TimeAgo($vb['date'] . " " . $vb['hour']) .
+                            '</span>';
+            $action_form .= '</div>';
+            $action_form .= '<span class="item-status">'
+                    . '<span class="badge badge-empty badge-success"></span>&nbsp&nbsp&nbsp&nbspTipo: ' .$vb['title_type']. '</span>';
+            $action_form .= '</div>';
+            $action_form .= '<div class="item-body">';
+            $action_form .= '<b>' . $vb['title']. ':</b>';
+            $action_form .= '&nbsp&nbsp' . $vb['description'];
+            $action_form .= '</div>';
+            $action_form .= '</div>';
+         }
+       /*  $action_form .= '<div class="item">
+		<div class="item-head">
+		<div class="item-details">
+		</div>
+		</div>
+		<div class="item-body">
+		</div>
+		</div>';*/
+         $action_form .= '</div></div>';
+         //FIN DE LA IMPRESION 
+          echo $action_form;
+}

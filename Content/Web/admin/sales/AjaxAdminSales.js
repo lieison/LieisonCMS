@@ -651,8 +651,10 @@ function InsertBitacora(id_bitacora , id_user)
                 url: "set_log_bitacora.php",
                 data: params,
                 success: function(success){
-                    var is_ok = $.trim(success);
-                    alert(is_ok);
+                    var view_= success;
+                    $("#bitacora_seccion").append(view_);
+                    var counter =  parseInt($("#bitacora_counter").html()) + 1;
+                    $("#bitacora_counter").html(counter);
                 }
              });
 

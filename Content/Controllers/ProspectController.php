@@ -405,6 +405,13 @@ class ProspectController extends ProspectModel {
         ));
     }
     
+    public function GetPropspectoByBitacora($id_bitacora){
+        $this->QUERY = "SELECT id_prospecto as id "
+                . "FROM sales_prospect_bitacora WHERE id_bitacora LIKE $id_bitacora";
+        $result = parent::RawQuery($this->QUERY);
+        return $result[0]['id'];
+    }
+    
     public function GetBitacorLogCount($id_prospect){
         $this->QUERY = "SELECT count(*) as 'counter' FROM sales_prospect_bitacora
                         INNER JOIN sales_prospect_bitacora_log ON  
@@ -415,10 +422,17 @@ class ProspectController extends ProspectModel {
     }
     
     
-    public function GetBitacora($id_prospect){
-          $this->QUERY= "call ProcProspectGetBitacora($id_prospect);";
-          return parent::RawQuery($this->QUERY);
+    public function GetBitacora($id_prospect , $hour = null){
+          if(\SivarApi\Tools\Validation::Is_Empty_OrNull($hour)){
+             $this->QUERY= "call ProcProspectGetBitacora($id_prospect , '');";
+             return parent::RawQuery($this->QUERY);
+          }
+          else{
+              $this->QUERY = "call ProcProspectGetBitacora($id_prospect , '$hour')";
+              return parent::RawQuery($this->QUERY);
+          }
     }
+    
     
     
     public function GetTypeOfBitacora(){

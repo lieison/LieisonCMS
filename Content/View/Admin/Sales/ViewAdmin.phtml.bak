@@ -1,3 +1,20 @@
+<style>
+  .class_tr_bitacora {
+        width: 100%;
+        
+  }
+  .class_tbody_bitacora
+  {
+    overflow-y: scroll;
+    overflow-wrap: scroll;
+    height: 430px;
+    width: 95%;
+    position: absolute;
+  }
+  
+</style>
+
+
 %{script_form}%
 
 <div class="row">
@@ -65,8 +82,8 @@
                                                 </div>           
 						</div>
 						<div class="portlet-body form">
-                                                    %{action_form}%      
-						</div>
+                                                    %{action_form}%  
+                                                </div>
 					</div>
 					<!-- END SAMPLE FORM PORTLET-->
 					<!-- BEGIN SAMPLE FORM PORTLET-->
