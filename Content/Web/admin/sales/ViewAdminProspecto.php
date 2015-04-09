@@ -95,7 +95,8 @@
     <div class="col-md-12 " align="center">
         <br><br><br><br><br><br><br>
                <p><img src="../img/assert/logos/LogoA.png" /></p>
-                <div class="alert alert-success" role="alert">CARGANDO , ESPERE POR FAVOR ...</div>
+               <div class="alert alert-success" role="alert">CARGANDO , SI NO CARGA EN 3 SEGUNDOS CLICK EN EL BOTON <b>Volver a cargar</b></div>
+                <button onclick="buscar_prospecto('<?php echo $_REQUEST['id'];  ?>');" class="btn btn-primary" >Volver a cargar</button>
     </div>            
     <?php endif; ?>   
 

@@ -124,8 +124,29 @@ function ProspectInitProcess(meta_estado , id_prospect)
     
       if(meta_estado ===1 )
       {
-         bootbox.confirm("¿Desea Terminar el Proceso ... Una vez terminado bla bla?", function(result) {
-               flag = result;
+         bootbox.confirm("¿Desea Terminar el Proceso ... Una vez terminado bla bla?",
+         function(result) {
+               if(result === true){
+                 
+                 var params = {
+                      "id_prospect": id_prospect
+                 };
+                  
+                  $.ajax({
+                      type: "POST",
+                      url: "get_prospectos.php",
+                      data: params,
+                      beforeSend: function()
+                      {
+                          $("#meta_estado").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
+                      },
+                      success: function(value){
+                          $("#meta_estado").html(value);
+                      }
+                  });
+                   
+               }
+               return;
         }); 
       }
       else{
@@ -662,6 +683,74 @@ function InsertBitacora(id_bitacora , id_user)
     }); 
    
 }
+
+/*NOTIFICACIONES DE LA BITACORA */
+ 
+function notify_bitacora(id_prospect){
+    
+  
+   /**CONFIGURACIONES DEL PRIMER PLANO*/
+    
+   var html = '<div class="clearfix"></div><div><span data-notify-text/></div>';
+   
+   $.notify.addStyle('happyblue', {
+        html: html,
+        classes: {
+        base: {
+            "white-space": "nowrap",
+            "background-color": "lightblue",
+            "padding": "5px"
+        },
+        superblue: {
+            "color": "white",
+            "background-color": "blue"
+        }
+       }
+    }); 
+    
+    
+    /*CODE*/
+    
+   var counter =  parseInt($("#bitacora_counter").html());
+   if(GetcountBitacora(counter , id_prospect) === false){
+       return;
+   }
+   
+   $.notify('EL USUARIO TAL , AGREGO EN LA BITACORA', {
+        style: 'happyblue',
+        className: 'superblue',
+        autoHide: true,
+        autoHideDelay: 20000,
+        arrowSize: 5,
+        elementPosition: 'bottom left',
+        globalPosition: 'top right',
+        showAnimation: 'slideDown',
+        showDuration: 400,
+        hideAnimation: 'slideUp',
+        hideDuration: 200,
+        gap: 2
+    });
+    //$.notify("NOTIFICACIONES " + id_prospect , "success");
+}
+
+function GetcountBitacora(counter , id){
+     var params = {
+         "id_prospect": id,
+         "count": counter
+     };
+    
+     $.ajax({
+                type: "POST",
+                url: "set_log_bitacora.php",
+                data: params,
+                success: function(success){
+                    var view_= success;
+                   // $("#bitacora_seccion").append(view_);
+                   //$("#bitacora_counter").html(counter + 1);
+                }
+     });
+}
+
 
 
 
