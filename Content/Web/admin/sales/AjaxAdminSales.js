@@ -124,8 +124,29 @@ function ProspectInitProcess(meta_estado , id_prospect)
     
       if(meta_estado ===1 )
       {
-         bootbox.confirm("¿Desea Terminar el Proceso ... Una vez terminado bla bla?", function(result) {
-               flag = result;
+         bootbox.confirm("¿Desea Terminar el Proceso ... Una vez terminado bla bla?",
+         function(result) {
+               if(result === true){
+                 
+                 var params = {
+                      "id_prospect": id_prospect
+                 };
+                  
+                  $.ajax({
+                      type: "POST",
+                      url: "get_prospectos.php",
+                      data: params,
+                      beforeSend: function()
+                      {
+                          $("#meta_estado").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
+                      },
+                      success: function(value){
+                          $("#meta_estado").html(value);
+                      }
+                  });
+                   
+               }
+               return;
         }); 
       }
       else{
