@@ -688,6 +688,9 @@ function InsertBitacora(id_bitacora , id_user)
  
 function notify_bitacora(id_prospect){
     
+  
+   /**CONFIGURACIONES DEL PRIMER PLANO*/
+    
    var html = '<div class="clearfix"></div><div><span data-notify-text/></div>';
    
    $.notify.addStyle('happyblue', {
@@ -706,11 +709,18 @@ function notify_bitacora(id_prospect){
     }); 
     
     
+    /*CODE*/
+    
+   var counter =  parseInt($("#bitacora_counter").html());
+   if(GetcountBitacora(counter , id_prospect) === false){
+       return;
+   }
+   
    $.notify('EL USUARIO TAL , AGREGO EN LA BITACORA', {
         style: 'happyblue',
         className: 'superblue',
         autoHide: true,
-        autoHideDelay: 10000,
+        autoHideDelay: 20000,
         arrowSize: 5,
         elementPosition: 'bottom left',
         globalPosition: 'top right',
@@ -721,6 +731,24 @@ function notify_bitacora(id_prospect){
         gap: 2
     });
     //$.notify("NOTIFICACIONES " + id_prospect , "success");
+}
+
+function GetcountBitacora(counter , id){
+     var params = {
+         "id_prospect": id,
+         "count": counter
+     };
+    
+     $.ajax({
+                type: "POST",
+                url: "set_log_bitacora.php",
+                data: params,
+                success: function(success){
+                    var view_= success;
+                   // $("#bitacora_seccion").append(view_);
+                   //$("#bitacora_counter").html(counter + 1);
+                }
+     });
 }
 
 

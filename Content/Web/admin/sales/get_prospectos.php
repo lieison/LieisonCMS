@@ -353,7 +353,7 @@
     
      //SCRIPT FORM 
      //SE LE AGREGAR EL SISTEMA PARA VERIFICAR SI SE AGREGARON MAS NOTIFICACIONES
-     $script_title .= " <script>setInterval('notify_bitacora($id_p)', 1000*10);</script>";    
+     $script_title .= " <script>setInterval('notify_bitacora($id_p)', 10000);</script>";    
     
    
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml.bak"
