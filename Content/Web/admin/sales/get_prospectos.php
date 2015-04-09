@@ -187,16 +187,16 @@
     $social_title = " Redes Sociales";
     $social_info = '<div class="form-body">';
     $social_info .= '<i  class="fa fa-globe"></i>&nbsp&nbsp<b>Pagina Web: </b>'
-            . '<a target="_blank" href="' . $prospect_data['pagina_web'] . '">' 
-            . $prospect_data['pagina_web'] . '</a>' ;
+                 . '<a target="_blank" href="' . $prospect_data['pagina_web'] . '">' 
+                 . $prospect_data['pagina_web'] . '</a>' ;
     $social_info .= "<br><br>";
     $social_info .= '<i class="fa fa-facebook"></i>&nbsp&nbsp<b>Facebook: </b>';
     $social_info .= '<a target="_blank" href="' . $prospect_data['facebook'] . '">' 
-            . $prospect_data['facebook'] . '</a>' ;
+                 . $prospect_data['facebook'] . '</a>' ;
     $social_info .= "<br><br>";
     $social_info .= '<i class="fa fa-twitter"></i>&nbsp&nbsp<b>Twitter: </b>';
     $social_info .= '<a target="_blank" href="https://twitter.com/' . $prospect_data['twitter'] . '">@' 
-            . $prospect_data['twitter'] . '</a>' ;
+                 . $prospect_data['twitter'] . '</a>' ;
     $social_info .= "<br>";
     $social_info .= "</div>";
      //FIN DE LAS REDES SOCIALES
