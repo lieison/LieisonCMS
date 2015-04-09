@@ -684,6 +684,46 @@ function InsertBitacora(id_bitacora , id_user)
    
 }
 
+/*NOTIFICACIONES DE LA BITACORA */
+ 
+function notify_bitacora(id_prospect){
+    
+   var html = '<div class="clearfix"></div><div><span data-notify-text/></div>';
+   
+   $.notify.addStyle('happyblue', {
+        html: html,
+        classes: {
+        base: {
+            "white-space": "nowrap",
+            "background-color": "lightblue",
+            "padding": "5px"
+        },
+        superblue: {
+            "color": "white",
+            "background-color": "blue"
+        }
+       }
+    }); 
+    
+    
+   $.notify('EL USUARIO TAL , AGREGO EN LA BITACORA', {
+        style: 'happyblue',
+        className: 'superblue',
+        autoHide: true,
+        autoHideDelay: 10000,
+        arrowSize: 5,
+        elementPosition: 'bottom left',
+        globalPosition: 'top right',
+        showAnimation: 'slideDown',
+        showDuration: 400,
+        hideAnimation: 'slideUp',
+        hideDuration: 200,
+        gap: 2
+    });
+    //$.notify("NOTIFICACIONES " + id_prospect , "success");
+}
+
+
 
 
 

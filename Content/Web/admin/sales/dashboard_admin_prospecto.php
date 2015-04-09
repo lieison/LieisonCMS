@@ -66,6 +66,7 @@
     
     //AL FINAL DEL FOOTER SE INCLUIRAN LOS JS NECESARIOS PARA QUE FUNCIONE EL SCRIPT ADECUADAMENTE
     $footer_end = '<script src="AjaxAdminSales.js"></script>';
+    $footer_end .= '<script src="../js/notify.js"></script>';
     $footer_end .= '<script src="../js/bootbox.js"></script>';
     $footer_end .= '<script src="../js/bootbox.min.js"></script>';
     $footer_end .= '<script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>

@@ -351,6 +351,10 @@
     
     //FIN SISTEMA DE AGENDA
     
+     //SCRIPT FORM 
+     //SE LE AGREGAR EL SISTEMA PARA VERIFICAR SI SE AGREGARON MAS NOTIFICACIONES
+     $script_title .= " <script>setInterval('notify_bitacora($id_p)', 1000*10);</script>";    
+    
    
      //este arreglo agrega todos los patrones a sustituir dentro del view "ViewAdmin.phtml.bak"
      $patterns = array(
@@ -371,6 +375,7 @@
          "%{body_contact}%"=> $body_contact,
          "%{actions_contact}%" => $action_contact
      );
+     
      
      
      ViewClass::PrepareView("ViewAdmin.phtml", "Admin/Sales");
