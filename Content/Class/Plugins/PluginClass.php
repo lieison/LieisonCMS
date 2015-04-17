@@ -16,6 +16,10 @@ class PluginClass extends \_Directory {
         unset($this);
     }
     
+    public function SetPathPlugin($path_plugin ){
+         $this->path_plugin = $path_plugin;
+    }
+    
     public function UnZipPlugin(){
         $result = $this->VerifyPlugin();
         
@@ -44,6 +48,18 @@ class PluginClass extends \_Directory {
         }
     }
     
+    public function PluginsInstalled(){
+        
+        $data = parent::FindDirectory($this->path);
+        $filter = array();
+        for($i=0 ; $i < count($data); $i++){
+            if(is_dir($this->path . "" . $data[$i])){
+                $filter[] = $this->path . "" . $data[$i];
+            }
+        }
+        return $filter;
+    }
+    
     private function VerifyPlugin(){
         $zip = new \ZipArchive();
         if(!$zip->open($this->path_plugin)){
@@ -56,5 +72,7 @@ class PluginClass extends \_Directory {
         $data = parent::FindDataDirectory($this->path);
         return $data;
     }
+    
+    
     
 }

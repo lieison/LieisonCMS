@@ -68,9 +68,11 @@
     
 ?>
     
-</head>
-<!-- ESTABLECIENDO EL HEADER  -->
+<!-- ESTABLECIENDO EL HEADER  --> 
 %{HEADER_CLASS_VIEW}%
+</head>
+
+
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 

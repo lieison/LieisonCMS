@@ -168,6 +168,11 @@ class _Directory {
         return $this->array_dir;
     }
     
+    
+    public function FindDirectory($root = "/"){
+        return scandir($root , SCANDIR_SORT_ASCENDING );
+    }
+    
    
     
     
