@@ -1,6 +1,6 @@
 <?php 
 
-    
+  
  /**
  *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
  *@copyright (c) 2015, Lieison
@@ -25,17 +25,38 @@
  * 
  *@version 1.0
  *@todo Lieison S.A de C.V 
+ * 
+ * 
+ * 
  */
-    session_start();
-    
+
+ 
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
-    $header = new Http\Header();
-    $header->redirect("dashboard_index.php");
     
-    /*$path_origin = "../";
-    $path_plugin = "../prueba_plugin.zip";
-    $plugin = new \Plugin\PluginClass($path_origin, $path_plugin);
-    print_r($plugin->UnZipPlugin());*/
+    //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
+    Session::InitSession();
+    Session::InsertSession("page_name", "Modulos");
     
-?>
+    Session::InsertSession("home", "Configuracion");
+    Session::InsertSession("title", "<b>Modulos</b>");
+
+
+    //PREPARANDO LA VISTA ...
+    ViewClass::PrepareView("View.phtml", "Admin");
+    
+    //CARGAMOS LA VISTA DEL PLUGINS
+    $loader = "<?php include_once 'plugin_view.php'; ?>";
+    
+    //functions
+    $js = "<script src='Functions.js' type='text/javascript' ></script>";
+    
+    //CSS
+    
+    $css = '<link href="../../assets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet"/>
+            <link href="../../assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+            <link href="../../assets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet"/>';
+    
+    //LLAMANDO LA VISTA
+    ViewClass::SetView(ViewClass::SetParamsString($loader , $js . $css, ""  , ""));
+    
