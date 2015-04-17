@@ -14,6 +14,11 @@ abstract class InstallClass extends \MysqlConection {
     
     var $class              = null;
     
+    var $querys             = array();
+    
+    var $querys_result      = array();
+    
+    
     public function __construct($conect_dsn = array(), $directory = null) {
         parent::__construct($conect_dsn, $directory);
     }
@@ -26,6 +31,10 @@ abstract class InstallClass extends \MysqlConection {
           );
     }
     
+    public function SetQuery($query){
+        $this->querys[] = $query;
+    }
+    
     
     public function GetError(){
         return $this->error;
@@ -34,6 +43,10 @@ abstract class InstallClass extends \MysqlConection {
     
     public function  GetTableError(){
         return $this->table_key_error;
+    }
+    
+    public function GetResultQuerys(){
+        return $this->querys_result;
     }
 
 
@@ -61,6 +74,22 @@ abstract class InstallClass extends \MysqlConection {
        return  $db_tables = parent::RawQuery("show tables " , \PDO::FETCH_NUM);
     }
     
+    
+    public function InstallQuerys(){
+        if(count($this->querys) == 0){
+            return;
+        }
+        for($i=0; $i<count($this->querys); $i++){
+            try{
+                $query = $this->querys[$i];
+                $this->querys_result[] = parent::RawQuery($query);
+            } catch (PDOException $ex){
+                $this->error[] = "Error Introducir query : " .  $ex->getMessage() . " Code: " . $ex->getCode() ;
+            }
+        }
+    }
+
+
     
     public abstract function  Install();
 
