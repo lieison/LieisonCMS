@@ -11,7 +11,39 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        // put your code here
+        
+         include   '../../../Conf/Include.php';
+           
+         class BaseInstall extends Plugin\Install\InstallClass
+         {
+            
+             public function __construct($conect_dsn = array(), $directory = null) {
+                 parent::__construct($conect_dsn, $directory);
+                 $this->class = new PluginController("../");
+             }
+
+            public function Install() {
+             
+            }
+            
+            public function __call($name, $arguments) {
+                $this->class->name($arguments[0]);
+            }
+            
+        }
+        
+        $class = new BaseInstall();
+        $class->SetTable("contrato", "");
+        $class->ConfigDatabases();
+        $errores = $class->GetTableError();
+        
+        
+        echo "<pre>";
+        print_r($errores);
+        echo "</pre>";
+        
+           
+        
         ?>
     </body>
 </html>

@@ -4,8 +4,8 @@
 
 class PluginClass extends \_Directory {
     
-    protected $path = NULL;
-    protected $path_plugin = NULL;
+    protected $path         = NULL;
+    protected $path_plugin  = NULL;
 
     public function __construct($path_origin = "Plugins" , $path_plugin = "/") {
         $this->path = $path_origin;
@@ -46,18 +46,6 @@ class PluginClass extends \_Directory {
         }else {
             return null;
         }
-    }
-    
-    public function PluginsInstalled(){
-        
-        $data = parent::FindDirectory($this->path);
-        $filter = array();
-        for($i=0 ; $i < count($data); $i++){
-            if(is_dir($this->path . "" . $data[$i])){
-                $filter[] = $this->path . "" . $data[$i];
-            }
-        }
-        return $filter;
     }
     
     private function VerifyPlugin(){
