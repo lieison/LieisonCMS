@@ -15,10 +15,9 @@ class PluginController extends \Plugin\PluginClass {
     
     var $filter             = array();
     
-    var $plugins_installed  = array();
+    var $plugins            = array();
     
-    
-    
+
     public function __construct($path_origin = "Plugins", $path_plugin = "/") {
         parent::__construct($path_origin, $path_plugin);
     }
@@ -28,13 +27,15 @@ class PluginController extends \Plugin\PluginClass {
         $this->filter = array();
         $this->plugins_installed = array();
         
-        $data = parent::FindDirectory($this->path);
-        for($i=0 ; $i < count($data); $i++){
-            if(is_dir($this->path . "" . $data[$i])){
-                $plug = parent::FindDataDirectory($data[$i] , array("name"=>"conf" , "extend"=> "json"));
-                if(!empty($plug)){
-                     $this->filter[] = array("root"=> $plug[0]['root'] , "file" => $plug[0]['filename'] );
-                }
+        $data = parent::FindDataDirectory($this->path , array("name"=>"conf" , "extend"=> "json"));
+        for($i=0 ; $i <=count($data); $i++){
+            if(!empty($data[$i])){
+                    $this->filter[] = 
+                    array(
+                        "root"      => $data[$i]['root'] , 
+                        "file"      => $data[$i]['filename']
+                    );
+                
             }
         }
 
@@ -43,15 +44,26 @@ class PluginController extends \Plugin\PluginClass {
             $archive =  $string_root . "/" . $this->filter[$i]['file'] ;
             $json_decode = new \SivarApi\Tools\Json_class();
             $json_decode->JsonFile($archive);
-            $this->plugins_installed[] = 
+            $this->plugins[] = 
                     array(
                         "root"      => $string_root . "/" , 
                         "decode"    => $json_decode->GetDecodeJsonFile(JSON_CLASS)
                     );
         }
         
-        return $this->plugins_installed;
+        return $this->plugins;
  
+    }
+    
+    
+    public function InstallModule($directory){
+        parent::SetPathPlugin($directory);
+        $flag = parent::UnZipPlugin();
+        return $flag;
+    }
+    
+    public function UninstallModule($directory){
+        
     }
     
 }

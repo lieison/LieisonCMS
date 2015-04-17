@@ -100,7 +100,7 @@
                                                                           
                                                                           $root = $modules[$i]['root'];
                                                                           $name = $modules[$i]['decode']->name;
-                                                                          $install = $modules[$i]['decode']->install;
+                                                                          $install =  $modules[$i]['decode']->install;
                                                                           $version = $modules[$i]['decode']->version;
                                                                           $actions = "<button title='Eliminar Modulo' type='button'  class='btn btn-warning' onclick='deletemodule(" . '"' . $root . '"' .");'>" 
                                                                                   . '<i class="fa fa-trash-o"></i>' . "</button>";
@@ -109,7 +109,8 @@
                                                                           echo "<td>" . ($i+1) . "</td>";
                                                                           echo "<td>$name</td>";
                                                                           echo "<td>$root</td>";
-                                                                          if($install == true):
+                     
+                                                                          if( $install == "true"):
                                                                                echo "<td>Instalado</td>";
                                                                                 $actions .= "<button title='Desinstalar Modulo' type='button' class='btn btn-primary' onclick='unistall(" . '"' . $root . '"' .");'>" 
                                                                                   . '<i class="fa fa-long-arrow-down"></i>' . "</button>";
