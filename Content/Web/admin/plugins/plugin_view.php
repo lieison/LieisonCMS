@@ -133,7 +133,9 @@
 								
 								</tbody>
 								</table>
+                                                                
 							</div>
+                                                    <div align='center' id="action_plugins"></div>
 						</div>
 					</div>
 					<!-- END SAMPLE TABLE PORTLET-->
