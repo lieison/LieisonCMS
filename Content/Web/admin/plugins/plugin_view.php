@@ -1,7 +1,6 @@
 
 <?php
  $path_origin = "../";
- 
  $plugin = new PluginController($path_origin);
  $modules = $plugin->GetAllModules();
  $count = count($modules);
@@ -19,7 +18,7 @@
 							<h3 class="panel-title">Instala un Nuevo Modulo</h3>
 						</div>
 						<div  class="panel-body">
-                                            <form id="fileupload" action="" method="POST" enctype="multipart/form-data">
+                                            <form id="fileupload" action="UploadPlugin.php" method="POST" enctype="multipart/form-data">
 						<div class="row fileupload-buttonbar">
 							<div class="col-lg-7">
 								<!-- The fileinput-button span is used to style the file input field as button -->
@@ -27,7 +26,7 @@
 								<i class="fa fa-plus"></i>
 								<span>
                                                                     Buscar Modulo </span>
-								<input type="file" name="" multiple="">
+                                                                <input type="file" name="plugin" id="plugin" multiple="">
 								</span>
 								<button type="submit" class="btn blue start">
 								<i class="fa fa-upload"></i>
@@ -35,7 +34,21 @@
                                                                     Iniciar Subida </span>
 								</button>
 							</div>
-							
+                                                   
+                                                        <?php
+                                                        
+                                                            if(isset($_REQUEST['error'])):
+                                                             
+                                                                if($_REQUEST['error'] == "nofile"):
+                                                                    echo '<br><br><br><div align="center" class="alert alert-success" role="alert"><i class="fa fa-exclamation"></i> ARCHIVO INCORRECTO</div>';
+                                                                elseif($_REQUEST['error'] == "noupload"):
+                                                                     echo '<br><br><br><div align="center" class="alert alert-success" role="alert"><i class="fa fa-exclamation"></i> EL ARCHIVO NO SE PUDO SUBIR</div>';
+                                                                endif;
+                                                                
+                                                            endif;
+                                                        
+                                                        ?>
+                                                    
 						</div>
 						<!-- The table listing the files available for upload/download -->
 						<table role="presentation" class="table table-striped clearfix">
