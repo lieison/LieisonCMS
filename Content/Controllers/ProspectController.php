@@ -183,6 +183,7 @@ class ProspectController extends ProspectModel {
     }
     
     
+    
       
    /**
      *@author Rolando Antonio Arriaza
@@ -219,6 +220,11 @@ class ProspectController extends ProspectModel {
             }
         }
         return round(($empty/$total)*100, 2);
+    }
+    
+    
+    public function EditProspect($id , array $values){
+        parent::Update("sales_prospect" , $values , " id_prospect LIKE $id");
     }
     
     

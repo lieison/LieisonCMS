@@ -49,10 +49,14 @@
                 fjs.parentNode.insertBefore(js, fjs);
         }(document, "script", "facebook-jssdk"));</script>';
     
-    $footer = 'var get_paises = function()
+   $footer = 'var get_paises = function(id)
    {
+   
+        var params = { "id":id };
+        
         $.ajax({
                       type: "POST",
+                      data:params,
                       url: "get_paises.php",
                       beforeSend: function()
                       {
@@ -67,9 +71,11 @@
                       }
                       
               });
+              
+     
    }
-   
-   get_paises();';
+    get_paises(' .$_REQUEST['id'] . ');
+   ';
     
     $footer_end = '<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>';
     $footer_end .= '<script src="AjaxAddSales.js"></script>';

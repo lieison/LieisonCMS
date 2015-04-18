@@ -25,3 +25,36 @@
  *@version 1.0
  *@todo Lieison S.A de C.V 
  */
+
+include   '../../../Conf/Include.php';
+
+$header = new Http\Header();
+if(!isset($_POST['cmd_enviar'])){
+    $header->redirect("index.php");
+    exit();
+}
+
+$values = array(
+         "nombre" => $_POST['txt_nombre'],
+         "direccion" => $_POST['txt_direccion1'],
+         "direccion2" => $_POST['txt_direccion2'],
+         "provincia" => $_POST['txt_provincia'],
+         "ciudad" => $_POST['txt_ciudad'],
+         "id_pais" => $_POST['combo_pais'],
+         "zip" => $_POST['txt_zip'],
+         "telefono" => $_POST['txt_telefono'],
+         "fax" => $_POST['txt_fax'],
+         "pagina_web" => $_POST['txt_web'],
+         "email" => $_POST['txt_email'],
+         "facebook" => $_POST['txt_facebook'],
+         "twitter" => $_POST['txt_twitter'],
+         "notas" => $_POST['txt_notas']
+);
+
+$id = $_POST['cmd_enviar'];
+$prospect = new ProspectController();
+$prospect->EditProspect($id, $values);
+$header->redirect("dashboard_admin_prospecto.php?id=$id");
+
+
+

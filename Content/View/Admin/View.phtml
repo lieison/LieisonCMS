@@ -69,9 +69,7 @@
 ?>
     
 <!-- ESTABLECIENDO EL HEADER  --> 
-<script src='Functions.js' type='text/javascript' ></script><link href="../../assets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet"/>
-            <link href="../../assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
-            <link href="../../assets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet"/>
+<link href="../../assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css"/><link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css"/>
 </head>
 
 
@@ -196,7 +194,7 @@
                                      
                                 ?>
 			</div>          
-                    <?php include_once 'plugin_view.php'; ?>
+                    <?php include 'ViewAdminProspecto.php' ?>
                 </div>
                
         </div>
@@ -229,7 +227,7 @@
     
    ?> 
            
-            
+   FormValidation.init();cargar_prospectos();cargar_entradas();         
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
@@ -253,7 +251,8 @@
 </script>
 <!-- END JAVASCRIPTS -->
 
- 
+<script src="AjaxAdminSales.js"></script><script src="../js/notify.js"></script><script src="../js/bootbox.js"></script><script src="../js/bootbox.min.js"></script><script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+                    <script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script> 
 
 </body>
 <!-- END BODY -->
