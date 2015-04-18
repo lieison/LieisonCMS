@@ -69,7 +69,6 @@ class PluginController extends \Plugin\PluginClass {
             return $json_class->GetDecodeJsonFile(JSON_CLASS);
     }
     
-    
     public function SetNewConfig($config , $path = null  ){
         if($path == null) {$path = "";}
         $json_class = new \SivarApi\Tools\Json_class();
@@ -77,7 +76,6 @@ class PluginController extends \Plugin\PluginClass {
         $json_class->JsonFile($path);
         $json_class->SaveNewJasonFile($config, $path);
     }
-    
     
     public function SetDashboard($section , $icon , $link , $title , $start_index , $priv){
         $mysql = new MysqlConection();

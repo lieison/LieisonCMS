@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/plugin_view.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales_unprospect/dashboard_index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PluginController.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales_unprospect/config.json</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/AjaxFunctions.js</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/dashboard_index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Plugins/PluginClass.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Plugins/InstallClass.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/Functions.js</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/config.json</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/visitfrontend.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales_unprospect/index.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
