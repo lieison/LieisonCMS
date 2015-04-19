@@ -2,7 +2,7 @@
 
      
    if(isset($_REQUEST['avatar_guardar'])):
-        $is_save =$user_controller->SetNew_Avatar(FunctionsController::GetRootUrl("../admin/img/users"), "avatar_imagen");
+        $is_save =$user_controller->SetNew_Avatar(FunctionsController::GetRootUrl("admin/img/users"), "avatar_imagen");
         if(!$is_save):
             echo "<script>alert('Imposible subir la imagen intente de nuevo mas tarde ...');</script>";
         else:
