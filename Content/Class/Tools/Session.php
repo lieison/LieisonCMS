@@ -75,11 +75,13 @@
      *@return Mixed 
      */
     public static function  GetSession($name , $key = null){
-        if(self::ExistSession($name)){
-            if($key != null){
+        if (self::ExistSession($name)) {
+            if ($key != null) {
                 return $_SESSION[$name][$key];
             }
             return $_SESSION[$name];
+        } else {
+            return false;
         }
     }
     

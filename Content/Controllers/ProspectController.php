@@ -223,8 +223,16 @@ class ProspectController extends ProspectModel {
     }
     
     
+     /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo edita un prospecto mediante un arreglo definido 
+     *@param string $id id del prospecto
+     *@param array $values el arreglo definido array("nombre"=>"valor" , "direccion"=>"valor" ...);
+     *@return bool
+     */ 
     public function EditProspect($id , array $values){
-        parent::Update("sales_prospect" , $values , " id_prospect LIKE $id");
+        return parent::Update("sales_prospect" , $values , " id_prospect LIKE $id");
     }
     
     

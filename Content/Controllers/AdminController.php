@@ -323,7 +323,7 @@ class AdminController extends AdminModel {
     public static function get_option_permission($redirect = ".../index.php" , $activate=true )
     {
         return array("redirect"=> $redirect , 
-                           "activate" => $activate);
+                      "activate" => $activate);
     }
     
     
