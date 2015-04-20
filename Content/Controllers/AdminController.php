@@ -314,34 +314,28 @@ class AdminController extends AdminModel {
                     array $alter_permission = array()
             )
     {
-        if(count($alter_permission) == 0){
-            $is_priv = $this->get_permission_page($rol, $dashboard_page);
+                $redirect_activate = $redirect['activate']; 
+                $is_priv = $this->get_permission_page($rol, $dashboard_page);
                 if(!$is_priv && $rol != "admin" ){
-                    if ($redirect['activate'] == true) {
-                        ob_start();
-                        $header = new \Http\Header();
-                        $header->redirect($redirect['redirect']);
-                        unset($header);
-                        ob_end_clean();
+                    if ($redirect_activate == true) {
+                         if(count($alter_permission) >= 1)
+                         {
+                               foreach ($alter_permission as $permission){
+                                    if(strcmp($permission, $rol)== 0){
+                                        return $permission;
+                                    }
+                                }
+                         }
+                              ob_start();
+                              $header = new \Http\Header();
+                              $header->redirect($redirect['redirect']);
+                              unset($header);
+                              ob_end_clean();
+                       
                     } else {
                         return $is_priv;
                     }
                 }
-        }
-        else if(count($alter_permission) >= 1){
-            foreach ($alter_permission as $permission){
-                if(strcmp($permission, $rol)== 0){
-                    return $permission;
-                }
-            }
-            if ($redirect['activate'] == true) {
-                 ob_start();
-                 $header = new \Http\Header();
-                 $header->redirect($redirect['redirect']);
-                 unset($header);
-                 ob_end_clean();
-            }
-        }
     }
     
     
