@@ -40,6 +40,17 @@
     $_SESSION['home'] = "Sales";
     $_SESSION['title'] = "Sales <b> Edicion De Prospecto</b>";
     
+    
+    $rol = $_SESSION['login']['rol'];
+    
+    $adminc = new AdminController();
+    
+     $adminc->Get_Permission(
+            $rol, 
+            FunctionsController::get_actual_page(),
+            AdminController::get_option_permission(),
+            array("admin" , "Sales"));
+    
     $header = '<div id="fb-root"></div>
             <script>(function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
@@ -81,10 +92,6 @@
     $footer_end .= '<script src="AjaxAddSales.js"></script>';
 
 
-    $rol = $_SESSION['login']['rol'];
-    $adminc = new AdminController();
-    $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
-    
     ViewClass::PrepareView("View.phtml", "Admin");
     ViewClass::SetView(ViewClass::SetParamsString("<?php include 'ViewEditProspecto.php'; ?>" , $header , $footer, $footer_end));
 

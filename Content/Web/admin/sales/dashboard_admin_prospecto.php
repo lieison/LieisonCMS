@@ -46,7 +46,12 @@
     //CONTROLADOR DEL ADMINISTRADOR 
     $adminc = new AdminController();
     //OBTIENE LOS PERMISOS MEDIANTE EL ROL INDICADO 
-    $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
+    $adminc->Get_Permission(
+            $rol, 
+            FunctionsController::get_actual_page(),
+            AdminController::get_option_permission(),
+            array("admin" , "Sales"));
+   
     
     
     //HEADER , CABECERA DONDE SE INICIARA ELEMENTOS NECESARIOS PARA ESTE SCRIPT

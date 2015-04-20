@@ -78,7 +78,7 @@ class DashboardController extends DashboardModel {
         $result = $this->RawQuery($query);
         $nivel =  $result[0]["nivel"];
         
-        $query = "SELECT id_seccion , seccion_dashboard.icono , seccion_dashboard.titulo , numero , privilegios"
+        $query = "SELECT id_seccion , seccion_dashboard.icono , seccion_dashboard.titulo , numero , privilegios ,status "
                 . " FROM seccion_dashboard ORDER BY numero ASC";
        
         $result_d = $this->RawQuery($query);
@@ -91,7 +91,9 @@ class DashboardController extends DashboardModel {
             $array_seccion[$id] = array(
                 "icono" =>$v["icono"] , 
                 "titulo"=>$v["titulo"],
-                "numero"=>$v['numero']);
+                "numero"=>$v['numero'],
+                "status"=>$v['status']    
+               );
             }
         }
         
@@ -122,7 +124,9 @@ class DashboardController extends DashboardModel {
             
             
             $side = $value[0];
-            if($side["numero"] == 1)
+            
+        if($side['status'] == 1){
+            if($side["numero"] == 1 )
             {
                 
                 $this->format .= '<li class="start active open">';
@@ -167,7 +171,8 @@ class DashboardController extends DashboardModel {
                     } 
             }
             
-            $this->format .= "</ul></li>";
+                 $this->format .= "</ul></li>";
+        }
 
         }
        
