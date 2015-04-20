@@ -48,7 +48,7 @@ class AdminHeader
     {
         echo '<ul class="dropdown-menu dropdown-menu-default">
                 <li>
-                   <a href="' . self::$relative_route . 'admin/perfil.php">
+                   <a href="' . self::$relative_route . 'admin/perfil/">
 		   <i class="icon-user"></i> Mi Perfil</a>
                  </li>';
         

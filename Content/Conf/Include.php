@@ -39,6 +39,7 @@ include $GLOBAL_ROOT . $FOLDER . '/Content/Class/Database/Class.Oci8.php';
  */
 include $GLOBAL_ROOT . $FOLDER . '/Content/Class/Directory/Class.Directory.php';
 include $GLOBAL_ROOT . $FOLDER . '/Content/Class/Directory/Class.File.php';
+require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Directory/BnFileReader.php';
 
 
 /**
@@ -80,6 +81,7 @@ require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/RegexClass.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/UrlClass.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/Time.php';
 require $GLOBAL_ROOT . $FOLDER . '/Content/Class/Tools/Session.php';
+
 /**
  * LLAMADA DE LAS CLASES EN EL DIRECTORIO VIEW 
  * 

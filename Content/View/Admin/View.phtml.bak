@@ -13,8 +13,13 @@
 
     $header = new Http\Header(); //clase header , ver en documentacion
     
-    if(!isset($_SESSION['login'])): //verifica si existe sesion 
-       $header->redirect("login.php"); //dado caso no exista retorna a login
+    if(!Session::GetSession("login")): //verifica si existe sesion 
+        if(file_exists("login.php")):
+              $header->redirect("login.php"); //dado caso no exista retorna a login
+        else:
+             $header->redirect("../login.php"); //dado caso no exista retorna a login
+        endif;
+            exit();
     endif;
 
     //VARIABLES DE SESION , ESTAS VARIABLES SE DECLARAN AL INICIAR EL LOGUEO 
@@ -68,9 +73,11 @@
     
 ?>
     
-</head>
-<!-- ESTABLECIENDO EL HEADER  -->
+<!-- ESTABLECIENDO EL HEADER  --> 
 %{HEADER_CLASS_VIEW}%
+</head>
+
+
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
@@ -238,7 +245,7 @@
    //Index.initChat();
   // Index.initMiniCharts();
    Tasks.initDashboardWidget();
-
+    
 
    /**
     * INICIA LOS GRAFICOS DE VISITAS EN EL FRONT END --- DESHABILITADO

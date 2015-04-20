@@ -1,5 +1,6 @@
-<?php
+<?php 
 
+  
  /**
  *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
  *@copyright (c) 2015, Lieison
@@ -24,37 +25,38 @@
  * 
  *@version 1.0
  *@todo Lieison S.A de C.V 
+ * 
+ * 
+ * 
  */
 
-include   '../../../Conf/Include.php';
-
-$header = new Http\Header();
-if(!isset($_POST['cmd_enviar'])){
-    $header->redirect("index.php");
-    exit();
-}
-
-$values = array(
-         "nombre" => $_POST['txt_nombre'],
-         "direccion" => $_POST['txt_direccion1'],
-         "direccion2" => $_POST['txt_direccion2'],
-         "provincia" => $_POST['txt_provincia'],
-         "ciudad" => $_POST['txt_ciudad'],
-         "id_pais" => $_POST['combo_pais'],
-         "zip" => $_POST['txt_zip'],
-         "telefono" => $_POST['txt_telefono'],
-         "fax" => $_POST['txt_fax'],
-         "pagina_web" => $_POST['txt_web'],
-         "email" => $_POST['txt_email'],
-         "facebook" => $_POST['txt_facebook'],
-         "twitter" => $_POST['txt_twitter'],
-         "notas" => $_POST['txt_notas']
-);
-
-$id = $_POST['cmd_enviar'];
-$prospect = new ProspectController();
-$prospect->EditProspect($id, $values);
-$header->redirect("dashboard_admin_prospecto.php?id=$id");
+ 
+    //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
+    include   '../../../Conf/Include.php';
+    
+    //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
+    Session::InitSession();
+    Session::InsertSession("page_name", "Modulos");
+    
+    Session::InsertSession("home", "Configuracion");
+    Session::InsertSession("title", "<b>Modulos</b>");
 
 
-
+    //PREPARANDO LA VISTA ...
+    ViewClass::PrepareView("View.phtml", "Admin");
+    
+    //CARGAMOS LA VISTA DEL PLUGINS
+    $loader = "<?php include_once 'plugin_view.php'; ?>";
+    
+    //functions
+    $js = "<script src='Functions.js' type='text/javascript' ></script>";
+    
+    //CSS
+    
+    $css = '<link href="../../assets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet"/>
+            <link href="../../assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+            <link href="../../assets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet"/>';
+    
+    //LLAMANDO LA VISTA
+    ViewClass::SetView(ViewClass::SetParamsString($loader , $js . $css, ""  , ""));
+    

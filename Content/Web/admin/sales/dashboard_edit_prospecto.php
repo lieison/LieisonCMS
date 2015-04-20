@@ -40,6 +40,17 @@
     $_SESSION['home'] = "Sales";
     $_SESSION['title'] = "Sales <b> Edicion De Prospecto</b>";
     
+    
+    $rol = $_SESSION['login']['rol'];
+    
+    $adminc = new AdminController();
+    
+     $adminc->Get_Permission(
+            $rol, 
+            FunctionsController::get_actual_page(),
+            AdminController::get_option_permission(),
+            array("admin" , "Sales"));
+    
     $header = '<div id="fb-root"></div>
             <script>(function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
@@ -49,10 +60,14 @@
                 fjs.parentNode.insertBefore(js, fjs);
         }(document, "script", "facebook-jssdk"));</script>';
     
-    $footer = 'var get_paises = function()
+   $footer = 'var get_paises = function(id)
    {
+   
+        var params = { "id":id };
+        
         $.ajax({
                       type: "POST",
+                      data:params,
                       url: "get_paises.php",
                       beforeSend: function()
                       {
@@ -67,18 +82,16 @@
                       }
                       
               });
+              
+     
    }
-   
-   get_paises();';
+    get_paises(' .$_REQUEST['id'] . ');
+   ';
     
     $footer_end = '<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>';
     $footer_end .= '<script src="AjaxAddSales.js"></script>';
 
 
-    $rol = $_SESSION['login']['rol'];
-    $adminc = new AdminController();
-    $adminc->Get_Permission($rol, FunctionsController::get_actual_page());
-    
     ViewClass::PrepareView("View.phtml", "Admin");
     ViewClass::SetView(ViewClass::SetParamsString("<?php include 'ViewEditProspecto.php'; ?>" , $header , $footer, $footer_end));
 

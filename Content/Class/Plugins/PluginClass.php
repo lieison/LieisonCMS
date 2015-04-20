@@ -4,8 +4,8 @@
 
 class PluginClass extends \_Directory {
     
-    protected $path = NULL;
-    protected $path_plugin = NULL;
+    protected $path         = NULL;
+    protected $path_plugin  = NULL;
 
     public function __construct($path_origin = "Plugins" , $path_plugin = "/") {
         $this->path = $path_origin;
@@ -14,6 +14,10 @@ class PluginClass extends \_Directory {
     
     public function __destruct() {
         unset($this);
+    }
+    
+    public function SetPathPlugin($path_plugin ){
+         $this->path_plugin = $path_plugin;
     }
     
     public function UnZipPlugin(){
@@ -56,5 +60,7 @@ class PluginClass extends \_Directory {
         $data = parent::FindDataDirectory($this->path);
         return $data;
     }
+    
+    
     
 }

@@ -183,6 +183,7 @@ class ProspectController extends ProspectModel {
     }
     
     
+    
       
    /**
      *@author Rolando Antonio Arriaza
@@ -219,6 +220,19 @@ class ProspectController extends ProspectModel {
             }
         }
         return round(($empty/$total)*100, 2);
+    }
+    
+    
+     /**
+     *@author Rolando Antonio Arriaza
+     *@version 0.1
+     *@todo edita un prospecto mediante un arreglo definido 
+     *@param string $id id del prospecto
+     *@param array $values el arreglo definido array("nombre"=>"valor" , "direccion"=>"valor" ...);
+     *@return bool
+     */ 
+    public function EditProspect($id , array $values){
+        return parent::Update("sales_prospect" , $values , " id_prospect LIKE $id");
     }
     
     
