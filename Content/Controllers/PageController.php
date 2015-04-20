@@ -21,19 +21,26 @@ class PageController extends PageModel{
     
     public function get_dashboard_pages()
     {
-        return FunctionsController::get_directory_tree("admin" ,  array("name"=>"dashboard" , "extend"=> "php"));
+        return FunctionsController::get_directory_tree(
+                    "admin" ,  
+                    array("name"=>"dashboard" , "extend"=> "php")
+                );
     }
     
-    public function get_dashboard_database()
+    public function get_dashboard_database($id = null)
     {
         /**
          * SENTENCIA SQL ES UN VIEW
          */
-        $result = parent::RawQuery("SELECT * FROM VIEW_DASHBOARD_DB");
+        if($id== null){
+            $result = parent::RawQuery("SELECT * FROM VIEW_DASHBOARD_DB");
+        }else{
+             $result = parent::RawQuery("CALL ProcGetDashboardPagebyId($id)");
+        }
         return $result;
     }
     
-    
+ 
     public function get_numbers_seccion()
     {
         $numeros = array();
@@ -45,6 +52,7 @@ class PageController extends PageModel{
         }
         return $numeros;
     }
+    
     
     public function set_dashboard_page($page , $directory)
     {
