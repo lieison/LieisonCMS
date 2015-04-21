@@ -47,9 +47,8 @@
     //ESTE CASO SE DAN PERMISOS ESPECIALES "Sales"
     $adminc->Get_Permission(
             $rol, 
-            FunctionsController::get_actual_page(),
-            AdminController::get_option_permission(),
-            array("Sales"));/*YA QUE LA PAGINA ACTUAL NO ESTA CONFIGURADA PARA PERMISOS SOLO dashboard_admin_prospecto.php
+            "dashboard_admin_prospecto.php", //pagina padre que otorgara los permisos
+            AdminController::get_option_permission());/*YA QUE LA PAGINA ACTUAL NO ESTA CONFIGURADA PARA PERMISOS SOLO dashboard_admin_prospecto.php
              * SE LE OTROGAN PERMISOS EXTRA A "Sales"
              */
     
