@@ -1,5 +1,16 @@
 <?php
 
+    $session = Session::GetSession("login");
+    $usuario = $session['user'];
+    $rol = $session['rol'];
+    $nombre = $session['nombre'];
+    $mail = $session['email'];
+    $activo = $session['activo'];
+    $id_user = $session['id'];
+    $imagen =  $session['imagen'];
+    
+    $user_controller = new UserController($id_user);
+    $header = new \Http\Header();
      
    if(isset($_REQUEST['avatar_guardar'])):
         $is_save =$user_controller->SetNew_Avatar(FunctionsController::GetRootUrl("admin/img/users"), "avatar_imagen");
@@ -20,21 +31,12 @@
     elseif(isset($_REQUEST['password_enviar'])):
         $is_ok = $user_controller->Get_Password($_REQUEST['txt_current_pass'], $_REQUEST['txt_new_pass']);
         if(!$is_ok):
-            $header->redirect("index.php?a=1");
+            $a=1;
+        else:
+            $a=2;
         endif;
     endif;
     
-    $session = Session::GetSession("login");
-    $usuario = $session['user'];
-    $rol = $session['rol'];
-    $nombre = $session['nombre'];
-    $mail = $session['email'];
-    $activo = $session['activo'];
-    $id_user = $session['id'];
-    $imagen =  $session['imagen'];
-    
-    $user_controller = new UserController($id_user);
-
 ?>
 
 <div class="row margin-top-20">
@@ -145,11 +147,16 @@
 									</div>
 									<div class="portlet-body">
                                                                             <?php
-                                                                                                    if(isset($_REQUEST['a'])):
-                                                                                                        if($_REQUEST['a']==1):
+                                                                                                    if(isset($a)):
+                                                                                                        if($a==1):
                                                                                                             echo ' <div class="alert alert-danger" role="alert">
                                                                                                                    La contraseña actual es incorrecta, intenta de nuevo.
                                                                                                                 </div>';
+                                                                                                        elseif($a==2):
+                                                                                                             echo ' <div class="alert alert-success" role="alert">
+                                                                                                                   Contraseña cambiada con exito
+                                                                                                                </div>';
+                                     
                                                                                                         endif;
                                                                                                     endif;
                                                                                                   
@@ -236,7 +243,7 @@
 											<!-- END CHANGE AVATAR TAB -->
 											<!-- CHANGE PASSWORD TAB -->
 											<div class="tab-pane" id="tab_1_3">
-                                                                                            <form action="#" method="get">
+                                                                                            <form action="index.php" method="post">
                                                                                                 
 													<div class="form-group">
 														<label class="control-label">Contraseña Actual</label>
