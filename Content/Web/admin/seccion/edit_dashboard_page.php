@@ -20,17 +20,18 @@
     
 
     //HEADER , CABECERA DONDE SE INICIARA ELEMENTOS NECESARIOS PARA ESTE SCRIPT
-    $header .= '<script type="text/javascript" src="PageFunctions.js"></script>';
+    $header .= '<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/select2/select2.css"/>
+                ';
 
     //BODY , SE INCLUIRA LA ESTRUCTURA QUE ESTA DENTRO DE ViewAdminProspecto
     $body = "<?php include 'view_edit_paginas.php' ?>";
     
     //FOOTER , SE INCLUIRAN EN EL PIE DE PAGINA PERO 
     // ESTOS DATOS SOLO DEBE SER FUNCIONES
-    $footer = '';
+    $footer = 'PrivF.init();';
 
     //AL FINAL DEL FOOTER SE INCLUIRAN LOS JS NECESARIOS PARA QUE FUNCIONE EL SCRIPT ADECUADAMENTE
-    $footer_end = '';
+    $footer_end = '<script type="text/javascript" src="PageFunctions.js"></script><script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>';
 
 
     ViewClass::PrepareView("View.phtml", "Admin");//PREPARANDO LA VISTA APUNTAMOS A "View.phtml" Dentro de la locacion "Admin"

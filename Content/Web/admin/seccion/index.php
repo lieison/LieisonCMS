@@ -25,7 +25,6 @@
  *@todo Lieison S.A de C.V 
  */
     
-
     include   '../../../Conf/Include.php';
     $header = new Http\Header();
     $header->redirect("dashboard_control_paginas.php");

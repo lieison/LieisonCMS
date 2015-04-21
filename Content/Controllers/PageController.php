@@ -1,16 +1,6 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of PageController
- *
- * @author rolandoantonio
- */
 class PageController extends PageModel{
     
     var $QUERY = null;
@@ -29,13 +19,18 @@ class PageController extends PageModel{
     
     public function get_dashboard_database($id = null)
     {
-        /**
+      
+        if($id== null){
+              /**
          * SENTENCIA SQL ES UN VIEW
          */
-        if($id== null){
             $result = parent::RawQuery("SELECT * FROM VIEW_DASHBOARD_DB");
         }else{
+              /**
+         * SENTENCIA SQL PROCEDIMIENTO ALMACENADO
+         */
              $result = parent::RawQuery("CALL ProcGetDashboardPagebyId($id)");
+             $result = $result[0];
         }
         return $result;
     }
@@ -53,6 +48,15 @@ class PageController extends PageModel{
         return $numeros;
     }
     
+    
+    public function get_seccion_dashboard(){
+        
+        $this->QUERY = "SELECT * FROM seccion_dashboard WHERE status LIKE 1";
+        $value = parent::RawQuery($this->QUERY);
+        return $value;
+    }
+
+
     
     public function set_dashboard_page($page , $directory)
     {
