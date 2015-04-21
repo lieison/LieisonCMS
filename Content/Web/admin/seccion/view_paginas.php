@@ -44,7 +44,7 @@
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="fa fa-globe"></i>
-                                                               Seccion y Paginas 
+                                                               Secciones
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -62,19 +62,10 @@
                                                          
                                                         <table class="table table-striped table-bordered table-hover">
                                                             <thead>
-                                                                <tr>
-                                                                    <td>Seccion</td>
-                                                                    <td>Paginas</td>
-                                                                </tr>
+         
                                                             </thead>
                                                             <tbody>
-                                                                  <tr>
-                                                                      <td>
-                                                                          <div id="seccion_standar"><button class="btn btn-default navbar-btn" onclick="nueva_seccion();">Nueva Seccion</button></div>
-                                    
-                                                                      </td>
-                                                                      <td><a href="">Nueva Pagina</a></td>
-                                                                  </tr>
+                                                                  
                                                             </tbody>
                                                         </table>
                                                     </div>

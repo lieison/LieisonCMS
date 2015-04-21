@@ -44,6 +44,8 @@ unset($page);
 /*echo "<pre>";
 print_r($dash);
 echo "</pre>";*/
+ 
+
 ?>
 
 <?php if(!$del): ?>
@@ -55,12 +57,12 @@ echo "</pre>";*/
 							</div>
 						</div>
 						<div class="portlet-body form">
-                                                    <form class="form-horizontal" role="form" action="save_edit_paginas.php">
+                                                    <form class="form-horizontal" role="form" >
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Dashboard Titulo</label>
 										<div class="col-md-9">
-											<input type="text" class="form-control input-sm" placeholder="Agregue un titulo" value="<?php echo $dash['dash_titulo'] ?>">
+                                                                                    <input type="text" id="txt_titulo" class="form-control input-sm" placeholder="Agregue un titulo" value="<?php echo $dash['dash_titulo'] ?>">
 										</div>
 									</div>
 									<div class="form-group">
@@ -73,7 +75,7 @@ echo "</pre>";*/
 									<div class="form-group">
 										<label class="col-md-3 control-label">Direccion (Link)</label>
 										<div class="col-md-9">
-											<input type="text" class="form-control input-sm" placeholder="Default Input" value="<?php echo $dash['link']; ?>">
+                                                                                    <input type="text" id="txt_link" class="form-control input-sm" placeholder="Default Input" value="<?php echo $dash['link']; ?>">
 										</div>
 									</div>
 									<div class="form-group">
@@ -129,14 +131,15 @@ echo "</pre>";*/
                                                                                             }
                                                                                             unset($admin);
                                                                                        ?>
-											<input type="text" class="form-control todo-taskbody-tags" placeholder="Privilegios" value="<?php echo $priv_string; ?>">
+                                                                                    <input id="txt_priv" type="text" class="form-control todo-taskbody-tags" placeholder="Privilegios" value="<?php echo $priv_string; ?>">
 										</div>
 									</div>
 									
 								</div>
 								<div class="form-actions right1">
-									<button type="button" class="btn default">Cancelar</button>
-									<button type="submit" class="btn green">Actualizar</button>
+                                                                        <input type="hidden" id="txt_id" value="<?php echo $id; ?>" />
+                                                                        <a href="index.php" class="btn default">Cancelar</a>
+                                                                        <button type="button" onclick="SavePage();" class="btn green"><b id="cmd_actualizar">Actualizar</b></button>
 								</div>
 							</form>
 						</div>

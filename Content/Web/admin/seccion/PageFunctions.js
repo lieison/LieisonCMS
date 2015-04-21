@@ -143,3 +143,43 @@
     };
 
 }();
+
+
+    function SavePage(){
+        
+        var id = $("#txt_id").val();
+        var titulo = $("#txt_titulo").val();
+        var icono = $("#txt_icono").val();
+        var link = $("#txt_link").val();
+        var seccion = $("#cmd_seccion").val();
+        var priv = $("#txt_priv").val();
+        
+        var parametros = {
+            "id": id,
+            "titulo": titulo,
+            "icono": icono,
+            "link": link,
+            "seccion": seccion,
+            "priv": priv
+        };
+        
+       $.ajax({
+                      type: "POST",
+                      url: "save_edit_paginas.php",
+                      data: parametros,
+                      beforeSend: function()
+                      {
+                          $("#cmd_actualizar").html('Actualizando espere ...');
+                      },
+                      success: function(value){
+                            var result = $.trim(value);
+                            if(result == 1){
+                                $("#cmd_actualizar").html('Actualizado');
+                            }else{
+                                 $("#cmd_actualizar").html('No Actualizado');
+                            }
+                            
+                      }
+        });
+        
+    }
