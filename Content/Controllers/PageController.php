@@ -21,14 +21,29 @@ class PageController extends PageModel{
     {
       
         if($id== null){
-              /**
-         * SENTENCIA SQL ES UN VIEW
-         */
-            $result = parent::RawQuery("SELECT * FROM VIEW_DASHBOARD_DB");
+           /**
+            * SENTENCIA SQL ES UN VIEW
+            */
+          $result = parent::RawQuery("SELECT * FROM VIEW_DASHBOARD_DB");
+          $admin = new AdminController();
+          $privs = $admin->Get_MasterPrivilegios();
+          for ($i=0; $i< count($result); $i++){
+              $a = explode(",", $result[$i]['priv_nombre']);
+              $strings = array();
+              foreach ($a as $a_values){
+                  foreach ($privs as $p_values){
+                      if((int)$a_values == (int)$p_values['nivel']){
+                          array_push($strings, $p_values['nombre']);
+                      }
+                  }
+              }
+              $result[$i]['priv_nombre'] = implode(",", $strings);
+          }
+          
         }else{
               /**
-         * SENTENCIA SQL PROCEDIMIENTO ALMACENADO
-         */
+                * SENTENCIA SQL PROCEDIMIENTO ALMACENADO
+                */
              $result = parent::RawQuery("CALL ProcGetDashboardPagebyId($id)");
              $result = $result[0];
         }
