@@ -74,8 +74,7 @@
 ?>
     
 <!-- ESTABLECIENDO EL HEADER  --> 
-<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/select2/select2.css"/>
-                
+<script type="text/javascript" src="PageFunctions.js"></script>
 </head>
 
 
@@ -200,7 +199,7 @@
                                      
                                 ?>
 			</div>          
-                    <?php include 'view_edit_paginas.php' ?>
+                    <?php include 'view_paginas.php' ?>
                 </div>
                
         </div>
@@ -233,7 +232,7 @@
     
    ?> 
            
-   PrivF.init();         
+   buscar_log(1); buscar_seccion();         
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
@@ -257,7 +256,7 @@
 </script>
 <!-- END JAVASCRIPTS -->
 
-<script type="text/javascript" src="PageFunctions.js"></script><script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script> 
+ 
 
 </body>
 <!-- END BODY -->
