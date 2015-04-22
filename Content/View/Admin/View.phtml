@@ -74,7 +74,14 @@
 ?>
     
 <!-- ESTABLECIENDO EL HEADER  --> 
-
+<div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&appId=271330856288382&version=v2.0";
+                fjs.parentNode.insertBefore(js, fjs);
+        }(document, "script", "facebook-jssdk"));</script>
 </head>
 
 
@@ -199,7 +206,7 @@
                                      
                                 ?>
 			</div>          
-                    
+                    <?php include 'ViewEditProspecto.php'; ?>
                 </div>
                
         </div>
@@ -232,6 +239,32 @@
     
    ?> 
            
+   var get_paises = function(id)
+   {
+   
+        var params = { "id":id };
+        
+        $.ajax({
+                      type: "POST",
+                      data:params,
+                      url: "get_paises.php",
+                      beforeSend: function()
+                      {
+                          $("#drown_pais").html("<p>Cargando datos ...</p>");
+                      },
+                      success: function(value){
+                          document.getElementById("drown_pais").innerHTML = value;
+                      },
+                      error: function()
+                      {
+                          $("#combo_pais").html("Error al cargar");
+                      }
+                      
+              });
+              
+     
+   }
+    get_paises(18);
             
    
    Metronic.init(); // init metronic core componets
@@ -256,7 +289,7 @@
 </script>
 <!-- END JAVASCRIPTS -->
 
- 
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script><script src="AjaxAddSales.js"></script> 
 
 </body>
 <!-- END BODY -->
