@@ -2,12 +2,13 @@
 
 include   '../../../Conf/Include.php';
 
+/* @var $path type */
 $path = $_REQUEST['path'];
 
 include $path . "/install.php";
 
 if(!class_exists('BaseInstall')){
-    echo "Error, No existe la clase de isntalacion ...";
+    echo "Error, No existe la clase de instalacion ...";
     exit();
 }
 

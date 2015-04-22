@@ -108,8 +108,9 @@ class DashboardController extends DashboardModel {
         foreach ($array_seccion as $key=>$value)
         {
             $query = "SELECT dashboard.id_dashboard , dashboard.privilegios , dashboard.icono as icono , dashboard.link"
-                . ", dashboard.titulo FROM dashboard INNER JOIN seccion_dashboard ON "
-                . " dashboard.id_seccion=seccion_dashboard.id_seccion WHERE seccion_dashboard.id_seccion LIKE '$key'"
+                . ", dashboard.titulo  FROM dashboard INNER JOIN seccion_dashboard ON "
+                . " dashboard.id_seccion=seccion_dashboard.id_seccion WHERE "
+                . "seccion_dashboard.id_seccion LIKE '$key' AND dashboard.status LIKE 1"
                 . " ORDER BY dashboard.start ASC";
             
             $result = $this->RawQuery($query);
