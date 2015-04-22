@@ -54,7 +54,7 @@
     
     //FOOTER , SE INCLUIRAN EN EL PIE DE PAGINA PERO 
     // ESTOS DATOS SOLO DEBE SER FUNCIONES
-    $footer = 'buscar_log(1);';
+    $footer = 'buscar_log(1); buscar_seccion();';
 
     //AL FINAL DEL FOOTER SE INCLUIRAN LOS JS NECESARIOS PARA QUE FUNCIONE EL SCRIPT ADECUADAMENTE
     $footer_end = '';

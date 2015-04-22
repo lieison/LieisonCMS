@@ -60,12 +60,10 @@
 							</div>
                                                     <div >
                                                          
-                                                        <table class="table table-striped table-bordered table-hover">
+                                                        <table id="io_2" class="table table-striped table-bordered table-hover">
                                                             <thead>
-         
                                                             </thead>
                                                             <tbody>
-                                                                  
                                                             </tbody>
                                                         </table>
                                                     </div>

@@ -28,16 +28,7 @@ class PageController extends PageModel{
           $admin = new AdminController();
           $privs = $admin->Get_MasterPrivilegios();
           for ($i=0; $i< count($result); $i++){
-              $a = explode(",", $result[$i]['priv_nombre']);
-              $strings = array();
-              foreach ($a as $a_values){
-                  foreach ($privs as $p_values){
-                      if((int)$a_values == (int)$p_values['nivel']){
-                          array_push($strings, $p_values['nombre']);
-                      }
-                  }
-              }
-              $result[$i]['priv_nombre'] = implode(",", $strings);
+              $result[$i]['priv_nombre'] = $this->ConvertPrivToString($result[$i]['priv_nombre']);
           }
           
         }else{
@@ -64,9 +55,17 @@ class PageController extends PageModel{
     }
     
     
-    public function get_seccion_dashboard(){
+    public function get_seccion_dashboard($status = 1){
         
-        $this->QUERY = "SELECT * FROM seccion_dashboard WHERE status LIKE 1";
+        if($status == 1){
+            $this->QUERY = "SELECT * FROM seccion_dashboard WHERE status LIKE 1";
+        }else if($status == 0){
+            $this->QUERY = "SELECT * FROM seccion_dashboard WHERE status LIKE 0";
+        }
+        else{
+            $this->QUERY = "SELECT * FROM seccion_dashboard";
+        }
+        
         $value = parent::RawQuery($this->QUERY);
         return $value;
     }
@@ -76,17 +75,28 @@ class PageController extends PageModel{
         return parent::Update("dashboard" , $params , " id_dashboard LIKE $id");
     }
     
+    
+    public function ConvertPrivToString($numeric_privs){
+         $admin = new AdminController();
+         $privs = $admin->Get_MasterPrivilegios();
+         $privs_array = array();
+         $numeric_array = explode(",", $numeric_privs);
+         for($i=0; $i< count($numeric_array); $i++){
+             foreach ($privs as $v){
+                 if($numeric_array[$i] == $v['nivel']){
+                     array_push($privs_array, $v['nombre']);
+                     break;
+                 }
+             }
+         }
+         $glue = implode(",", $privs_array);
+         if(SivarApi\Tools\Validation::Is_Empty_OrNull($glue)){
+             return "all privileges";
+         }
+         return $glue;
+    }
    
 
-        
-    public function set_dashboard_page($page , $directory)
-    {
-        
-    }
-    
-    public function delete_dashboard_page($page_name , $directory)
-    {
-        
-    }
+     
    
 }
