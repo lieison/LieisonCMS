@@ -32,10 +32,31 @@
 
  
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
-    include   '../../Conf/Include.php';
+    include   '../../../Conf/Include.php';
     
-    //INDEX APUNTA AL DIRECTORIO USER
-    $header = new \Http\Header();
-    $header->redirect("user/");
- 
+    //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
+    Session::InitSession();
+    Session::InsertSession("page_name", "Apps");
+    
+    Session::InsertSession("home", "");
+    Session::InsertSession("title", "<b>Aplicaciones</b>");
+
+
+    //PREPARANDO LA VISTA ...
+    ViewClass::PrepareView("View.phtml", "Admin");
+    
+    //CARGAMOS LA VISTA DEL PLUGINS
+    $loader = "<?php ?>";
+    
+    //functions
+    $js = "<script src='' type='text/javascript' ></script>";
+    
+    //CSS
+    
+    $css = '<link href="../../assets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet"/>
+            <link href="../../assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet"/>
+            <link href="../../assets/global/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet"/>';
+    
+    //LLAMANDO LA VISTA
+    ViewClass::SetView(ViewClass::SetParamsString($loader , $js . $css, ""  , ""));
     

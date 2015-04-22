@@ -183,3 +183,30 @@
         });
         
     }
+    
+    
+    function EnablePage(){
+        var id = $("#txt_id").val();
+        var status = $("#txt_status").val();
+        
+        var parametros = {
+            "id": id,
+            "status": status
+        };
+        
+       $.ajax({
+                      type: "POST",
+                      url: "save_status_paginas.php",
+                      data: parametros,
+                      beforeSend: function()
+                      {
+                          $("#cmd_actualizar").html('Actualizando espere ...');
+                      },
+                      success: function(){
+                            $("#cmd_actualizar").html('Actualizado');
+                            window.location.href = 'index.php';
+                      }
+        });
+        
+        
+    }

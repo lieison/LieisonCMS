@@ -146,6 +146,33 @@ echo "</pre>";*/
 					</div>
 <?php else: ?>
 
+<div class="panel panel-default">
+  <div class="panel-body">
+     <?php 
+                            if($_REQUEST['status'] == 1):
+                                echo "¿ESTA SEGURO QUE DESEA DESHABILITAR LA PAGINA?";
+                            else:
+                                 echo "ESTA PAGINA ESTA DESHABILITADA ¿DESEA HABILITARLA?";
+                            endif;
+     ?>
+  </div>
+    <div class="panel-footer">
+        <input type="hidden" id="txt_id" value="<?php echo $id; ?>" />
+         <input type="hidden" id="txt_status" value="<?php echo $_REQUEST['status']; ?>" />
+        <a href="index.php" class="btn default">Cancelar</a>
+            <button type="button" onclick="EnablePage();" class="btn green">
+                <b id="cmd_actualizar">
+                        <?php 
+                            if($_REQUEST['status'] == 1):
+                                echo "Deshabilitar";
+                            else:
+                                 echo "Habilitar";
+                            endif;
+                        ?>
+                </b>
+            </button>
+    </div>
+</div>
 
 <?php endif; 
 

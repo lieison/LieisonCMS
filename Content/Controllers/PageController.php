@@ -75,6 +75,8 @@ class PageController extends PageModel{
     public function Set_UpdateDashboard($id , array $params){
         return parent::Update("dashboard" , $params , " id_dashboard LIKE $id");
     }
+    
+   
 
         
     public function set_dashboard_page($page , $directory)
