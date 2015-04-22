@@ -308,7 +308,7 @@ class AdminController extends AdminModel {
                     $dashboard_page , 
                     array $redirect =
                     array(
-                            "redirect"=> "../index.php" , 
+                            "redirect"=> "../error/permisos/index.php" , 
                             "activate" => true
                      ),
                     array $alter_permission = array()
@@ -342,7 +342,7 @@ class AdminController extends AdminModel {
     /**
      *@var funcion parametros Get_Permission
      */
-    public static function get_option_permission($redirect = "../index.php" , $activate=true )
+    public static function get_option_permission($redirect = "../error/permisos/index.php" , $activate=true )
     {
         return array("redirect"=> $redirect , 
                       "activate" => $activate);

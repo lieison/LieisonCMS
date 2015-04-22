@@ -143,4 +143,4 @@ function verificar_prospecto(nombre)
   });
 }
 
-  google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initialize);

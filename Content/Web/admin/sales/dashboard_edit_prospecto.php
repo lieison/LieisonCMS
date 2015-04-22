@@ -25,33 +25,36 @@
  * 
  *@version 1.0
  *@todo Lieison S.A de C.V 
- * 
- * 
- * 
  */
 
-    //INICIAMOS SESION 
-    session_start();
     
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
     
-    $_SESSION['page_name']  = "Admin Prospecto";
-    $_SESSION['home'] = "Sales";
-    $_SESSION['title'] = "Sales <b> Edicion De Prospecto</b>";
+    Session::InitSession();
+    $login = Session::GetSession("login");
+    $rol = $login['rol'];
     
+    //VARIABLES DE SESION , CAMBIO EN EL VISTA
+    Session::InsertSession("page_name", "Admin Prospectos");
+    Session::InsertSession("home", "Edicion del prospecto ...");
+    Session::InsertSession("title", "Sales: <b> Administrar Prospectos</b>");
     
-    $rol = $_SESSION['login']['rol'];
     
     $adminc = new AdminController();
     
-     $adminc->Get_Permission(
+    //VERIFICANDO LOS PERMISOS PARA ESTA PAGINA 
+    //ESTE CASO SE DAN PERMISOS ESPECIALES "Sales"
+    $adminc->Get_Permission(
             $rol, 
-            FunctionsController::get_actual_page(),
-            AdminController::get_option_permission(),
-            array("admin" , "Sales"));
+            "dashboard_admin_prospecto.php", //pagina padre que otorgara los permisos
+            AdminController::get_option_permission());/*YA QUE LA PAGINA ACTUAL NO ESTA CONFIGURADA PARA PERMISOS SOLO dashboard_admin_prospecto.php
+             * SE LE OTROGAN PERMISOS EXTRA A "Sales"
+             */
     
-    $header = '<div id="fb-root"></div>
+    
+   //VALORES DEL HEADER EN EL VIEW
+   $header = '<div id="fb-root"></div>
             <script>(function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
@@ -60,6 +63,7 @@
                 fjs.parentNode.insertBefore(js, fjs);
         }(document, "script", "facebook-jssdk"));</script>';
     
+   //VALORES DE INICIO JAVASCRIPT
    $footer = 'var get_paises = function(id)
    {
    
@@ -88,12 +92,19 @@
     get_paises(' .$_REQUEST['id'] . ');
    ';
     
+    //SCRIPT QUE IRAN AL FINAL 
     $footer_end = '<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>';
     $footer_end .= '<script src="AjaxAddSales.js"></script>';
 
 
-    ViewClass::PrepareView("View.phtml", "Admin");
-    ViewClass::SetView(ViewClass::SetParamsString("<?php include 'ViewEditProspecto.php'; ?>" , $header , $footer, $footer_end));
+    ViewClass::PrepareView("View.phtml", "Admin");//PREAPRANDO LA VISTA 
+    ViewClass::SetView(ViewClass::SetParamsString(
+            "<?php include 'ViewEditProspecto.php'; ?>" , //body
+            $header , //header
+            $footer, //footer
+            $footer_end //end footer
+    ));//OBTENIENDO LA VISTA
+    
 
  
 

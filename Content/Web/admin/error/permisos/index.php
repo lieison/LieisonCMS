@@ -28,47 +28,28 @@
  */
  
 
-    include   '../../../Conf/Include.php';
-    
-    
+    include   '../../../../Conf/Include.php';
     
     Session::InitSession();
-    $login = Session::GetSession("login");
-    $name =  substr($login['nombre']  , 0 , 25) . "...";
-    $rol = $login['rol'];
-    
+
     //VARIABLES DE SESION , CAMBIO EN EL VISTA
     Session::InsertSession("page_name", "");
     Session::InsertSession("home", "");
-    Session::InsertSession("title", "<b>$name</b>");
-    
-    
-    //CONTROLADOR DEL ADMINISTRADOR 
-   // $adminc = new AdminController();
-    //OBTIENE LOS PERMISOS MEDIANTE EL ROL INDICADO 
-    //$adminc->Get_Permission($rol, FunctionsController::get_actual_page());
+    Session::InsertSession("title", "<b>Error </b>");
     
 
     //HEADER , CABECERA DONDE SE INICIARA ELEMENTOS NECESARIOS PARA ESTE SCRIPT
-    $header .= '<link href="../../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
-                <link href="../../assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/>
-                <link href="../../assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>';
+    $header .= '<link href="../../../assets/admin/pages/css/error.css" rel="stylesheet" type="text/css"/>';
 
     //BODY , SE INCLUIRA LA ESTRUCTURA QUE ESTA DENTRO DE ViewAdminProspecto
-    $body = "<?php include 'view_perfil.php' ?>";
+    $body = "<?php include 'view_permisos.php' ?>";
     
     //FOOTER , SE INCLUIRAN EN EL PIE DE PAGINA PERO 
     // ESTOS DATOS SOLO DEBE SER FUNCIONES
-    $footer = 'Profile.init(); // iniciar el perfil del usaurio';
+    $footer = '';
 
     //AL FINAL DEL FOOTER SE INCLUIRAN LOS JS NECESARIOS PARA QUE FUNCIONE EL SCRIPT ADECUADAMENTE
-    $footer_end = '<!-- BEGIN PAGE LEVEL PLUGINS -->
-                    <script src="../../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
-                    <script src="../../assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
-                    <!-- END PAGE LEVEL PLUGINS -->
-                    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-                    <script src="../../assets/admin/pages/scripts/profile.js" type="text/javascript"></script>
-                    <!-- END PAGE LEVEL SCRIPTS -->';
+    $footer_end = '';
 
 
     ViewClass::PrepareView("View.phtml", "Admin");//PREPARANDO LA VISTA APUNTAMOS A "View.phtml" Dentro de la locacion "Admin"

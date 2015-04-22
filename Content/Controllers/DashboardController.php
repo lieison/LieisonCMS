@@ -77,8 +77,9 @@ class DashboardController extends DashboardModel {
         $query = "SELECT nivel FROM privilegios WHERE nombre LIKE '$privilegios'";
         $result = $this->RawQuery($query);
         $nivel =  $result[0]["nivel"];
-        
-        $query = "SELECT id_seccion , seccion_dashboard.icono , seccion_dashboard.titulo , numero , privilegios ,status "
+
+        $query = "SELECT id_seccion , seccion_dashboard.icono , "
+                . "seccion_dashboard.titulo , numero , privilegios ,status "
                 . " FROM seccion_dashboard ORDER BY numero ASC";
        
         $result_d = $this->RawQuery($query);
@@ -86,16 +87,23 @@ class DashboardController extends DashboardModel {
 
         foreach ($result_d as $k=>$v)
         {
-            if($nivel == $v['privilegios'] || $v['privilegios'] == 0 || $nivel == 55 ){
-            $id = $v["id_seccion"];
-            $array_seccion[$id] = array(
-                "icono" =>$v["icono"] , 
-                "titulo"=>$v["titulo"],
-                "numero"=>$v['numero'],
-                "status"=>$v['status']    
-               );
+            $arr_priv = explode(",", $v['privilegios']);
+            foreach ($arr_priv as $arr_value){
+                if($nivel == $arr_value || $arr_value == 0 || $nivel == 55 ){
+                    $id = $v["id_seccion"];
+                    $array_seccion[$id] = array(
+                    "icono" =>$v["icono"] , 
+                    "titulo"=>$v["titulo"],
+                    "numero"=>$v['numero'],
+                    "status"=>$v['status']    
+                    );
+                }
             }
         }
+        
+        /*echo "<pre>";
+        print_r($array_seccion);
+        echo "</pre>";*/
         
         foreach ($array_seccion as $key=>$value)
         {
