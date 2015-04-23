@@ -1,6 +1,3 @@
-<?php
-    $page = new PageController();
-?>
 
 	<div class="portlet box purple ">
 						<div class="portlet-title">
@@ -25,47 +22,24 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-3 control-label">Direccion (Link)</label>
+										<label class="col-md-3 control-label">Inicio</label>
 										<div class="col-md-9">
-                                                                                    <input type="text" id="txt_link" class="form-control input-sm" placeholder="Default Input" value="">
+                                                                                    <input type="text" id="txt_inicio" class="form-control input-sm" placeholder="se asigna un numero ejemplo: 1 se inica de primero en el dashboard " value="">
 										</div>
 									</div>
 								
 									<div class="form-group">
 										<label class="col-md-3 control-label">Privilegios</label>
 										<div class="col-md-9">
-                                                                                       <?php
-                                                                                            $admin = new AdminController();
-                                                                                            $priv_master = $admin->Get_MasterPrivilegios();
-                                                                                            $page_priv = explode(",", $dash['priv_nombre']);
-                                                                                            $priv_string = "";
-                                                                                            foreach ($priv_master as $values){
-                                                                                                $nivel = $values['nivel'];
-                                                                                                $nameP = $values['nombre'];
-                                                                                                if(is_array($page_priv)){
-                                                                                                    for ($i=0; $i < count($page_priv); $i++){
-                                                                                                        if($page_priv[$i] === $nivel){
-                                                                                                            if($i == count($page_priv)-1){
-                                                                                                                 $priv_string .= $nameP . "";
-                                                                                                            }else{
-                                                                                                                $priv_string .= $nameP . ",";
-                                               
-                                                                                                            }
-                                                                                                        }
-                                                                                                    }
-                                                                                                }
-                                                                                            }
-                                                                                            unset($admin);
-                                                                                       ?>
-                                                                                    <input id="txt_priv" type="text" class="form-control todo-taskbody-tags" placeholder="Privilegios" value="<?php echo $priv_string; ?>">
+                                                                                
+                                                                                    <input id="txt_priv" type="text" class="form-control todo-taskbody-tags" placeholder="Privilegios" value="admin">
 										</div>
 									</div>
 									
 								</div>
 								<div class="form-actions right1">
-                                                                        <input type="hidden" id="txt_id" value="<?php echo $id; ?>" />
                                                                         <a href="index.php" class="btn default">Cancelar</a>
-                                                                        <button type="button" onclick=";" class="btn green"><b id="cmd_actualizar">Actualizar</b></button>
+                                                                        <button type="button" onclick="SaveSeccion();" class="btn green"><b id="cmd_actualizar">Guardar</b></button>
 								</div>
 							</form>
 						</div>

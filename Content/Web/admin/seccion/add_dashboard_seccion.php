@@ -54,7 +54,7 @@
     
     //FOOTER , SE INCLUIRAN EN EL PIE DE PAGINA PERO 
     // ESTOS DATOS SOLO DEBE SER FUNCIONES
-    $footer = '//PrivF.init();';
+    $footer = 'PrivF.init();';
 
     //AL FINAL DEL FOOTER SE INCLUIRAN LOS JS NECESARIOS PARA QUE FUNCIONE EL SCRIPT ADECUADAMENTE
     $footer_end = '<script type="text/javascript" src="PageFunctions.js"></script><script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>';

@@ -223,3 +223,27 @@
                     }
            });   
     }
+    
+    function SaveSeccion(){
+        
+        
+        var params = {
+             "titulo": $("#txt_titulo").val(),
+             "icono": $("#txt_icono").val(),
+             "inicio": $("#txt_inicio").val(),
+             "priv": $("#txt_priv").val()
+        };
+        
+       $.ajax({
+                    type: "POST",
+                    url: "save_seccion.php",
+                    data: params,
+                    beforeSend:function(){
+                        $("#cmd_actualizar").html('Guardando');
+                    },
+                    success: function(){
+                        window.location.href = 'index.php';
+                    }
+           });   
+        
+    }
