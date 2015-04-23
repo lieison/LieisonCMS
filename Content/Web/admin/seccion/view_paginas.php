@@ -44,17 +44,17 @@
 						<div class="portlet-title">
 							<div class="caption">
 								<i class="fa fa-globe"></i>
-                                                               Secciones
+                                                                Secciones &nbsp;&nbsp;&nbsp;
 							</div>
 						</div>
 						<div class="portlet-body">
 							<div class="table-toolbar">
 								<div class="row">
 									<div class="col-md-6">
-                                                                           
+                                                                           <a href="add_dashboard_seccion.php" class="btn btn-primary">Agregar </a>
 									</div>
 									<div class="col-md-6">
-									
+                                                                            
 									</div>
 								</div>
 							</div>
