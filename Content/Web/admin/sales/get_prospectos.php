@@ -141,7 +141,11 @@
      }//si esta al 100% el progreso desaparece
      
      //cambia el titulo del dashboard por el nombre del prospecto , agrega el perfil completado
-     $action_edit =  '<a class="btn blue"  href="../sales/dashboard_edit_prospecto.php?id=' . $prospect_data['id_prospect']  . '"' . '><i class="fa fa-pencil"></i></a>' ;
+     $action_edit = "";
+     if($prospect_data['meta_estado'] <= 1){
+        $action_edit =  '<a class="btn blue"  href="../sales/dashboard_edit_prospecto.php?id=' . $prospect_data['id_prospect']  . '"' . '><i class="fa fa-pencil"></i></a>' ;
+     }
+     
      $script_title = "<script>$('#id_title').html('<p><b>" . strtoupper($prospect_data['nombre']) . "</b>"
              . "&nbsp&nbsp " . $action_edit . " <small>" . $complete_profile . "</small>" . "</p>');</script>";
 

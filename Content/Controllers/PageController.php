@@ -95,6 +95,15 @@ class PageController extends PageModel{
          }
          return $glue;
     }
+    
+    public function Set_NewSeccion( $title  ,$icon , $start , $privs ){
+        return parent::Insert("seccion_dashboard", array(
+            "numero" => $start,
+            "icono" => $icon,
+            "titulo" =>$title,
+            "privilegios" =>$privs
+        ));
+    }
    
 
      

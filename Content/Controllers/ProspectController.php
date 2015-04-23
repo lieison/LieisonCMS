@@ -503,4 +503,52 @@ class ProspectController extends ProspectModel {
     }
     
     
+    /**
+     * --------------------------------------------------------------
+     *  FUNCIONES DE PROSPECTO A CLIENTE 
+     * --------------------------------------------------------------
+     */
+    
+    public function CreateClient($id_prospect){
+        
+        $prospect = $this->Get_Prospect_ById($id_prospect);
+        
+        if(count($prospect) <= 0){
+            return false;
+        }
+        
+        
+        $this->Set_MetaStatus(2, $id_prospect);
+        
+        $client = array(
+            "nombre" => $prospect['nombre'],
+            "direccion" => $prospect['direccion'] . "," . " " . $prospect['direccion2'],
+            "id_pais" => $prospect['id_pais'],
+            "provincia"=> $prospect['provincia'],
+            "zip" => $prospect['zip'],
+            "telefono"=> $prospect['telefono'],
+            "facebook" => $prospect['facebook'],
+            "twitter" => $prospect['twitter'],
+            "pagina_web" => $prospect['pagina_web'],
+            "email"=> $prospect['email'],
+            "fax"=>$prospect['fax'],
+            "ciudad"=>$prospect['ciudad'],
+            "id_prospect" => $prospect['id_prospect'],
+            "fecha" => FunctionsController::get_date(),
+            "hora" => FunctionsController::get_time()
+        );
+        
+        
+        
+        
+        return parent::Insert("sales_client", $client);
+
+        //echo "<pre>";
+        //print_r($client);
+       // echo "</pre>";
+        
+        
+    }
+    
+    
 }
