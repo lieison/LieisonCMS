@@ -1,0 +1,7 @@
+{"name":"vendedor",
+"install":"false",
+"version":"1.0",
+"update":"null",
+"controller": "PruebaController.php",
+"model":"PruebaModel.php"
+}
