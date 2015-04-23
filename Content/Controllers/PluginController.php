@@ -18,10 +18,22 @@ class PluginController extends \Plugin\PluginClass {
     var $plugins            = array();
     
 
+    /**
+     *@author Rolando Arriaza
+     *@todo  Contructor
+     *@param string $path_origin direcotrio donde se instalara el plugin
+     *@param string $path_plugin directorio donde se encuentra actualmente el plugin a cargar
+     */
     public function __construct($path_origin = "Plugins", $path_plugin = "/") {
         parent::__construct($path_origin, $path_plugin);
     }
     
+    
+    /**
+     * @author Rolando Arriaza
+     * @todo  obtiene todos los modulos de los plugins instalados 
+     * @return Mixed Array() : esta informacion la tiene del archivo json configuracion
+     */
     public function GetAllModules(){
         
         $this->filter = array();
@@ -55,11 +67,18 @@ class PluginController extends \Plugin\PluginClass {
  
     }
     
+    
+    /**
+     *@author Rolando Arriaza
+     *@param string $directory directorio donde se instalara el plugin o modulo
+     * 
+     */
     public function InstallModule($directory){
         parent::SetPathPlugin($directory);
         $flag = parent::UnZipPlugin();
         return $flag;
     }
+    
     
     public function GetConfigPlugin($path = null){
             if($path == null) {$path = "";}
@@ -91,6 +110,44 @@ class PluginController extends \Plugin\PluginClass {
                         )
                 );
     }
+    
+    public function InstallModel($model_name , $path = null){
+        $path_model = FunctionsController::GetRootUrl("Models" , true);
+        $clean = str_replace("../" , "" , $path);
+        $clean = str_replace("/" , "" , $clean);
+        $dest_model = FunctionsController::GetRootUrl("admin/" . $clean);
+        $dest_model .= "$model_name";
+        if(file_exists($path_model)){
+            if(file_exists($path)){
+              if(@rename($dest_model, $path_model. "$model_name")){
+                   return true;
+               }
+               else {
+                   return false;
+               } 
+            }
+        }
+    }
+    
+    public function InstallController($controller_name , $path = null){
+        $path_controller = FunctionsController::GetRootUrl("Controllers" , true);
+        $clean = str_replace("../" , "" , $path);
+        $clean = str_replace("/" , "" , $clean);
+        $dest_c = FunctionsController::GetRootUrl("admin/" . $clean);
+        $dest_c .= "$controller_name";
+        if(file_exists($path_controller)){
+            if(file_exists($path)){
+               if(@rename($dest_c, $path_controller. "$controller_name")){
+                   return true;
+               }
+               else {
+                   return false;
+               } 
+            }
+        }
+       
+    }
+    
     
     public function UninstallModule($directory){
        

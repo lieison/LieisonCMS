@@ -35,11 +35,16 @@
 class FunctionsController {
     
     
-    public static function GetRootUrl($directory)
+    public static function GetRootUrl($directory , $host = false)
     {
-        return $url = $_SERVER['DOCUMENT_ROOT'] .  "/" . $_COOKIE['FOLDER'] . "/Content/Web/$directory/";
+        if(!$host){
+            return $url = $_SERVER['DOCUMENT_ROOT'] .  "/" . $_COOKIE['FOLDER'] . "/Content/Web/$directory/";
+        }else{
+              return $url = $_SERVER['DOCUMENT_ROOT'] .  "/" . $_COOKIE['FOLDER'] . "/Content/$directory/";
+        }
     }
     
+
     public static function GetUrl($link)
     {
        return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";

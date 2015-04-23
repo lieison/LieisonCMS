@@ -89,7 +89,6 @@
     }
     
     
- 
     function font_change(){
         var font = $("#txt_icono").val();
         $("#font_change").html('Font Awesome Icono &nbsp;&nbsp; <i  class="'  + font +'"></i>'); 
@@ -209,4 +208,18 @@
         });
         
         
+    }
+    
+    
+    function buscar_seccion(){
+         $.ajax({
+                    type: "POST",
+                    url: "ResponsiveControlSeccion.php",
+                    beforeSend:function(){
+                         $("#io_2").html("Cargando ..");
+                    },
+                    success: function(value){
+                        $("#io_2").html(value);
+                    }
+           });   
     }
