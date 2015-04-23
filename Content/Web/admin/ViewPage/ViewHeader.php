@@ -117,10 +117,10 @@ class AdminHeader
     
     static function GetSystemContent()
     {
-        echo '<li id="load_message" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-					
+        echo '<li id="load_message" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">			
               </li>';
-        echo '';
+          echo '<li id="load_task" class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">			
+              </li>';
     }
     
     static function GetBasePlugin()
@@ -135,7 +135,7 @@ class AdminHeader
           * CARGA LOS  MENSAJES 
          **/
    
-        echo ' load_message();';
+        echo 'load_message();';
         echo "setInterval('load_message()',1000*10);";
         
          /**CARGA LAS NOTIFICACIONES */
@@ -148,8 +148,8 @@ class AdminHeader
            * */
         echo 'load_dashboard_sidebar();';
         
-        echo '';
-             
+        echo 'load_task();';
+        echo "setInterval('load_task()' , 1000*10);";    
     }
     
     
