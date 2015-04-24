@@ -3,13 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/task/front/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/front_inbox.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/inbox.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/AdminModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/AdminController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/ProspectModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/MessageController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/DashboardModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/task/view_task.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/SliderModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/user/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PluginController.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/AjaxFunctions.js</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/ViewHeader.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_admin_prospecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PageController.php</file>
         </group>
     </open-files>
 </project-private>
