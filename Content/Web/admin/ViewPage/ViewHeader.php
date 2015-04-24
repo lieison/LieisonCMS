@@ -265,8 +265,9 @@ class AdminHeader
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/ckeditor/ckeditor.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>';
-           
+            echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js"></script>';
             echo '<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>';
+            
     }
     
     static function Get_ImgSesion($imagen)

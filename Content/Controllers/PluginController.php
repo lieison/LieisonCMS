@@ -1,16 +1,6 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of PluginController
- *
- * @author rolandoantonio
- */
 class PluginController extends \Plugin\PluginClass {
     
     var $filter             = array();
@@ -80,6 +70,11 @@ class PluginController extends \Plugin\PluginClass {
     }
     
     
+    
+    /**
+     * VERIFICA SI EXISTE EL ARCHIVO config.json en dado caso exista retorna 
+     * un stdclass u objeto de ella
+     */
     public function GetConfigPlugin($path = null){
             if($path == null) {$path = "";}
             $path = $path . "config.json";
@@ -87,6 +82,7 @@ class PluginController extends \Plugin\PluginClass {
             $json_class->JsonFile($path);
             return $json_class->GetDecodeJsonFile(JSON_CLASS);
     }
+    
     
     public function SetNewConfig($config , $path = null  ){
         if($path == null) {$path = "";}
