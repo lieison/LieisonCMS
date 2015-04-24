@@ -206,7 +206,7 @@
                                      
                                 ?>
 			</div>          
-                    <?php include 'ViewEditProspecto.php'; ?>
+                    <?php include 'ViewAddProspecto.php'; ?>
                 </div>
                
         </div>
@@ -239,14 +239,10 @@
     
    ?> 
            
-   var get_paises = function(id)
+      var get_paises = function()
    {
-   
-        var params = { "id":id };
-        
         $.ajax({
                       type: "POST",
-                      data:params,
                       url: "get_paises.php",
                       beforeSend: function()
                       {
@@ -261,11 +257,9 @@
                       }
                       
               });
-              
-     
    }
-    get_paises(21);
-            
+   
+   get_paises();         
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
