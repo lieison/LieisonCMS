@@ -1,6 +1,6 @@
+<?php 
 
-<?php
-
+  
  /**
  *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
  *@copyright (c) 2015, Lieison
@@ -27,38 +27,49 @@
  *@todo Lieison S.A de C.V 
  */
 
+ 
+    //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
     
+    //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
     Session::InitSession();
+    Session::InsertSession("page_name", "Tasks");
+    Session::InsertSession("home", "Task");
+    Session::InsertSession("title", "Tasks");
     
     $login = Session::GetSession("login");
     $rol = $login['rol'];
     
-    //VARIABLES DE SESION , CAMBIO EN EL VISTA
-    Session::InsertSession("page_name", "Control de Paginas");
-    Session::InsertSession("home", "Dashboard Control de paginas");
-    Session::InsertSession("title", "<b>Agregar una nueva seccion</b>");
-    
-    
     //CONTROLADOR DEL ADMINISTRADOR 
     $adminc = new AdminController();
     //OBTIENE LOS PERMISOS MEDIANTE EL ROL INDICADO 
-    $adminc->Get_Permission($rol, "dashboard_control_paginas.php");
+    $adminc->Get_Permission(
+            $rol, 
+            FunctionsController::get_actual_page(),
+            AdminController::get_option_permission());
+  
+    
+    //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER
+    $header = "";
+    
+    //CARGARA EL BODY
+    $body = "<?php include 'view_task.php' ?>";
+
+    //CARGARA EL FOOTER O LOS SCRIPTS JS
+    $footer = "<script src='js/Functions.js'></script>";
+    
+    //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
+    $end_footer = "TaskInit.init();";
     
 
-    //HEADER , CABECERA DONDE SE INICIARA ELEMENTOS NECESARIOS PARA ESTE SCRIPT
-    $header .= '<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/select2/select2.css"/>';
-
-    //BODY , SE INCLUIRA LA ESTRUCTURA QUE ESTA DENTRO DE ViewAdminProspecto
-    $body = "<?php include 'view_add_seccion.php' ?>";
+    //PREPARANDO LA VISTA ...
+    ViewClass::PrepareView("View.phtml", "Admin");
     
-    //FOOTER , SE INCLUIRAN EN EL PIE DE PAGINA PERO 
-    // ESTOS DATOS SOLO DEBE SER FUNCIONES
-    $footer = 'PrivF.init();';
+    //LLAMANDO LA VISTA
+    ViewClass::SetView(ViewClass::SetParamsString($body ,$header , $end_footer , $footer));
+    
+    
+    //MUESTRA LAS TAREAS ...
+ 
+    
 
-    //AL FINAL DEL FOOTER SE INCLUIRAN LOS JS NECESARIOS PARA QUE FUNCIONE EL SCRIPT ADECUADAMENTE
-    $footer_end = '<script type="text/javascript" src="PageFunctions.js"></script><script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>';
-
-
-    ViewClass::PrepareView("View.phtml", "Admin");//PREPARANDO LA VISTA APUNTAMOS A "View.phtml" Dentro de la locacion "Admin"
-    ViewClass::SetView(ViewClass::SetParamsString($body , $header , $footer , $footer_end)); //ENVIAMOS LOS PARAMETROS .. 

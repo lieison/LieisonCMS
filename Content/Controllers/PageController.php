@@ -1,5 +1,33 @@
 <?php
 
+    
+ /**
+ *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
+ *@copyright (c) 2015, Lieison
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE. 
+ * 
+ *@version 1.5
+ *  EN LA VERSION 1.5 SE MODIFICARON VARIAS FUNCIONES PARA SU CORRECTA EJECUCION EN CUALQUIER AMBITO 
+ *@todo Lieison S.A de C.V 
+ */
+
 
 class PageController extends PageModel{
     
@@ -41,7 +69,6 @@ class PageController extends PageModel{
         return $result;
     }
     
- 
     public function get_numbers_seccion()
     {
         $numeros = array();
@@ -53,7 +80,6 @@ class PageController extends PageModel{
         }
         return $numeros;
     }
-    
     
     public function get_seccion_dashboard($status = 1){
         
@@ -70,11 +96,18 @@ class PageController extends PageModel{
         return $value;
     }
     
-    
     public function Set_UpdateDashboard($id , array $params){
         return parent::Update("dashboard" , $params , " id_dashboard LIKE $id");
     }
     
+    public function Set_NewSeccion( $title  ,$icon , $start , $privs ){
+        return parent::Insert("seccion_dashboard", array(
+            "numero" => $start,
+            "icono" => $icon,
+            "titulo" =>$title,
+            "privilegios" =>$privs
+        ));
+    }
     
     public function ConvertPrivToString($numeric_privs){
          $admin = new AdminController();
@@ -95,8 +128,5 @@ class PageController extends PageModel{
          }
          return $glue;
     }
-   
 
-     
-   
 }

@@ -124,24 +124,33 @@ function ProspectInitProcess(meta_estado , id_prospect)
     
       if(meta_estado ===1 )
       {
-         bootbox.confirm("¿Desea Terminar el Proceso ... Una vez terminado bla bla?",
+         var dialog = "<p>Si Continua quiere decir que este prospecto se ha <b>ACEPTADO</b></p>";
+             dialog += "<p>Por lo tanto se trasladara como cliente y no hay vuelta atras.</p>";
+             dialog += "<b>¿Desea trasladarlo como cliente ?</b>";
+         bootbox.confirm(dialog,
          function(result) {
                if(result === true){
                  
                  var params = {
-                      "id_prospect": id_prospect
+                      "id": id_prospect
                  };
                   
                   $.ajax({
                       type: "POST",
-                      url: "get_prospectos.php",
+                      url: "get_finish_prospect.php",
                       data: params,
                       beforeSend: function()
                       {
                           $("#meta_estado").html('<img src="../img/assert/loadingd.gif" width="30" height="30" />');
                       },
                       success: function(value){
-                          $("#meta_estado").html(value);
+                          var is_ok = $.trim(value);
+                          if(is_ok == "true"){
+                                $("#meta_estado").html('<div class="alert alert-info" role="alert">Se añadio este prospecto como cliente ...</div>');
+                          }else{
+                              $("#meta_estado").html('<div class="alert alert-danger" role="alert">Opps! Algo ocurrio intente denuevo</div>');
+                          }
+                          
                       }
                   });
                    

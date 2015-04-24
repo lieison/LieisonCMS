@@ -24,6 +24,18 @@ function load_message()
              });
  }
  
+ function load_task(){
+       
+       var route = document.getElementById("route_value").value;
+        $.ajax({
+                    type: "POST",
+                    url: route  + "admin/task/front/",
+                    success: function(value){
+                          $("#load_task").html(value);
+                     }
+             });
+ }
+ 
  var load_dashboard_sidebar = function()
    {
      
