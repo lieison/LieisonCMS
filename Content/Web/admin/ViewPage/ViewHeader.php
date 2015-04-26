@@ -150,6 +150,9 @@ class AdminHeader
         
         echo 'load_task();';
         echo "setInterval('load_task()' , 1000*10);";    
+        
+        echo " ComponentsPickers.init();";
+        
     }
     
     
@@ -197,7 +200,18 @@ class AdminHeader
               <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
               <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-datepicker/css/datepicker.css"/>';
         
+        echo '<link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-select/bootstrap-select.min.css"/>
+                <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/select2/select2.css"/>
+                <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/jquery-multi-select/css/multi-select.css"/>';
+        
         echo '<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css"/>';
+        
+        echo '<link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/clockface/css/clockface.css"/>'
+                . '<link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-datepicker/css/datepicker3.css"/>
+                   <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"/>
+                   <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css"/>
+                   <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
+                   <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>';
         
     }
     
@@ -258,14 +272,32 @@ class AdminHeader
             
             echo '<script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/jquery-validation/js/additional-methods.min.js"></script>
-                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/select2/select2.min.js"></script>
-                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/ckeditor/ckeditor.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
                     <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-markdown/lib/markdown.js"></script>';
             echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/jquery-bootpag/jquery.bootpag.min.js"></script>';
+             
+            //SCRIPTS DE DROPDOWN
+            
+            echo '<script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/select2/select2.min.js">
+                  </script><script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+                    <script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>';
+            
+             
+             //SCRIPT CONTROL DE TIMER Y DATE PICKERS
+             echo '<script type="text/javascript" src="' . self::$relative_route  . 'assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>';
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>';
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>';
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/admin/pages/scripts/components-pickers.js"></script>';
+            
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>';
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/clockface/js/clockface.js"></script>';
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>';
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>';
+              
+            //DROP DOWN
             echo '<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>';
             
     }

@@ -88,6 +88,18 @@
 				return json_decode($this->get($url),true);
 			}
 		}
+                
+                
+                /*OBTIENE TODOS LOS FOLDERS DE LA RAIZ**/
+                public function get_all_folders(){
+                    $url = $this->build_url("/folders/0/");
+			if($json){	
+				return $this->get($url);
+			} else {
+				return json_decode($this->get($url),true);
+			}
+                }
+                
 		
 		/* Lists the folders in the mentioned folder */
 		public function get_folders($folder) {

@@ -219,6 +219,8 @@
 
 <?php AdminHeader::GetJs(); ?>
 
+%{FOOTER_CLASS_VIEW_END}% 
+
 <script>
     
   <?php AdminHeader::GetJsAfterLoad(); ?>
@@ -232,20 +234,21 @@
     
    ?> 
            
-   %{FOOTER_CLASS_VIEW}%         
+      
    
    Metronic.init(); // init metronic core componets
    Layout.init(); // init layout
    QuickSidebar.init(); // init quick sidebar
    Demo.init(); // init demo features 
    Index.init();   
-   Index.initDashboardDaterange();
-   Index.initJQVMAP(); // init index page's custom scripts
+  // Index.initDashboardDaterange();
+   //Index.initJQVMAP(); // init index page's custom scripts
    //Index.initCalendar(); // init index page's custom scripts
    //Index.initChat();
   // Index.initMiniCharts();
-   Tasks.initDashboardWidget();
-    
+   //Tasks.initDashboardWidget();
+  
+    %{FOOTER_CLASS_VIEW}%    
 
    /**
     * INICIA LOS GRAFICOS DE VISITAS EN EL FRONT END --- DESHABILITADO
@@ -255,8 +258,6 @@
 });
 </script>
 <!-- END JAVASCRIPTS -->
-
-%{FOOTER_CLASS_VIEW_END}% 
 
 </body>
 <!-- END BODY -->

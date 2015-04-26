@@ -1,4 +1,4 @@
-var PortletDraggable = function () {
+var UserTiles = function () {
 
     return {
         init: function () {
@@ -8,18 +8,18 @@ var PortletDraggable = function () {
             }
 
             $("#sortable_portlets").sortable({
-                connectWith: ".portlet",
-                items: ".portlet", 
+                connectWith: ".tiles",
+                items: ".tile", 
                 opacity: 0.8,
                 coneHelperSize: true,
-                placeholder: 'portlet-sortable-placeholder',
+                placeholder: '',
                 forcePlaceholderSize: true,
                 tolerance: "pointer",
                 helper: "clone",
                 tolerance: "pointer",
                 forcePlaceholderSize: !0,
                 helper: "clone",
-                cancel: ".portlet-sortable-empty, .portlet-fullscreen", 
+                cancel: "", 
                 revert: 250, 
                 update: function(b, c) {
                     if (c.item.prev().hasClass("portlet-sortable-empty")) {

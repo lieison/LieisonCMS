@@ -4,4 +4,4 @@
     include   '../../../Conf/Include.php';
     //INDEX APUNTA AL DIRECTORIO USER
     $header = new \Http\Header();
-    $header->redirect("dashboard_task.php");
+    $header->redirect("dashboard_index.php");

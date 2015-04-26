@@ -25,9 +25,6 @@
  * 
  *@version 1.0
  *@todo Lieison S.A de C.V 
- * 
- * 
- * 
  */
 
  
@@ -36,27 +33,33 @@
     
     //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
     Session::InitSession();
-    Session::InsertSession("page_name", "Principal");
-
-    //EN EL INDEX DESTRUYE TODO TIPO DE SESION DENTRO DE LOS TITULOS...
-    if(Session::ExistSession("title")):
-        Session::DestroySession("title");
-        if(Session::ExistSession("home")):
-              Session::DestroySession("home");
-        endif;
-    endif;
+    Session::InsertSession("page_name", "Tasks");
+    Session::InsertSession("home", "Task");
+    Session::InsertSession("title", "Tasks");
+    
+    $login = Session::GetSession("login");
+    $rol = $login['rol'];
+    
+    //CONTROLADOR DEL ADMINISTRADOR 
+    $adminc = new AdminController();
+    //OBTIENE LOS PERMISOS MEDIANTE EL ROL INDICADO 
+    $adminc->Get_Permission(
+            $rol, 
+            FunctionsController::get_actual_page(),
+            AdminController::get_option_permission());
+  
     
     //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER
     $header = "";
     
     //CARGARA EL BODY
-    $body = "<?php include 'view_user.php' ?>";
+    $body = "<?php include 'view_task.php' ?>";
 
     //CARGARA EL FOOTER O LOS SCRIPTS JS
-    $footer = "<script src='PrimaryFunctions.js'></script>";
+    $footer = "<script src='js/Functions.js'></script>";
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-    $end_footer = "UserTiles.init();";
+    $end_footer = "TaskInit.init();";
     
 
     //PREPARANDO LA VISTA ...
@@ -65,5 +68,8 @@
     //LLAMANDO LA VISTA
     ViewClass::SetView(ViewClass::SetParamsString($body ,$header , $end_footer , $footer));
     
+    
+    //MUESTRA LAS TAREAS ...
  
     
+
