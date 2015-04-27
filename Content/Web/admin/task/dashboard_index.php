@@ -59,7 +59,7 @@
     $footer = "<script src='js/Functions.js'></script>";
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-    $end_footer = "TaskInit.init();";
+    $end_footer = "//TaskInit.init();";
     
 
     //PREPARANDO LA VISTA ...

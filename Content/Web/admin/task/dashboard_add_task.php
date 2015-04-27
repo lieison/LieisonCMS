@@ -33,7 +33,7 @@
     $footer .= '<script type="text/javascript" src="../../assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>';
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-    $end_footer = "FindUsers.init();FormWizard.init();";
+    $end_footer = "TaskInit.init();FormWizard.init();";
     
 
     //PREPARANDO LA VISTA ...

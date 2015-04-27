@@ -67,9 +67,13 @@ var FormWizard = function () {
 
     return {
         init: function () {
+            
+           
+            
             if (!jQuery().bootstrapWizard) {
                 return;
             }
+
 
             function format(state) {
                 if (!state.id) return state.text; 
@@ -299,4 +303,49 @@ var FormWizard = function () {
 
     };
 
+}();
+
+
+
+/***
+ *
+ *
+ *  FUNCIONES GENERALES PARA TASK Y MULTITASK
+ *  DESARROLLADO POR: LIESON  (rmarroquin@lieison.com)
+ *  VERSION: 1.0
+ *  AÑO: 2015
+ *     
+ */
+
+
+/**
+ * @author Rolando Arriaza
+ * @version 1.0
+ * @return {HTML} devuelve el html del task <option value='id' >Name</option>
+ * */
+function FindClients(){
+    
+         $.ajax({
+                      type: "POST",
+                      url: "includes/findclients.php",
+                      success: function(value){
+                           alert(value);
+                      }
+            });
+     
+}
+
+
+/**
+ * @author Rolando Arriaza
+ * @version 1.0
+ * @syntax Inicia los procedimientos de task simple 
+ * */
+var TaskInit = function () {
+
+    return {
+        init: function () {     
+            FindClients();
+        }
+    };
 }();
