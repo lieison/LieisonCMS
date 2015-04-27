@@ -103,23 +103,23 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3">Confirm Password <span class="required">
+													<label class="control-label col-md-3">blabla <span class="required">
 													* </span>
 													</label>
 													<div class="col-md-4">
 														<input type="password" class="form-control" name="rpassword"/>
 														<span class="help-block">
-														Confirm your password </span>
+														blabla</span>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3">Email <span class="required">
+													<label class="control-label col-md-3">bla <span class="required">
 													* </span>
 													</label>
 													<div class="col-md-4">
 														<input type="text" class="form-control" name="email"/>
 														<span class="help-block">
-														Provide your email address </span>
+														blabl </span>
 													</div>
 												</div>
 											</div>
