@@ -59,8 +59,11 @@ class BaseBox extends Box_API{
     
     
     public function ShowFiles($folder_id){
+        
         $box_items = parent::get_folder_items($folder_id);
+        
         $items = array();
+        
         if(isset($box_items['entries'])){
             if(is_array($box_items['entries'])){
                 foreach ($box_items['entries'] as $entries){

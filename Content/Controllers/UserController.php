@@ -4,6 +4,12 @@ class UserController extends UserModel  {
     
     protected $array_file = null;
     
+   
+    /**
+     *@author Rolando Arriaza
+     *@todo Constructor de la clase
+     *@param string $id_user el id del usuario  
+     */
     public function __construct($id_user = null) {
         if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($id_user))
         {
@@ -11,6 +17,7 @@ class UserController extends UserModel  {
         }
         parent::__construct();
     }
+    
     
     public function set_idUser($id_user){
       $this->ID_USER = $id_user;
@@ -46,8 +53,10 @@ class UserController extends UserModel  {
         if ($this->array_file  != null ) {
             unset($directory);
             $update_avatar = parent::Update("usuario",
-                    array("imagen"=>$this->array_file), 
-                    "id_usuario LIKE '$this->ID_USER'");
+                    array(
+                        "imagen"    =>$this->array_file
+                    ), 
+                  "id_usuario LIKE '$this->ID_USER'");
             if ($update_avatar) {
                 return true;
             }else{ return false;}
@@ -82,24 +91,24 @@ class UserController extends UserModel  {
            $datafile = FileExtension::GetIcon_extension($dir , $extension , $value['contrato']);
            if($datafile != false ){
                     $contract_array[] = array(
-                        "id"=>$value['id_contrato'],
-                        "nombre"=>$value['nombre'],
-                        "contrato"=>$value['contrato'],
-                        "aceptado"=>$value['aceptado'],
-                        "fecha_envio"=>$value['fecha_envio'],
-                        "fecha_contrato"=>$value['fecha_contrato'],
-                        "icono"=> $datafile
+                        "id"                =>$value['id_contrato'],
+                        "nombre"            =>$value['nombre'],
+                        "contrato"          =>$value['contrato'],
+                        "aceptado"          =>$value['aceptado'],
+                        "fecha_envio"       =>$value['fecha_envio'],
+                        "fecha_contrato"    =>$value['fecha_contrato'],
+                        "icono"             => $datafile
                     );
            }
            else {
                  $contract_array[] = array(
-                        "id"=>$value['id_contrato'],
-                        "nombre"=>$value['nombre'],
-                        "contrato"=>$value['contrato'],
-                        "aceptado"=>$value['aceptado'],
-                        "fecha_envio"=>$value['fecha_envio'],
-                        "fecha_contrato"=>$value['fecha_contrato'],
-                        "icono"=> "DocBroken.png"
+                        "id"                =>$value['id_contrato'],
+                        "nombre"            =>$value['nombre'],
+                        "contrato"          =>$value['contrato'],
+                        "aceptado"          =>$value['aceptado'],
+                        "fecha_envio"       =>$value['fecha_envio'],
+                        "fecha_contrato"    =>$value['fecha_contrato'],
+                        "icono"             => "DocBroken.png"
                     );
            }
         }

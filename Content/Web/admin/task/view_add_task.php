@@ -62,11 +62,11 @@
 										<div class="tab-content">
 											<div class="alert alert-danger display-none">
 												<button class="close" data-dismiss="alert"></button>
-												Tienes algunos errores Favor revisar la tarea
+												Algunos campos obligatorios estan vacios
 											</div>
 											<div class="alert alert-success display-none">
 												<button class="close" data-dismiss="alert"></button>
-												Exito
+												Exito sigue adelante !!
 											</div>
 											<div class="tab-pane active" id="tab1">
 												<div class="form-group">
@@ -103,23 +103,35 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3">blabla <span class="required">
+													<label class="control-label col-md-3">Cliente <span class="required">
 													* </span>
 													</label>
-													<div class="col-md-4">
-														<input type="password" class="form-control" name="rpassword"/>
+													<div class="col-md-3">
+                                                                                                                <select id="cmd_cliente" class="form-control select2me" data-placeholder="Cliente">
+                                                                                                                
+                                                                                                                </select>
 														<span class="help-block">
-														blabla</span>
+														Selecciona el cliente</span>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3">bla <span class="required">
+													<label class="control-label col-md-3">Descripcion <span class="required">
 													* </span>
 													</label>
-													<div class="col-md-4">
-														<input type="text" class="form-control" name="email"/>
+													<div class="col-md-6">
+                                                                                                            <textarea class="ckeditor form-control" name="editor1" rows="6" data-error-container="">
+                                                                                                                        <?php
+                                                                                                                            $nombre = Session::GetSession("login", "nombre");
+                                                                                                                                
+                                                                                                                        ?>
+                                                                                                                        <p><?php echo $nombre; ?><strong> No agrego una descripcion</strong></p>
+                                                                                                               
+
+                                                                                                            </textarea>
+
+
 														<span class="help-block">
-														blabl </span>
+														Breve Descripcion de la tarea </span>
 													</div>
 												</div>
 											</div>

@@ -329,7 +329,7 @@ function FindClients(){
                       type: "POST",
                       url: "includes/findclients.php",
                       success: function(value){
-                           alert(value);
+                           $("#cmd_cliente").html(value);
                       }
             });
      
