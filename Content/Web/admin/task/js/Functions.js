@@ -91,27 +91,21 @@ var FormWizard = function () {
                 errorClass: 'help-block help-block-error', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
-                    //account
                     txt_title: {
                         minlength: 3,
                         required: true
                     },
-                    password: {
-                        minlength: 5,
+                    txt_date: {
                         required: true
                     },
-                    rpassword: {
-                        minlength: 5,
-                        required: true,
-                        equalTo: "#submit_form_password"
-                    },
-                    //profile
-                    fullname: {
+                    txt_hour: {
                         required: true
                     },
-                    email: {
-                        required: true,
-                        email: true
+                    txt_description: {
+                        required: true
+                    },
+                    cmd_client: {
+                        required: true
                     },
                     phone: {
                         required: true
@@ -269,9 +263,9 @@ var FormWizard = function () {
                 onNext: function (tab, navigation, index) {
                     success.hide();
                     error.hide();
-                     if (form.valid() == false) {
+                    /* if (form.valid() == false) {
                         return false;
-                    }
+                    }*/
 
                     handleTitle(tab, navigation, index);
                 },
@@ -321,7 +315,7 @@ var FormWizard = function () {
 /**
  * @author Rolando Arriaza
  * @version 1.0
- * @return {HTML} devuelve el html del task <option value='id' >Name</option>
+ * @return {HTML} devuelve el html del task client <option value='id' >Name</option>
  * */
 function FindClients(){
     
@@ -329,10 +323,48 @@ function FindClients(){
                       type: "POST",
                       url: "includes/findclients.php",
                       success: function(value){
-                           $("#cmd_cliente").html(value);
+                           $("#cmd_client").html(value);
                       }
             });
      
+}
+
+/**
+ * @author Rolando Arriaza
+ * @version 1.0
+ * @return {HTML} devuelve el html del task asign <option value='id' >Name</option>
+ * */
+function AsignTo(){
+     $.ajax({
+                      type: "POST",
+                      url: "includes/findusers.php",
+                      success: function(value){
+                           $("#cmd_asignto").html(value);
+                      }
+            });
+}
+
+
+/**
+ * @author Rolando Arriaza
+ * @version 1.0
+ * @return {HTML} devuelve el html del task informacion del usuario <option value='id' >Name</option>
+ * */
+function ShowAsignInfo(){
+     
+    var params = {
+         "id_user": $("#cmd_asignto").val()
+    };
+     
+     $.ajax({
+                      type: "POST",
+                      url: "includes/infousers.php",
+                      data : params ,
+                      success: function(value){
+                           var data = $.trim(value);
+                           $("#info_user").html(data);
+                      }
+     });
 }
 
 
@@ -346,6 +378,7 @@ var TaskInit = function () {
     return {
         init: function () {     
             FindClients();
+            AsignTo();
         }
     };
 }();

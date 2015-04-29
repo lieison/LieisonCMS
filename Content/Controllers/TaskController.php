@@ -24,4 +24,25 @@ class TaskController extends TaskModel {
         return $string_select;
     }
     
+    
+    public function AsignTouser($id_from){
+        $result = parent::GetUserToAsign($id_from);
+        $string_select = "";
+        foreach ($result as $user){
+            $id = $user['id'];
+            $name = $user['name'];
+            $priv = $user['priv'];
+            $string_select .= "<option value='$id'>$name ($priv)</option>";
+        }
+        
+        return $string_select;
+    }
+    
+    
+    public function Show_UserInfo($id_user){
+        
+        $result = parent::GetUserInfo($id_user);
+        return $result[0];
+    }
+    
 }
