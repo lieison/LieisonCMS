@@ -8,21 +8,16 @@ class BaseBox extends Box_API{
     
     var $client_id              = "nwv60huci6wgjiitowownynfqa1gwt1y";
     var $client_secret          = 'lpcu7GSqbu4J0nrvyQQMMY5Tv3RTA9O5';
-    var $redirect_uri           = 'http://localhost/LieisonCMS/Content/Web/admin/box/BaseBox.php';
+    var $redirect_uri           = 'http://localhost/LieisonCMS/Content/Web/admin/task/includes/box.php';
     
     
     
-    public function __construct($client_id = '', $client_secret = '', $redirect_uri = '') {
-        if($client_id == '' && $client_secret == '')
+    public function __construct($redirect_uri = null) {
+        
+        if($redirect_uri != null)
         {
-            parent::__construct($this->client_id, $this->client_secret, $this->redirect_uri);
-        }
-        else if($redirect_uri != '')
-        {
-             parent::__construct($this->client_id, $this->client_secret, $redirect_uri);
-        }
-        else{
-            parent::__construct($client_id, $client_secret, $redirect_uri);
+            $this->redirect_uri = $redirect_uri;
+             parent::__construct($this->client_id, $this->client_secret, $this->redirect_uri);
         }
     }
     
@@ -123,6 +118,7 @@ class BaseBox extends Box_API{
             default :
                 return -1;
         }
+    
     }
     
     
@@ -130,19 +126,4 @@ class BaseBox extends Box_API{
     
 }
 
-$box = new BaseBox();
-$box->ConecToBox();
 
-$folders = $box->ShowAllPrimaryFolders();
-   
-$parent_folder = $box->ShowFiles($folders[2]['id']);
-$child_folder =  $box->ShowFiles($parent_folder[1]['id']);
-
-
-echo "<pre>";
-print_r($parent_folder);
-echo "<pre>";
-
-echo "<pre>";
-print_r($child_folder);
-echo "<pre>";

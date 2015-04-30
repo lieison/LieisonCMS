@@ -1,3 +1,7 @@
+   <?php
+       //$box = new BaseBox();
+       //$box->ConecToBox();
+    ?>
 <div class="row">
 				<div class="col-md-12">
 					<div class="portlet box blue" id="form_wizard_1">
@@ -157,198 +161,46 @@
 												
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3">Address <span class="required">
-													* </span>
+													<label class="control-label col-md-3">Comentario <span class="required">
+                                                                                                         </span>
 													</label>
 													<div class="col-md-4">
 														<input type="text" class="form-control" name="address"/>
 														<span class="help-block">
-														Provide your street address </span>
+														 ¿Algun comentario sobre la tarea? </span>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3">City/Town <span class="required">
-													* </span>
+													<label class="control-label col-md-3">Estado<span class="required">
+													</span>
 													</label>
 													<div class="col-md-4">
-														<input type="text" class="form-control" name="city"/>
+                                                                                                            <select class="form-control">
+                                                                                                                <option  value="1">Activa</option>
+                                                                                                                <option value="0">No activa</option>
+                                                                                                            </select>
 														<span class="help-block">
-														Provide your city or town </span>
+														¿El estado de la tarea? </span>
 													</div>
 												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Country</label>
-													<div class="col-md-4">
-														
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Remarks</label>
-													<div class="col-md-4">
-														<textarea class="form-control" rows="3" name="remarks"></textarea>
-													</div>
-												</div>
+												
 											</div>
-											<div class="tab-pane" id="tab3">
-												<h3 class="block">Provide your billing and credit card details</h3>
-												<div class="form-group">
-													<label class="control-label col-md-3">Card Holder Name <span class="required">
-													* </span>
-													</label>
-													<div class="col-md-4">
-														<input type="text" class="form-control" name="card_name"/>
-														<span class="help-block">
-														</span>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Card Number <span class="required">
-													* </span>
-													</label>
-													<div class="col-md-4">
-														<input type="text" class="form-control" name="card_number"/>
-														<span class="help-block">
-														</span>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">CVC <span class="required">
-													* </span>
-													</label>
-													<div class="col-md-4">
-														<input type="text" placeholder="" class="form-control" name="card_cvc"/>
-														<span class="help-block">
-														</span>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Expiration(MM/YYYY) <span class="required">
-													* </span>
-													</label>
-													<div class="col-md-4">
-														<input type="text" placeholder="MM/YYYY" maxlength="7" class="form-control" name="card_expiry_date"/>
-														<span class="help-block">
-														e.g 11/2020 </span>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Payment Options <span class="required">
-													* </span>
-													</label>
-													<div class="col-md-4">
-														<div class="checkbox-list">
-															<label>
-															<input type="checkbox" name="payment[]" value="1" data-title="Auto-Pay with this Credit Card."/> Auto-Pay with this Credit Card </label>
-															<label>
-															<input type="checkbox" name="payment[]" value="2" data-title="Email me monthly billing."/> Email me monthly billing </label>
-														</div>
-														<div id="form_payment_error">
-														</div>
-													</div>
-												</div>
+											<div class="tab-pane" id="tab3" >
+                                                                                            <div id="box_document" name="box_document">
+                                                                                                
+                                                                                                <div class="form-group">
+                                                                                                    
+                                                                                                 
+													
+                                                                                                </div>
+                                                                                                    
+                                                                                            </div>
+							
 											</div>
 											<div class="tab-pane" id="tab4">
-												<h3 class="block">Confirm your account</h3>
-												<h4 class="form-section">Account</h4>
+												
 												<div class="form-group">
-													<label class="control-label col-md-3">Username:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="username">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Email:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="email">
-														</p>
-													</div>
-												</div>
-												<h4 class="form-section">Profile</h4>
-												<div class="form-group">
-													<label class="control-label col-md-3">Fullname:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="fullname">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Gender:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="gender">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Phone:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="phone">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Address:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="address">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">City/Town:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="city">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Country:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="country">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Remarks:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="remarks">
-														</p>
-													</div>
-												</div>
-												<h4 class="form-section">Billing</h4>
-												<div class="form-group">
-													<label class="control-label col-md-3">Card Holder Name:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="card_name">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Card Number:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="card_number">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">CVC:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="card_cvc">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Expiration:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="card_expiry_date">
-														</p>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="control-label col-md-3">Payment Options:</label>
-													<div class="col-md-4">
-														<p class="form-control-static" data-display="payment[]">
-														</p>
-													</div>
+													
 												</div>
 											</div>
 										</div>

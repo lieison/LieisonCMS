@@ -25,17 +25,26 @@
     //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER
     $header = "";
     
-    //CARGARA EL BODY
-    $body = "<?php include 'view_add_task.php' ?>";
+    //CARGARA EL BODY SISTEMA DE SEGURIDAD CORTESIA DE BOX
+    if(isset($_REQUEST['security'])):
+        $body = "<?php include 'view_add_task.php' ?>";
+       if(isset($_REQUEST['box'])):
+           if($_REQUEST['box'] == 0):
+               $end_footer = "TaskInit.init();FormWizard.init();"; 
+           else:
+               $end_footer = "TaskInit.init();FormWizard.init();ShowBoxDocument();";
+           endif;
+       endif;
+    else:
+        $body = "<?php include 'security.php' ?>";
+    endif;
+    
 
     //CARGARA EL FOOTER O LOS SCRIPTS JS
     $footer = "<script src='js/Functions.js'></script>";
     $footer .= '<script type="text/javascript" src="../../assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>';
     
-    //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-    $end_footer = "TaskInit.init();FormWizard.init();";
-    
-
+  
     //PREPARANDO LA VISTA ...
     ViewClass::PrepareView("View.phtml", "Admin");
     

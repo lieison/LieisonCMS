@@ -368,6 +368,24 @@ function ShowAsignInfo(){
 }
 
 
+function ShowBoxDocument(){
+    
+      var params = {
+         "init": 1
+       };
+        
+       $.ajax({
+                      type: "POST",
+                      url: "includes/box.php",
+                      data : params ,
+                      success: function(value){
+                           alert();
+                           $("#box_document").html(value);
+                      }
+     });
+}
+
+
 /**
  * @author Rolando Arriaza
  * @version 1.0
@@ -379,6 +397,7 @@ var TaskInit = function () {
         init: function () {     
             FindClients();
             AsignTo();
+           
         }
     };
 }();
