@@ -23,7 +23,7 @@
   
     
     //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER
-    $header = "";
+    $header = '<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css"/>';
     
     //CARGARA EL BODY SISTEMA DE SEGURIDAD CORTESIA DE BOX
     if(isset($_REQUEST['security'])):
@@ -43,7 +43,7 @@
     //CARGARA EL FOOTER O LOS SCRIPTS JS
     $footer = "<script src='js/Functions.js'></script>";
     $footer .= '<script type="text/javascript" src="../../assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>';
-    
+    $footer .= '<script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script>';
   
     //PREPARANDO LA VISTA ...
     ViewClass::PrepareView("View.phtml", "Admin");

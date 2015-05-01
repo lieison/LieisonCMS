@@ -109,7 +109,7 @@ class BaseBox extends Box_API{
     
     
     
-    private function Get_type($type){
+    public function Get_type($type){
         switch ($type){
             case "folder":
                 return 0;

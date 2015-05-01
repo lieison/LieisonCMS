@@ -186,16 +186,63 @@
 												
 											</div>
 											<div class="tab-pane" id="tab3" >
+                                                                                            
+                                                                                         <?php if(isset($_REQUEST['box'])): ?>
+                                                                                            <?php if($_REQUEST['box'] == 1): ?>
+                                                                                           
+                                                                                            <input type="hidden" value="" id="box_stack" name="box_stack" />
+                                                                                            <!--CARGA DE BOX DRIVER -->
+                                                                                            <div  class="form-group">
+                                                                                                 <label class="control-label col-md-3"><span class="required">
+													</span>
+													</label>
+                                                                                            <div align='center' class="col-md-6">
                                                                                             <div id="box_document" name="box_document">
-                                                                                                
-                                                                                                <div class="form-group">
-                                                                                                    
-                                                                                                 
-													
-                                                                                                </div>
-                                                                                                    
+                                                                                             
                                                                                             </div>
-							
+                                                                                                 </div>
+                                                                                           </div>
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label col-md-3"><span class="required">
+													</span>
+													</label>
+                                                                                                <div class="col-md-6">
+                                                                                                    <div class="list-group" id="box_child">
+                                                                                                                
+                                                                                                    </div>
+                                                                                                </div>
+													
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label col-md-3"><span class="required">
+													</span>
+													</label>
+                                                                                                <div class="col-md-6">
+                                                                                                    <div class="list-group" id="box_tree">
+                                                                                                                
+                                                                                                    </div>
+                                                                                                </div>
+													
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label col-md-3"><span class="required">
+													</span>
+													</label>
+                                                                                                <div class="col-md-6">
+                                                                                                    <div class="list-group" id="box_documents">
+                                                                                                                
+                                                                                                    </div>
+                                                                                                </div>
+													
+                                                                                            </div>
+                                                                                            <?php else: ?>;
+                                                                                            
+                                                                                            <?php endif; ?>
+                                                                                            
+                                                                                            <?php else: ?>;
+                                                                                            
+                                                                                            <?php endif; ?>
+                                                        
 											</div>
 											<div class="tab-pane" id="tab4">
 												

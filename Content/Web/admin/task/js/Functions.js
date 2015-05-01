@@ -368,6 +368,11 @@ function ShowAsignInfo(){
 }
 
 
+/**
+ * @author Rolando Arriaza
+ * @version 1.0
+ * @return {HTML} devuelve el html del task informacion de box <option value='id' >Name</option>
+ * */
 function ShowBoxDocument(){
     
       var params = {
@@ -379,8 +384,77 @@ function ShowBoxDocument(){
                       url: "includes/box.php",
                       data : params ,
                       success: function(value){
-                           alert();
-                           $("#box_document").html(value);
+                           $("#box_document").html(value); 
+              }
+     });
+}
+
+//SI EL id es = 0 entonces verifica un select por defecto
+function GetBoxChild(id , tree_name){
+    
+    
+    if(id==0){
+        id = $('#box_parent').val();
+        tree_name = $( "#box_parent option:selected" ).text();
+    }
+    
+    var params = {
+         "folder": id,
+         "file_tree" : tree_name
+       };
+        
+       $.ajax({
+                      type: "POST",
+                      beforeSend: function(){
+                            var loading ='<div class="panel panel-default"><div class="panel-body">';
+                                loading += '<img width="50" height="50" src="../img/assert/loadingd.gif" />';
+                                loading += '&nbsp;&nbsp;<b>BUSCANDO DENTRO DE ' + tree_name.toUpperCase() + '</b>';
+                                loading += '</div></div>';
+                                
+                            $("#box_child").html(loading);
+                      },
+                      url: "includes/box.php",
+                      data : params ,
+                      success: function(value){
+                           $("#box_child").html(value); 
+                          
+                      }
+     });
+}
+
+
+function AddFile(name , url){
+    
+    var stack = $("#box_stack").val();
+    var view_ = "";
+    
+    if(stack === "undefined"){
+        stack = null;
+    }
+    //alert(stack);
+    var data = {
+            "name": name,
+            "url": url,
+            "stack": stack
+    };
+        
+     $.ajax({
+                      type: "POST",
+                      url: "includes/box_stack.php",
+                      data : data ,
+                      success: function(value){
+                           var json = $.trim(value);
+                           $("#box_stack").val(json); 
+                           
+                           var parse = JSON.parse(json);
+                           //alert(json);
+                           $.each(parse, function(k,v){
+                                view_ = ' <a href="#" class="list-group-item">' + v.name + '</a>';
+                                $("#box_documents").append(view_);
+                           });  
+                           
+                           
+                           
                       }
      });
 }
