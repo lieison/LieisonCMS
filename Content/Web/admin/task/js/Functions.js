@@ -407,8 +407,8 @@ function GetBoxChild(id , tree_name){
                       type: "POST",
                       beforeSend: function(){
                             var loading ='<div class="panel panel-default"><div class="panel-body">';
-                                loading += '<img width="50" height="50" src="../img/assert/loadingd.gif" />';
-                                loading += '&nbsp;&nbsp;<b>BUSCANDO DENTRO DE ' + tree_name.toUpperCase() + '</b>';
+                                loading += '<img width="80" height="80" src="../img/assert/search.gif" />';
+                                loading += '&nbsp;&nbsp;&nbsp;<b>BUSCANDO DENTRO DE ' + tree_name.toUpperCase() + '</b>';
                                 loading += '</div></div>';
                                 
                             $("#box_child").html(loading);
@@ -423,15 +423,41 @@ function GetBoxChild(id , tree_name){
 }
 
 
+/**
+ * @author Rolando Arriaza
+ * @version 1.0
+ * @syntax  AddFile lo que hace es agregar un arbol de archivos de nodos en nodos
+ * */
 function AddFile(name , url){
     
-    var stack = $("#box_stack").val();
+    //VARIABLES QUE USAREMOS
+    var stack = $("#box_stack").val(); //HIDDEN DONDE GUARDAMOS LOS NODOS 
     var view_ = "";
+    var flag = true;
     
-    if(stack === "undefined"){
+    if(stack === "undefined" || stack === ""){
+        //NULL BABY
         stack = null;
+    }else{
+         //INGENIERIA INVERSA , VERIFICAMOS SI UN ELEMENTO ESTA YA DEFINIDO 
+         //EN DADO CASO ESTE DEFINIDO ELIMINARLO 
+         //YA QUE EL CHECKBOX SOLO TIENE DOS ESTADOS SIGNIFICA QUE 
+         //SI NO ESTA DEFINIDO EL PRIMER ESTADO ES ENABLE Y SI YA ESTA DEFINIDO EL SEGUNDO ESTADO ES DISABLED
+         var find = JSON.parse(stack);
+         $.each(find , function(k ,v){
+             if(v.name === name){
+                 delete find[k];
+                 find[k] = "";
+                 stack = JSON.stringify(find);
+                 flag = false;
+                 return;
+             }
+         });
     }
-    //alert(stack);
+    
+    
+    if(flag === true){
+    
     var data = {
             "name": name,
             "url": url,
@@ -443,20 +469,43 @@ function AddFile(name , url){
                       url: "includes/box_stack.php",
                       data : data ,
                       success: function(value){
-                           var json = $.trim(value);
+                          
+                           //ELIMINAMOS LOS ESPACIOS EN BLANCO
+                           var json =  $.trim(value) ;
+                           
+                           //INPUT DE TYPO HIDDEN
                            $("#box_stack").val(json); 
                            
+                           //JSON A OBJETO
                            var parse = JSON.parse(json);
-                           //alert(json);
+                           
+                           //RECORREMOS EL JSON
                            $.each(parse, function(k,v){
-                                view_ = ' <a href="#" class="list-group-item">' + v.name + '</a>';
-                                $("#box_documents").append(view_);
+                               if(v != "undefined" && v != ""){
+                                     view_ += '<a href="#" class="list-group-item">' + v.name + ' <span class="badge"><button onclick="AddFile(' + "'" + v.name + "'" + ' , null);" class="badge">X</button></span></a>'; 
+                                }
                            });  
                            
-                           
-                           
+                           //DIV -> MUESTRA LOS VALORES AGREGADOS AL ARBOL
+                           $("#box_documents").html(view_);
                       }
-     });
+            });
+    }else{
+        
+          //SI LA BANDERA ES FALSA M SIGNIFICA QUE ELIMINO UN ELEMENTO JSON DESDE FORNT-END Y APLICO I-I EN ESE MOMENTO
+          //NO ES NECESARIO AJAX
+          var parse = JSON.parse(stack);
+          
+          $("#box_stack").val(stack); 
+          
+          $.each(parse, function(k,v){
+                 if(v != "undefined" && v != ""){
+                     view_ += '<a href="#" class="list-group-item">' + v.name + ' <span class="badge"><button onclick="AddFile(' + "'" + v.name + "'" + ' , null);" class="badge">X</button></span></a>'; 
+                 }
+          });  
+          
+          $("#box_documents").html(view_);
+    }
 }
 
 

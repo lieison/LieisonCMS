@@ -103,7 +103,7 @@ if(!isset($_REQUEST['folder'])){
          
      }
      
-     echo $html_string ? : "<b>Opps!! Error al cargar intente de nuevo.</b>";
+     echo $html_string ? : '<div class="alert alert-warning" role="alert">Opps!! Nada por aqui , Nada por alla.</div>';
      
 }
 

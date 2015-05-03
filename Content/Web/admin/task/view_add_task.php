@@ -190,6 +190,7 @@
                                                                                          <?php if(isset($_REQUEST['box'])): ?>
                                                                                             <?php if($_REQUEST['box'] == 1): ?>
                                                                                            
+                                                                                            <!--ACA SE GUARDARAN LOS NODOS ELEJIDOS DE BOX EN LA TAREA -->
                                                                                             <input type="hidden" value="" id="box_stack" name="box_stack" />
                                                                                             <!--CARGA DE BOX DRIVER -->
                                                                                             <div  class="form-group">
@@ -208,7 +209,9 @@
 													</label>
                                                                                                 <div class="col-md-6">
                                                                                                     <div class="list-group" id="box_child">
-                                                                                                                
+                                                                                                                <div align="center">
+                                                                                                        <img  src="../img/assert/logos/box_logo.jpg" />
+                                                                                                        </div> 
                                                                                                     </div>
                                                                                                 </div>
 													
@@ -219,7 +222,7 @@
 													</label>
                                                                                                 <div class="col-md-6">
                                                                                                     <div class="list-group" id="box_tree">
-                                                                                                                
+                                                                                                       
                                                                                                     </div>
                                                                                                 </div>
 													
@@ -235,8 +238,30 @@
                                                                                                 </div>
 													
                                                                                             </div>
-                                                                                            <?php else: ?>;
                                                                                             
+                                                                                              <div class="form-group">
+                                                                                                <label class="control-label col-md-3"><span class="required">
+													</span>
+													</label>
+                                                                                                <div class="col-md-6">
+                                                                                                    <label class="control-label col-md-3">
+                                                                                                        <b>Otros:</b>
+                                                                                                    </label>
+                                                                                                    <textarea class="form-control" id="cmd_another_doc"></textarea>
+                                                                                                </div>
+													
+                                                                                            </div>
+                                                                                            <?php else: ?>;
+                                                                                             <div class="form-group">
+                                                                                                <label class="control-label col-md-3"><span class="required">
+													</span>
+													</label>
+                                                                                                <div class="col-md-6">
+                                                                                                    <label class="control-label col-md-3">Agrega links (url) a la tarea<span class="required">
+                                                                                                    </span>
+                                                                                                    </label>
+                                                                                                    <textarea class="form-control" id="cmd_another_doc"></textarea>
+                                                                                                </div>
                                                                                             <?php endif; ?>
                                                                                             
                                                                                             <?php else: ?>;

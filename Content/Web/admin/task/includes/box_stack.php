@@ -18,7 +18,7 @@ if($stack == null || $stack == '""'){
                 "url"   => $url
             ));
     
-    echo $json_stack;
+    echo "[" . $json_stack . "]";
     exit();      
 }else{
 
