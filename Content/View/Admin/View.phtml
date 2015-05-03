@@ -74,7 +74,7 @@
 ?>
     
 <!-- ESTABLECIENDO EL HEADER  --> 
-<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css"/>
+
 </head>
 
 
@@ -199,7 +199,7 @@
                                      
                                 ?>
 			</div>          
-                    <?php include 'view_add_task.php' ?>
+                    <?php include 'view_user.php' ?>
                 </div>
                
         </div>
@@ -219,7 +219,7 @@
 
 <?php AdminHeader::GetJs(); ?>
 
-<script src='js/Functions.js'></script><script type="text/javascript" src="../../assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script><script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script> 
+<script src='PrimaryFunctions.js'></script> 
 
 <script>
     
@@ -248,7 +248,7 @@
   // Index.initMiniCharts();
    //Tasks.initDashboardWidget();
   
-    TaskInit.init();FormWizard.init();ShowBoxDocument();    
+    UserTiles.init();    
 
    /**
     * INICIA LOS GRAFICOS DE VISITAS EN EL FRONT END --- DESHABILITADO

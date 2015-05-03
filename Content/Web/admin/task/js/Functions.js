@@ -423,6 +423,39 @@ function GetBoxChild(id , tree_name){
 }
 
 
+
+/**
+ * @author Rolando Arriaza
+ * @version 1.0
+ * ESTA FUNCION CREA LA TAREA BASADO EN TODOS LOS PARAMETROS ENVIADOS.
+ * */
+function SaveTask(){
+    
+    
+    
+    
+    /*
+     * DECLARAREMOS TODO LO RELACIONADO CON DOCUMENTOS
+     * ESTO IMPLICA A BOX
+     * */
+    
+    //NODOS SELECCIONADOS A LA TAREA MEDIANTE BOX
+    var BoxNodes = $("#box_stack").val();
+    
+    //OTROS DOCUMENTOS 
+    var ODocs = $("#cmd_another_doc").val();
+    
+    
+    //BOX CUANDO NO EXISTE 
+    if(BoxNodes === "undefined"){ BoxNodes = ""; }
+    
+    /**FIN DE LA DECLARACION DOCUMENTOS*/
+    
+    alert(BoxNodes);
+    
+}
+
+
 /**
  * @author Rolando Arriaza
  * @version 1.0

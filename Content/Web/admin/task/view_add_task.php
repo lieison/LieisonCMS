@@ -238,7 +238,7 @@
                                                                                                 </div>
 													
                                                                                             </div>
-                                                                                            
+                                                
                                                                                               <div class="form-group">
                                                                                                 <label class="control-label col-md-3"><span class="required">
 													</span>
@@ -247,24 +247,22 @@
                                                                                                     <label class="control-label col-md-3">
                                                                                                         <b>Otros:</b>
                                                                                                     </label>
-                                                                                                    <textarea class="form-control" id="cmd_another_doc"></textarea>
+                                                                                                    <textarea class="form-control" id="cmd_another_doc" name="cmd_another_doc"></textarea>
                                                                                                 </div>
 													
                                                                                             </div>
-                                                                                            <?php else: ?>;
+                                                                                            <?php else: ?>
                                                                                              <div class="form-group">
-                                                                                                <label class="control-label col-md-3"><span class="required">
+                                                                                                <label class="control-label col-md-3">Puedes agregar los "links" donde se encuentra un docuemnto o imagen<span class="required">
 													</span>
-													</label>
+												</label>
                                                                                                 <div class="col-md-6">
-                                                                                                    <label class="control-label col-md-3">Agrega links (url) a la tarea<span class="required">
-                                                                                                    </span>
-                                                                                                    </label>
-                                                                                                    <textarea class="form-control" id="cmd_another_doc"></textarea>
+                                                                                                 
+                                                                                                     <textarea name="txt_description" name="cmd_another_doc"   id="cmd_another_doc" class="ckeditor form-control" name="editor1" rows="6" data-error-container="">
+                                                                                                     </textarea>
                                                                                                 </div>
                                                                                             <?php endif; ?>
                                                                                             
-                                                                                            <?php else: ?>;
                                                                                             
                                                                                             <?php endif; ?>
                                                         
@@ -285,8 +283,8 @@
 												<a href="javascript:;" class="btn blue button-next">
 												Continuar <i class="m-icon-swapright m-icon-white"></i>
 												</a>
-												<a href="javascript:;" class="btn green button-submit">
-												Submit <i class="m-icon-swapright m-icon-white"></i>
+												<a href="javascript:SaveTask();" class="btn green button-submit">
+												Guardar <i class="m-icon-swapright m-icon-white"></i>
 												</a>
 											</div>
 										</div>
