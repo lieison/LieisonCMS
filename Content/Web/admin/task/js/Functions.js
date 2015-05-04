@@ -2,7 +2,9 @@ var TaskInit = function () {
 
     return {
         init: function () {
-
+            
+            alert();
+            
             if (!jQuery().sortable) {
                 return;
             }
