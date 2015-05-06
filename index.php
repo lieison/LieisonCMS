@@ -6,7 +6,7 @@
        *@author Rolando Arriaza 
        *@version 1.1
        *@copyright (c) SV API 2014
-       *@since 1.1, index.php
+       *@since 1.5, index.php
       */
 
      /**
@@ -55,8 +55,8 @@
      //OPCIONAL
      header("Pragma: no-cache");
     
+     
      //NOMBRE DEL ARCHIVO EN LA CUAL INICIARA , GENERALMENTE ES UN INDEX.PHP  
-
      $url = "http://$SERVER__/$DIR_NAME/Content/Web/admin/index.php" ;
      if(url_exists($url)):
           header("Location: http://$SERVER__/$DIR_NAME/Content/Web/admin/index.php" ); 
@@ -65,23 +65,23 @@
      endif;
     
  
-     
+     //FUNCION PARA VERIFICAR URL SE AGREGO EN LA VERSION 1.5
     function url_exists( $url = NULL ) {
 
-    if(( $url == '' ) ||( $url == NULL ) ){
-        return false;
-    }
+        if(( $url == '' ) ||( $url == NULL ) ){
+            return false;
+        }
 
-    $headers = @get_headers( $url );
-    sscanf($headers[0], 'HTTP/%*d.%*d %d', $httpcode);
+        $headers = @get_headers( $url );
+        sscanf($headers[0], 'HTTP/%*d.%*d %d', $httpcode);
 
-    //Aceptar solo respuesta 200 (Ok), 301 (redirección permanente) o 302 (redirección temporal)
-    $accepted_response = array(200,301,302);
-    if( in_array( $httpcode, $accepted_response ) ) {
-        return true;
-    } else {
-        return false;
-    }
+    
+        $accepted_response = array(200,301,302);
+        if( in_array( $httpcode, $accepted_response ) ) {
+            return true;
+        } else {
+            return false;
+        }
     
    
    }

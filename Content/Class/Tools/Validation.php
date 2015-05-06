@@ -118,7 +118,7 @@ class Validation  {
             }else { return false; }
   }
   
-    public static function PrimaryFolderPath($path = "LieisonCms"){
+    public static function PrimaryFolderPath($path = "LieisonCMS"){
         if (!isset($_COOKIE['FOLDER'])) {
             setcookie("FOLDER", $path);
             return $path;
