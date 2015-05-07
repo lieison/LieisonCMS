@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"access_token":"sqzkELoS3Utas3kzSN63fyLg3lpJpH8j","expires_in":3973,"restricted_to":[],"refresh_token":"EvzetAqSTYa4qg2KLDJrlI7iTGf8nl64evRNxc63SxY1VlqUMTbW0VTCGzQS39UO","token_type":"bearer","timestamp":1430753813}
+=======
+{"access_token":"f9NazNX5krwCxVupieDfF44xBpaksrjt","expires_in":3675,"restricted_to":[],"refresh_token":"uKRcA5VdJJma0k6HeRuSR14pXU3DEUQBEF0Df6in2qDtkBsMkAG1mOsCFgEnPXm3","token_type":"bearer","timestamp":1430797641}
+>>>>>>> origin/master
