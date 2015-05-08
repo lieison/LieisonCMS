@@ -52,7 +52,7 @@ class PageController extends PageModel{
            /**
             * SENTENCIA SQL ES UN VIEW
             */
-          $result = parent::RawQuery("SELECT * FROM VIEW_DASHBOARD_DB");
+          $result = parent::RawQuery("SELECT * FROM VIEW_DASHBOARD");
           $admin = new AdminController();
           $privs = $admin->Get_MasterPrivilegios();
           for ($i=0; $i< count($result); $i++){

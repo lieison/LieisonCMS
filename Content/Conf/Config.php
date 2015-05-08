@@ -16,10 +16,11 @@ $SERVER_DIR = getcwd();
 $ARRAY_DIR = explode("\\", $SERVER_DIR);
 $DIR_NAME = $ARRAY_DIR[count($ARRAY_DIR)-1];
 
-if(!is_array($ARRAY_DIR)):
-     $ARRAY_DIR = explode("/", $SERVER_DIR);
+ if(count($ARRAY_DIR)<=1):
+         $ARRAY_DIR = explode("/", $SERVER_DIR);
  endif;
- $DIR_NAME = $ARRAY_DIR[count($ARRAY_DIR)-1];
+ 
+$DIR_NAME = $ARRAY_DIR[count($ARRAY_DIR)-1];
 
 /**
  * verifica si la cookie FOLDER existe en dado caso
@@ -72,8 +73,7 @@ $CONFIG_ = array(
     
     "APP_FOLDER" => $FOLDER_ ?: "LieisonCMS"
      
-)
-
+);
 
 
 ?>
