@@ -270,7 +270,15 @@
 											<div class="tab-pane" id="tab4">
 												
 												<div class="form-group">
-													
+                                                                                                   <label class="control-label col-md-3"><span class="required">
+												   </span>
+												</label>
+                                                                                                <div class="col-md-6">
+                                                                                                    <div class="alert alert-info" id="taskmessage" role="alert">
+                                                                                                        <b>Todo Bien !</b>&nbsp;Puedes Crear la tarea dandole <b>Click en guardar</b>
+                                                                                                       
+                                                                                                    </div>
+                                                                                                </div>
 												</div>
 											</div>
 										</div>
@@ -283,7 +291,7 @@
 												<a href="javascript:;" class="btn blue button-next">
 												Continuar <i class="m-icon-swapright m-icon-white"></i>
 												</a>
-												<a href="javascript:SaveTask();" class="btn green button-submit">
+                                                                                            <a id="savetask" href="javascript:SaveTask();" class="btn green button-submit">
 												Guardar <i class="m-icon-swapright m-icon-white"></i>
 												</a>
 											</div>

@@ -44,7 +44,11 @@ class FunctionsController {
         }
     }
     
-
+    public static function GetContentUrl($link = ""){
+        return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/$link";
+    }
+    
+    
     public static function GetUrl($link)
     {
        return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";

@@ -26,6 +26,7 @@
  *@version 1.0
  *@todo Lieison S.A de C.V 
  * 
+ * ESTA VERSION ESTA OBSOLETA
  * 
  * 
  */
@@ -70,7 +71,7 @@
 <?php 
 
     
-    AdminHeader::$relative_route = "../../";
+    AdminHeader::$relative_route = FunctionsController::GetContentUrl("web/");
     AdminHeader::GetTitle("Lieison Dashboard");
     AdminHeader::GetMeta();
     AdminHeader::GetCss();
