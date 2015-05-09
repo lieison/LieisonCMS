@@ -1,7 +1,27 @@
-   <?php
-       //$box = new BaseBox();
-       //$box->ConecToBox();
-    ?>
+<?php
+
+/**
+ * NUEVA COOKIE ...
+ * ESTA SESION SERVIRA PARA BOX | TIENE O NO TIENE 
+ */
+
+  $showme = null;
+  if(!Session::GetSession("box")):
+      Session::InsertSession("box", $_GET['box'] ? : 0);
+  else:
+      switch (Session::GetSession("box")){
+            case 0:
+                $showme = "sesion sin dropbox";
+                break;
+            case 1:
+                $showme = "sesion con dropbox";
+                break;
+      }
+  endif;
+  
+  
+
+?>
 <div class="row">
 				<div class="col-md-12">
 					<div class="portlet box blue" id="form_wizard_1">

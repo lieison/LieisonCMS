@@ -27,12 +27,21 @@
  *@todo Lieison S.A de C.V 
  */
 
-/**
- * Description of FunctionsController
- *
- * @author rolandoantonio
- */
+define("URL" , 0);
+define("NAME" , 1);
+
+
 class FunctionsController {
+    
+    
+    public static function GetHost($type = URL){
+        switch ($type){
+            case URL:
+                return  "http://" . $_COOKIE['SERVER'];
+            case NAME:
+                return $_COOKIE['SERVER'];
+        }
+    }
     
     
     public static function GetRootUrl($directory , $host = false)
@@ -47,8 +56,7 @@ class FunctionsController {
     public static function GetContentUrl($link = ""){
         return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/$link";
     }
-    
-    
+
     public static function GetUrl($link)
     {
        return $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'] . "/Content/Web/admin/$link";

@@ -14,7 +14,7 @@
 include   '../../../../Conf/Include.php';
 include   '../../box/BaseBox.php';
 
-$uri = 'http://localhost/LieisonCMS/Content/Web/admin/task/includes/box.php?init=' . $_GET['init'] ? : 1;
+$uri = FunctionsController::GetUrl('task/includes/box.php?init=' . $_GET['init'] ? : 1);
 $box = new BaseBox($uri);
 $box->ConecToBox();
 
@@ -24,7 +24,7 @@ if(isset($_REQUEST['init'])){
         $header->redirect('../../task/dashboard_add_task.php?security=1&box=1');
         exit();
     }else{
-        $uri = 'http://localhost/LieisonCMS/Content/Web/admin/task/includes/box.php?init=1';
+        $uri = FunctionsController::GetUrl('task/includes/box.php?init=1');
     }
 }
 

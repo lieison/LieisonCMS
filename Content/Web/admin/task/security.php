@@ -5,11 +5,19 @@
      * ESTE FRAGMENTO DE CODIGO LO QUE HACE ES REDIRECCIONAR SI EXISTE 
      * EL TOKEN DE BOX , ESTO QUIERE DECIR QUE SE HA LOGADO ANTES A UNA CUENTA
      */
-    if(file_exists("includes/token.box")){
+
+     if(Session::ExistSession("box")):
+         echo "<script> "
+        . " window.location.href='includes/box.php?init=0&box=" . Session::GetSession("box") . "';"
+        . "</script>";
+     elseif(file_exists("includes/token.box")):
         echo "<script> "
         . " window.location.href='includes/box.php?init=0';"
         . "</script>";
-    }
+     endif;
+
+     
+   
 
 ?>
 <div class="portlet box purple">
