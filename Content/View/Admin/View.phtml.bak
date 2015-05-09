@@ -57,7 +57,8 @@
         $host = $_COOKIE['HOST'];
     endif;
     
-    AdminHeader::$relative_route =  "http://" . $host  . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
+    //AdminHeader::$relative_route =  "http://" . $host  . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
+    AdminHeader::$relative_route = FunctionsController::GetContentUrl("Web/");
     AdminHeader::GetTitle("Lieisoft"); //TITULO INICIAL DEL DASHBOARD
     AdminHeader::GetMeta(); //OBTIENE LOS METAS UTILIZADOS 
     AdminHeader::GetCss();//OBTIENE LAS OJAS DE ESTILO UTILIZADAS
@@ -235,26 +236,16 @@
    ?> 
            
       
-   
-   Metronic.init(); // init metronic core componets
-   Layout.init(); // init layout
-   QuickSidebar.init(); // init quick sidebar
-   Demo.init(); // init demo features 
+   //init template core
+   Metronic.init(); 
+   Layout.init(); 
+   QuickSidebar.init(); 
+   Demo.init(); 
    Index.init();   
-  // Index.initDashboardDaterange();
-   //Index.initJQVMAP(); // init index page's custom scripts
-   //Index.initCalendar(); // init index page's custom scripts
-   //Index.initChat();
-  // Index.initMiniCharts();
-   //Tasks.initDashboardWidget();
-  
-    %{FOOTER_CLASS_VIEW}%    
 
-   /**
-    * INICIA LOS GRAFICOS DE VISITAS EN EL FRONT END --- DESHABILITADO
-    * */
-   // iniciargraficos_visita();
-   
+    //app init lieisoft
+   %{FOOTER_CLASS_VIEW}%    
+
 });
 </script>
 <!-- END JAVASCRIPTS -->

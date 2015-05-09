@@ -86,4 +86,6 @@
  echo '</li>';
  echo '</ul>';
  
+ unset( $messagecontroller);
+ 
  
