@@ -8,10 +8,15 @@
 <head>
     
 <?php 
-    
-    //SivarApi\Tools\Sessions\Session::InitSession();
 
+    /**
+     *@author Rolando Arriaza
+     *@version 1.5 
+     *@copyright (c) 2015, Lieison
+     */
+    
     $header = new Http\Header(); //clase header , ver en documentacion
+    
     
     if(!Session::GetSession("login")): //verifica si existe sesion 
         if(file_exists("login.php")):
@@ -21,7 +26,8 @@
         endif;
             exit();
     endif;
-
+    
+    
     //VARIABLES DE SESION , ESTAS VARIABLES SE DECLARAN AL INICIAR EL LOGUEO 
     $SessionUser = Session::GetSession("login");
     $usuario = $SessionUser['user'];
@@ -45,10 +51,17 @@
     
     //VER SI LA CUENTA ACTUAL ESTA ACTIVA
     if($activo == 0):
-        $header->redirect("cuenta_desactivada.php");
+        $header->redirect("../cuenta_desactivada.php");
+        exit();
+    endif;
+    
+    //SI EXISTE UNA REDIRECCION ENTONCES EL SISTEMA REDIRECCIONARA AL LUGAR DESEADO
+    if(isset($_REQUEST['redirect'])):
+         $header->redirect(FunctionsController::GetUrl($_REQUEST['redirect']));
+         exit();
     endif;
 
-    
+
     //INGRESA LA RUTA , ESTE CASO SE HA DEJADO COMO RUTA ABSOLUTA , PERO TAMBIEN APLICA RELATIVAS
     $host = null;
     if(!isset($_COOKIES['HOST'])):
@@ -57,8 +70,9 @@
         $host = $_COOKIE['HOST'];
     endif;
     
-    //AdminHeader::$relative_route =  "http://" . $host  . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
+    //AdminHeader::$relative_route =  "http://" . $host  . "/" .$_COOKIE['FOLDER'] . '/Content/Web/'; //DEPRECADO
     AdminHeader::$relative_route = FunctionsController::GetContentUrl("Web/");
+   
     AdminHeader::GetTitle("Lieisoft"); //TITULO INICIAL DEL DASHBOARD
     AdminHeader::GetMeta(); //OBTIENE LOS METAS UTILIZADOS 
     AdminHeader::GetCss();//OBTIENE LAS OJAS DE ESTILO UTILIZADAS
