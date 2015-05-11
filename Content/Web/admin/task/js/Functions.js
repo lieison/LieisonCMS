@@ -445,16 +445,52 @@ function SaveTask(){
     //OTROS DOCUMENTOS 
     var ODocs = $("#cmd_another_doc").val();
     
-    
+   
     //BOX CUANDO NO EXISTE 
     if(BoxNodes === "undefined"){ BoxNodes = ""; }
     
     /**FIN DE LA DECLARACION DOCUMENTOS*/
     
+    /*INICIO PARAMETROS GENERALES*/
+    
+    var title  = $("#txt_title").val();
+    
+    var deadline = $("#txt_date").val();
+    
+    var hourdead = $("#txt_hour").val();
+    
+    
+    /**CAPTURA DE PARAMETROS CLIENTES*/
+    
+    var id_client = $("#cmd_client").val();
+    
+    var client_description = $("#txt_description").val();
+    
+    /**CAPTURA DE ASIGNACION AL USUARIO*/
+    
+    var id_user = $("#cmd_asignto").val();
+    
+    var user_comment = $("#txt_coment").val();
+    
+    var user_activate = $("#txt_activate").val();
+    
+    /**FIN DE LA CAPTURA */
+    
     
    
    var data = {
-        "type":"task"
+        "type":"task",
+        "box_nodes" : BoxNodes,
+        "other_docs":ODocs,
+        "title":title,
+        "deadline": deadline,
+        "hourdead": hourdead,
+        "id_client": id_client,
+        "client_description": client_description,
+        "id_user": id_user,
+        "user_comment": user_comment,
+        "user_activate":user_activate
+        
    };
     
    
