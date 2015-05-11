@@ -87,5 +87,11 @@ class TaskModel extends MysqlConection {
         $this->QUERY = "SELECT imagen ,  email FROM usuario WHERE id_usuario LIKE '$id_user'";
         return parent::RawQuery($this->QUERY, PDO::FETCH_CLASS);
     }
+    
+    
+    public function SetTask($multitask , $task){
+        // $params_mt = array();
+         //$multitask = parent::Insert("", $params_mt );
+    }
    
 }

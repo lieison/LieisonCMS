@@ -1,5 +1,12 @@
 <?php
 
+include   '../../../../Conf/Include.php';
+
+$type = $_REQUEST['type'] ? : null;
+if(SivarApi\Tools\Validation::Is_Empty_OrNull($type)):
+    echo 0;
+    exit();
+endif;
 
 /*
  *  var data = {
@@ -18,4 +25,30 @@
    };
  * 
  */
+
+
+$task = new TaskController();
+
+Session::InitSession();
+
+$id_user = Session::GetSession("login", "id");
+
+switch ($type):
+    case "task":
+        $task->SaveTask(array(
+            "id_client" => $_REQUEST['id_client'],
+            "id_u_from" => $id_user, 
+            "description" => $_REQUEST['client_description'],
+            "title" => $_REQUEST['title'],
+            "status" => 1
+        ),
+        array(
+             
+         ));
+        break;
+    case "multitask":
+        break;
+endswitch;
+
+unset($task);
 
