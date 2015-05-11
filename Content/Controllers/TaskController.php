@@ -40,9 +40,13 @@ class TaskController extends TaskModel {
     
     
     public function Show_UserInfo($id_user){
-        
         $result = parent::GetUserInfo($id_user);
         return $result[0];
+    }
+    
+    
+    public function SaveTask(array $mtask , array $task ){
+        return parent::SetTask($mtask , $task);
     }
     
     

@@ -185,7 +185,7 @@
                                                                                                          </span>
 													</label>
 													<div class="col-md-4">
-														<input type="text" class="form-control" name="address"/>
+                                                                                                            <input type="text" class="form-control" name="txt_coment" id="txt_coment"/>
 														<span class="help-block">
 														 ¿Algun comentario sobre la tarea? </span>
 													</div>
@@ -195,7 +195,7 @@
 													</span>
 													</label>
 													<div class="col-md-4">
-                                                                                                            <select class="form-control">
+                                                                                                            <select id="txt_activate" class="form-control">
                                                                                                                 <option  value="1">Activa</option>
                                                                                                                 <option value="0">No activa</option>
                                                                                                             </select>

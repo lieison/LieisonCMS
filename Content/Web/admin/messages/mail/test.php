@@ -12,13 +12,13 @@ try{
     
     
 $mail->IsSMTP();
-$mail->Host = "smtp.gmail.com";
+/*$mail->Host = "smtp.gmail.com";
 $mail->SMTPSecure = "tls"; //"tls";
 $mail->SMTPAuth = true;
 $mail->SMTPDebug = 1;
 $mail->Port = 465;
 $mail->Username = 'rolignu90@gmail.com';
-$mail->Password = 'linux902014';
+$mail->Password = 'linux902014';*/
 
 
 
