@@ -3,19 +3,25 @@
  include '../../../Conf/Include.php';
  
  $header = new Http\Header();
- $url = null;
+ $redirect = $_REQUEST['redirect'] ? : null;
  
- if(!isset($_COOKIE['SERVER'])):
-     setcookie("SERVER" , $_SERVER["SERVER_NAME"]);
-     setcookie("FOLDER" , $GLOBALS['FOLDER']);
-     $url = "http://" . $_SERVER["SERVER_NAME"] . "/" . $GLOBALS['FOLDER'];
+ $url = null;
+ $url_err = null;
+ $url_index = null;
+ 
+ if(SivarApi\Tools\Validation::Is_Empty_OrNull($redirect)):
+     $url = "login.php";
+     $url_err = "login.php?error=true";
+     $url_index = "index.php";
  else:
-     $url = "http://" . $_COOKIE['SERVER'] . "/" . $_COOKIE['FOLDER'];
+     $url = "login.php?redirect=" . $_REQUEST['redirect'];
+     $url_err = "login.php?error=true&redirect=" . $_REQUEST['redirect'];
+     $url_index ="index.php?redirect=" . $_REQUEST['redirect'];
  endif;
-
+ 
 
  if(!isset($_POST['username'])):
-     $header->redirect($url . "/Content/Web/admin/login.php");
+     $header->redirect(FunctionsController::GetUrl($url));
  endif;
  
  $user = $_POST['username'];
@@ -23,7 +29,7 @@
  
 if ( preg_match("/[^A-Za-z0-9]/", $user) ||  preg_match("/[^A-Za-z0-9]/", $pass) ):
     if(!\SivarApi\Tools\Validation::CheckEmail($user)):
-             $header->redirect($url . "/Content/Web/admin/login.php?error=true");
+             $header->redirect(FunctionsController::GetUrl($url_err));
              exit();
     endif;
 endif;
@@ -32,25 +38,22 @@ endif;
  $is_user = $admin_controller->GetLogin($user, $pass);
  $date = new DateTime();
  
- if($is_user):
+ if($is_user):  
       $hora_entrada =  FunctionsController::get_time();
       $fecha = FunctionsController::get_date();
-      $id_user = $_SESSION['login']["id"];
-      
-      if(!$admin_controller->SessionActive($_SESSION['login']["id_log"])){
+      $id_user = Session::GetSession("login", "id");
+      if(!$admin_controller->SessionActive(Session::GetSession('login', "id_log"))):
           $id_log = $admin_controller->Create_Log($id_user, $hora_entrada, $fecha);
-          $admin_controller->UpdateSession($_SESSION['login']["id_log"], 1);
-      }
-      else{
+          $admin_controller->UpdateSession(Session::GetSession('login', "id_log"), 1);
+      else:
           $_SESSION['DUPLICATE_SESSION'] = true;
-      }
-      
+      endif;
       $_SESSION['log'] = $id_log;
-      $header->redirect($url . "/Content/Web/admin/index.php");
+      $header->redirect(FunctionsController::GetUrl($url_index));   
  else:
-      $header->redirect($url . "/Content/Web/admin/login.php?error=true");
+      $header->redirect(FunctionsController::GetUrl($url_err));
  endif;
  
  
-?>
+
 

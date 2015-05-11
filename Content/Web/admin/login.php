@@ -56,6 +56,15 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="login">
+ 
+<?php
+
+    if(isset($_REQUEST['redirect'])):
+        echo "<input type='hidden' id='redirect' name='redirect' value='" . $_REQUEST['redirect'] . "' />";
+    endif;
+
+?>
+    
 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 <div class="menu-toggler sidebar-toggler">
 </div>
@@ -77,6 +86,7 @@
 <!-- BEGIN LOGIN -->
    
 <div class="content">
+    
     
 	<!-- BEGIN LOGIN FORM -->
         <form class="login-form" action="ControlPage/GetLogin.php" method="post">

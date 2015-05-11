@@ -29,13 +29,21 @@
  * 
  * 
  */
+    
 
+    
  
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../Conf/Include.php';
     
-    //INDEX APUNTA AL DIRECTORIO USER
     $header = new \Http\Header();
-    $header->redirect("user/");
+    
+    //INDEX APUNTA AL DIRECTORIO USER
+    if(isset($_REQUEST['redirect'])):
+          $header->redirect("user/index.php?redirect=" . $_REQUEST['redirect'] );
+    else:
+        $header->redirect("user/");
+    endif;
+   
  
     

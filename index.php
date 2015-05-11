@@ -67,24 +67,15 @@
  
      //FUNCION PARA VERIFICAR URL SE AGREGO EN LA VERSION 1.5
     function url_exists( $url = NULL ) {
-
-        if(( $url == '' ) ||( $url == NULL ) ){
-            return false;
-        }
-
         $headers = @get_headers( $url );
         sscanf($headers[0], 'HTTP/%*d.%*d %d', $httpcode);
-
-    
         $accepted_response = array(200,301,302);
         if( in_array( $httpcode, $accepted_response ) ) {
             return true;
         } else {
             return false;
         }
-    
-   
-   }
+    }
 
  
 ?>

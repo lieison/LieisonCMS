@@ -22,10 +22,13 @@ $GLOBAL_ROOT = $CONFIG_["DIR"]["root"];
 $GLOBAL_DIRECTORY = $CONFIG_["DIR"]["directory"];
 $FOLDER = $CONFIG_["APP_FOLDER"];
 
+if(strrpos($GLOBAL_ROOT, "/") !== true):
+    $GLOBAL_ROOT .= "/";
+endif;
 
 $GLOBAL_PATH = "";
 
-if(file_exists($GLOBAL_ROOT . $FOLDER . '/Content/Class/index.php')):
+if(file_exists($GLOBAL_ROOT .  $FOLDER . '/Content/Class/index.php')):
     $GLOBAL_PATH = $GLOBAL_ROOT . $FOLDER ;
 else:
     $GLOBAL_PATH = $GLOBAL_ROOT ;

@@ -59,7 +59,7 @@ class AdminHeader
                             <i class="icon-lock"></i> Bloquear Pantalla </a>
 			</li>
                             <li>
-                           <a href="' . self::$relative_route . '/admin/ControlPage/LogoutPage.php">
+                           <a href="' . self::$relative_route . 'admin/ControlPage/LogoutPage.php">
                                 <i class="icon-key"></i> Cerrar Sesion </a>
 			</li></ul>';
     }
@@ -90,7 +90,7 @@ class AdminHeader
     
     static function GetTitle($name)
     {
-        echo "<title>$name</title>";
+        echo "<title name='title' id='title'>$name</title>";
     }
     
     static function GetIcon()
@@ -138,19 +138,34 @@ class AdminHeader
         echo 'load_message();';
         echo "setInterval('load_message()',1000*10);";
         
+        echo 'load_count_message();';
+        echo "setInterval('load_count_message()',1000*10);";
+        
+        /*************************************************/
+        
+        
          /**CARGA LAS NOTIFICACIONES */
-   
         echo 'load_notify();';
         echo "setInterval('load_notify()' , 1000*10);";    
         
-          /**
-            * CARGA EL DASHBOARD SIDEBAR
-           * */
+        /****************************************************/
+        
+        /**
+        * CARGA EL DASHBOARD SIDEBAR
+        * */
         echo 'load_dashboard_sidebar();';
         
+        /****************************************************/
+        
+        /**
+         * CARGA LAS TAREAS 
+         */
         echo 'load_task();';
         echo "setInterval('load_task()' , 1000*10);";    
         
+        /****************************************************/
+        
+        /**CARGA LOS COMPONENETES DE TIME PICKER*/
         echo " ComponentsPickers.init();";
         
     }

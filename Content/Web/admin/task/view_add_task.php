@@ -1,7 +1,27 @@
-   <?php
-       //$box = new BaseBox();
-       //$box->ConecToBox();
-    ?>
+<?php
+
+/**
+ * NUEVA COOKIE ...
+ * ESTA SESION SERVIRA PARA BOX | TIENE O NO TIENE 
+ */
+
+  $showme = null;
+  if(!Session::GetSession("box")):
+      Session::InsertSession("box", $_GET['box'] ? : 0);
+  else:
+      switch (Session::GetSession("box")){
+            case 0:
+                $showme = "sesion sin dropbox";
+                break;
+            case 1:
+                $showme = "sesion con dropbox";
+                break;
+      }
+  endif;
+  
+  
+
+?>
 <div class="row">
 				<div class="col-md-12">
 					<div class="portlet box blue" id="form_wizard_1">
@@ -270,7 +290,15 @@
 											<div class="tab-pane" id="tab4">
 												
 												<div class="form-group">
-													
+                                                                                                   <label class="control-label col-md-3"><span class="required">
+												   </span>
+												</label>
+                                                                                                <div class="col-md-6">
+                                                                                                    <div class="alert alert-info" id="taskmessage" role="alert">
+                                                                                                        <b>Todo Bien !</b>&nbsp;Puedes Crear la tarea dandole <b>Click en guardar</b>
+                                                                                                       
+                                                                                                    </div>
+                                                                                                </div>
 												</div>
 											</div>
 										</div>
@@ -283,7 +311,7 @@
 												<a href="javascript:;" class="btn blue button-next">
 												Continuar <i class="m-icon-swapright m-icon-white"></i>
 												</a>
-												<a href="javascript:SaveTask();" class="btn green button-submit">
+                                                                                            <a id="savetask" href="javascript:SaveTask();" class="btn green button-submit">
 												Guardar <i class="m-icon-swapright m-icon-white"></i>
 												</a>
 											</div>

@@ -12,6 +12,31 @@ function load_message()
           });
  }
  
+ function load_count_message()
+{
+       var route = document.getElementById("route_value").value;
+
+        $.ajax({
+                    type: "POST",
+                    url: route  + "admin/messages/count_inbox.php",
+                    success: function(value){
+                          var title =  $("#title").html();
+                          value = $.trim(value);
+                          title = title.replace('(' , "" , title);
+                          title = title.replace(')' , "" , title);
+                          title = title.replace(/[0-9]+/gi, "");
+                          if(value == 0){
+                               $("#title").html( title );
+                          }else{
+                               $("#title").html( "(" + value + ")" + " " + title );
+                          }
+                         
+                     }
+          });
+ }
+ 
+ 
+ 
  function load_notify()
  {
        var route = document.getElementById("route_value").value;

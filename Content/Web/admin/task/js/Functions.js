@@ -202,8 +202,6 @@ var FormWizard = function () {
             });
 
             
-            
-            
             var displayConfirm = function() {
                 $('#tab4 .form-control-static', form).each(function(){
                     var input = $('[name="'+$(this).attr("data-display")+'"]', form);
@@ -453,8 +451,35 @@ function SaveTask(){
     
     /**FIN DE LA DECLARACION DOCUMENTOS*/
     
-    alert(BoxNodes);
     
+   
+   var data = {
+        "type":"task"
+   };
+    
+   
+   $.ajax({
+                      type: "POST",
+                      url: "includes/savetask.php",
+                      data : data ,
+                      beforeSend : function(){
+                          $("#taskmessage").html(
+                                    '<img width="80" height="80" src="../img/assert/loading.gif" />'
+                                    + '&nbsp;&nbsp;&nbsp;<b> Guardando Tarea por favor espere ...</b>'
+                                  );
+                          $("#savetask").html('Guardando ...');
+                          $('#savetask').attr('href', 'javascript:void(0);');
+                      },
+                      success: function(value){
+                        $("#taskmessage").html(
+                                    '<b>Tarea Creada con exito !! </b>'
+                                    + '&nbsp;&nbsp;<a href="#" class="btn btn-primary">Ver Tarea</a>'
+                                  );
+                        $("#savetask").html('Guardar <i class="m-icon-swapright m-icon-white"></i>');
+                        $('#savetask').attr('href', 'javascript:alert("Esta Tarea ya se ha creado ...");');
+                      }
+    });
+     
 }
 
 

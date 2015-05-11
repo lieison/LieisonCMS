@@ -8,10 +8,15 @@
 <head>
     
 <?php 
-    
-    //SivarApi\Tools\Sessions\Session::InitSession();
 
+    /**
+     *@author Rolando Arriaza
+     *@version 1.5 
+     *@copyright (c) 2015, Lieison
+     */
+    
     $header = new Http\Header(); //clase header , ver en documentacion
+    
     
     if(!Session::GetSession("login")): //verifica si existe sesion 
         if(file_exists("login.php")):
@@ -21,7 +26,8 @@
         endif;
             exit();
     endif;
-
+    
+    
     //VARIABLES DE SESION , ESTAS VARIABLES SE DECLARAN AL INICIAR EL LOGUEO 
     $SessionUser = Session::GetSession("login");
     $usuario = $SessionUser['user'];
@@ -45,10 +51,17 @@
     
     //VER SI LA CUENTA ACTUAL ESTA ACTIVA
     if($activo == 0):
-        $header->redirect("cuenta_desactivada.php");
+        $header->redirect("../cuenta_desactivada.php");
+        exit();
+    endif;
+    
+    //SI EXISTE UNA REDIRECCION ENTONCES EL SISTEMA REDIRECCIONARA AL LUGAR DESEADO
+    if(isset($_REQUEST['redirect'])):
+         $header->redirect(FunctionsController::GetUrl($_REQUEST['redirect']));
+         exit();
     endif;
 
-    
+
     //INGRESA LA RUTA , ESTE CASO SE HA DEJADO COMO RUTA ABSOLUTA , PERO TAMBIEN APLICA RELATIVAS
     $host = null;
     if(!isset($_COOKIES['HOST'])):
@@ -57,7 +70,9 @@
         $host = $_COOKIE['HOST'];
     endif;
     
-    AdminHeader::$relative_route =  "http://" . $host  . "/" .$_COOKIE['FOLDER'] . '/Content/Web/';
+    //AdminHeader::$relative_route =  "http://" . $host  . "/" .$_COOKIE['FOLDER'] . '/Content/Web/'; //DEPRECADO
+    AdminHeader::$relative_route = FunctionsController::GetContentUrl("Web/");
+   
     AdminHeader::GetTitle("Lieisoft"); //TITULO INICIAL DEL DASHBOARD
     AdminHeader::GetMeta(); //OBTIENE LOS METAS UTILIZADOS 
     AdminHeader::GetCss();//OBTIENE LAS OJAS DE ESTILO UTILIZADAS
@@ -74,24 +89,7 @@
 ?>
     
 <!-- ESTABLECIENDO EL HEADER  --> 
-<<<<<<< HEAD
-<div id="fb-root"></div>
-            <script>(function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&appId=271330856288382&version=v2.0";
-                fjs.parentNode.insertBefore(js, fjs);
-        }(document, "script", "facebook-jssdk"));</script>
-=======
-<<<<<<< HEAD
-<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css"/>
-=======
-<link href="../../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
-                <link href="../../assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/>
-                <link href="../../assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
->>>>>>> origin/master
->>>>>>> origin/master
+
 </head>
 
 
@@ -216,15 +214,7 @@
                                      
                                 ?>
 			</div>          
-<<<<<<< HEAD
-                    <?php include 'ViewAddProspecto.php'; ?>
-=======
-<<<<<<< HEAD
-                    <?php include 'view_add_task.php' ?>
-=======
-                    <?php include 'view_perfil.php' ?>
->>>>>>> origin/master
->>>>>>> origin/master
+                    <?php include 'view_user.php' ?>
                 </div>
                
         </div>
@@ -244,21 +234,7 @@
 
 <?php AdminHeader::GetJs(); ?>
 
-<<<<<<< HEAD
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script><script src="AjaxAddSales.js"></script> 
-=======
-<<<<<<< HEAD
-<script src='js/Functions.js'></script><script type="text/javascript" src="../../assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script><script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script> 
-=======
-<!-- BEGIN PAGE LEVEL PLUGINS -->
-                    <script src="../../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
-                    <script src="../../assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
-                    <!-- END PAGE LEVEL PLUGINS -->
-                    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-                    <script src="../../assets/admin/pages/scripts/profile.js" type="text/javascript"></script>
-                    <!-- END PAGE LEVEL SCRIPTS --> 
->>>>>>> origin/master
->>>>>>> origin/master
+<script src='PrimaryFunctions.js'></script> 
 
 <script>
     
@@ -274,54 +250,16 @@
    ?> 
            
       
-   
-   Metronic.init(); // init metronic core componets
-   Layout.init(); // init layout
-   QuickSidebar.init(); // init quick sidebar
-   Demo.init(); // init demo features 
+   //init template core
+   Metronic.init(); 
+   Layout.init(); 
+   QuickSidebar.init(); 
+   Demo.init(); 
    Index.init();   
-  // Index.initDashboardDaterange();
-   //Index.initJQVMAP(); // init index page's custom scripts
-   //Index.initCalendar(); // init index page's custom scripts
-   //Index.initChat();
-  // Index.initMiniCharts();
-   //Tasks.initDashboardWidget();
-  
-<<<<<<< HEAD
-       var get_paises = function()
-   {
-        $.ajax({
-                      type: "POST",
-                      url: "get_paises.php",
-                      beforeSend: function()
-                      {
-                          $("#drown_pais").html("<p>Cargando datos ...</p>");
-                      },
-                      success: function(value){
-                          document.getElementById("drown_pais").innerHTML = value;
-                      },
-                      error: function()
-                      {
-                          $("#combo_pais").html("Error al cargar");
-                      }
-                      
-              });
-   }
-   
-   get_paises();    
-=======
-<<<<<<< HEAD
-    TaskInit.init();FormWizard.init();ShowBoxDocument();    
-=======
-    Profile.init(); // iniciar el perfil del usaurio    
->>>>>>> origin/master
->>>>>>> origin/master
 
-   /**
-    * INICIA LOS GRAFICOS DE VISITAS EN EL FRONT END --- DESHABILITADO
-    * */
-   // iniciargraficos_visita();
-   
+    //app init lieisoft
+   UserTiles.init();    
+
 });
 </script>
 <!-- END JAVASCRIPTS -->
