@@ -8,8 +8,8 @@
  * CONTROL DE TAREAS 
  * 
  * **/ ?>
-<select class="selectpicker">
-    <option data-content="<span class=''>Aplicaciones</span>"></option>
+ <select class="selectpicker" id="task_selected">
+    <option data-content='Aplicaciones&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">42</span>'></option>
 </select>
 </div>
 <div class="actions">

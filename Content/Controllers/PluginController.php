@@ -97,12 +97,12 @@ class PluginController extends \Plugin\PluginClass {
         $mysql->Insert(
                         "dashboard" , 
                         array(
-                            "id_seccion" =>$section, 
-                            "icono" =>$icon,
-                            "link"=>$link,
-                            "titulo"=>$title,
-                            "start" =>$start_index,
-                            "privilegios" =>$priv
+                            "id_seccion"    =>$section, 
+                            "icono"         =>$icon,
+                            "link"          =>$link,
+                            "titulo"        =>$title,
+                            "start"         =>$start_index,
+                            "privilegios"   =>$priv
                         )
                 );
     }

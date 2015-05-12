@@ -1,0 +1,1 @@
+(2015-05-11)(17:34:46)(ERROR==>SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statuss' in 'field list')

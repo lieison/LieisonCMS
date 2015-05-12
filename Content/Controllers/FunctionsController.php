@@ -43,7 +43,11 @@ class FunctionsController {
         }
     }
     
-    
+    /**
+     * @author Rolando Arriaza
+     * @todo funcion estatica que devuelve la raiz del host o de la carpeta admin
+     * 
+     */
     public static function GetRootUrl($directory , $host = false)
     {
         if(!$host){
@@ -82,6 +86,12 @@ class FunctionsController {
         return  $time->GetFormatDate();
     }
     
+    public static function  ReWriteDate($date){
+          $format = new DateTime($date);
+          return $format->format("Y-m-d");
+    }
+
+
     public static function get_time()
     {
          $time = new \SivarApi\Tools\Time(hour);

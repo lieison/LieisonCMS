@@ -56,7 +56,7 @@
     $body = "<?php include 'view_task.php' ?>";
 
     //CARGARA EL FOOTER O LOS SCRIPTS JS
-    $footer = "<script src='js/Functions.js'></script>";
+    $footer = "<script src='js/TaskView.js'></script>";
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
     $end_footer = "TaskInit.init();";
