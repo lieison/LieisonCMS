@@ -103,7 +103,7 @@ class TaskModel extends MysqlConection {
     }
     
     public function FindTask($query){
-         
+         return parent::RawQuery($query, PDO::FETCH_CLASS);
     }
    
    

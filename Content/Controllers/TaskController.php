@@ -66,9 +66,8 @@ class TaskController extends TaskModel {
     }
     
     
-    public function GetCreateTask($id_user_from){
-        $task =  parent::FindTask("GetMyTask('$id_user_from');");
-        
+    public function GetCountCreateTask($id_user_from){
+        return $task_count =  parent::FindTask("call GetCountMyTask('$id_user_from');");
     }
     
     
