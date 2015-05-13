@@ -8,9 +8,17 @@
  * CONTROL DE TAREAS 
  * 
  * **/ ?>
- <select class="selectpicker" id="task_selected">
-    <option data-content='Aplicaciones&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">42</span>'></option>
+<select onchange="alert(this.value);" class="selectpicker" id="task_selected" name="task_selected">
+    <option selected value="1" data-content='Mis Tareas'></option>
+    <option value="0" data-content='Tareas Asignadas'></option>
 </select>
+ <select onchange="alert(this.value);" class="selectpicker" id="task_selected" name="task_selected">
+  <option value="-1" selected data-content='Ordenar Por...'></option>   
+  <option value="0" data-content='Fecha'></option>
+  <option value="1" data-content='Deadline'></option>
+  <option value="1" data-content='En Proceso'></option>
+  <option value="1" data-content='En Espera'></option>
+</select>   
 </div>
 <div class="actions">
 										<div class="btn-group">
@@ -55,7 +63,7 @@
 
 <div class="portlet-body ">
 <div class="scroller" style="height:600px" data-always-visible="1" data-rail-visible="0">
-<div class="row" id="sortable_portlets">
+<div class="row" id="task_view">
   <?php
         /**
          * ESPACIO PARA QUE CARGUEN LAS TAREAS
@@ -66,6 +74,9 @@
          * 
         */
 ?>
+   
+    	
+
 </div>
 </div>
 </div>

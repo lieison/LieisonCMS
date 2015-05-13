@@ -89,7 +89,7 @@
 ?>
     
 <!-- ESTABLECIENDO EL HEADER  --> 
-<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/jstree/dist/themes/default/style.min.css"/>
+
 </head>
 
 
@@ -214,7 +214,7 @@
                                      
                                 ?>
 			</div>          
-                    <?php include 'view_add_task.php' ?>
+                    <?php include 'view_task.php' ?>
                 </div>
                
         </div>
@@ -234,7 +234,7 @@
 
 <?php AdminHeader::GetJs(); ?>
 
-<script src='js/Functions.js'></script><script type="text/javascript" src="../../assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script><script src="../../assets/global/plugins/jstree/dist/jstree.min.js"></script> 
+<script src='js/TaskView.js'></script> 
 
 <script>
     
@@ -258,7 +258,7 @@
    Index.init();   
 
     //app init lieisoft
-   TaskInit.init();FormWizard.init();ShowBoxDocument();    
+   TaskInit.init();    
 
 });
 </script>

@@ -1,5 +1,18 @@
 <?php
 
+ /* order : 0 = por fecha de asignacion
+ *         1 = deadline
+ *         2 = en proceso
+ *         3 = espera
+ *         4 = termianda
+ */ 
+
+define("FECHA" , 0);
+define("PROCESO",2);
+define("ESPERA",3);
+define("DEADLINE",1);
+define("TERMINADA",4);
+
 
 class TaskController extends TaskModel {
     
@@ -67,7 +80,26 @@ class TaskController extends TaskModel {
     
     
     public function GetCountCreateTask($id_user_from){
-        return $task_count =  parent::FindTask("call GetCountMyTask('$id_user_from');");
+        return $task_count =  parent::FindTask(
+                        "SELECT count(*) as count FROM task_multitask "
+                      . " WHERE id_user_from LIKE '$id_user_from';"
+              );
+    }
+    
+    public function GetMyTask($id_user_from , $order = FECHA){
+        
+        $order_by     = null;
+        
+        switch ($order){
+            case FECHA:
+                $order_by = "task_task.date_asign";
+                break;
+            case DEADLINE:
+                break;
+        }
+        
+        return parent::FindTask("call ShowYourTask('$id_user_from' , '$order_by');");
+        
     }
     
     
