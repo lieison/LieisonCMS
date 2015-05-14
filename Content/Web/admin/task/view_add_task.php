@@ -143,13 +143,9 @@
 													* </span>
 													</label>
 													<div class="col-md-6">
-                                                                                                            <textarea name="txt_description"  id="txt_description" class="ckeditor form-control" name="editor1" rows="6" data-error-container="">
-                                                                                                                        <?php
-                                                                                                                            $nombre = Session::GetSession("login", "nombre");
-                                                                                                                                
-                                                                                                                        ?>
-                                                                                                                        <p><?php echo $nombre; ?><strong> No agrego una descripcion</strong></p>
-                                                                                                              
+                                                                                                            <textarea name="txt_description"  id="txt_description" class="wysihtml5  form-control" rows="6" >
+                                                                                                                      
+                                                                                                             
                                                                                                             </textarea>
 
 

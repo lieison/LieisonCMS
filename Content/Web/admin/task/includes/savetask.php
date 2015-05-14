@@ -42,7 +42,7 @@ switch ($type):
             "id_multitask"          => $id_mt,
             "id_client"             => $_REQUEST['id_client'],
             "id_user_from"          => $id_user, 
-            "description"           => htmlspecialchars($_REQUEST['client_description'] , ENT_QUOTES) ? : "ERROR",
+            "description"           => $_REQUEST['client_description'] ? : "ERROR",
             "title"                 => $_REQUEST['title'],
             "status"                => 1
         ),
