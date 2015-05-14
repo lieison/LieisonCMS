@@ -90,8 +90,21 @@ class TaskModel extends MysqlConection {
     
     
     public function SetTask($multitask , $task){
-        // $params_mt = array();
-         //$multitask = parent::Insert("", $params_mt );
+           parent::beginTransaction();
+           $query = "INSERT INTO task_multitask ";
+           $query .= "(". implode(",", array_keys($multitask)).")";
+           $query .= " VALUES ('" . implode("', '", array_values($multitask)) . "')";
+           parent::exec($query);
+           $query1 = "INSERT INTO task_task ";
+           $query1 .= "(". implode(",", array_keys($task)).")";
+           $query1 .= " VALUES ('" . implode("', '", array_values($task)) . "')";
+           parent::exec($query1);
+           return parent::commit();
     }
+    
+    public function FindTask($query){
+         return parent::RawQuery($query, PDO::FETCH_CLASS);
+    }
+   
    
 }

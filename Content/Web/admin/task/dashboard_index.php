@@ -50,13 +50,16 @@
   
     
     //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER
-    $header = "";
+    $header = '<link href="../../assets/global/plugins/pace/themes/lieison-loading.css" rel="stylesheet" type="text/css"/>'
+            . '<script src="../../assets/global/plugins/pace/pace.min.js" type="text/javascript"></script>'
+            . '<link href="../../assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css"/>'
+            . '<link href="../css/loading-lieison-cms.css" rel="stylesheet" type="text/css"/>';
     
     //CARGARA EL BODY
     $body = "<?php include 'view_task.php' ?>";
 
     //CARGARA EL FOOTER O LOS SCRIPTS JS
-    $footer = "<script src='js/Functions.js'></script>";
+    $footer = "<script src='js/TaskView.js'></script>";
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
     $end_footer = "TaskInit.init();";
