@@ -69,10 +69,9 @@ class MysqlConection extends PDO
     if(count($conect_dsn) ==0){
         
         if($directory != null){
-            include $directory . '/Config.php';
+            include $directory;
         }else{
-            $root = $_SERVER['DOCUMENT_ROOT'];
-            include $root . $_COOKIE['FOLDER'] . '/Content/Conf/Config.php';
+            global $CONFIG_;
         }
         
         $this->dsn = $CONFIG_["DB_MYSQL"]["driver"].
@@ -508,5 +507,7 @@ class MysqlConection extends PDO
     
    
 }
+
+
      
 ?>

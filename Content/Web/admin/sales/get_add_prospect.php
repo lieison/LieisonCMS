@@ -71,7 +71,7 @@
 <?php 
 
     
-    AdminHeader::$relative_route = FunctionsController::GetContentUrl("web/");
+    AdminHeader::$relative_route = FunctionsController::GetContentUrl("Web/");
     AdminHeader::GetTitle("Lieison Dashboard");
     AdminHeader::GetMeta();
     AdminHeader::GetCss();

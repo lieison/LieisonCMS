@@ -50,7 +50,8 @@
                 $sales->InsertBitacora($id_bitacora, $id_user, $id_type, $title, $description);
                 $print_status .=  " En Proceso  &nbsp&nbsp&nbsp"
                         . " <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' "
-                        . "value='Terminar Proceso' id='cmdmeta_estado' />&nbsp<a class='btn btn-primary' href='dashboard_admin_prospecto.php?id=$id_p'>"
+                        . "value='Terminar Proceso' id='cmdmeta_estado' />&nbsp<a class='btn btn-primary' href='" . 
+                        FunctionsController::GetUrl("dashboard_admin_prospecto.php?id=$id_p") . "'>"
                         . "<i class='fa fa-refresh'></i></a>";
                 break;
             case 1:
@@ -143,7 +144,7 @@
      //cambia el titulo del dashboard por el nombre del prospecto , agrega el perfil completado
      $action_edit = "";
      if($prospect_data['meta_estado'] <= 1){
-        $action_edit =  '<a class="btn blue"  href="../sales/dashboard_edit_prospecto.php?id=' . $prospect_data['id_prospect']  . '"' . '><i class="fa fa-pencil"></i></a>' ;
+        $action_edit =  '<a class="btn blue"  href="' . FunctionsController::GetUrl('sales/dashboard_edit_prospecto.php?id=' . $prospect_data['id_prospect'] )   . '"' . '><i class="fa fa-pencil"></i></a>' ;
      }
      
      $script_title = "<script>$('#id_title').html('<p><b>" . strtoupper($prospect_data['nombre']) . "</b>"

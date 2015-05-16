@@ -3,35 +3,25 @@
 /**
  * @author Rolando Arriaza <rolignu90@gmail.com>
  * @copyright (c) 2015, Rolignu
- * @version 1.0
+ * @version 1.5
  * @access public
  * 
- * SCRIPT CONFIG EN EL CUAL SE EJECUTA TODAS LAS CONFIGURACIONES
- * DE LA BASES DE DATOS EN DADO CASO EXISTA DE FORMA RELATIVA
+ * SCRIPT DE CONFIGURACION DEL SISTEMA 
+ * ACA SE REALIZAN TODA CONFIGURACION DE LA API EN CUANTO DIRECCIONES 
+ * O RUTAS DESDE LAS CONFIGURACIONES DE LAS BASES DE DATOS
  * 
  * 
  */
-$FOLDER_ = null;
+
+
+
 $SERVER_DIR = getcwd();
 $ARRAY_DIR = explode("\\", $SERVER_DIR);
+if(count($ARRAY_DIR)<=1):
+       $ARRAY_DIR = explode("/", $SERVER_DIR);
+endif;
 $DIR_NAME = $ARRAY_DIR[count($ARRAY_DIR)-1];
 
- if(count($ARRAY_DIR)<=1):
-         $ARRAY_DIR = explode("/", $SERVER_DIR);
- endif;
- 
-$DIR_NAME = $ARRAY_DIR[count($ARRAY_DIR)-1];
-
-/**
- * verifica si la cookie FOLDER existe en dado caso
- * no exita eliminar dicha condicion o dejarla (No importa ), agregando el folder 
- * inicial manualmente  $FOLDER_ = "SivarPlugin";
- */
-if (isset($_COOKIE['FOLDER'])) {
-    $FOLDER_ = $_COOKIE['FOLDER'];
-} else {
-    $FOLDER_ = "LieisonCMS";
-}
 
 $CONFIG_ = array(
     
@@ -64,15 +54,21 @@ $CONFIG_ = array(
     ],
     
     "DIR" =>[
-        "root"=> $_SERVER['DOCUMENT_ROOT'],
-        "directory"=> $DIR_NAME  ,
-        "server" => $_SERVER["SERVER_NAME"],
-        "user_agent"=> $_SERVER["HTTP_USER_AGENT"],
-        "protocol" => "http://"
+        "root"          => $_SERVER['DOCUMENT_ROOT'] . "/",
+        "directory"     => $DIR_NAME  ,
+        "server"        => $_SERVER["SERVER_NAME"],
+        "user_agent"    => $_SERVER["HTTP_USER_AGENT"],
+        "protocol"      => "http://",
+        "folder"        => "LieisonCMS"
     ],
     
-    "APP_FOLDER" => $FOLDER_ ?: "LieisonCMS"
-     
+    "MASK" => [
+        "enable" => TRUE,
+        "type"   => "0",
+        "host"   => FALSE
+    ]
+    
+
 );
 
 

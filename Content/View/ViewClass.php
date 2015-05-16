@@ -50,18 +50,29 @@
      
      public static function SetView($params = array())
      {
-         $folder = null;
          
-        /* @var $_COOKIE type Nombre del folder o archivo donde se aloja el plugin */
-        if (!isset($_COOKIE['FOLDER'])) {
+         global $CONFIG_;
+         $folder = $CONFIG_['DIR']['folder'];
+         
+         //@var $_COOKIE type Nombre del folder o archivo donde se aloja el plugin */
+      /*  if (!isset($_COOKIE['FOLDER'])) {
             $folder = \SivarApi\Tools\Validation::PrimaryFolderPath();
         } else {
             $folder = $_COOKIE['FOLDER'];
-        }
-        
-        $route = $_SERVER['DOCUMENT_ROOT'] .  "/" . $folder  . 
+        }*/
+      
+        if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($folder)){
+             $route = $CONFIG_['DIR']['root']  . $folder  . 
                  self::$relative_route . 
                  self::$end_route . "/" . self::$pointer ? : "/" . self::$pointer;
+        }
+        else{
+            $route = $CONFIG_['DIR']['root']   . 
+                 self::$relative_route . 
+                 self::$end_route . "/" . self::$pointer ? : "/" . self::$pointer;
+        }
+        
+       
 
          if(file_exists($route) && is_readable($route))
          { 

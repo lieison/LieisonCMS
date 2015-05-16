@@ -46,7 +46,7 @@ endswitch;
 
 switch ($type):
     case 0:
-        $request = $task->GetMyTask($id , $order);
+        $request = $task->GetMyTask($id , $order );
         break;
     case 1:
         break;
@@ -54,7 +54,7 @@ endswitch;
 
 switch ($style):
     case 0:
-        PorltetStyle($request , $type);
+        PorltetStyle($request , $type , $id ,  $task);
         break;
     case 1:
         break;
@@ -79,10 +79,11 @@ endswitch;
  * 
  */
 
-function PorltetStyle($request , $type){
+function PorltetStyle($request , $type , $id ){
     
     $count              =  count($request); 
     $portlet_array      = array();
+    $task               = new TaskController();
     
     
     if($count == 1):
@@ -103,6 +104,7 @@ function PorltetStyle($request , $type){
       $n = 1;
       $p=2;
       $q=3;
+      
       foreach($request as $data){
         
         //GENERAL 
@@ -142,25 +144,36 @@ function PorltetStyle($request , $type){
         $body_porlet            = '<div class="portlet portlet-sortable light bordered">';
         $body_porlet           .= '<div class="portlet-title tabbable-line">';
         $body_porlet           .= '<div class="caption">';
+      
         $body_porlet           .= '<i class="fa fa-tasks"></i>';
         $body_porlet           .= '<span class="caption-subject bold font-yellow-crusta uppercase">';
         $body_porlet           .= $title . '</span>&nbsp;';
+        
         
         if($task_status == 1):
             $body_porlet           .= '<span class="caption-helper">Tarea Activa</span>';    
         else:
             $body_porlet           .= '<span class="caption-helper">Tarea Terminada</span>';        
         endif;
-        
+       
+
         $body_porlet           .= '</div>';
         $body_porlet           .= '<ul class="nav nav-tabs">';
-        $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab">HOLA</a></li>';
-        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab">DATA</a></li>';
-        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab">INFO</a></li>';
+        if($type == 0):
+        $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i> Estados</a></li>';
+        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i> Asignado</a></li>';
+        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i> Informacion</a></li>';
+        else:
+         $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i> Acciones</a></li>';
+        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i> Asigno</a></li>';
+        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i> Informacion</a></li>';  
+        endif;
+
         $body_porlet           .= '</ul>';
         $body_porlet           .= '</div>';
         $body_porlet           .= '<div class="portlet-body">';
         $body_porlet           .= '<div class="tab-content">';
+        //PRIMER TAB ------------------------------------------------------------------------------------------------
         $body_porlet           .= '<div class="tab-pane active" id="portlet_tab' . $n .'">';
         $body_porlet           .= '<div class="scroller">';
        
@@ -199,11 +212,31 @@ function PorltetStyle($request , $type){
         $body_porlet           .= '<i class="fa fa-university blog-twiiter-icon"></i>';
         $body_porlet           .= '</div></div>';
         $body_porlet           .= '<p><b>Descripcion:</b></p>';
-        $body_porlet           .= '<p>' . $mt_description . '</p>';
+        $body_porlet           .= '<p class="bg-danger">' . $mt_description . '</p>';
         $body_porlet           .= '</div></div>';
+        //SEGUNDO TAB --------------------------------------------------------------------------
         $body_porlet           .= '<div class="tab-pane" id="portlet_tab' . $p . '">';
         $body_porlet           .= '<div class="scroller">';
-        $body_porlet           .= '<p> </p>';
+        $body_porlet           .= '<div class="row">';
+        $body_porlet           .= '<div class="col-md-4">';
+        if($user_image == null ):
+            $user_image = "avatar.png";
+        endif;
+        $body_porlet           .= '<img src="' . FunctionsController::GetUrl("img/users/$user_image") . '" class="img-circle" width ="100" height="100" alt="">';
+        $body_porlet           .= '</div>';
+        $body_porlet           .= '<div class="col-md-8">';
+        $body_porlet           .= '<h4><b>' . $user . '</b></h4>';
+        $body_porlet           .= '<p><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<b>' . $user_mail . '</b></p>';
+        if($type == 0):
+        $select_users           = $task->AsignTouser($id);
+        $body_porlet           .= '<div align="center">'
+                               . '<button  onclick="alert();" type="button" class="btn btn-circle btn-primary">'
+                               . '<i class="fa fa-repeat"></i> Reasignar</button>'
+                               . '</div>';
+        endif;
+        $body_porlet           .= '';
+        $body_porlet           .= '</div>';
+        $body_porlet           .= '</div>';
         $body_porlet           .= '</div></div>';
         $body_porlet           .= '<div class="tab-pane" id="portlet_tab' . $q. '">';
         $body_porlet           .= '<div class="scroller">';
