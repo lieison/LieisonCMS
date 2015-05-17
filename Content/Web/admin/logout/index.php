@@ -21,10 +21,10 @@
     $body = "<?php include 'view_logout.php' ?>";
 
     //CARGARA EL FOOTER O LOS SCRIPTS JS
-    $footer = "<script src='PrimaryFunctions.js'></script>";
+    $footer = "<script src='session.js'></script>";
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-    $end_footer = "";
+    $end_footer = "exit_session();";
     
 
     //PREPARANDO LA VISTA ...

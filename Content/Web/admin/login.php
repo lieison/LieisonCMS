@@ -10,14 +10,6 @@
         $http->redirect("index.php");
     endif;
     
-    
-    if(!isset($_COOKIE['SERVER'])):
-     setcookie("SERVER" , $_SERVER["SERVER_NAME"]);
-     setcookie("FOLDER" , $GLOBALS['FOLDER']);
-     $http->redirect("index.php");
-    endif;
-
- 
 ?>
 
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
