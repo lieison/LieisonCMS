@@ -6,7 +6,6 @@ Session::InitSession();//INICIA SESION
 
 $id_log         = NULL;
 $hora_salida    = NULL;
-$test_var       = NULL;
 $admin          = new AdminController();
 
 
