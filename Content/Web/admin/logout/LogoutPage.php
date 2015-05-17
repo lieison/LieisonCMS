@@ -9,8 +9,7 @@ $hora_salida    = NULL;
 $test_var       = NULL;
 $admin          = new AdminController();
 
-print_r($_SESSION['login']);
-exit();
+
  
 while(Session::ExistSession("login")):
         $id_log         = Session::GetSession("log"); //OBTIENE EL LOG DE LOGUEO
