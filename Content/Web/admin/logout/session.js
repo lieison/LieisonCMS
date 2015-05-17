@@ -6,8 +6,7 @@ function exit_session(){
                       url: "LogoutPage.php",
                       success: function(value){
                             var url = $.trim(value);
-                            alert(url);
-                           // window.location.href = url ;
+                            window.location.href = url ;
                       }
        });
 }
