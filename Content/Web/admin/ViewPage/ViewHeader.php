@@ -59,7 +59,7 @@ class AdminHeader
                             <i class="icon-lock"></i> Bloquear Pantalla </a>
 			</li>
                             <li>
-                           <a href="' .FunctionsController::GetUrl('ControlPage/LogoutPage.php') . '">
+                           <a href="' .FunctionsController::GetUrl('logout/') . '">
                                 <i class="icon-key"></i> Cerrar Sesion </a>
 			</li></ul>';
     }
