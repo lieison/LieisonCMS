@@ -30,7 +30,6 @@ function load_message()
                           }else{
                                $("#title").html( "(" + value + ")" + " " + title );
                           }
-                         
                      }
           });
  }

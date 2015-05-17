@@ -7,10 +7,15 @@
  * @access public
  * 
  * SCRIPT DE CONFIGURACION DEL SISTEMA 
- * ACA SE REALIZAN TODA CONFIGURACION DE LA API EN CUANTO DIRECCIONES 
- * O RUTAS DESDE LAS CONFIGURACIONES DE LAS BASES DE DATOS
  * 
+ * -CONFIGURACION PARA LAS BASES DEE DATOS:
  * 
+ *          -MYSQL
+ *          -SQLITE
+ *          -ORACLE
+ *          
+ * -DIRECTORIOS
+ * -ENMASCARAMIENTO .htaccess
  */
 
 
@@ -26,46 +31,46 @@ $DIR_NAME = $ARRAY_DIR[count($ARRAY_DIR)-1];
 $CONFIG_ = array(
     
     "DB_MYSQL" =>[
-         "classname" => '',//tipo de la clase
-	 'driver' => "mysql",//driver de conexion , defecto mysql
-	 'persistent' => false,//datos persistentes falso
-	 'host' => "lieison.com",//"localhost", //"lieison.com",//hosting
-	 'user' =>"lieison", //"root", //"lieison", //usuario
-	 'password' =>"Lieison2014", // "" ,//"Lieison2014",//password de la base de datos si es requerido
-	 'database' => "lieison_soft", //base de datos a utilizar
-         'port' => "3306", //puerto de la base de datos si es requerido
-	 'prefix' => false, //uso de prefijos defecto falso
-	 'encoding' => 'utf8',//codificacion utf-8 segun normalizaciones
-	 'timezone' => 'UTC',//zona horaria
-	 'cacheMetadata' => true,//uso de metadatos
-         'prefix'=> "sv_"
+         "classname"                => '',                                     //tipo de la clase
+	 'driver'                   => "mysql",                                  //driver de conexion , defecto mysql
+	 'persistent'               => FALSE,                               //datos persistentes falso
+	 'host'                     => "lieison.com",                            //"localhost", //"lieison.com",//hosting
+	 'user'                     =>"lieison",                                //"root", //"lieison", //usuario
+	 'password'                 =>"Lieison2014",                       //password de la base de datos si es requerido
+	 'database'                 => "lieison_soft",                    //base de datos a utilizar
+         'port'                     => "3306",                               //puerto de la base de datos si es requerido
+	 'prefix'                   => FALSE,                             //uso de prefijos defecto falso
+	 'encoding'                 => 'utf8',                         //codificacion utf-8 segun normalizaciones
+	 'timezone'                 => 'UTC',                         //zona horaria
+	 'cacheMetadata'            => FALSE,                    //uso de metadatos
+         'prefix'                   => "sv_"
     ],
     
     "DB_SQLITE" => [
-        "dir"=> "$SERVER_DIR/Class/Database/sqlitedb/example.db"//direccion donde se encuentra la bdd 
+        "dir"                       => "$SERVER_DIR/Class/Database/sqlitedb/example.db"//direccion donde se encuentra la bdd 
     ],
     
     
     "DB_ORACLE" => [
-        "host"=>"localhost",//host
-        "user"=>"",//user
-        "password"=>"",//password
-        "database"=>""//database name
+        "host"                      =>"localhost",        //host
+        "user"                      =>"",                //user
+        "password"                  =>"",           //password
+        "database"                  =>""           //database name
     ],
     
     "DIR" =>[
-        "root"          => $_SERVER['DOCUMENT_ROOT'] . "/",
-        "directory"     => $DIR_NAME  ,
-        "server"        => $_SERVER["SERVER_NAME"],
-        "user_agent"    => $_SERVER["HTTP_USER_AGENT"],
-        "protocol"      => "http://",
-        "folder"        => "LieisonCMS"
+        "root"                      => $_SERVER['DOCUMENT_ROOT'] . "/",    //DIRECTORIO RAIZ 
+        "directory"                 => $DIR_NAME  ,                       //DIRECTORIO 
+        "server"                    => $_SERVER["SERVER_NAME"],          //NOMBRE DEL SERVIDOR WEB
+        "user_agent"                => $_SERVER["HTTP_USER_AGENT"],     //USER AGENT ACTUAL
+        "protocol"                  => "http://",                      //PROTOCOLO
+        "folder"                    => "LieisonCMS"                   //CARPETA DE LOCALIZACION SISTEMA
     ],
     
     "MASK" => [
-        "enable" => TRUE,
-        "type"   => "0",
-        "host"   => FALSE
+        "enable"                    => TRUE,        //HABILITAR ENMASCARAMIENTO
+        "type"                      => "0",        //TIPO DE ENMASCARAMIENTO RewriteRule ^0/(.*)$  Content/Web/$1  [L]
+        "host"                      => FALSE      //ES UN HOSTING O SERVIDOR DE PRUEBA
     ]
     
 
