@@ -55,9 +55,9 @@
      echo '<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php?id_mensaje=' . $value['id_mensaje'] . '">';
      echo '<span class="photo">';
      if ($value['imagen'] == null) {
-        echo '<img src="' . FunctionsController::GetUrl("img") . '/users/avatar.png" class="img-circle" alt="">';
+        echo '<img src="' . FunctionsController::GetUrl("img" , false) . '/users/avatar.png" class="img-circle" alt="">';
      } else {
-        echo '<img src="' . FunctionsController::GetUrl("img") . '/users/' . $value['imagen'] . '" class="img-circle" alt="">';
+        echo '<img src="' . FunctionsController::GetUrl("img" , false) . '/users/' . $value['imagen'] . '" class="img-circle" alt="">';
      }
      echo '</span>';
      echo '<span class="subject">';

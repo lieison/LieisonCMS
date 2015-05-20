@@ -46,7 +46,7 @@ endswitch;
 
 switch ($type):
     case 0:
-        $request = $task->GetMyTask($id , $order);
+        $request = $task->GetMyTask($id , $order );
         break;
     case 1:
         break;
@@ -54,7 +54,7 @@ endswitch;
 
 switch ($style):
     case 0:
-        PorltetStyle($request , $type);
+        PorltetStyle($request , $type , $id ,  $task);
         break;
     case 1:
         break;
@@ -79,10 +79,11 @@ endswitch;
  * 
  */
 
-function PorltetStyle($request , $type){
+function PorltetStyle($request , $type , $id ){
     
     $count              =  count($request); 
     $portlet_array      = array();
+    $task               = new TaskController();
     
     
     if($count == 1):
@@ -96,14 +97,20 @@ function PorltetStyle($request , $type){
         $portlet_array[] = array( '<div class="col-md-4 column sortable">');
     endif;
     
-    //for($i=0 ; $i < count($portlet_array) ; $i++){
+  
       $i = -1;
+      $max = count($portlet_array)-1 ;
+      //ESTADOS DE LOS TABULADORES
+      $n = 1;
+      $p=2;
+      $q=3;
+      
       foreach($request as $data){
         
         //GENERAL 
         $mt_id                  = $data->mt_id;
         $mt_status              = $data->status;
-        $mt_description         = $data->mt_description;
+        $mt_description         = stripcslashes(nl2br($data->mt_description));
         $title                  = $data->title;
         //CLIENTE
         $client_name            = $data->client_name;
@@ -137,27 +144,38 @@ function PorltetStyle($request , $type){
         $body_porlet            = '<div class="portlet portlet-sortable light bordered">';
         $body_porlet           .= '<div class="portlet-title tabbable-line">';
         $body_porlet           .= '<div class="caption">';
+      
         $body_porlet           .= '<i class="fa fa-tasks"></i>';
         $body_porlet           .= '<span class="caption-subject bold font-yellow-crusta uppercase">';
         $body_porlet           .= $title . '</span>&nbsp;';
+        
         
         if($task_status == 1):
             $body_porlet           .= '<span class="caption-helper">Tarea Activa</span>';    
         else:
             $body_porlet           .= '<span class="caption-helper">Tarea Terminada</span>';        
         endif;
-        
+       
+
         $body_porlet           .= '</div>';
         $body_porlet           .= '<ul class="nav nav-tabs">';
-        $body_porlet           .= '<li><a href="#portlet_tab3" data-toggle="tab">HOLA</a></li>';
-        $body_porlet           .= '<li><a href="#portlet_tab2" data-toggle="tab">DATA</a></li>';
-        $body_porlet           .= '<li class="active" ><a href="#portlet_tab1" data-toggle="tab">INFO</a></li>';
+        if($type == 0):
+        $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i> Estados</a></li>';
+        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i> Asignado</a></li>';
+        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i> Informacion</a></li>';
+        else:
+         $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i> Acciones</a></li>';
+        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i> Asigno</a></li>';
+        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i> Informacion</a></li>';  
+        endif;
+
         $body_porlet           .= '</ul>';
         $body_porlet           .= '</div>';
         $body_porlet           .= '<div class="portlet-body">';
         $body_porlet           .= '<div class="tab-content">';
-        $body_porlet           .= '<div class="tab-pane active" id="portlet_tab1">';
-        $body_porlet           .= '<div class="scroller" style="height: 200px;">';
+        //PRIMER TAB ------------------------------------------------------------------------------------------------
+        $body_porlet           .= '<div class="tab-pane active" id="portlet_tab' . $n .'">';
+        $body_porlet           .= '<div class="scroller">';
        
         if($type == 0):
             switch ($task_type_id):
@@ -186,13 +204,42 @@ function PorltetStyle($request , $type){
         else:    
             $body_porlet           .= '<h4>Estado: :) FELIZ</h4>';
         endif;
-        
+        $body_porlet           .= '<div class="blog-twitter">'; 
+        $body_porlet           .= '<div class="blog-twitter-block">';
+        $body_porlet           .= '<p><i class="fa fa-university "></i>&nbsp;&nbsp;<b>Cliente:</b>&nbsp;' .  $client_name . ' </p>';
+        $body_porlet           .= '<i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<a href="">' . $client_mail . '</a>';
+        $body_porlet           .= '<span><i class="fa fa-phone"></i>&nbsp;&nbsp;' . $client_phone .  '</span>';
+        $body_porlet           .= '<i class="fa fa-university blog-twiiter-icon"></i>';
         $body_porlet           .= '</div></div>';
-        $body_porlet           .= '<div class="tab-pane" id="portlet_tab2">';
-        $body_porlet           .= '<div class="scroller" style="height: 200px;">';
+        $body_porlet           .= '<p><b>Descripcion:</b></p>';
+        $body_porlet           .= '<p class="bg-danger">' . $mt_description . '</p>';
         $body_porlet           .= '</div></div>';
-        $body_porlet           .= '<div class="tab-pane" id="portlet_tab3">';
-        $body_porlet           .= '<div class="scroller" style="height: 200px;">';
+        //SEGUNDO TAB --------------------------------------------------------------------------
+        $body_porlet           .= '<div class="tab-pane" id="portlet_tab' . $p . '">';
+        $body_porlet           .= '<div class="scroller">';
+        $body_porlet           .= '<div class="row">';
+        $body_porlet           .= '<div class="col-md-4">';
+        if($user_image == null ):
+            $user_image = "avatar.png";
+        endif;
+        $body_porlet           .= '<img src="' . FunctionsController::GetUrl("img/users/$user_image") . '" class="img-circle" width ="100" height="100" alt="">';
+        $body_porlet           .= '</div>';
+        $body_porlet           .= '<div class="col-md-8">';
+        $body_porlet           .= '<h4><b>' . $user . '</b></h4>';
+        $body_porlet           .= '<p><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<b>' . $user_mail . '</b></p>';
+        if($type == 0):
+        $select_users           = $task->AsignTouser($id);
+        $body_porlet           .= '<div align="center">'
+                               . '<button  onclick="alert();" type="button" class="btn btn-circle btn-primary">'
+                               . '<i class="fa fa-repeat"></i> Reasignar</button>'
+                               . '</div>';
+        endif;
+        $body_porlet           .= '';
+        $body_porlet           .= '</div>';
+        $body_porlet           .= '</div>';
+        $body_porlet           .= '</div></div>';
+        $body_porlet           .= '<div class="tab-pane" id="portlet_tab' . $q. '">';
+        $body_porlet           .= '<div class="scroller">';
         $body_porlet           .= '</div></div>';
        /* $body_porlet           .= '';
         $body_porlet           .= '';
@@ -210,9 +257,20 @@ function PorltetStyle($request , $type){
         $body_porlet           .= '';*/
         $body_porlet           .= '</div></div></div>';
         
+        /*
+         * TABULACION PROBLEMA MATEMATICO
+         * 
+         * si n = primero = 1
+         *      entonces n = n+q dado q = ultimo
+         * si p = segundo = 2 
+         *      entonces p = p+q dado q = ultimo
+         * si q = ultimo 
+         *      entonces q = q + q o el doble de su producto
+         */
         
-        //SISTEMA PARA REORDENAMIENTO DE NX3 EN LA MATRIZ
-        $max = count($portlet_array) ;
+        $n = $n + $q;
+        $p = $p+ $q;
+        $q += $q;
         
         if($i >= $max):
             $i = 0;
@@ -220,22 +278,19 @@ function PorltetStyle($request , $type){
             $i++;
         endif;
         
-      
         $portlet_array[$i][]    = $body_porlet;
         
        }
-       
-       
-
-   // }
-    
+  
     $paste_body = "";
     for($i=0 ; $i < count($portlet_array) ; $i++):
          $portlet_array[$i][] = "</div>";
          $paste_body .= implode("", $portlet_array[$i]);
     endfor;
     
-    //print_r($portlet_array);
+    /*echo '<pre>';
+    print_r($portlet_array);
+    echo "</pre>";*/
     echo $paste_body;
   
 }

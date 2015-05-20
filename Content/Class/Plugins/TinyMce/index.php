@@ -46,9 +46,16 @@ class TinyMce {
     
     public function __construct($width = 600 , $height = 600 , $theme = "modern" , $file_manager_path = null) {
        
-        include $_SERVER['DOCUMENT_ROOT'] . $_COOKIE['FOLDER'] . "/Content/Conf/Config.php";
+        global $CONFIG_;
+        $folder = $CONFIG_["DIR"]['folder'];
+        if($folder == "" || $folder == null){
+            include $_SERVER['DOCUMENT_ROOT'] .  "/Content/Conf/Config.php";
+        }else{
+            include $_SERVER['DOCUMENT_ROOT'] . $folder. "/Content/Conf/Config.php";
+        }
+        
         $GLOBAL_ROOT = $CONFIG_["DIR"]["root"];
-        $FOLDER = $CONFIG_["APP_FOLDER"];
+        $FOLDER = $CONFIG_["DIR"]['folder'];
         $this->path = $GLOBAL_ROOT  . $FOLDER;
         $this->width = $width;
         $this->height = $height;
@@ -57,11 +64,11 @@ class TinyMce {
             $this->file_manager_path = $file_manager_path;
         else:
             $this->file_manager_path = $CONFIG_["DIR"]["protocol"] . $CONFIG_["DIR"]["server"] .
-                "/" . $CONFIG_["APP_FOLDER"] . "/Content/Class/Plugins/TinyMce/filemanager/";
+                "/" . $CONFIG_["DIR"]['folder'] . "/Content/Class/Plugins/TinyMce/filemanager/";
         endif;
         
          $this->file_manager_external_p =  $CONFIG_["DIR"]["protocol"] . $CONFIG_["DIR"]["server"] .
-                "/" . $CONFIG_["APP_FOLDER"] . "/Content/Class/Plugins/TinyMce/filemanager/plugin.min.js";
+                "/" . $CONFIG_["DIR"]['folder'] . "/Content/Class/Plugins/TinyMce/filemanager/plugin.min.js";
          
                 
         

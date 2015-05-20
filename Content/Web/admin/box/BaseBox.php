@@ -8,7 +8,7 @@ class BaseBox extends Box_API{
     
     var $client_id              = "nwv60huci6wgjiitowownynfqa1gwt1y";
     var $client_secret          = 'lpcu7GSqbu4J0nrvyQQMMY5Tv3RTA9O5';
-    var $redirect_uri           = 'http://localhost/LieisonCMS/Content/Web/admin/task/includes/box.php';
+    var $redirect_uri           = '';
     
     
     
@@ -16,7 +16,7 @@ class BaseBox extends Box_API{
         
         if($redirect_uri != null)
         {
-            $this->redirect_uri = $redirect_uri;
+             $this->redirect_uri = $redirect_uri;
              parent::__construct($this->client_id, $this->client_secret, $this->redirect_uri);
         }
     }

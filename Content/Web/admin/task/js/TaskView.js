@@ -9,7 +9,7 @@ var TaskInit = function () {
                 return;
             }
             
-             ShowTask(0,0,0);
+             ShowTask(0,0,0 , true);
             
            
           
@@ -38,8 +38,9 @@ var SelectTask = function(){
      };
 }();
 
-function ShowTask(type , style , order){
+function ShowTask(type , style , order , load){
     
+       
       
        var data = {
            "type": type,
@@ -51,7 +52,16 @@ function ShowTask(type , style , order){
                       type: "POST",
                       url: "includes/taskview.php",
                       beforeSend : function(){
-                         
+                          if(load){
+                          var loading = "<div clas='col-md-12'>";
+                              loading += '<div class="portlet light">';
+                              loading += '<div class="portlet-title tabbable-line"></div>';
+                              loading += '<div class="portlet-body">';
+                              loading += '<div class="portlet-body" align="center">';
+                              loading += '<div id="facebookG"><div id="blockG_1" class="facebook_blockG"></div><div id="blockG_2" class="facebook_blockG"></div><div id="blockG_3" class="facebook_blockG"></div></div> ';
+                              loading += '</div></div></div>';
+                              $("#task_view").html(loading);
+                        }
                       },
                       data: data,
                       success: function(value){

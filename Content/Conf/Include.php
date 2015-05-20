@@ -16,13 +16,13 @@
  * 
  */
 
-require 'Config.php';
+include  'Config.php';
 
 $GLOBAL_ROOT = $CONFIG_["DIR"]["root"];
 $GLOBAL_DIRECTORY = $CONFIG_["DIR"]["directory"];
-$FOLDER = $CONFIG_["APP_FOLDER"];
+$FOLDER = $CONFIG_["DIR"]['folder'];
 
-if(strrpos($GLOBAL_ROOT, "/") !== true):
+if(strrpos($GLOBAL_ROOT, "/") != true):
     $GLOBAL_ROOT .= "/";
 endif;
 
@@ -33,6 +33,7 @@ if(file_exists($GLOBAL_ROOT .  $FOLDER . '/Content/Class/index.php')):
 else:
     $GLOBAL_PATH = $GLOBAL_ROOT ;
 endif;
+
 
 
 /**

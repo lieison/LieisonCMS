@@ -24,13 +24,13 @@
   ExpiresByType image/x-icon              "access plus 1 week"
 
   # Imágenes, vídeo, audio: 1 mes
-  ExpiresByType image/gif                 "access plus 1 month"
-  ExpiresByType image/png                 "access plus 1 month"
-  ExpiresByType image/jpeg                "access plus 1 month"
-  ExpiresByType video/ogg                 "access plus 1 month"
-  ExpiresByType audio/ogg                 "access plus 1 month"
-  ExpiresByType video/mp4                 "access plus 1 month"
-  ExpiresByType video/webm                "access plus 1 month"
+  ExpiresByType image/gif                 "access plus 1 week"
+  ExpiresByType image/png                 "access plus 1 week"
+  ExpiresByType image/jpeg                "access plus 1 week"
+  ExpiresByType video/ogg                 "access plus 1 week"
+  ExpiresByType audio/ogg                 "access plus 1 week"
+  ExpiresByType video/mp4                 "access plus 1 week"
+  ExpiresByType video/webm                "access plus 1 week"
 
   # Fuentes web: 1 mes
   ExpiresByType application/x-font-ttf    "access plus 1 month"

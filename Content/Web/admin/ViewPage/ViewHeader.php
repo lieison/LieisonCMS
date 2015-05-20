@@ -48,18 +48,18 @@ class AdminHeader
     {
         echo '<ul class="dropdown-menu dropdown-menu-default">
                 <li>
-                   <a href="' . self::$relative_route . 'admin/perfil/">
+                   <a href="' . FunctionsController::GetUrl('perfil/'). '">
 		   <i class="icon-user"></i> Mi Perfil</a>
                  </li>';
         
         echo '<li class="divider">
 		</li>
                       <li>
-			<a href="' . self::$relative_route . 'admin/lock.php">
+			<a href="' .FunctionsController::GetUrl('lock.php'). '">
                             <i class="icon-lock"></i> Bloquear Pantalla </a>
 			</li>
                             <li>
-                           <a href="' . self::$relative_route . 'admin/ControlPage/LogoutPage.php">
+                           <a href="' .FunctionsController::GetUrl('logout/') . '">
                                 <i class="icon-key"></i> Cerrar Sesion </a>
 			</li></ul>';
     }

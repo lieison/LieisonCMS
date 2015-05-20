@@ -1,6 +1,12 @@
 <?php
+global $CONFIG_;
+$folder = $CONFIG_["DIR"]['folder'];
 
-$path_port_data =  "/" . $_COOKIE['FOLDER'] . "/Content/Class/Plugins/TinyMce";
+if($folder == "" || $folder == null){
+    $path_port_data =  "/Content/Class/Plugins/TinyMce";
+}else{
+    $path_port_data =  "/" . $folder . "/Content/Class/Plugins/TinyMce";
+}
 
 session_start();
 mb_internal_encoding('UTF-8');

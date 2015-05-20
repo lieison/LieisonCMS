@@ -1,4 +1,33 @@
 
+var ComponentsEditors = function () {
+    
+    var handleWysihtml5 = function () {
+        if (!jQuery().wysihtml5) {
+            return;
+        }
+
+        if ($('.wysihtml5').size() > 0) {
+            $('.wysihtml5').wysihtml5({
+                //"stylesheets": ["../../assets/global/plugins/bootstrap-wysihtml5/wysiwyg-color.css"]
+            });
+        }
+    }
+
+    var handleSummernote = function () {
+        $('#summernote_1').summernote({height: 300});
+    }
+
+    return {
+        //main function to initiate the module
+        init: function () {
+            handleWysihtml5();
+            handleSummernote();
+        }
+    };
+
+}();
+
+
 
 var FindUsers = function () {
 
@@ -417,9 +446,8 @@ function SaveTask(){
     
     var id_client = $("#cmd_client").val();
     
-    var client_description = $("#txt_description").html();
-    
-    
+    var client_description = $("#txt_description").val();
+
     
     /**CAPTURA DE ASIGNACION AL USUARIO*/
     

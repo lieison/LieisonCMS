@@ -14,7 +14,8 @@
 include   '../../../../Conf/Include.php';
 include   '../../box/BaseBox.php';
 
-$uri = FunctionsController::GetUrl('task/includes/box.php?init=' . $_GET['init'] ? : 1);
+$uri = FunctionsController::GetContentUrl('Web/admin/task/includes/box.php?init=' . $_GET['init'] ? : 1);
+//$box = new BaseBox("http://localhost/LieisonCMS/Content/Web/admin/task/includes/box.php?init=" . $_GET['init'] ? : 1);
 $box = new BaseBox($uri);
 $box->ConecToBox();
 

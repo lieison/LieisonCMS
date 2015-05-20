@@ -118,12 +118,12 @@ class Validation  {
             }else { return false; }
   }
   
-    public static function PrimaryFolderPath($path = "LieisonCMS"){
-        if (!isset($_COOKIE['FOLDER'])) {
-            setcookie("FOLDER", $path);
+    public static function PrimaryFolderPath($path = NULL){
+        if($path == NULL){
+            global  $CONFIG_;
+            return  $CONFIG_['DIR']['folder'];
+        }else{
             return $path;
-        } else {
-            return $_COOKIE['FOLDER'];
         }
     }
   
