@@ -35,8 +35,8 @@ $CONFIG_ = array(
 	 'driver'                   => "mysql",                                  //driver de conexion , defecto mysql
 	 'persistent'               => FALSE,                               //datos persistentes falso
 	 'host'                     => "lieison.com",                            //"localhost", //"lieison.com",//hosting
-	 'user'                     =>"lieison",                                //"root", //"lieison", //usuario
-	 'password'                 =>"Lieison2014",                       //password de la base de datos si es requerido
+	 'user'                     => "lieison_soft",                                //"root", //"lieison", //usuario
+	 'password'                 => "@@Support##",                       //password de la base de datos si es requerido
 	 'database'                 => "lieison_soft",                    //base de datos a utilizar
          'port'                     => "3306",                               //puerto de la base de datos si es requerido
 	 'prefix'                   => FALSE,                             //uso de prefijos defecto falso
@@ -77,7 +77,7 @@ $CONFIG_ = array(
 );
 
 
-?>
+
 
 
 

@@ -98,6 +98,7 @@
         $date = FunctionsController::get_date();
         $time = FunctionsController::get_time();
         $id_p =$_REQUEST['id'];
+        
         $sales->NewEntrance($id_user, $id_p, $date, $time);
        
      //TERMINA EL REGISTRO DE ENTRADA
@@ -105,6 +106,8 @@
     
      //CREACION DE LA BITACORA ...
        $sales->InitBitacora($id_p);
+       
+   
 
      //verifica si los datos del prospecto existe
      if (count($prospect_data) == 0) {
@@ -125,6 +128,9 @@
          $prospect_body_dir .= '<div class="form-body"><i class="fa fa-map-marker"></i> <b>Direccion 2: </b>' . $prospect_data['direccion2']  . '</div>';
      }
      
+    
+    
+     
      $title_dir = "Direccion " ;
      $action_button = '' ;
      $pais = $sales->Get_Country($prospect_data['id_pais']); //obtiene el pais
@@ -133,7 +139,7 @@
              '<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Ciudad: </b>' . $prospect_data['ciudad'] . 
               '<b>&nbsp&nbsp&nbsp&nbsp  <i class="fa fa-globe"></i> Pais: </b>' . $pais .'</div>';//agrega los datos de la direccion
      
-     
+
      //perfil o progreso del prospecto completado
      $propect_progress = $sales->Get_ProspectProgress($prospect_data['id_prospect']);
      $complete_profile = "(Perfil Completado:  " . $propect_progress . "%)";
@@ -224,6 +230,8 @@
     
     //OBTENEMOS LOS TIPOS DE DE DATOS QUE SE MANEJAN EN LA BITACORA
      $meta_bitacora_type = $sales->GetTypeOfBitacora();
+     
+     
     //CODIFICAMOS LOS TIPOS A JSON
      $json_encode = new \SivarApi\Tools\Services_JSON();
      $meta_type_json = $json_encode->encode($meta_bitacora_type);
@@ -232,6 +240,8 @@
      //CONTADOR DE LA BITACORA ¿CUANTOS LOGS EXISTEN?     
      $bitacora_counter = $sales->GetBitacorLogCount($prospect_data['id_prospect']);
      //VERIFICAMOS SI EXISTEN O NO LOGS 
+    
+     
      if($bitacora_counter == 0){
          
         $action_form .= '<div class="form-body">';  
@@ -248,9 +258,12 @@
                  $sales->GetIdBitacora($prospect_data['id_prospect']) . 
                  ',"' . UserController::GetIDUser() . '"' .
                  ");'><i class='fa fa-plus'></i></button>";
-         
+       
          //OBTENEMOS LOS VALORES DE LA BITACORA ANTES DE IMPRIMIRLOS 'POR LOGICA'
          $result_bitacora = $sales->GetBitacora($prospect_data['id_prospect']);
+        
+     
+         
          $action_form .= '<div class="scroller" style="height: 430px;" '
                  . 'data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">'
                  . '<div class="general-item-list class_tbody_bitacora" id="bitacora_seccion">';
@@ -288,6 +301,7 @@
      //TITULO DE LA BITACORA ...
      $action_title = "Bitacora <span class='badge' id='bitacora_counter'>$bitacora_counter</span>";
     //FIN DE TODAS LAS ACCIONES BITACORA
+     
      
      
      

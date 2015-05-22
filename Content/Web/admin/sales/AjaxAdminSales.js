@@ -66,7 +66,7 @@ function buscar_prospecto(id_prospect)
                             );
                       },
                       success: function(value){
-                             console.log(value)
+                             console.log(value);
                             $("#cargar_admin").html(value); 
                       }
               });
