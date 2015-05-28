@@ -46,75 +46,21 @@ class FunctionsController {
         }
     }
     
-    /**
-     * @author Rolando Arriaza
-     * @todo funcion estatica que devuelve la raiz del host o de la carpeta admin
-     * 
-     */
+    
     public static function GetRootUrl($directory , $host = false)
     {
-        global $CONFIG_;
-        $folder = $CONFIG_['DIR']['folder'];
-        if(\SivarApi\Tools\Validation::Is_Empty_OrNull($folder)){
-            if(!$host){
-              return $url = $CONFIG_['DIR']['root'] .  "Content/Web/$directory/";
-            }else
-            {
-              return $url = $CONFIG_['DIR']['root'] .  "Content/$directory/";
-            }
-        }
-        if(!$host){
-            return $url = $CONFIG_['DIR']['root'] .  "" . $folder . "/Content/Web/$directory/";
-        }else{
-              return $url = $CONFIG_['DIR']['root'] .  "" . $folder . "/Content/$directory/";
-        }
+       return \Url\Url::GetRootUrl($directory, $host);
     }
     
     public static function GetContentUrl($link = ""){
-        global $CONFIG_;
-        $folder = $CONFIG_['DIR']['folder'];
-        if(\SivarApi\Tools\Validation::Is_Empty_OrNull($folder)){
-             return $url = $CONFIG_['DIR']['protocol'] .$CONFIG_['DIR']['server'] .  "/Content/$link";
-        }
-        return $url = $CONFIG_['DIR']['protocol'] . 
-                      $CONFIG_['DIR']['server'] .
-                      "/" . $folder . 
-                      "/Content/$link";
+       return  \Url\Url::GetContentUrl($link);
     }
-
-    /**
-     * 
-     * @version 2.5
-     */
+    
     public static function GetUrl($link , $mask_state = TRUE )
     {
-       global $CONFIG_;
-       
-       $url = $CONFIG_['DIR']['protocol'] .  $CONFIG_['DIR']['server'] ;
-       $folder = $CONFIG_['DIR']['folder'];
-       $mask = $CONFIG_['MASK']['enable'];
-       
-
-       if($mask && $mask_state){
-           $type = $CONFIG_['MASK']['type'];
-           $mask_host = $CONFIG_['MASK']['host'];
-           
-           if(!$mask_host){
-               if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($folder)){
-                    $url .= "/" . $folder;
-                }
-           }
-           
-           $url .= "/$type/admin/$link";
-       }else{
-            if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($folder)){
-                $url .= "/" . $folder;
-            }
-            $url .= "/Content/Web/admin/$link";
-       }
-       
-       return $url ;
+         return \Url\Url::GetUrl($link, $mask_state);
     }
+    
     
     public static function get_year(){
         return date('Y');
@@ -129,6 +75,7 @@ class FunctionsController {
     {
         return date('d');
     }
+    
     
     public static function  get_date()
     {

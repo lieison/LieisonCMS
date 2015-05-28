@@ -1,10 +1,10 @@
 <?php
 
  /* order : 0 = por fecha de asignacion
- *         1 = deadline
- *         2 = en proceso
- *         3 = espera
- *         4 = termianda
+ *          1 = deadline
+ *          2 = en proceso
+ *          3 = espera
+ *          4 = termianda
  */ 
 
 define("FECHA" , 0);
@@ -88,17 +88,7 @@ class TaskController extends TaskModel {
     
     public function GetMyTask($id_user_from , $order = FECHA){
         
-        $order_by     = null;
-        
-        switch ($order){
-            case FECHA:
-                $order_by = "task_task.date_asign";
-                break;
-            case DEADLINE:
-                break;
-        }
-        
-        return parent::FindTask("call ShowYourTask('$id_user_from' , '$order_by');");
+        return parent::ViewTask($id_user_from, $order);
         
     }
     

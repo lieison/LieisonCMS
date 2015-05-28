@@ -28,7 +28,7 @@
   *     MEJORAS: *PARAMETROS DINAMICOS POR MEDIO DE UN ARCHIVO JSON
   *              *AGREGA PARAMETROS NECESARIOS EN EL ARCHIVO
   * 
- *@todo Sivar Api 2014
+ *@todo Sivar Framework 2015
  */
 
  class ViewClass {
@@ -53,14 +53,7 @@
          
          global $CONFIG_;
          $folder = $CONFIG_['DIR']['folder'];
-         
-         //@var $_COOKIE type Nombre del folder o archivo donde se aloja el plugin */
-      /*  if (!isset($_COOKIE['FOLDER'])) {
-            $folder = \SivarApi\Tools\Validation::PrimaryFolderPath();
-        } else {
-            $folder = $_COOKIE['FOLDER'];
-        }*/
-      
+
         if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($folder)){
              $route = $CONFIG_['DIR']['root']  . $folder  . 
                  self::$relative_route . 
@@ -130,26 +123,7 @@
         );
      }
      
-     
-     
-     public function CreateNewPattern($pattern_name){
-
-     }
-     
-     public function AddNewParamInPattern(string $pattern_name , array $param ){
-         
-     }
-     
-     public function DeletePattern($pattern_name){
-         
-     }
-     
-     public function DeleteParamInPatter(string $pattern_name , array $param_key ){
-         
-     }
-     
    
-    
 }
 
 

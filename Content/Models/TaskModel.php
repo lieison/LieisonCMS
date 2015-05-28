@@ -105,6 +105,20 @@ class TaskModel extends MysqlConection {
     public function FindTask($query){
          return parent::RawQuery($query, PDO::FETCH_CLASS);
     }
+    
+    
+    public function ViewTask( $id_user_from , $order = NULL){
+        
+        $this->QUERY = "SELECT task_multitask.id_multitask as mt_id , task_multitask.status as mt_status ,"
+                . " task_multitask.description as mt_description , task_multitask.title as title ,"
+                . "  ";
+         
+         if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($order)){
+             
+         }
+         
+         return $this->FindTask($this->QUERY);
+    }
    
    
 }
