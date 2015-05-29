@@ -51,8 +51,12 @@ class Database {
                 $this->db = new PDO(
                         $this->dsn,
                         $CONFIG_["DB_CONFIG"]["user"] ,
-                        $CONFIG_["DB_CONFIG"]["password"] 
+                        $CONFIG_["DB_CONFIG"]["password"],
+                        array( PDO::ATTR_PERSISTENT => true)
                 );
+                
+               
+                
         } catch (PDOException $ex){
             echo "Opps !! Algo esta mal (" . $ex->getMessage() . ")";
             $this->SetLog($ex->getMessage(), $ex->getLine());
@@ -72,7 +76,6 @@ class Database {
             $this->query = $query;
             $this->request = $this->db->query($this->query);
             $result = $this->request->fetchAll($style);
-           
             return $result;
     }
     
@@ -80,6 +83,13 @@ class Database {
     public function  CountRows(){
          return $this->request->rowCount();
     }
+    
+    
+    public function ColumnCount(){
+        return  $this->request->columnCount();
+    }
+    
+    
     
     
     
