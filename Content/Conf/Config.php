@@ -30,6 +30,20 @@ $DIR_NAME = $ARRAY_DIR[count($ARRAY_DIR)-1];
 
 $CONFIG_ = array(
     
+    "DB_CONFIG" => [
+        "driver"                    => "mysql",
+        "database"                  => "lieison_soft",
+        "user"                      => "lieison_soft",
+        "password"                  => "@@Support##",
+        "host"                      => "lieison.com",
+        "port"                      => "3306",
+        "prefix"                    => NULL,
+        "cacheMetadata"             => FALSE,
+        'encoding'                  => 'utf8',                         
+	'timezone'                  => 'UTC',
+        "sqlite_db"                 => ''
+    ],
+    
     "DB_MYSQL" =>[
          "classname"                => '',                                     //tipo de la clase
 	 'driver'                   => "mysql",                                  //driver de conexion , defecto mysql
