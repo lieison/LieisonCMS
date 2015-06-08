@@ -50,10 +50,10 @@ class MysqlConection extends PDO
      * @version 1.1 
      * **/
     
-    protected $response = null;
-    protected $dsn = null;
-    private $query=null;
-    protected $count = 0;
+    protected $response         = null;
+    protected $dsn              = null;
+    private $query              =null;
+    protected $count            = 0;
    
     /**
      * @author Rolando Antonio Arriaza

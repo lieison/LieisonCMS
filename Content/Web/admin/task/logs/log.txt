@@ -13,3 +13,7 @@
 (2015-05-13)(16:31:18)(ERROR==>SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statuss' in 'field list')
 (2015-05-13)(16:55:59)(ERROR==>SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statuss' in 'field list')
 (2015-05-13)(16:56:23)(ERROR==>SQLSTATE[42S22]: Column not found: 1054 Unknown column 'statuss' in 'field list')
+(2015-05-21)(22:11:52)(ERROR==>SQLSTATE[42S22]: Column not found: 1054 Unknown column 'box_files' in 'field list')
+(2015-05-21)(22:12:06)(ERROR==>SQLSTATE[42S22]: Column not found: 1054 Unknown column 'box_files' in 'field list')
+(2015-05-21)(22:12:48)(ERROR==>SQLSTATE[22003]: Numeric value out of range: 167 Out of range value for column 'id_multitask' at row 1)
+(2015-05-21)(22:14:34)(ERROR==>SQLSTATE[42S22]: Column not found: 1054 Unknown column 'box_files' in 'field list')

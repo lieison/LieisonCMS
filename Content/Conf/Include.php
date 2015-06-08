@@ -179,6 +179,33 @@ foreach ($path_controller as $k=>$val)
      require $val['root'] . '/' . $val['filename'];
 }
 
+/*
+ * Helper
+ * 
+ * **/
+
+$Dir_ = new _Directory();
+$path_controller = $Dir_->FindDataDirectory($GLOBAL_PATH ."/Content/Helper/");
+foreach ($path_controller as $k=>$val)
+{
+     require $val['root'] . '/' . $val['filename'];
+}
+
+/*
+ * Library
+ * 
+ * **/
+
+$Dir_ = new _Directory();
+$path_controller = $Dir_->FindDataDirectory($GLOBAL_PATH ."/Content/Library/");
+foreach ($path_controller as $k=>$val)
+{
+     require $val['root'] . '/' . $val['filename'];
+}
+
+
+
+
   /**
   * Modelo del sistema 
   */

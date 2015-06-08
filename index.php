@@ -45,7 +45,7 @@
      header("Pragma: no-cache");
 
     
-     if($FOLDER != NULL || $FOLDER != ""):
+     if($FOLDER != NULL && $FOLDER != ""):
          $FOLDER = "/" . $FOLDER;
      endif;
      
