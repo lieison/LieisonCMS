@@ -84,6 +84,15 @@ function PorltetStyle($request , $type , $id ){
     $count              =  count($request); 
     $portlet_array      = array();
     $task               = new TaskController();
+
+
+    if($count == 0 ){
+        $not_task = "<div align='center' class='col-md-12'>";
+        $not_task .= "<h1><br><br><br><b>No Hay Tareas :)</b></h1>";
+        $not_task .= "</div>";
+        echo $not_task;
+        exit;
+    }
     
     
     if($count == 1):
@@ -144,29 +153,57 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet            = '<div class="portlet portlet-sortable light bordered">';
         $body_porlet           .= '<div class="portlet-title tabbable-line">';
         $body_porlet           .= '<div class="caption">';
-      
-        $body_porlet           .= '<i class="fa fa-tasks"></i>';
-        $body_porlet           .= '<span class="caption-subject bold font-yellow-crusta uppercase">';
-        $body_porlet           .= $title . '</span>&nbsp;';
+
+          switch($task_type_id ){
+
+              case 1:
+                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
+                  $body_porlet           .= '<span class="caption-subject bold font-green-crusta uppercase">';
+                  $body_porlet           .= $title . '</span>&nbsp;';
+                  break;
+              case 2:
+                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
+                  $body_porlet           .= '<span class="caption-subject  bold font-blue-crusta uppercase">';
+                  $body_porlet           .= $title . '</span>&nbsp;';
+                  break;
+              case 3:
+                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
+                  $body_porlet           .= '<span class="caption-subject  bold font-red-crusta uppercase">';
+                  $body_porlet           .= $title . '</span>&nbsp;';
+                  break;
+              case 4:
+                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
+                  $body_porlet           .= '<span class="caption-subject  bold font-green-crusta uppercase">';
+                  $body_porlet           .= $title . '</span>&nbsp;';
+                  break;
+              case 5:
+                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
+                  $body_porlet           .= '<span class="caption-subject  bold font-yellow-crusta uppercase">';
+                  $body_porlet           .= $title . '</span>&nbsp;';
+                  break;
+
+          }
+
         
         
         if($task_status == 1):
-            $body_porlet           .= '<span class="caption-helper">Tarea Activa</span>';    
+            $body_porlet           .= '<span class="caption-helper"><i class="fa fa-spinner"></i></span>';
         else:
-            $body_porlet           .= '<span class="caption-helper">Tarea Terminada</span>';        
+            $body_porlet           .= '<span class="caption-helper"><i class="fa fa-check"></i></span>';
         endif;
        
 
         $body_porlet           .= '</div>';
         $body_porlet           .= '<ul class="nav nav-tabs">';
+
         if($type == 0):
         $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i></a></li>';
         $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i></a></li>';
         $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i></a></li>';
         else:
-         $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i> Acciones</a></li>';
-        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i> Asigno</a></li>';
-        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i> Informacion</a></li>';
+         $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i></a></li>';
+        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i></a></li>';
+        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i></a></li>';
         endif;
 
         $body_porlet           .= '</ul>';
@@ -199,7 +236,7 @@ function PorltetStyle($request , $type , $id ){
                     //FALTA PROGRAMAR LA REASIGNACION
                     $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent grey-cascade btn-sm active">Estado de la Tarea: ' 
                                            . $task_type_name 
-                                           .'</label>&nbsp;&nbsp;<a href="javascript:alert();" class="btn btn-circle btn-primary btn-sm"><i class="fa fa-check-circle-o"></i>&nbsp;Tomar Accion</a></h4>';
+                                           .'</label>&nbsp;&nbsp;<br><a href="javascript:alert();" class="btn btn-circle btn-primary btn-sm"><i class="fa fa-check-circle-o"></i>&nbsp;Tomar Accion</a></h4>';
                     break;
             endswitch;
         else:    

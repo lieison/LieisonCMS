@@ -50,7 +50,8 @@
   
     
     //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER
-    $header = '<link href="../../assets/global/plugins/pace/themes/lieison-loading.css" rel="stylesheet" type="text/css"/>'
+    //<link href="../../assets/global/plugins/pace/themes/lieison-loading.css" rel="stylesheet" type="text/css"/>
+    $header = ''
             . '<script src="../../assets/global/plugins/pace/pace.min.js" type="text/javascript"></script>'
             . '<link href="../../assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css"/>'
             . '<link href="../css/loading-lieison-cms.css" rel="stylesheet" type="text/css"/>'

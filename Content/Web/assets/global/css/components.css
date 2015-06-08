@@ -11113,6 +11113,18 @@ Yellow Crusta
   color: #f3c200 !important;
 }
 
+.font-blue-crusta {
+    color: blue !important;
+}
+
+.font-red-crusta {
+    color: red !important;
+}
+
+.font-green-crusta {
+    color: green !important;
+}
+
 .progress-bar.yellow-crusta {
   background: #f3c200 !important;
   color: #FFFFFF !important;
