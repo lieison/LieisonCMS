@@ -1,7 +1,7 @@
 
 # Lieison : SISTEMA GESTOR DE CONTENIDO 
 
-[![Lieison version](https://img.shields.io/hackage/v/pretty.svg?style=flat)]() 
+[![Lieison version](https://img.shields.io/badge/lieison-1.5-red.svg)](https://img.shields.io/badge/lieison-1.5-red.svg) 
 [![Build Status](https://img.shields.io/travis/haskell/pretty.svg?style=flat)]()
 
 
