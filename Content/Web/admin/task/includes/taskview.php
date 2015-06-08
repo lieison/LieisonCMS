@@ -160,19 +160,20 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '</div>';
         $body_porlet           .= '<ul class="nav nav-tabs">';
         if($type == 0):
-        $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i> Estados</a></li>';
-        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i> Asignado</a></li>';
-        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i> Informacion</a></li>';
+        $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i></a></li>';
+        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i></a></li>';
+        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i></a></li>';
         else:
          $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i> Acciones</a></li>';
         $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i> Asigno</a></li>';
-        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i> Informacion</a></li>';  
+        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i> Informacion</a></li>';
         endif;
 
         $body_porlet           .= '</ul>';
         $body_porlet           .= '</div>';
         $body_porlet           .= '<div class="portlet-body">';
         $body_porlet           .= '<div class="tab-content">';
+
         //PRIMER TAB ------------------------------------------------------------------------------------------------
         $body_porlet           .= '<div class="tab-pane active" id="portlet_tab' . $n .'">';
         $body_porlet           .= '<div class="scroller">';
@@ -222,11 +223,14 @@ function PorltetStyle($request , $type , $id ){
         if($user_image == null ):
             $user_image = "avatar.png";
         endif;
-        $body_porlet           .= '<img src="' . FunctionsController::GetUrl("img/users/$user_image") . '" class="img-circle" width ="100" height="100" alt="">';
+        $body_porlet           .= '<img src="' . FunctionsController::GetUrl("img/users/$user_image") . '" class="img-circle" width ="60" height="60" alt="">';
         $body_porlet           .= '</div>';
         $body_porlet           .= '<div class="col-md-8">';
         $body_porlet           .= '<h4><b>' . $user . '</b></h4>';
-        $body_porlet           .= '<p><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;<b>' . $user_mail . '</b></p>';
+
+          /**RECORDATORIO :  SE LE CAMBIARA EL MAILTO POR NUESTRO SISTEMA DE CORREOS */
+        $body_porlet           .= '<p><i class="fa fa-envelope-o"></i>&nbsp;<b><a href="mailto:' . $user_mail . '">' . current(explode("@" , $user_mail )) . '</a></b></p>';
+
         if($type == 0):
         $select_users           = $task->AsignTouser($id);
         $body_porlet           .= '<div align="center">'

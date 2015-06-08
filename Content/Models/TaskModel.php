@@ -109,9 +109,34 @@ class TaskModel extends MysqlConection {
     
     public function ViewTask( $id_user_from , $order = NULL){
         
-        $this->QUERY = "SELECT task_multitask.id_multitask as mt_id , task_multitask.status as mt_status ,"
-                . " task_multitask.description as mt_description , task_multitask.title as title ,"
-                . "  ";
+         $this->QUERY = "SELECT task_multitask.id_multitask as 'mt_id' ,
+                          task_multitask.status as 'status',
+                          task_multitask.description as 'mt_description',
+                          task_multitask.title as 'title',
+                          sales_client.nombre as 'client_name' ,
+                          sales_client.telefono as 'client_phone' ,
+                          sales_client.email as 'client_email' ,
+                          concat(usuario.nombre , ' ' , usuario.apellido) as 'user_name',
+                          usuario.imagen as 'user_image' ,
+                          usuario.email as 'user_email',
+                          task_task.date_asign as 'td_asign',
+                          task_task.time_asign as 'tt_asign',
+                          task_task.time_deadline as 't_timedeadline',
+                          task_task.date_deadline as 't_deadline',
+                          task_task.status as 't_status',
+                          task_task.id_task as 't_id',
+                          task_task.id_type as 't_idtype',
+                          task_type.name as 't_nametype',
+                          task_type.status as 't_typestatus',
+                          task_task.box_files as 't_boxfiles',
+                          task_task.files as 't_files',
+                          task_task.comments as 't_comment'
+                          FROM task_multitask
+                          INNER JOIN task_task ON task_multitask.id_multitask = task_task.id_multitask
+                          INNER JOIN sales_client ON task_multitask.id_client = sales_client.id_client
+                          INNER JOIN usuario ON task_task.id_user_to=usuario.id_usuario
+                          INNER JOIN task_type ON task_task.id_type = task_type.id_type
+                          WHERE task_task.id_user_from LIKE '$id_user_from' ORDER BY task_task.date_asign DESC;";
          
          if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($order)){
              
