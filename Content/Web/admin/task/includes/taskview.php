@@ -190,7 +190,7 @@ function PorltetStyle($request , $type , $id ){
           $body_porlet           .= '<span class="caption-subject  bold ' . $title_color . ' uppercase">';
           $body_porlet           .= $title . '</span>&nbsp;';
 
-          /**FINAL SELECCION */
+          /**FINAL SELECCION DE COLOR  TITULO */
         
         
         if($task_status == 1):
