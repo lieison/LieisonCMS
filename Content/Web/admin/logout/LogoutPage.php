@@ -1,6 +1,10 @@
 <?php
 
+
+
 include '../../../Conf/Include.php';
+
+set_dependencies(array( "AdminController"));
 
 Session::InitSession();//INICIA SESION
 

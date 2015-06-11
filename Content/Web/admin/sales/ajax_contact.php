@@ -32,6 +32,8 @@
 
 include   '../../../Conf/Include.php';
 
+set_dependencies(array('ProspectController'));
+
 if(!isset($_REQUEST['type'])){
     exit();
 }

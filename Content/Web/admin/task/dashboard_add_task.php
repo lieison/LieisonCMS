@@ -3,6 +3,10 @@
 
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
+
+    get_dependencies(array(
+        "AdminController"
+    ));
     
     //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
     Session::InitSession();

@@ -6,7 +6,7 @@
      *@version 1.x
      *@since 0.1
      */
-    session_start();
+     Session::InitSession();
     
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';

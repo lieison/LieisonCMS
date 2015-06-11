@@ -172,12 +172,14 @@ require $GLOBAL_PATH . '/Content/Class/Plugins/InstallClass.php';
  /**
  * Controladores | Controllers
  */
-$Dir_ = new _Directory();
+/*$Dir_ = new _Directory();
 $path_controller = $Dir_->FindDataDirectory($GLOBAL_PATH ."/Content/Controllers/");
 foreach ($path_controller as $k=>$val)
 {
      require $val['root'] . '/' . $val['filename'];
-}
+}*/
+
+
 
 /*
  * Helper
@@ -204,6 +206,15 @@ foreach ($path_controller as $k=>$val)
 }
 
 
+ /**
+  *
+  * Como nueva estructura se creo un sistema de dependencias para lieison cms
+  *
+  *
+  *
+ **/
+
+  require $GLOBAL_PATH . '/Content/Conf/dependencies.php';
 
 
   /**

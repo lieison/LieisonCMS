@@ -28,10 +28,11 @@
  *@version 1.0
  *@todo Lieison S.A de C.V 
  */
- 
 
-    
+
     include   '../../../Conf/Include.php';
+
+    set_dependencies(array('AdminController'));
     
     Session::InitSession();
     $login = Session::GetSession("login");

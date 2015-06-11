@@ -14,6 +14,8 @@
      *@version 1.5 
      *@copyright (c) 2015, Lieison
      */
+
+    set_dependencies(array( "UserController"));
     
     $header = new Http\Header(); //clase header , ver en documentacion
     

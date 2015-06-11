@@ -2,12 +2,16 @@
 
 
  include '../../../Conf/Include.php';
+
+ set_dependencies(array(
+    "AdminController"
+ ));
  
  if(!isset($_REQUEST['id'])):
      echo false;
      exit();
  endif;
- 
+
  $id = explode(",", $_REQUEST['id']);
  $admin = new AdminController();
  $delete = $admin->DeleteUser($id[0], $id[1]);

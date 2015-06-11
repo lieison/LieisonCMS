@@ -2,6 +2,8 @@
 
 include '../../../Conf/Include.php';
 
+set_dependencies(array( "AdminController"));
+
 Session::InitSession();//INICIA SESION
 $header = new Http\Header();//INSTANCIA EL HEADER
  

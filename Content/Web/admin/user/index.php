@@ -33,7 +33,7 @@
  
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
-    
+
     //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
     Session::InitSession();
     Session::InsertSession("page_name", "Principal");
