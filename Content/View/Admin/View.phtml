@@ -90,14 +90,7 @@
 ?>
     
 <!-- ESTABLECIENDO EL HEADER  --> 
-<div id="fb-root"></div>
-            <script>(function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&appId=271330856288382&version=v2.0";
-                fjs.parentNode.insertBefore(js, fjs);
-        }(document, "script", "facebook-jssdk"));</script>
+<link href="../../assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css"/><link rel="stylesheet" type="text/css" href="../../assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css"/>
 </head>
 
 
@@ -222,7 +215,7 @@
                                      
                                 ?>
 			</div>          
-                    <?php include 'ViewEditProspecto.php'; ?>
+                    <?php include 'ViewAdminProspecto.php' ?>
                 </div>
                
         </div>
@@ -242,7 +235,8 @@
 
 <?php AdminHeader::GetJs(); ?>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script><script src="AjaxAddSales.js"></script> 
+<script src="AjaxAdminSales.js"></script><script src="../js/notify.js"></script><script src="../js/bootbox.js"></script><script src="../js/bootbox.min.js"></script><script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+                    <script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script> 
 
 <script>
     
@@ -266,33 +260,7 @@
    Index.init();   
 
     //app init lieisoft
-   var get_paises = function(id)
-   {
-   
-        var params = { "id":id };
-        
-        $.ajax({
-                      type: "POST",
-                      data:params,
-                      url: "get_paises.php",
-                      beforeSend: function()
-                      {
-                          $("#drown_pais").html("<p>Cargando datos ...</p>");
-                      },
-                      success: function(value){
-                          document.getElementById("drown_pais").innerHTML = value;
-                      },
-                      error: function()
-                      {
-                          $("#combo_pais").html("Error al cargar");
-                      }
-                      
-              });
-              
-     
-   }
-    get_paises(23);
-       
+   FormValidation.init();cargar_prospectos();cargar_entradas();    
 
 });
 </script>
