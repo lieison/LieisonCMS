@@ -5,6 +5,11 @@
  
  Session::InitSession();
  
+ set_dependencies(array(
+        "AdminController",
+        "MessageController"
+  ));
+ 
  $messagecontroller = new MessageController();
  
  $id_user = $_SESSION['login']['id'];

@@ -5,6 +5,12 @@
  
  $messagecontroller = new MessageController();
  
+  set_dependencies(array(
+        "AdminController",
+        "MessageController"
+  ));
+ 
+ 
  $id_user = $_SESSION['login']['id'];
  $count = $messagecontroller->GetMessageCountFrom($id_user);
  $msjto = $messagecontroller->GetMessageFrom($id_user , null);
