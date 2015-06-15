@@ -11,6 +11,10 @@
 
 include   '../../../../Conf/Include.php';
 
+set_dependencies(array(
+    "TaskController"
+ ));
+
 $task = new TaskController(); //declaracion de la clase
 echo $task->Show_SelectClient();//imprime el html option value
 

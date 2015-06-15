@@ -1,6 +1,11 @@
 <?php
 
  include   '../../../Conf/Include.php';
+ 
+  set_dependencies(array(
+      "PageController",
+      "AdminController"
+  ));
 
  $id = $_REQUEST['id'] ? : null;
  $status = $_REQUEST['status'] ?: null;

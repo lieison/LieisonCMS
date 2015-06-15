@@ -4,10 +4,9 @@
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
 
-    get_dependencies(array(
+    set_dependencies(array(
         "AdminController"
     ));
-    
     //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
     Session::InitSession();
     Session::InsertSession("page_name", "Add Tasks");
@@ -36,9 +35,14 @@
         $body = "<?php include 'view_add_task.php' ?>";
        if(isset($_REQUEST['box'])):
            if($_REQUEST['box'] == 0):
-               $end_footer = "TaskInit.init();FormWizard.init();ComponentsEditors.init();"; 
+               $end_footer = "TaskInit.init();"
+                   . "FormWizard.init();"
+                   . "ComponentsEditors.init();"; 
            else:
-               $end_footer = "TaskInit.init();FormWizard.init();ShowBoxDocument();ComponentsEditors.init();";
+               $end_footer = "TaskInit.init();"
+                   . "FormWizard.init();"
+                   . "ShowBoxDocument();"
+                   . "ComponentsEditors.init();";
            endif;
        endif;
     else:

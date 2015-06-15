@@ -12,6 +12,7 @@ if(!function_exists("set_dependencies")){
                $depend = $dir_controller . $values . ".php";
 
                if(file_exists($depend)){
+                  
                     include $depend;
                }
 

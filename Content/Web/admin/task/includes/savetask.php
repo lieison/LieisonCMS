@@ -23,6 +23,11 @@ include   '../../../../Conf/Include.php';
 
 $type = $_REQUEST['type'] ? : null;
 
+set_dependencies(array(
+    "TaskController",
+    "LogsController"
+ ));
+
 if(SivarApi\Tools\Validation::Is_Empty_OrNull($type)):
     echo 0;
     exit();

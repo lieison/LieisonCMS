@@ -4,6 +4,10 @@ include   '../../../../Conf/Include.php';
 
 $id = $_REQUEST['id_user'] ? : null;
 
+set_dependencies(array(
+    "TaskController"
+ ));
+
 if(\SivarApi\Tools\Validation::Is_Empty_OrNull($id)){
     exit();
 }

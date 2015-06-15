@@ -16,6 +16,11 @@ include   '../../../../Conf/Include.php';
  *         4 = termianda
  */ 
 
+set_dependencies(array(
+    "TaskController"
+ ));
+
+
 Session::InitSession();
  
 $type       = $_REQUEST['type'] ? : 0;  //verifica el tipo de tarea a mostrar 0 y 1
