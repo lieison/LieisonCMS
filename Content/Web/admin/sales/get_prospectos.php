@@ -30,6 +30,11 @@
 
  include   '../../../Conf/Include.php';
  
+  set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+    ));
+ 
  $sales = new ProspectController();//constructor nuevo sales en el controlador
  
  //CAMBIAR PROCESO DEL PROSPECTO

@@ -32,6 +32,11 @@
  
 include   '../../../Conf/Include.php';
 
+ set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+    ));
+
 $exist_country = false;
 if(isset($_REQUEST['country'])){
     $exist_country = true;

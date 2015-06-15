@@ -28,6 +28,13 @@
  */
 
  include   '../../../Conf/Include.php';
+ 
+ set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+ ));
+ 
+ 
  $sales = new ProspectController();//constructor nuevo sales en el controlador
  
  if(isset($_REQUEST['new_notes'])){

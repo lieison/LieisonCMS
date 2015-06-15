@@ -32,7 +32,10 @@
 
     include   '../../../Conf/Include.php';
 
-    set_dependencies(array('AdminController'));
+    set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+    ));
     
     Session::InitSession();
     $login = Session::GetSession("login");

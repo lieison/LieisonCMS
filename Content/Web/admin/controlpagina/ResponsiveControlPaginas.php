@@ -2,6 +2,11 @@
 
 include '../../../Conf/Include.php';
 
+ set_dependencies(array(
+      "PageController",
+      "AdminController"
+ ));
+  
 
 $pagecontroller = new PageController();
 $pages = $pagecontroller->get_dashboard_database();

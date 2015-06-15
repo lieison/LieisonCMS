@@ -29,6 +29,11 @@
 
 include   '../../../Conf/Include.php';
 
+ set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+  ));
+
 $id = $_REQUEST['id'] ? : null;
 if($id == null){
     exit();

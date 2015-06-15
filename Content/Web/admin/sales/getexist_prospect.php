@@ -28,9 +28,17 @@
  */
 
  include   '../../../Conf/Include.php';
+ 
+  set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+    ));
+ 
  if(!isset($_REQUEST['nombre'])):
      exit();
  endif;
+ 
+ 
  $prospecto = new ProspectController();
  $resultado = $prospecto->Find_Prospect($_REQUEST['nombre']);
  unset($prospecto);
