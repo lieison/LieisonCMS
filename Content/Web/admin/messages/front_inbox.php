@@ -8,6 +8,8 @@
         "MessageController"
     ));
 
+ Session::InitSession();
+
  
  $messagecontroller = new MessageController();
 

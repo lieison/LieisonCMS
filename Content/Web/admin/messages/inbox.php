@@ -36,7 +36,7 @@ include   '../../../Conf/Include.php';
 Session::InitSession();
 Session::InsertSession("page_name", "Inbox");
 Session::InsertSession("home", "Inbox");
-Session::InsertSession("title", "Inbox");
+Session::InsertSession("title", "<b>Inbox</b>");
 
 
 //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER

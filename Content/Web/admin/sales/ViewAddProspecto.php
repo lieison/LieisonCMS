@@ -160,7 +160,7 @@
 												<span class="input-group-addon">
 												
 												</span>
-                                                                                           <textarea class="ckeditor form-control" name="txt_notas" id="txt_notas" rows="6" data-error-container="#editor2_error"></textarea>
+                                                                                           <textarea class="form-control" name="txt_notas" id="txt_notas" rows="6" data-error-container="#editor2_error"></textarea>
 											</div>
 										</div>
 									</div>
