@@ -28,6 +28,11 @@
 
     include   '../../../Conf/Include.php';
     
+    set_dependencies(array(
+      "AdminController",
+      "PageController" 
+    ));
+    
     Session::InitSession();
     
     $login = Session::GetSession("login");

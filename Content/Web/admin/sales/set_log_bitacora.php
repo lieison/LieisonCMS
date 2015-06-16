@@ -39,6 +39,11 @@
 
 include   '../../../Conf/Include.php';
 
+ set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+  ));
+
 
 if(!isset($_REQUEST['id_bitacora'])){
     exit();

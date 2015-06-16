@@ -158,8 +158,8 @@
 				
                                 <!-- ACA SE CREARA EL DASHBOARD DINAMICO -->
                                 <?php
-                                     $dashboard = new DashboardController();
-                                     echo $dashboard->get_dashboard_sidebar_menu($rol, "Sales");
+                                   //  $dashboard = new DashboardController();
+                                    // echo $dashboard->get_dashboard_sidebar_menu($rol, "Sales");
                                 ?>
 				<!--FINAL DEL DASHBOARD DINAMICO -->
 			</ul>

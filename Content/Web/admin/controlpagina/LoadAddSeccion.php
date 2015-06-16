@@ -2,6 +2,11 @@
 
   include   '../../../Conf/Include.php';
   
+  set_dependencies(array(
+      "PageController",
+      "AdminController"
+  ));
+  
   $page = new PageController();
   
   

@@ -2,6 +2,11 @@
 
  include   '../../../Conf/Include.php';
  
+  set_dependencies(array(
+      "PageController",
+      "AdminController"
+  ));
+ 
  $titulo = $_REQUEST['titulo'] ? : null;
  $icono = $_REQUEST['icono'] ? : null;
  $inicio = $_REQUEST['inicio'] ? : null;

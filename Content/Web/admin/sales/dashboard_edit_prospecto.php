@@ -31,6 +31,11 @@
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
     
+     set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+    ));
+    
     Session::InitSession();
     $login = Session::GetSession("login");
     $rol = $login['rol'];

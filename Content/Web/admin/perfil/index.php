@@ -30,8 +30,7 @@
 
     include   '../../../Conf/Include.php';
     
-    
-    
+
     Session::InitSession();
     $login = Session::GetSession("login");
     $name =  substr($login['nombre']  , 0 , 25) . "...";
@@ -42,12 +41,7 @@
     Session::InsertSession("home", "");
     Session::InsertSession("title", "<b>$name</b>");
     
-    
-    //CONTROLADOR DEL ADMINISTRADOR 
-   // $adminc = new AdminController();
-    //OBTIENE LOS PERMISOS MEDIANTE EL ROL INDICADO 
-    //$adminc->Get_Permission($rol, FunctionsController::get_actual_page());
-    
+           
 
     //HEADER , CABECERA DONDE SE INICIARA ELEMENTOS NECESARIOS PARA ESTE SCRIPT
     $header .= '<link href="../../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>

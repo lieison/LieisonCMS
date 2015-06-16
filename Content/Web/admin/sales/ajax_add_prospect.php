@@ -30,6 +30,12 @@
  * 
  */
  include   '../../../Conf/Include.php';
+
+ set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+  ));
+  
  
  $prospecto = new ProspectController();
  $arrayp= array(

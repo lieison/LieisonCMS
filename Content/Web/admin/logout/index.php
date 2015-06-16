@@ -2,6 +2,8 @@
 
     include   '../../../Conf/Include.php';
 
+    set_dependencies(array( "AdminController"));
+
     //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
     Session::InitSession();
     Session::InsertSession("page_name", "Principal");
@@ -13,7 +15,8 @@
               Session::DestroySession("home");
         endif;
     endif;
-    
+
+
     //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER
     $header = "";
     
@@ -25,11 +28,11 @@
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
     $end_footer = "exit_session();";
-    
+
 
     //PREPARANDO LA VISTA ...
     ViewClass::PrepareView("View.phtml", "Admin");
+
     
     //LLAMANDO LA VISTA
     ViewClass::SetView(ViewClass::SetParamsString($body ,$header , $end_footer , $footer));
-    

@@ -2,6 +2,10 @@
 
 include   '../../../Conf/Include.php';
 
+set_dependencies(array(
+    "PluginController"
+));
+
 //print_r($_FILES['']);
 
 //DIRRECTORIO DONDE SE GUARDAN LOS MODULOS

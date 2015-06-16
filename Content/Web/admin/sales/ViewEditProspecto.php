@@ -5,7 +5,7 @@
       $header->redirect("index.php");
       exit();
   }
-  
+
   $prospect = new ProspectController();
   $result = $prospect->Get_Prospect_ById($_REQUEST['id']);
   

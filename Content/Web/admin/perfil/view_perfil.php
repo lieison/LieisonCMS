@@ -8,7 +8,7 @@
     $activo = $session['activo'];
     $id_user = $session['id'];
     $imagen =  $session['imagen'];
-    
+
     $user_controller = new UserController($id_user);
     $header = new \Http\Header();
      

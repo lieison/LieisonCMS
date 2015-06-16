@@ -1,9 +1,14 @@
 <?php
 
 include   '../../../../Conf/Include.php';
-Session::InitSession();
-$id = Session::GetSession("login", "id");
 
+set_dependencies(array(
+    "TaskController"
+ ));
+
+Session::InitSession();
+
+$id = Session::GetSession("login", "id");
 $task = new TaskController();
 
 /**

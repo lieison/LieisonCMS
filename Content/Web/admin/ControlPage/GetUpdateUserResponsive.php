@@ -2,6 +2,8 @@
 
  include '../../../Conf/Include.php';
 
+set_dependencies(array( "AdminController"));
+
  $admin = new AdminController();
  
  $user = $_REQUEST['usuario'];

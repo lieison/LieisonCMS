@@ -9,6 +9,8 @@ if(!isset($_REQUEST['type'])){
 $type = $_REQUEST['type'];
 $args = $_REQUEST['args'];
 
+set_dependencies(array( "AdminController"));
+
 $admin = new AdminController();
 
 switch ($type)

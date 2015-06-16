@@ -30,11 +30,19 @@
  * 
  */
 
-    //INICIAMOS SESION 
-    session_start();
+ 
     
     //INCLUIMOS LIBRERIA PRINCIPAL DONDE SE CARGAN TODAS LAS DEMAS LIBRERIAS O SCRIPTS
     include   '../../../Conf/Include.php';
+    
+    //INICIAMOS SESION 
+    Session::InitSession();
+    
+     set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+    ));
+  
     
     $_SESSION['page_name']  = "Agregar Prospecto";
     $_SESSION['home'] = "Sales";

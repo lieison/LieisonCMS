@@ -1,6 +1,8 @@
 <?php
 
  include '../../../Conf/Include.php';
+
+ set_dependencies(array( "AdminController"));
  
  $header = new Http\Header();
  $redirect = $_REQUEST['redirect'] ? : null;

@@ -36,15 +36,11 @@ if($id == null && $del == null){
     exit();
 }
 
+
 $page = new PageController();
 $dash = $page->get_dashboard_database($id);
 unset($page);
 
-//TEST
-/*echo "<pre>";
-print_r($dash);
-echo "</pre>";*/
- 
 
 ?>
 
@@ -138,7 +134,7 @@ echo "</pre>";*/
 								</div>
 								<div class="form-actions right1">
                                                                         <input type="hidden" id="txt_id" value="<?php echo $id; ?>" />
-                                                                        <a href="index.php" class="btn default">Cancelar</a>
+                                                                        <a href="index.php" class="btn default">Atras</a>
                                                                         <button type="button" onclick="SavePage();" class="btn green"><b id="cmd_actualizar">Actualizar</b></button>
 								</div>
 							</form>

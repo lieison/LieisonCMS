@@ -16,6 +16,11 @@ include   '../../../../Conf/Include.php';
  *         4 = termianda
  */ 
 
+set_dependencies(array(
+    "TaskController"
+ ));
+
+
 Session::InitSession();
  
 $type       = $_REQUEST['type'] ? : 0;  //verifica el tipo de tarea a mostrar 0 y 1
@@ -113,6 +118,12 @@ function PorltetStyle($request , $type , $id ){
       $n = 1;
       $p=2;
       $q=3;
+
+
+    /**
+     * RECORRIDO DE LAS TAREAS PENDIENTES O ASIGNADAS DE ACUERDO
+     * AL PERFIL DEL USUARIO DADO ...
+     */
       
       foreach($request as $data){
         
@@ -121,6 +132,7 @@ function PorltetStyle($request , $type , $id ){
         $mt_status              = $data->status;
         $mt_description         = stripcslashes(nl2br($data->mt_description));
         $title                  = $data->title;
+
         //CLIENTE
         $client_name            = $data->client_name;
         $client_phone           = $data->client_phone;
@@ -154,36 +166,36 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '<div class="portlet-title tabbable-line">';
         $body_porlet           .= '<div class="caption">';
 
+          /**INICIO : SELECCION SE COLOR TITULO MEDIANTE EL TYPO DE TAREA*/
+
+          $title_color = NULL;
+
           switch($task_type_id ){
 
               case 1:
-                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
-                  $body_porlet           .= '<span class="caption-subject bold font-green-crusta uppercase">';
-                  $body_porlet           .= $title . '</span>&nbsp;';
+                  $title_color = "font-green-crusta";
                   break;
               case 2:
-                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
-                  $body_porlet           .= '<span class="caption-subject  bold font-blue-crusta uppercase">';
-                  $body_porlet           .= $title . '</span>&nbsp;';
+                  $title_color = "font-blue-crusta";
                   break;
               case 3:
-                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
-                  $body_porlet           .= '<span class="caption-subject  bold font-red-crusta uppercase">';
-                  $body_porlet           .= $title . '</span>&nbsp;';
+                  $title_color = "font-red-crusta";
                   break;
               case 4:
-                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
-                  $body_porlet           .= '<span class="caption-subject  bold font-green-crusta uppercase">';
-                  $body_porlet           .= $title . '</span>&nbsp;';
+                  $title_color = "font-green-crusta";
                   break;
               case 5:
-                  $body_porlet           .= '<i class="fa fa-tasks"></i>';
-                  $body_porlet           .= '<span class="caption-subject  bold font-yellow-crusta uppercase">';
-                  $body_porlet           .= $title . '</span>&nbsp;';
+                  $title_color = "font-yellow-crusta";
                   break;
 
           }
 
+
+          $body_porlet           .= '<i class="fa fa-tasks"></i>';
+          $body_porlet           .= '<span class="caption-subject  bold ' . $title_color . ' uppercase">';
+          $body_porlet           .= $title . '</span>&nbsp;';
+
+          /**FINAL SELECCION DE COLOR  TITULO */
         
         
         if($task_status == 1):

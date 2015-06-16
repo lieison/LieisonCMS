@@ -31,6 +31,12 @@
  */
 
 include   '../../../Conf/Include.php';
+
+ set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+    ));
+
 $prospect = new ProspectController();
 $result = $prospect->GetEntrance();
 $print = "";

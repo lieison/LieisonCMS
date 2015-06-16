@@ -28,6 +28,11 @@
 
 include   '../../../Conf/Include.php';
 
+ set_dependencies(array(
+      "ProspectController",
+      "AdminController"
+    ));
+
 $header = new Http\Header();
 if(!isset($_POST['cmd_enviar'])){
     $header->redirect("index.php");

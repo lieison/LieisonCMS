@@ -1,5 +1,7 @@
 <?php
     include '../../../Conf/Include.php';
+
+    set_dependencies(array( "AdminController"));
     
     if(!isset($_REQUEST['input'])):
         exit();
