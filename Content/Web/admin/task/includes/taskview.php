@@ -264,6 +264,8 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '<p><b>Descripcion:</b></p>';
         $body_porlet           .= '<p class="bg-danger">' . $mt_description . '</p>';
         $body_porlet           .= '</div></div>';
+
+
         //SEGUNDO TAB --------------------------------------------------------------------------
         $body_porlet           .= '<div class="tab-pane" id="portlet_tab' . $p . '">';
         $body_porlet           .= '<div class="scroller">';
@@ -291,10 +293,13 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '</div>';
         $body_porlet           .= '</div>';
         $body_porlet           .= '</div></div>';
+
+        /**TERCER TAB -----------------------------------------------------------------------------------------*/
         $body_porlet           .= '<div class="tab-pane" id="portlet_tab' . $q. '">';
         $body_porlet           .= '<div class="scroller">';
         $body_porlet           .= '</div></div>';
-       /* $body_porlet           .= '';
+
+       /* $body_porlet         .= '';
         $body_porlet           .= '';
         $body_porlet           .= '';
         $body_porlet           .= '';

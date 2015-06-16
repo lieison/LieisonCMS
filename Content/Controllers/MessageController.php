@@ -45,8 +45,8 @@ class MessageController extends MessageModel {
      */
     public function SetPermisssionMessage($id_usuario , $id_usuario_permission){
         $this->Insert("lieisoft_mensajes_permisos", array(
-            "id_usuario"=>$id_usuario,
-            "id_usuario_permiso"=>$id_usuario_permission
+                        "id_usuario"            =>$id_usuario,
+                        "id_usuario_permiso"    =>$id_usuario_permission
         ));
     }
     

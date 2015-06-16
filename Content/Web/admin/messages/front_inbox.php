@@ -1,20 +1,23 @@
 <?php
 
- session_start();
+
  include   '../../../Conf/Include.php';
+
+
+    set_dependencies(array(
+        "MessageController"
+    ));
+
  
  $messagecontroller = new MessageController();
- 
-  set_dependencies(array(
-        "AdminController",
-        "MessageController"
-  ));
- 
- 
+
  $id_user = $_SESSION['login']['id'];
  $count = $messagecontroller->GetMessageCountFrom($id_user);
  $msjto = $messagecontroller->GetMessageFrom($id_user , null);
+
+
  $count_submsj = 0;
+
  
  if(count($msjto) == 0){
       $msjto = $messagecontroller->GetMessageTo($id_user , null);
@@ -23,8 +26,10 @@
      $r = $messagecontroller->GetCountSubMessage($v['id_mensaje'] , $id_user);
      $count_submsj += count($r);
  }
- 
+
+
  $count += $count_submsj;
+
  echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">';
  echo '<i class="icon-envelope-open"></i>';
  echo '<span class="badge badge-default">';

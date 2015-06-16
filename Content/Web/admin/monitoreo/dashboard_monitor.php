@@ -2,6 +2,11 @@
 
 <?php 
     session_start();
+
+    set_dependencies(array(
+        "AdminController"
+    ));
+
     include   '../../Conf/Include.php';
     $http = new Http\Header();
     if(!isset($_SESSION['login'])):
