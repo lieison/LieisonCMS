@@ -6,9 +6,7 @@
 var chat_preview = function(id){
     
      var load_chat = new chat();
-     load_chat.load(id);
-    
-    
+     load_chat.add(id);
 };
 
 
@@ -25,7 +23,7 @@ var chat = function(){
         return document.getElementById("route_value").value;
     };
     
-    this.load = function(id){
+    this.add = function(id){
         
           var task = new jtask();
           task.url = route() + "admin/messages/loader/chat_loader.php";
