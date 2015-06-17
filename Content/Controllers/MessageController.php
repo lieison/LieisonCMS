@@ -58,14 +58,7 @@ class MessageController extends MessageModel {
                  . " usuario.id_usuario LIKE '$id_usuario'");
          return $result;
     }
-    
-    public function DeleteMessage($id_message) {
-        
-    }
 
-    public function DeleteSubMessage($id_submesage) {
-        
-    }
 
     public function GetMessageCountFrom($id_u_para, $no_read = true) {
          $result = null;

@@ -32,6 +32,12 @@ SOFTWARE.
 include   '../../../Conf/Include.php';
 
 
+set_dependencies(array(
+    "MessageController"
+));
+
+
+
 //INICIA UNA NUEVA SESION...CLASE DEL CORE Tools/Session
 Session::InitSession();
 Session::InsertSession("page_name", "Inbox");

@@ -2,8 +2,13 @@
 
 
 
+echo Session::GetSession("login" , "id");
 
-Session::InsertSession("title", "<b>Bandeja</b>");
+//$message = new MessageController();
+$bandeja =  null;//$message->GetMessageCountFrom();
+
+
+Session::InsertSession("title", "<b>No leidos ($bandeja)</b>");
 
 
 ?>
