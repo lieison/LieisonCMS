@@ -12,6 +12,7 @@ function load_message()
           });
  }
  
+ 
  function load_count_message()
 {
        var route = document.getElementById("route_value").value;

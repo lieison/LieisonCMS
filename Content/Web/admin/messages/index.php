@@ -32,9 +32,9 @@ SOFTWARE.
 include   '../../../Conf/Include.php';
 
 
-set_dependencies(array(
+/*set_dependencies(array(
     "MessageController"
-));
+));*/
 
 
 

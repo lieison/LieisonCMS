@@ -1719,6 +1719,7 @@ Quick Sidebar Toggler
   font-size: 17px;
 }
 
+
 /* quick sidebar top position fix for mobile view */
 @media (max-width: 480px) {
   /* 480px */

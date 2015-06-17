@@ -4,18 +4,18 @@
  include   '../../../Conf/Include.php';
 
 
-    set_dependencies(array(
-        "MessageController"
-    ));
-
  Session::InitSession();
-
  
+ set_dependencies(array(
+     "MessageController"
+ ));
+ 
+
  $messagecontroller = new MessageController();
 
- $id_user = $_SESSION['login']['id'];
- $count = $messagecontroller->GetMessageCountFrom($id_user);
- $msjto = $messagecontroller->GetMessageFrom($id_user , null);
+ $id_user   = Session::GetSession("login", "id");
+ $count     = $messagecontroller->GetMessageCountFrom($id_user);
+ $msjto     = $messagecontroller->GetMessageFrom($id_user , null);
 
 
  $count_submsj = 0;
@@ -65,32 +65,39 @@
  {
      echo '<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">';
      echo '<li>';
-     echo '<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php?id_mensaje=' . $value['id_mensaje'] . '">';
+     echo '<a href="javascript:chat_preview(' . $value['id_mensaje'] . ');">';
      echo '<span class="photo">';
+    
      if ($value['imagen'] == null) {
         echo '<img src="' . FunctionsController::GetUrl("img" , false) . '/users/avatar.png" class="img-circle" alt="">';
      } else {
         echo '<img src="' . FunctionsController::GetUrl("img" , false) . '/users/' . $value['imagen'] . '" class="img-circle" alt="">';
      }
+     
      echo '</span>';
      echo '<span class="subject">';
+     
      $sub_msj = $messagecontroller->GetCountSubMessage($value['id_mensaje'] , $id_user);
+     
      if($sub_msj >= 1){
         echo '<span class="badge badge-default">';
         echo $sub_msj . '</span>';
      }
+     
      echo '<span class="from">';
      echo  $value['nombre'] . '</span>';
      echo '<span class="time">'  . FunctionsController::Get_TimeAgo($value['fecha']. " " . $value['hora']) .'</span>';
      echo '</span>';
      echo '<br><span class="message">';
      echo '<b>' . $value['asunto'] . "</b><br>"; 
+     
      if(strlen($value['mensaje'])  >= 65)
      {
          echo substr($value['mensaje'], 0 , 60) . ' (...)';
      }else{
          echo $value['mensaje'];
      }
+     
      echo '</span>';
      echo '</a>';
      echo '</li>';

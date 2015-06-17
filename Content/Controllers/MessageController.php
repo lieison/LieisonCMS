@@ -49,8 +49,7 @@ class MessageController extends MessageModel {
                         "id_usuario_permiso"    =>$id_usuario_permission
         ));
     }
-    
-    
+
     public function GetUsersPermission($id_usuario){
          $result = $this->RawQuery("SELECT usuario.id_usuario , concat(usuario.nombre , ' ' , usuario.apellido) as nombre"
                  . " usuario.imagen FROM usuario INNER JOIN lieisoft_mensajes_permisos ON "
@@ -58,7 +57,6 @@ class MessageController extends MessageModel {
                  . " usuario.id_usuario LIKE '$id_usuario'");
          return $result;
     }
-
 
     public function GetMessageCountFrom($id_u_para, $no_read = true) {
          $result = null;
@@ -119,11 +117,11 @@ class MessageController extends MessageModel {
 
     public function SetSubmessage($id_message, $id_usuario, $mensaje) {
         $this->Insert("lieisoft_submensajeria" , array(
-            "id_mensajeria"=>$id_message,
-            "id_usuario"=>$id_usuario,
-            "mensaje"=>$mensaje,
-            "fecha"=>  FunctionsController::get_date(),
-            "hora"=>  FunctionsController::get_time()
+                    "id_mensajeria"         =>$id_message,
+                    "id_usuario"            =>$id_usuario,
+                    "mensaje"               =>$mensaje,
+                    "fecha"                 => FunctionsController::get_date(),
+                    "hora"                  => FunctionsController::get_time()
         ));
     }
 
@@ -149,6 +147,48 @@ class MessageController extends MessageModel {
          $result = $this->RawQuery($query);
          
          return $result[0]['count'];
+    }
+
+    public function DeleteMessage($id_message) {
+        
+    }
+
+    public function DeleteSubMessage($id_submesage) {
+        
+    }
+
+    public function GetChatById($id) {
+        
+        $me         = Session::GetSession("login", "id");
+        
+        $vector     = [];
+        
+        $query =   "SELECT lieisoft_mensajeria.asunto as 'asunto' ,
+                    lieisoft_mensajeria.fecha as 'fecha' ,
+                    lieisoft_mensajeria.hora as 'hora' ,
+                    concat(usuario.nombre ,  ' ' , usuario.apellido) as 'to_name',
+                    usuario.imagen as 'avatar' , login.rol as 'to_rol' FROM lieisoft_mensajeria
+                    INNER JOIN usuario ON usuario.id_usuario = lieisoft_mensajeria.id_usuario_de
+                    INNER JOIN login ON login.id_usuario = lieisoft_mensajeria.id_usuario_de
+                    WHERE lieisoft_mensajeria.id_usuario_para LIKE '$me';";
+ 
+        $vector[] =  parent::RawQuery($query);
+        
+        $query = "SELECT lieisoft_submensajeria.mensaje as 'mensaje' ,
+                  lieisoft_submensajeria.fecha as 'fecha',
+                  lieisoft_submensajeria.hora as 'hora' ,
+                  lieisoft_submensajeria.leido as 'leido' ,
+                  lieisoft_submensajeria.id_usuario as 'id',
+                  concat(usuario.nombre , ' ' , usuario.apellido ) as 'nombre',
+                  usuario.imagen as 'avatar' FROM lieisoft_submensajeria 
+                  INNER JOIN usuario ON usuario.id_usuario=lieisoft_submensajeria.id_usuario
+                  WHERE lieisoft_submensajeria.id_mensajeria 
+                  LIKE $id
+                  ORDER BY lieisoft_submensajeria.fecha , lieisoft_submensajeria.hora DESC;";
+      
+        $vector[] =  parent::RawQuery($query);
+        
+        return $vector;
     }
 
 }
