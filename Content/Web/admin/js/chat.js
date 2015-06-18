@@ -82,15 +82,13 @@ var chat = function(){
     
     this.load = function(){
         
-        if(window.localStorage.getItem("chat") === null){
-            return;
-        }
-        else{
-        var chats = window.localStorage.getItem("chat");
-        var data = chats.split(",");
-        var task = new jtask();
+            if(window.localStorage.getItem("chat") === null){
+                return;
+            }
         
-           
+            var chats = window.localStorage.getItem("chat");
+            var task = new jtask();
+        
             task.method = "GET";
             task.url = route() + "admin/messages/loader/active_chat.php";
             task.async = true;
@@ -99,26 +97,25 @@ var chat = function(){
             };
             task.success_callback(function(callback){
                 // console.log("Chat: {" + id + "}"); //solo es para depuracion...
-                /* if($("#chat_" + id)[0]){
-                     $("#chat_" + id).remove();
-                     $("#user_chat").prepend(callback);
-                 }else{
-                     $("#user_chat").prepend(callback);
-                 }*/
                 $("#user_chat").html(callback);
             });
             
             task.do_task(); 
-        }
+        
  
        
         
     };
     
     this.count_chat = function() {
-        var c = window.localStorage.getItem("chat");
-        var data = c.split(",");
-        $("#chat_count").html(data.length);
+        try{
+            var c = window.localStorage.getItem("chat");
+            var data = c.split(",");
+            $("#chat_count").html(data.length);
+        }catch(ex){
+            $("#chat_count").html("0");
+            console.log("No hay contador...");
+        }
     };
    
 };
