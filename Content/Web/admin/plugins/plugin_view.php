@@ -1,6 +1,7 @@
 
 <?php
  $path_origin = "../";
+ 
  $plugin = new PluginController($path_origin);
  $modules = $plugin->GetAllModules();
  $count = count($modules);
