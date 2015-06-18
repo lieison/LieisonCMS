@@ -115,11 +115,7 @@ var chat = function(){
             task.do_task(); 
         });
         
-        //Metodo de ordenamiento ...
-        $.map(data, function(id){
-            // console.log($("#chat_" + id).attr("title"));
-        });
-        
+       
         
     };
     

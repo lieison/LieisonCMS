@@ -21,7 +21,7 @@ $request = $msj->GetActiveUserChat($id);
 
 $count_msj = $msj->GetCountSubMessage($id, Session::GetSession("login", "id"));
 
-echo '<li title="' . $request['fecha'] . "&" . $request['hora'] . '" name="" id="chat_' . $id . '" class="media">';
+echo '<li title="' . $request['fecha'] . "&" . $request['hora'] . "&" . $count_msj . '" name="" id="chat_' . $id . '" class="media">';
 
 if($count_msj != 0){
     echo '<div class="media-status">';
