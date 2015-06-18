@@ -74,7 +74,7 @@ var jtask = function(){
                         C_before.target();
                     }
               },
-              complete   : function() {C_complete.target();},
+              complete   : function() { },
               success: function ( callback){ C_call.callback(callback);},
               statusCode: {
                         404: function() {

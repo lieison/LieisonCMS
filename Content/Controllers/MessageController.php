@@ -159,19 +159,44 @@ class MessageController extends MessageModel {
 
     public function GetChatById($id) {
         
+        //el id del usuario 
         $me         = Session::GetSession("login", "id");
         
+        //defecto el usuario quien lo mando y para quien 
+        $msj       = "lieisoft_mensajeria.id_usuario_de";
+        $to        = "lieisoft_mensajeria.id_usuario_para";
+        
+        //preparamos el vector
         $vector     = [];
         
+        //preparamos la query de verificar si el usuario actual es el que envio el mensaje
+        //si en dado caso el envio el mensaje los parametros cambian 
+        $query =    "SELECT lieisoft_mensajeria.id_usuario_de as 'id'"
+                    ." FROM lieisoft_mensajeria WHERE id_mensaje LIKE $id";
+        
+        //resultado
+        $result =   parent::RawQuery($query);
+        $result =   $result[0]['id'];
+        
+        //parametros cambian si envio el mensaje 
+        if($result == $me){
+            $msj       = "lieisoft_mensajeria.id_usuario_para";
+            $to        = "lieisoft_mensajeria.id_usuario_de";
+        }
+        
+        //resultado de la consulta ya con parametros cambiados
         $query =   "SELECT lieisoft_mensajeria.asunto as 'asunto' ,
                     lieisoft_mensajeria.fecha as 'fecha' ,
                     lieisoft_mensajeria.hora as 'hora' ,
                     concat(usuario.nombre ,  ' ' , usuario.apellido) as 'to_name',
-                    usuario.imagen as 'avatar' , login.rol as 'to_rol' FROM lieisoft_mensajeria
-                    INNER JOIN usuario ON usuario.id_usuario = lieisoft_mensajeria.id_usuario_de
-                    INNER JOIN login ON login.id_usuario = lieisoft_mensajeria.id_usuario_de
-                    WHERE lieisoft_mensajeria.id_usuario_para LIKE '$me';";
+                    usuario.imagen as 'avatar' , login.rol as 'to_rol' ,
+                    privilegios.padre as 'parent_rol'  FROM lieisoft_mensajeria
+                    INNER JOIN usuario ON usuario.id_usuario=$msj
+                    INNER JOIN login ON login.id_usuario = $msj
+                    INNER JOIN privilegios ON privilegios.nombre = login.rol    
+                    WHERE $to LIKE '$me' ;";
  
+        //primer resultado vector 1
         $vector[] =  parent::RawQuery($query);
         
         $query = "SELECT lieisoft_submensajeria.mensaje as 'mensaje' ,
@@ -186,9 +211,52 @@ class MessageController extends MessageModel {
                   LIKE $id
                   ORDER BY lieisoft_submensajeria.fecha , lieisoft_submensajeria.hora DESC;";
       
+        //segundo resultado vector 2
         $vector[] =  parent::RawQuery($query);
         
         return $vector;
+    }
+
+    public function GetActiveUserChat($id) {
+        
+//el id del usuario 
+        $me         = Session::GetSession("login", "id");
+        
+        //defecto el usuario quien lo mando y para quien 
+        $msj       = "lieisoft_mensajeria.id_usuario_de";
+        $to        = "lieisoft_mensajeria.id_usuario_para";
+        
+        
+        //preparamos la query de verificar si el usuario actual es el que envio el mensaje
+        //si en dado caso el envio el mensaje los parametros cambian 
+        $query =    "SELECT lieisoft_mensajeria.id_usuario_de as 'id'"
+                    ." FROM lieisoft_mensajeria WHERE id_mensaje LIKE $id";
+        
+        //resultado
+        $result =   parent::RawQuery($query);
+        $result =   $result[0]['id'];
+        
+        //parametros cambian si envio el mensaje 
+        if($result == $me){
+            $msj       = "lieisoft_mensajeria.id_usuario_para";
+            $to        = "lieisoft_mensajeria.id_usuario_de";
+        }
+        
+        //resultado de la consulta ya con parametros cambiados
+        $query =   "SELECT lieisoft_mensajeria.asunto as 'asunto' ,
+                    lieisoft_mensajeria.fecha as 'fecha' ,
+                    lieisoft_mensajeria.hora as 'hora' ,
+                    concat(usuario.nombre ,  ' ' , usuario.apellido) as 'to_name',
+                    usuario.imagen as 'avatar' , login.rol as 'to_rol' ,
+                    privilegios.padre as 'parent_rol'  FROM lieisoft_mensajeria
+                    INNER JOIN usuario ON usuario.id_usuario=$msj
+                    INNER JOIN login ON login.id_usuario = $msj
+                    INNER JOIN privilegios ON privilegios.nombre = login.rol    
+                    WHERE $to LIKE '$me' AND lieisoft_mensajeria.id_mensaje LIKE $id;";
+ 
+        $request = parent::RawQuery($query);
+        
+        return $request[0];
     }
 
 }
