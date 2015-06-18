@@ -101,10 +101,6 @@ var chat = function(){
             });
             
             task.do_task(); 
-        
- 
-       
-        
     };
     
     this.count_chat = function() {
@@ -114,7 +110,7 @@ var chat = function(){
             $("#chat_count").html(data.length);
         }catch(ex){
             $("#chat_count").html("0");
-            console.log("No hay contador...");
+            console.log("No hay contador..." );
         }
     };
    
