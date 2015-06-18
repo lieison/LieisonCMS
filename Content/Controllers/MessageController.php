@@ -45,26 +45,17 @@ class MessageController extends MessageModel {
      */
     public function SetPermisssionMessage($id_usuario , $id_usuario_permission){
         $this->Insert("lieisoft_mensajes_permisos", array(
-            "id_usuario"=>$id_usuario,
-            "id_usuario_permiso"=>$id_usuario_permission
+                        "id_usuario"            =>$id_usuario,
+                        "id_usuario_permiso"    =>$id_usuario_permission
         ));
     }
-    
-    
+
     public function GetUsersPermission($id_usuario){
          $result = $this->RawQuery("SELECT usuario.id_usuario , concat(usuario.nombre , ' ' , usuario.apellido) as nombre"
                  . " usuario.imagen FROM usuario INNER JOIN lieisoft_mensajes_permisos ON "
                  . " usuario.id_usuario=lieisoft_mensajes_permisos.id_usuario_permiso WHERE "
                  . " usuario.id_usuario LIKE '$id_usuario'");
          return $result;
-    }
-    
-    public function DeleteMessage($id_message) {
-        
-    }
-
-    public function DeleteSubMessage($id_submesage) {
-        
     }
 
     public function GetMessageCountFrom($id_u_para, $no_read = true) {
@@ -126,11 +117,11 @@ class MessageController extends MessageModel {
 
     public function SetSubmessage($id_message, $id_usuario, $mensaje) {
         $this->Insert("lieisoft_submensajeria" , array(
-            "id_mensajeria"=>$id_message,
-            "id_usuario"=>$id_usuario,
-            "mensaje"=>$mensaje,
-            "fecha"=>  FunctionsController::get_date(),
-            "hora"=>  FunctionsController::get_time()
+                    "id_mensajeria"         =>$id_message,
+                    "id_usuario"            =>$id_usuario,
+                    "mensaje"               =>$mensaje,
+                    "fecha"                 => FunctionsController::get_date(),
+                    "hora"                  => FunctionsController::get_time()
         ));
     }
 
@@ -156,6 +147,116 @@ class MessageController extends MessageModel {
          $result = $this->RawQuery($query);
          
          return $result[0]['count'];
+    }
+
+    public function DeleteMessage($id_message) {
+        
+    }
+
+    public function DeleteSubMessage($id_submesage) {
+        
+    }
+
+    public function GetChatById($id) {
+        
+        //el id del usuario 
+        $me         = Session::GetSession("login", "id");
+        
+        //defecto el usuario quien lo mando y para quien 
+        $msj       = "lieisoft_mensajeria.id_usuario_de";
+        $to        = "lieisoft_mensajeria.id_usuario_para";
+        
+        //preparamos el vector
+        $vector     = [];
+        
+        //preparamos la query de verificar si el usuario actual es el que envio el mensaje
+        //si en dado caso el envio el mensaje los parametros cambian 
+        $query =    "SELECT lieisoft_mensajeria.id_usuario_de as 'id'"
+                    ." FROM lieisoft_mensajeria WHERE id_mensaje LIKE $id";
+        
+        //resultado
+        $result =   parent::RawQuery($query);
+        $result =   $result[0]['id'];
+        
+        //parametros cambian si envio el mensaje 
+        if($result == $me){
+            $msj       = "lieisoft_mensajeria.id_usuario_para";
+            $to        = "lieisoft_mensajeria.id_usuario_de";
+        }
+        
+        //resultado de la consulta ya con parametros cambiados
+        $query =   "SELECT lieisoft_mensajeria.asunto as 'asunto' ,
+                    lieisoft_mensajeria.fecha as 'fecha' ,
+                    lieisoft_mensajeria.hora as 'hora' ,
+                    concat(usuario.nombre ,  ' ' , usuario.apellido) as 'to_name',
+                    usuario.imagen as 'avatar' , login.rol as 'to_rol' ,
+                    privilegios.padre as 'parent_rol'  FROM lieisoft_mensajeria
+                    INNER JOIN usuario ON usuario.id_usuario=$msj
+                    INNER JOIN login ON login.id_usuario = $msj
+                    INNER JOIN privilegios ON privilegios.nombre = login.rol    
+                    WHERE $to LIKE '$me' ;";
+ 
+        //primer resultado vector 1
+        $vector[] =  parent::RawQuery($query);
+        
+        $query = "SELECT lieisoft_submensajeria.mensaje as 'mensaje' ,
+                  lieisoft_submensajeria.fecha as 'fecha',
+                  lieisoft_submensajeria.hora as 'hora' ,
+                  lieisoft_submensajeria.leido as 'leido' ,
+                  lieisoft_submensajeria.id_usuario as 'id',
+                  concat(usuario.nombre , ' ' , usuario.apellido ) as 'nombre',
+                  usuario.imagen as 'avatar' FROM lieisoft_submensajeria 
+                  INNER JOIN usuario ON usuario.id_usuario=lieisoft_submensajeria.id_usuario
+                  WHERE lieisoft_submensajeria.id_mensajeria 
+                  LIKE $id
+                  ORDER BY lieisoft_submensajeria.fecha , lieisoft_submensajeria.hora DESC;";
+      
+        //segundo resultado vector 2
+        $vector[] =  parent::RawQuery($query);
+        
+        return $vector;
+    }
+
+    public function GetActiveUserChat($id) {
+        
+//el id del usuario 
+        $me         = Session::GetSession("login", "id");
+        
+        //defecto el usuario quien lo mando y para quien 
+        $msj       = "lieisoft_mensajeria.id_usuario_de";
+        $to        = "lieisoft_mensajeria.id_usuario_para";
+        
+        
+        //preparamos la query de verificar si el usuario actual es el que envio el mensaje
+        //si en dado caso el envio el mensaje los parametros cambian 
+        $query =    "SELECT lieisoft_mensajeria.id_usuario_de as 'id'"
+                    ." FROM lieisoft_mensajeria WHERE id_mensaje LIKE $id";
+        
+        //resultado
+        $result =   parent::RawQuery($query);
+        $result =   $result[0]['id'];
+        
+        //parametros cambian si envio el mensaje 
+        if($result == $me){
+            $msj       = "lieisoft_mensajeria.id_usuario_para";
+            $to        = "lieisoft_mensajeria.id_usuario_de";
+        }
+        
+        //resultado de la consulta ya con parametros cambiados
+        $query =   "SELECT lieisoft_mensajeria.asunto as 'asunto' ,
+                    lieisoft_mensajeria.fecha as 'fecha' ,
+                    lieisoft_mensajeria.hora as 'hora' ,
+                    concat(usuario.nombre ,  ' ' , usuario.apellido) as 'to_name',
+                    usuario.imagen as 'avatar' , login.rol as 'to_rol' ,
+                    privilegios.padre as 'parent_rol'  FROM lieisoft_mensajeria
+                    INNER JOIN usuario ON usuario.id_usuario=$msj
+                    INNER JOIN login ON login.id_usuario = $msj
+                    INNER JOIN privilegios ON privilegios.nombre = login.rol    
+                    WHERE $to LIKE '$me' AND lieisoft_mensajeria.id_mensaje LIKE $id;";
+ 
+        $request = parent::RawQuery($query);
+        
+        return $request[0];
     }
 
 }

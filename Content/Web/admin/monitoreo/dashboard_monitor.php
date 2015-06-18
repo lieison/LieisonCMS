@@ -2,7 +2,15 @@
 
 <?php 
     session_start();
+<<<<<<< HEAD
     
+=======
+
+    set_dependencies(array(
+        "AdminController"
+    ));
+
+>>>>>>> origin/master
     include   '../../Conf/Include.php';
     
     set_dependencies(array(

@@ -22,4 +22,9 @@ abstract class MessageModel extends MysqlConection {
     public abstract  function DeleteSubMessage($id_submesage);
     public abstract  function GetSubMessage($id_mensaje);
     public abstract  function GetCountSubMessage($id_mensaje  , $id_user, $not_read = true);
+    
+    public abstract  function GetChatById($id);
+    public abstract  function GetActiveUserChat($id);
+  
+    
 }

@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PluginController.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/index.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/set_end_process.php</file>
@@ -51,6 +52,17 @@
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/perfil/view_perfil.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_entradas.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_finish_prospect.php</file>
+=======
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/MessageModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/View/Admin/View.phtml.bak</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/add_chat.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/assets/admin/layout/scripts/quick-sidebar.js</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/chat.js</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/load_chats.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/MessageController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/AjaxFunctions.js</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>

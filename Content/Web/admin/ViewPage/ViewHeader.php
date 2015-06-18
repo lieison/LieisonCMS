@@ -145,8 +145,8 @@ class AdminHeader
         
         
          /**CARGA LAS NOTIFICACIONES */
-        echo 'load_notify();';
-        echo "setInterval('load_notify()' , 1000*10);";    
+      //  echo 'load_notify();';
+       // echo "setInterval('load_notify()' , 1000*10);";    
         
         /****************************************************/
         
@@ -228,24 +228,19 @@ class AdminHeader
                    <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css"/>
                    <link rel="stylesheet" type="text/css" href="'. self::$relative_route . 'assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>';
         
+
     }
     
     static function GetJs()
     {
         
-        /**
-         *          <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
-                    <script src="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
-         * 
-         */
+            /**
+             * JS GLOBALES 
+             * 
+             */
         
-        
-            echo '<!--[if lt IE 9]>
+                echo '<!-- BEGIN CORE PLUGINS -->
+                 <!--[if lt IE 9]>
                     <script src="'. self::$relative_route . 'assets/global/plugins/respond.min.js"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/excanvas.min.js"></script> 
                  <![endif]-->
@@ -262,7 +257,6 @@ class AdminHeader
                     <script src="'. self::$relative_route . 'assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
                 <!-- END CORE PLUGINS -->
                 <!-- BEGIN PAGE LEVEL PLUGINS -->
-           
                     <script src="'. self::$relative_route . 'assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
@@ -274,6 +268,21 @@ class AdminHeader
                     <script src="'. self::$relative_route . 'assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
                     <script src="'. self::$relative_route . 'assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>';
             
+        
+            /*
+             * JS PARA USO DE CHAT ...
+             * 
+             * **/
+        
+             
+            echo '<script type="text/javascript" src="' . self::$relative_route  .  'admin/js/chat.js"></script>';
+            
+      
+            /**
+             * JS JAVASCRIPT TASK 
+             */
+            
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'admin/js/task.js"></script>';
             
             echo '<script src="'. self::$relative_route . '/assets/global/scripts/metronic.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
@@ -312,6 +321,8 @@ class AdminHeader
              echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>';
              echo '<script type="text/javascript" src="' . self::$relative_route  .  'assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>';
               
+            
+             
             //DROP DOWN
             echo '<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>';
             
@@ -322,13 +333,6 @@ class AdminHeader
         echo '<img alt="" class="img-circle" src="' . self::$relative_route . 'admin/img/users/' . $imagen . '" />';
     }
     
-    static function Get_Quick_Sidebar()
-    {
-        echo '<a href="javascript:;" class="page-quick-sidebar-toggler"><i class="icon-close"></i></a>';
-        echo '<div class="page-quick-sidebar-wrapper">';
-        
-        echo '</div>';
-    }
     
     
     static function Get_Sublinks($link= null , $link1 = null)
