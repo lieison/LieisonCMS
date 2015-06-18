@@ -145,8 +145,8 @@ class AdminHeader
         
         
          /**CARGA LAS NOTIFICACIONES */
-        echo 'load_notify();';
-        echo "setInterval('load_notify()' , 1000*10);";    
+      //  echo 'load_notify();';
+       // echo "setInterval('load_notify()' , 1000*10);";    
         
         /****************************************************/
         

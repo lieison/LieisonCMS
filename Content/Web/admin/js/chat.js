@@ -98,12 +98,12 @@ var chat = function(){
            
             task.method = "GET";
             task.url = route() + "admin/messages/loader/active_chat.php";
-            task.async = false;
+            task.async = true;
             task.data = {
                 "id_message" : id
             };
             task.success_callback(function(callback){
-                 console.log("Chat: {" + id + "}");
+                // console.log("Chat: {" + id + "}"); //solo es para depuracion...
                  if($("#chat_" + id)[0]){
                      $("#chat_" + id).remove();
                      $("#user_chat").prepend(callback);
@@ -116,9 +116,9 @@ var chat = function(){
         });
         
         //Metodo de ordenamiento ...
-        /*$.map(data, function(id){
-             console.log($("#chat_" + id).attr("title"));
-        });*/
+        $.map(data, function(id){
+            // console.log($("#chat_" + id).attr("title"));
+        });
         
         
     };
