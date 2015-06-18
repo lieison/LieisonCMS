@@ -69,7 +69,6 @@ var chat = function(){
                   }
               }
               
-             $("#user_chat").html("");
 
              $("#quick_sidebar_tab_1")
                      .removeClass("tab-pane active page-quick-sidebar-chat")
@@ -86,35 +85,32 @@ var chat = function(){
         if(window.localStorage.getItem("chat") === null){
             return;
         }
-        
-        
+        else{
         var chats = window.localStorage.getItem("chat");
         var data = chats.split(",");
-
-        //agregamos a la lista
-        $.map(data, function(id){
-            
-            var task = new jtask();
+        var task = new jtask();
+        
            
             task.method = "GET";
             task.url = route() + "admin/messages/loader/active_chat.php";
             task.async = true;
             task.data = {
-                "id_message" : id
+                "id_message" : chats
             };
             task.success_callback(function(callback){
                 // console.log("Chat: {" + id + "}"); //solo es para depuracion...
-                 if($("#chat_" + id)[0]){
+                /* if($("#chat_" + id)[0]){
                      $("#chat_" + id).remove();
                      $("#user_chat").prepend(callback);
                  }else{
                      $("#user_chat").prepend(callback);
-                 }
+                 }*/
+                $("#user_chat").html(callback);
             });
             
             task.do_task(); 
-        });
-        
+        }
+ 
        
         
     };
