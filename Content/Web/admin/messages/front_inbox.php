@@ -53,7 +53,7 @@
 		<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php">Ver Todos</a>
 	    </li>';
      }else{
-           echo '<li class="external">
+            echo '<li class="external">
             <h3>' . $count . ' <span class="bold">Mensajes</span> Recientes </h3>
 		<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php">Ver Todos</a>
 	    </li>';
