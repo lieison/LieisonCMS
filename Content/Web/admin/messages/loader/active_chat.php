@@ -10,16 +10,18 @@ set_dependencies(array(
     "MessageController"
 ));
 
-
+//VERIFICAMOS LOS MULTIPLES IDS 
 $id         = explode(",",  $_GET['id_message']);
 
 $array_     = array();
 
 
+//RECORREMOS LOS IDS 
 foreach($id as $value){
 $msj = new MessageController(); //controlador
 $request = $msj->GetActiveUserChat($value); //data
 $count_msj = $msj->GetCountSubMessage($value, Session::GetSession("login", "id")); //cantidad de mensajes
+
 $array_[] = array(
         "date"      => $request['fecha'],
         "time"      => $request['hora'],

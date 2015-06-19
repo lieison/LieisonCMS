@@ -1,22 +1,40 @@
 /* 
- * 
- * 
+ * @version 1.5
+ * SISTEMA DE CHAT LIEISON 
  */
 
 
-
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @description cuando en metronics cae un inbox le da seleccionar entonces se abre el chat
+ * */
 var chat_preview = function(id){
     
      var load_chat = new chat();
      load_chat.add(id);
 };
 
+
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @description elimina un chat activo
+ * */
 var delele_chat = function(id){
     console.log("eliminando elemento {" + id + "}");
     var chat_ = new chat();
     chat_.delete_active_chat(id);
-}
+};
 
+
+/**App Chat
+ * 
+ * @author Rolando Arriaza
+ * @class chat
+ * @version 1.2
+ * @requires jquery , metronics template
+ * */
 
 var chat = function(){
     
@@ -76,6 +94,7 @@ var chat = function(){
     this.load = function(){
         
             if(window.localStorage.getItem("chat") === null){
+                
                 return;
             }
         
@@ -109,7 +128,6 @@ var chat = function(){
             $("#chat_count").html(data.length);
         }catch(ex){
             $("#chat_count").html("0");
-            console.log("No hay contador..." );
         }
     };
     
