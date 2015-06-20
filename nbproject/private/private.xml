@@ -3,12 +3,70 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/active_chat.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/message_chat.php</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PluginController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/set_end_process.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/UploadPlugin.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_add_prospecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_admin_prospecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_edit_prospecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_paises.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/inbox.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/controlpagina/LoadAddSeccion.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/CallInstall.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/notifications/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/count_inbox.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/seccion/dashboard_control_paginas.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/plugin_view.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/getexist_prospect.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/seccion/LoadAddSeccion.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/seccion/edit_dashboard_page.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/mail/test.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewAddProspecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/seccion/ResponsiveControlSeccion.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_prospectos.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/dashboard_index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/seccion/ResponsiveControlPaginas.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/monitoreo/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/PageController.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/ViewHeader.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/monitoreo/dashboard_monitor.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ajax_add_prospect.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewAdminProspecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/seccion/view_edit_paginas.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/seccion/PageFunctions.js</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ajax_contact.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/plugins/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/edit_prospect.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/controlpagina/deprecado.txt</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/ViewEditProspecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/seccion/add_dashboard_seccion.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/perfil/index.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_add_prospect.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_edit_prospect.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/set_log_bitacora.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/front_inbox.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/controlpagina/ResponsiveControlPaginas.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/perfil/view_perfil.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_entradas.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/get_finish_prospect.php</file>
+=======
+>>>>>>> origin/master
             <file>file:/C:/wamp/www/LieisonCMS/Content/Models/MessageModel.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/View/Admin/View.phtml.bak</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/chat.js</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/MessageController.php</file>
+<<<<<<< HEAD
+=======
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/AjaxFunctions.js</file>
+>>>>>>> origin/master
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>

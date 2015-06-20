@@ -10,21 +10,24 @@ set_dependencies(array(
     "MessageController"
 ));
 
-
+//VERIFICAMOS LOS MULTIPLES IDS 
 $id         = explode(",",  $_GET['id_message']);
 
 $array_     = array();
 
 
+//RECORREMOS LOS IDS 
 foreach($id as $value){
 $msj = new MessageController(); //controlador
 $request = $msj->GetActiveUserChat($value); //data
 $count_msj = $msj->GetCountSubMessage($value, Session::GetSession("login", "id")); //cantidad de mensajes
+
 $array_[] = array(
         "date"      => $request['fecha'],
         "time"      => $request['hora'],
         "count"     => $count_msj,
-        "data"      => $request
+        "data"      => $request,
+        "id"        => $value
 );
 
 unset($msj);
@@ -52,16 +55,17 @@ foreach ($array_ as $value){
     
     $c = $value['count'];
     $request = $value['data'];
-    echo '<li title="' . $request['to_rol']. '" name="" id="chat_' . $id . '" class="media">';
+    $del = "javascript:delele_chat(" . $value['id'] .");";
+    echo '<li title="' . $request['to_rol']. '"  id="chat_' . $value['id'] . '" class="media">';
     if($c != 0){
         echo '<div class="media-status">';
-        echo '<a href=""><i class="fa fa-times-circle"></i></a><br>';
+        echo '<a href="' . $del . '"><i class="fa fa-times-circle"></i></a><br>';
         echo '<span class="badge badge-success">' . $c. '</span>';
         echo "</div>";
     }
     else{
         echo '<div class="media-status">';
-        echo '<a href=""><i class="fa fa-times-circle"></i></a>';
+        echo '<a href="' . $del . '"><i class="fa fa-times-circle"></i></a>';
         echo "</div>";
     }
 

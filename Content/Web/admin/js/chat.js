@@ -1,8 +1,14 @@
 /* 
- * 
- * 
+ * @version 1.5
+ * SISTEMA DE CHAT LIEISON 
  */
 
+
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @description cuando en metronics cae un inbox le da seleccionar entonces se abre el chat
+ * */
 var chat_preview = function(id){
     
      var load_chat = new chat();
@@ -10,9 +16,29 @@ var chat_preview = function(id){
 };
 
 
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @description elimina un chat activo
+ * */
+var delele_chat = function(id){
+    console.log("eliminando elemento {" + id + "}");
+    var chat_ = new chat();
+    chat_.delete_active_chat(id);
+};
+
+
+/**App Chat
+ * 
+ * @author Rolando Arriaza
+ * @class chat
+ * @version 1.2
+ * @requires jquery , metronics template
+ * */
+
 var chat = function(){
     
-   var sidebar = function(){
+    var sidebar = function(){
         
      $("body")
         .removeClass("page-header-fixed page-quick-sidebar-over-content page-style-square")
@@ -24,26 +50,15 @@ var chat = function(){
     };
     
     this.add = function(id){
-        
-          var task = new jtask();
-          task.url = route() + "admin/messages/loader/message_chat.php";
-          task.data = {
-              "id_message" : id
-          };
-          task.beforesend = true;
-          task.config_before(function(){
-             
-               sidebar(); //cargamos el sidebar
-               $("#user_chat").html(' <h3 class="list-heading"><br><b>Cargando Chat...</b></h3>');
-          });
-          task.success_callback(function(callback){
-              
+
               //window.localStorage.removeItem("chat_active");
               //window.localStorage.removeItem("chat");
               if(window.localStorage.getItem("chat") === null){
                   var id_storage = [id];
                   window.localStorage.setItem("chat" , id_storage );
-              }else{
+              }
+              else{
+                  
                   var current_storage =  window.localStorage.getItem("chat");
                   var data = current_storage.split(",");
                   if(Array.isArray(data)){
@@ -69,28 +84,23 @@ var chat = function(){
                   }
               }
               
-
+             sidebar();
              $("#quick_sidebar_tab_1")
                      .removeClass("tab-pane active page-quick-sidebar-chat")
                      .addClass("tab-pane active page-quick-sidebar-chat page-quick-sidebar-content-item-shown");
-         
-          });
-          task.do_task();
-         
+
     };
-    
     
     this.load = function(){
         
-        if(window.localStorage.getItem("chat") === null){
-            return;
-        }
-        else{
-        var chats = window.localStorage.getItem("chat");
-        var data = chats.split(",");
-        var task = new jtask();
+            if(window.localStorage.getItem("chat") === null){
+                
+                return;
+            }
         
-           
+            var chats = window.localStorage.getItem("chat");
+            var task = new jtask();
+        
             task.method = "GET";
             task.url = route() + "admin/messages/loader/active_chat.php";
             task.async = true;
@@ -99,26 +109,51 @@ var chat = function(){
             };
             task.success_callback(function(callback){
                 // console.log("Chat: {" + id + "}"); //solo es para depuracion...
-                /* if($("#chat_" + id)[0]){
-                     $("#chat_" + id).remove();
-                     $("#user_chat").prepend(callback);
-                 }else{
-                     $("#user_chat").prepend(callback);
-                 }*/
                 $("#user_chat").html(callback);
             });
             
             task.do_task(); 
-        }
- 
-       
-        
     };
     
     this.count_chat = function() {
-        var c = window.localStorage.getItem("chat");
-        var data = c.split(",");
-        $("#chat_count").html(data.length);
+        try{
+            //window.localStorage.removeItem("chat");
+            var c = window.localStorage.getItem("chat");
+            var data = c.split(",");
+            if(data == "" || data == null){
+                 console.log("reset data");
+                 window.localStorage.removeItem("chat");
+            }
+            console.log(data);
+            $("#chat_count").html(data.length);
+        }catch(ex){
+            $("#chat_count").html("0");
+        }
+    };
+    
+    this.delete_active_chat = function(id){
+        try{
+            var c = window.localStorage.getItem("chat");
+            var data = c.split(",");
+            for(var i = 0; i < data.length ; i++){
+                 if(data[i] == id){
+                     data.splice(i , 1);
+                     console.log("Eliminando ... metodo delete");
+                 }
+            }
+            if($("#chat_" + id)[0]){
+                console.log("removiendo nodo");
+                $("#chat_" + id).remove();
+            }
+            console.log("compilando almacenamiento local");
+            window.localStorage.removeItem("chat");
+            window.localStorage.setItem("chat" , data);
+            
+        }catch(ex){}
+    };
+    
+    this.chating = function(){
+        
     };
    
 };

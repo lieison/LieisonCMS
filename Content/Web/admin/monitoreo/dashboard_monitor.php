@@ -2,16 +2,26 @@
 
 <?php 
     session_start();
+<<<<<<< HEAD
+    
+=======
 
     set_dependencies(array(
         "AdminController"
     ));
 
+>>>>>>> origin/master
     include   '../../Conf/Include.php';
+    
+    set_dependencies(array(
+        "AdminController"
+    ));
+    
     $http = new Http\Header();
     if(!isset($_SESSION['login'])):
         $http->redirect("login.php");
     endif;
+    
     
     $usuario = $_SESSION['login']['user'];
     $rol = $_SESSION['login']['rol'];
