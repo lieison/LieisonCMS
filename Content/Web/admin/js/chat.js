@@ -75,6 +75,23 @@ var inbox = function(){
          $("#inbox_count").removeClass("badge badge-active")
                  .addClass("badge badge-primary");
          
+         
+        var title =  $("#title").html();
+            title = title.replace('(' , "" , title);
+            title = title.replace(')' , "" , title);
+            title = title.replace(/[0-9]+/gi, "");
+                          
+         if(parseInt(count) === 0){
+             $("#title").html( title );
+         }else{
+             $("#title").html( "(" + count + ")" + " " + title );
+         }
+         
+         setTimeout('inbox()', 3000);
+        // setInterval('inbox()',2000);
+         
+         console.log("iteracion ... " );
+
     });
     task.do_task();
     

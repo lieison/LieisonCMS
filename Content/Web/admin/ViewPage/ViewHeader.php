@@ -122,12 +122,8 @@ class AdminHeader
           * CARGA LOS  MENSAJES 
          **/
    
-        echo 'load_message();';
-        echo "setInterval('inbox()',1000);";
-        
-        echo 'load_count_message();';
-        echo "setInterval('load_count_message()',1000);";
-        
+        echo 'inbox();';
+
         /*************************************************/
         
         
