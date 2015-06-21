@@ -42,6 +42,11 @@ var chat_message = function(id){
 };
 
 
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @descriptionsistema funcion que activa el inbox cuando hace la carga de la pagina
+ * */
 var inbox = function(){
     var route = document.getElementById("route_value").value;
     var task = new jtask();
@@ -87,10 +92,8 @@ var inbox = function(){
              $("#title").html( "(" + count + ")" + " " + title );
          }
          
-         setTimeout('inbox()', 3000);
-        // setInterval('inbox()',2000);
+         setTimeout('inbox()', 1000);
          
-        // console.log("iteracion ... " );
 
     });
     task.do_task();
@@ -159,8 +162,6 @@ var chat = function(){
               }
               
              chat_message(id);
-              
-             
 
     };
     
@@ -240,8 +241,7 @@ var chat = function(){
         
         var id = window.localStorage.getItem("chat_active");
         
-        alert(id);
-        
+      
     };
    
 };
