@@ -28,6 +28,62 @@ var delele_chat = function(id){
 };
 
 
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @descriptionsistema de chateo por medio de tareas asincronas
+ * */
+var chat_message = function(id){
+    window.localStorage.removeItem("chat_active");
+    window.localStorage.setItem("chat_active" , id);
+    var chat_ = new chat();
+    chat_.sidebar();
+    chat_.chat_messages();
+};
+
+
+var inbox = function(){
+    var route = document.getElementById("route_value").value;
+    var task = new jtask();
+    task.url = route  + "admin/messages/front_inbox.php";
+    task.async = true;
+    task.success_callback(function(call){
+         var decode     = JSON.parse(call);
+         var count      = decode['count'].counter;
+         
+         $("#inbox_count").html(count);
+        
+         var c          = '';
+         switch(parseInt(count)){
+             case 0:
+                 c += '<h3>No Hay <span class="bold">Mensajes</span> Recientes  </h3>';
+                 break;
+             case 1:
+                  c += '<h3>1 <span class="bold">Mensaje</span> Reciente  </h3>';
+                 break;
+             default :
+                 c += ' <h3>' + count + '  <span class="bold">Mensajes</span> Recientes </h3>';
+                 break;
+         }
+         
+         c += '<a href="' + decode['count'].url  + '">Ver Todos</a>';
+        
+         $("#inbox_data").html(c);
+         
+         $("#inbox_messages").html(decode['inbox'].data);
+        
+         $("#inbox_count").removeClass("badge badge-active")
+                 .addClass("badge badge-primary");
+         
+    });
+    task.do_task();
+    
+    var chat_ = new chat();
+    chat_.count_chat();
+    chat_.load();
+};
+
+
 /**App Chat
  * 
  * @author Rolando Arriaza
@@ -38,11 +94,15 @@ var delele_chat = function(id){
 
 var chat = function(){
     
-    var sidebar = function(){
+    this.sidebar = function(){
         
      $("body")
         .removeClass("page-header-fixed page-quick-sidebar-over-content page-style-square")
         .addClass("page-header-fixed page-quick-sidebar-over-content page-style-square page-quick-sidebar-open");
+
+     $("#quick_sidebar_tab_1")
+            .removeClass("tab-pane active page-quick-sidebar-chat")
+            .addClass("tab-pane active page-quick-sidebar-chat page-quick-sidebar-content-item-shown");
     };
     
     var route = function(){
@@ -67,7 +127,7 @@ var chat = function(){
                       
                       $.map(data , function(call){
                           if(call == id){
-                              console.log("bandera arriba");
+                              //console.log("bandera arriba");
                               flag = true;
                           }
                       });
@@ -76,18 +136,14 @@ var chat = function(){
                           data.push(id);
                       }
                       
-                      window.localStorage.removeItem("chat_active");
                       window.localStorage.removeItem("chat");
-                      window.localStorage.setItem("chat_active" , id);
                       window.localStorage.setItem("chat" , data );
-                      
                   }
               }
               
-             sidebar();
-             $("#quick_sidebar_tab_1")
-                     .removeClass("tab-pane active page-quick-sidebar-chat")
-                     .addClass("tab-pane active page-quick-sidebar-chat page-quick-sidebar-content-item-shown");
+             chat_message(id);
+              
+             
 
     };
     
@@ -121,12 +177,17 @@ var chat = function(){
             var c = window.localStorage.getItem("chat");
             var data = c.split(",");
             if(data == "" || data == null){
-                 console.log("reset data");
+                // console.log("reset data");
                  window.localStorage.removeItem("chat");
             }
-            console.log(data);
+            //console.log(data);
             $("#chat_count").html(data.length);
         }catch(ex){
+            
+            $("#user_chat").html(
+                     '<h3 class="list-heading">No hay chats...</h3>'
+                    );
+            
             $("#chat_count").html("0");
         }
     };
@@ -142,17 +203,27 @@ var chat = function(){
                  }
             }
             if($("#chat_" + id)[0]){
-                console.log("removiendo nodo");
+                //console.log("removiendo nodo");
                 $("#chat_" + id).remove();
             }
-            console.log("compilando almacenamiento local");
+            //console.log("compilando almacenamiento local");
             window.localStorage.removeItem("chat");
             window.localStorage.setItem("chat" , data);
+            this.count_chat();
+            this.load();
             
         }catch(ex){}
     };
     
-    this.chating = function(){
+    this.chat_messages = function(){
+        
+        if(window.localStorage.getItem("chat_active") === null){
+             return ;
+        }
+        
+        var id = window.localStorage.getItem("chat_active");
+        
+        alert(id);
         
     };
    

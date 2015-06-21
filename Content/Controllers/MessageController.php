@@ -244,6 +244,7 @@ class MessageController extends MessageModel {
         
         //resultado de la consulta ya con parametros cambiados
         $query =   "SELECT lieisoft_mensajeria.asunto as 'asunto' ,
+                    $msj as 'id_user',
                     lieisoft_mensajeria.fecha as 'fecha' ,
                     lieisoft_mensajeria.hora as 'hora' ,
                     concat(usuario.nombre ,  ' ' , usuario.apellido) as 'to_name',
@@ -255,6 +256,12 @@ class MessageController extends MessageModel {
                     WHERE $to LIKE '$me' AND lieisoft_mensajeria.id_mensaje LIKE $id;";
  
         $request = parent::RawQuery($query);
+        
+        /*echo "<pre>";
+        print_r($request[0]);
+        echo "</pre>";
+        
+        return;**/
         
         return $request[0];
     }

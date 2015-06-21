@@ -92,10 +92,11 @@ class Dashboard extends MysqlConection{
                 if($nivel == $arr_value || $arr_value == 0 || $nivel == 55 ){
                     $id = $v["id_seccion"];
                     $array_seccion[$id] = array(
-                    "icono" =>$v["icono"] , 
-                    "titulo"=>$v["titulo"],
-                    "numero"=>$v['numero'],
-                    "status"=>$v['status']    
+                        
+                        "icono"         =>$v["icono"] , 
+                        "titulo"        =>$v["titulo"],
+                        "numero"        =>$v['numero'],
+                        "status"        =>$v['status']    
                     );
                 }
             }
@@ -107,7 +108,7 @@ class Dashboard extends MysqlConection{
         
         foreach ($array_seccion as $key=>$value)
         {
-            $query = "SELECT dashboard.id_dashboard , dashboard.privilegios , dashboard.icono as icono , dashboard.link"
+            $query ="SELECT dashboard.id_dashboard , dashboard.privilegios , dashboard.icono as icono , dashboard.link"
                 . ", dashboard.titulo  FROM dashboard INNER JOIN seccion_dashboard ON "
                 . " dashboard.id_seccion=seccion_dashboard.id_seccion WHERE "
                 . "seccion_dashboard.id_seccion LIKE '$key' AND dashboard.status LIKE 1"

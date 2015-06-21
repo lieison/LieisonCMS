@@ -60,18 +60,6 @@ $CONFIG_ = array(
          'prefix'                   => "sv_"
     ],
     
-    "DB_SQLITE" => [
-        "dir"                       => "$SERVER_DIR/Class/Database/sqlitedb/example.db"//direccion donde se encuentra la bdd 
-    ],
-    
-    
-    "DB_ORACLE" => [
-        "host"                      =>"localhost",        //host
-        "user"                      =>"",                //user
-        "password"                  =>"",           //password
-        "database"                  =>""           //database name
-    ],
-    
     "DIR" =>[
         "root"                      => $_SERVER['DOCUMENT_ROOT'] . "/",    //DIRECTORIO RAIZ 
         "directory"                 => $DIR_NAME  ,                       //DIRECTORIO 

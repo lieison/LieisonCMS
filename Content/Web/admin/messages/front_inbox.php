@@ -4,21 +4,24 @@
  include   '../../../Conf/Include.php';
 
 
+ //Inicia sesion 
  Session::InitSession();
  
+ //agrega las dependencias
  set_dependencies(array(
      "MessageController"
  ));
  
-
+ //controlador del mensaje 
  $messagecontroller = new MessageController();
 
- $id_user   = Session::GetSession("login", "id");
- $count     = $messagecontroller->GetMessageCountFrom($id_user);
- $msjto     = $messagecontroller->GetMessageFrom($id_user , null);
+ 
+ $id_user   = Session::GetSession("login", "id"); //id del usuario
+ $count     = $messagecontroller->GetMessageCountFrom($id_user); //cuenta los mensajes
+ $msjto     = $messagecontroller->GetMessageFrom($id_user , null); //mensaje para
 
 
- $count_submsj = 0;
+ $count_submsj = 0; //
 
  
  if(count($msjto) == 0){
@@ -31,81 +34,66 @@
 
 
  $count += $count_submsj;
+ 
+ $array_    = array();
 
- echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">';
- echo '<i class="icon-envelope-open"></i>';
- echo '<span class="badge badge-default">';
  
- if($count == 0){
-     echo '0</span>';
-     echo '</a><ul class="dropdown-menu">';
-     echo '<li class="external">
-            <h3>No Hay <span class="bold">Mensajes</span> Recientes  </h3>
-		<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php">Ver Todos</a>
-	    </li>';
- }
- else{
-     echo $count .'</span>';
-     echo '</a><ul class="dropdown-menu">';
-     if($count == 1){
-        echo '<li class="external">
-            <h3>' . $count . ' <span class="bold">Mensaje</span> Reciente  </h3>
-		<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php">Ver Todos</a>
-	    </li>';
-     }else{
-            echo '<li class="external">
-            <h3>' . $count . ' <span class="bold">Mensajes</span> Recientes </h3>
-		<a href="' . FunctionsController::GetUrl("messages") . '/inbox.php">Ver Todos</a>
-	    </li>';
-     }
- }
+ $array_['count'] = array(
+         "counter"  => $count,
+         "url"      => FunctionsController::GetUrl("messages") . '/inbox.php'   
+  );
  
- echo '<li>';
+ $data = "";
+ 
  foreach ($msjto as $key=>$value)
  {
-     echo '<ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">';
-     echo '<li>';
-     echo '<a href="javascript:chat_preview(' . $value['id_mensaje'] . ');">';
-     echo '<span class="photo">';
-    
+     
+     
+     $data .= '<li>';
+     $data .= '<a href="javascript:chat_preview(' . $value['id_mensaje'] . ');">';
+     $data .= '<span class="photo">';
+     
      if ($value['imagen'] == null) {
-        echo '<img src="' . FunctionsController::GetUrl("img" , false) . '/users/avatar.png" class="img-circle" alt="">';
+        $data .= '<img src="' . FunctionsController::GetUrl("img" , false) . '/users/avatar.png" class="img-circle" alt="">';
      } else {
-        echo '<img src="' . FunctionsController::GetUrl("img" , false) . '/users/' . $value['imagen'] . '" class="img-circle" alt="">';
+        $data .= '<img src="' . FunctionsController::GetUrl("img" , false) . '/users/' . $value['imagen'] . '" class="img-circle" alt="">';
      }
      
-     echo '</span>';
-     echo '<span class="subject">';
+     $data .= '</span>';
+     $data .= '<span class="subject">';
      
      $sub_msj = $messagecontroller->GetCountSubMessage($value['id_mensaje'] , $id_user);
      
      if($sub_msj >= 1){
-        echo '<span class="badge badge-default">';
-        echo $sub_msj . '</span>';
+        $data .= '<span class="badge badge-default">';
+        $data .= $sub_msj . '</span>';
      }
      
-     echo '<span class="from">';
-     echo  $value['nombre'] . '</span>';
-     echo '<span class="time">'  . FunctionsController::Get_TimeAgo($value['fecha']. " " . $value['hora']) .'</span>';
-     echo '</span>';
-     echo '<br><span class="message">';
-     echo '<b>' . $value['asunto'] . "</b><br>"; 
+     $data .= '<span class="from">';
+     $data .=  $value['nombre'] . '</span>';
+     $data .= '<span class="time">'  . FunctionsController::Get_TimeAgo($value['fecha']. " " . $value['hora']) .'</span>';
+     $data .= '</span>';
+     $data .= '<br><span class="message">';
+     $data .= '<b>' . $value['asunto'] . "</b><br>"; 
      
      if(strlen($value['mensaje'])  >= 65)
      {
-         echo substr($value['mensaje'], 0 , 60) . ' (...)';
+         $data .= substr($value['mensaje'], 0 , 60) . ' (...)';
      }else{
-         echo $value['mensaje'];
+         $data .= $value['mensaje'];
      }
      
-     echo '</span>';
-     echo '</a>';
-     echo '</li>';
+     $data .= '</span>';
+     $data .= '</a>';
+     $data .= '</li>';
    
+     
  }
- echo '</li>';
- echo '</ul>';
  
+ $array_['inbox'] = array("data" => $data);
+ $json = new SivarApi\Tools\Services_JSON();
+ echo $json->encode($array_);
+
  unset( $messagecontroller);
  
  

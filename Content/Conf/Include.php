@@ -1,22 +1,21 @@
 <?php
 
+
 /**
  * @author Rolando Arriaza
  * @access public
  * @version 1.2
  * @since 2015
  * 
- * INCLUDE.PHP
- * SE INCLUIRAN TODOS LOS SCRIPTS DEL PLUGIN 
- * SI REMUEVE ALGUN SCRIPT PUEDE QUE EL PLUGIN NO FUNCIONE COMO DEBE
- * DADO CASO NO FUNCIONE , REVISAR LAS RUTAS DEL SCRIPT
- * 
- * NOTA: 
- *      LOS SCRIPTS DENTRO DE LA CARPETA MODEL Y CONTROLLER SE AGREGARAN AUTOMATICAMENTE
- * 
  */
 
+
+/*
+ * Configuracion General del sistema
+ * 
+ */
 include  'Config.php';
+
 
 $GLOBAL_ROOT = $CONFIG_["DIR"]["root"];
 $GLOBAL_DIRECTORY = $CONFIG_["DIR"]["directory"];
@@ -28,12 +27,12 @@ endif;
 
 $GLOBAL_PATH = "";
 
+
 if(file_exists($GLOBAL_ROOT .  $FOLDER . '/Content/Class/index.php')):
     $GLOBAL_PATH = $GLOBAL_ROOT . $FOLDER ;
 else:
     $GLOBAL_PATH = $GLOBAL_ROOT ;
 endif;
-
 
 
 /**
@@ -42,8 +41,6 @@ endif;
  */
 
 include $GLOBAL_PATH . '/Content/Class/Database/Class.Mysql.php';
-include $GLOBAL_PATH . '/Content/Class/Database/Class.Sqlite.php';
-include $GLOBAL_PATH . '/Content/Class/Database/Class.Oci8.php';
 
 
 /**
@@ -51,6 +48,7 @@ include $GLOBAL_PATH . '/Content/Class/Database/Class.Oci8.php';
  * directory.php no depende de otra clase
  * file.php depende de directory
  */
+
 include $GLOBAL_PATH . '/Content/Class/Directory/Class.Directory.php';
 include $GLOBAL_PATH . '/Content/Class/Directory/Class.File.php';
 require $GLOBAL_PATH . '/Content/Class/Directory/BnFileReader.php';
@@ -72,10 +70,12 @@ require $GLOBAL_PATH . '/Content/Class/Tools/BaseCaptcha.php';
 require $GLOBAL_PATH . '/Content/Class/Google/GoogleTranslate.php';
 require $GLOBAL_PATH . '/Content/Class/Google/GoogleAnalyticsAPI.class.php';
 
+
 /**
  * LLAMADA DE PAGINACION
  * basepaginacion.php depende de paginacion.php
  */
+
 require $GLOBAL_PATH . '/Content/Class/Pagination/Class.Paginacion.php';
 require $GLOBAL_PATH . '/Content/Class/Pagination/Class.BasePaginacion.php';
 
@@ -105,9 +105,9 @@ require $GLOBAL_PATH . '/Content/Class/View/ViewLoader.php';
 require $GLOBAL_PATH . '/Content/Class/View/ImageRender.php';
 
 
-/* CLASE PHP MAIL , HEREDA CLASES EXTERNAS DENTRO DEL DIRECTORIO Mail**/
 
 require $GLOBAL_PATH . '/Content/Class/Mail/PHPMailerAutoload.php';
+
 
 /*LLAMADA DE LA CLASE HEADER **/
 require $GLOBAL_PATH . '/Content/Class/Http/Class.Header.php';
@@ -126,20 +126,12 @@ require $GLOBAL_PATH . '/Content/Class/Pdf/Class-Fpdf.php';
 require $GLOBAL_PATH . '/Content/Class/Pdf/exportPDF.class.php';
 
 
-/**
- * E-COMMERCE CLASS 
- */
-
-//require $GLOBAL_PATH . '/Content/Class/Ecommerce/GoPaypal.class.php';
-require $GLOBAL_PATH . '/Content/Class/Ecommerce/ccvalidator.class.php';
 
 /**
  * PLUGIN CLASS
  */
 require $GLOBAL_PATH . '/Content/Class/Plugins/PluginClass.php';
 require $GLOBAL_PATH . '/Content/Class/Plugins/InstallClass.php';
-
-
 
 
 
@@ -154,7 +146,6 @@ require $GLOBAL_PATH . '/Content/Class/Plugins/InstallClass.php';
  }
  
  
-
 /**
  * Modelos | Models
  */
@@ -167,19 +158,6 @@ require $GLOBAL_PATH . '/Content/Class/Plugins/InstallClass.php';
  
  
  
-  
-  
- /**
- * Controladores | Controllers
- */
-/*$Dir_ = new _Directory();
-$path_controller = $Dir_->FindDataDirectory($GLOBAL_PATH ."/Content/Controllers/");
-foreach ($path_controller as $k=>$val)
-{
-     require $val['root'] . '/' . $val['filename'];
-}*/
-
-
 
 /*
  * Helper
@@ -206,31 +184,6 @@ foreach ($path_controller as $k=>$val)
 }
 
 
- /**
-  *
-  * Como nueva estructura se creo un sistema de dependencias para lieison cms
-  *
-  *
-  *
- **/
-
-  require $GLOBAL_PATH . '/Content/Conf/dependencies.php';
-
-
-  /**
-  * Modelo del sistema 
-  */
-  
-  //require $GLOBAL_PATH . '/Content/Class/Model/Model.php';  
-
-  
- /**
-  * Controlador del sistema 
-  */
-  
-  //require $GLOBAL_PATH . '/Content/Class/Controller/Controller.php';
-
- 
   
  /**
   * View del sistema
@@ -245,6 +198,29 @@ foreach ($path_controller as $k=>$val)
   * **/
   
  require $GLOBAL_PATH . '/Content/Web/admin/ViewPage/ViewHeader.php';
+ 
+ 
+ if(!function_exists("set_dependencies")){
+
+    function set_dependencies(array $lib ){
+        
+          global $GLOBAL_PATH;
+
+          $dir_      = $GLOBAL_PATH . "/Content/Controllers/" ;
+
+          foreach($lib as $values){
+
+               $depend = $dir_ . $values . ".php";
+
+               if(file_exists($depend)){
+                    include $depend;
+               }
+
+          }
+    }
+
+}
+
 
 
 

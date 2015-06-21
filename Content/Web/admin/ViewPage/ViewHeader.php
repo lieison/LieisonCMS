@@ -115,19 +115,6 @@ class AdminHeader
         }
     }
     
-    static function GetSystemContent()
-    {
-        echo '<li id="load_message" class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">			
-              </li>';
-          echo '<li id="load_task" class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">			
-              </li>';
-    }
-    
-    static function GetBasePlugin()
-    {
-        
-    }
-    
     
     static function GetJsSystemLoad()
     {
@@ -136,10 +123,10 @@ class AdminHeader
          **/
    
         echo 'load_message();';
-        echo "setInterval('load_message()',1000*10);";
+        echo "setInterval('inbox()',1000);";
         
         echo 'load_count_message();';
-        echo "setInterval('load_count_message()',1000*10);";
+        echo "setInterval('load_count_message()',1000);";
         
         /*************************************************/
         
@@ -171,11 +158,6 @@ class AdminHeader
     }
     
     
-    static function GetJsAfterLoad()
-    {
-        
-    }
-    
     static function GetHiddenData()
     {
          echo '<input type="hidden" id="route_value" value=" ' .  AdminHeader::$relative_route . '" />';
@@ -185,17 +167,17 @@ class AdminHeader
     
     static function GetCss()
     {
-        echo '<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-              <link href="'. self::$relative_route . 'assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-              <link href="'. self::$relative_route . 'assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-              <link href="'. self::$relative_route . 'assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-              <link href="'. self::$relative_route . 'assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-              <link href="'. self::$relative_route . 'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+        echo '  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+                <link href="'. self::$relative_route . 'assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+                <link href="'. self::$relative_route . 'assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+                <link href="'. self::$relative_route . 'assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+                <link href="'. self::$relative_route . 'assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+                <link href="'. self::$relative_route . 'assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
                 <!-- END GLOBAL MANDATORY STYLES -->
                 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
-            <link href="'. self::$relative_route . 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
-            <link href="'. self::$relative_route . 'assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
-            <link href="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>';
+                <link href="'. self::$relative_route . 'assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
+                <link href="'. self::$relative_route . 'assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css"/>
+                <link href="'. self::$relative_route . 'assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>';
         
         echo '<!-- END PAGE LEVEL PLUGIN STYLES -->
                 <!-- BEGIN PAGE STYLES -->

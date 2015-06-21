@@ -39,7 +39,7 @@
     $activo = $SessionUser['activo'];
     $id_user = $SessionUser['id'];
     
-    //VERIFICAR SI EL AVATA ESTA VACIO (ASIGNARLE AVATAR EMPTY) O SI EXISTE AVATAR (EN IMAGEN)
+    //VERIFICAR SI EL AVATAR ESTA VACIO (ASIGNARLE AVATAR EMPTY) O SI EXISTE AVATAR (EN IMAGEN)
     $imagen = UserController::Verify_Avatar();
     
     //EN CASO DE QUE LA PANTALLA ESTE BLOQUEADA REVISAMOS SI LA SESION DE BLOQUEO EXISTE
@@ -98,7 +98,7 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-quick-sidebar-over-content page-style-square"> 
     
-<?php AdminHeader::GetHiddenData(); ?>
+<?php AdminHeader::GetHiddenData(); ?>   
 <input type="hidden" id="rol_value" value="<?php echo $rol; ?>" />
 <input type="hidden" id="page_value" value="<?php echo $page_name; ?>" />
 
@@ -108,7 +108,12 @@
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
-			<?php AdminHeader::GetLogo(177,49); //OBTIENE EL LOGO ESQUINA SUPERIOR IZQUIERDA  ?>
+			<?php 
+                            /*
+                             * Logo Lieisoft Esquina superior Izquierda
+                             */
+                            AdminHeader::GetLogo(177,49);      
+                        ?>
 			<div class="menu-toggler sidebar-toggler hide">
                             <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
 			</div>
@@ -121,32 +126,49 @@
 		<!-- BEGIN TOP NAVIGATION MENU -->
 		<div class="top-menu">
 			<ul class="nav navbar-nav pull-right">
-                            
-  
-                                <?php 
-                                    /**
-                                     *  ESTA FUNCION SE AGREGARAN LOS DROPDOWN 
-                                     *   COMO INBOX , TASK , NOTIFICACIONES ETC .
-                                     * 
-                                     *   ADEMAS SE AGREGARAN LOS DISPARADORES DE CADA SISTEMA
-                                     */
-                                     AdminHeader::GetSystemContent();
-                                     
-                                ?>
-                                
-                                
-                                
+                            <!-- CARGA EL SISTEMA DE MENSAJERIA INBOX  -->  
+                            <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">			 
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <i class="icon-envelope-open"></i>
+                                    <span id="inbox_count" class="badge badge-active">
+                                        <img src="../../admin/img/assert/loading.gif" width="10" height="10" />
+                                    </span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li id="inbox_data" class="external">
+                                         <!-- DATA DEL INBOX  -->  
+                                    </li>
+                                    <li>
+                                        <ul id="inbox_messages" class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                                              <!-- MENSAJES  -->  
+                                        </ul>
+                                    </li>
+                                </ul>
+                               
+                            </li>
+                            <li id="load_task" class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">			
+                                  <!-- CARGA EL SISTEMA DE TAREAS -->
+                            </li>    
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                         <?php AdminHeader::Get_ImgSesion($imagen); //OBTENEMOS LA IMAGEN DEL USUARIO?>
+                                        <?php 
+                                                /**
+                                                 * OBTENEMOS LA IMAGEN DEL USUARIO
+                                                 */
+                                                AdminHeader::Get_ImgSesion($imagen);
+                                        ?>
 					<span class="username username-hide-on-mobile">
-					 <?php echo $usuario; //NOMBRE DEL USUARIO ?>
+					<?php 
+                                                echo $usuario; //NOMBRE DEL USUARIO 
+                                        ?>
                                         </span>
 					<i class="fa fa-angle-down"></i>
 					</a>
-					<?php AdminHeader::Get_DropDown(); //OBTENEMOS LAS OPCIONES COMO , PERFIL , CERRAR SESION ETC. ?>
+					<?php 
+                                                AdminHeader::Get_DropDown(); //OBTENEMOS LAS OPCIONES COMO , PERFIL , CERRAR SESION ETC. 
+                                        ?>
 				</li>
  
 				<!-- END USER LOGIN DROPDOWN -->
@@ -250,11 +272,9 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active page-quick-sidebar-chat" id="quick_sidebar_tab_1">
-                    <div class="page-quick-sidebar-chat-users" data-rail-color="#ddd" data-wrapper-class="page-quick-sidebar-list">
+                    <div id="user_chat" class="page-quick-sidebar-chat-users" data-rail-color="#ddd" data-wrapper-class="page-quick-sidebar-list">
                             <!-- CARGAMOS LOS USUARIOS QUE ESTAN CHATEANDO -->
-                            <ul id="user_chat" class="media-list list-items">
-                                
-                            </ul>
+                           
                     </div>
                     <div class="page-quick-sidebar-item">
 
@@ -665,9 +685,7 @@
 
 <script>
     
-  <?php AdminHeader::GetJsAfterLoad(); ?>
     
- 
   jQuery(document).ready(function() {    
       
    <?php

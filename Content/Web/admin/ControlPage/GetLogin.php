@@ -7,6 +7,7 @@
  $header = new Http\Header();
  $redirect = $_REQUEST['redirect'] ? : null;
  
+
  $url = null;
  $url_err = null;
  $url_index = null;
@@ -21,13 +22,15 @@
      $url_index ="index.php?redirect=" . $_REQUEST['redirect'];
  endif;
  
-
+ 
+ 
  if(!isset($_POST['username'])):
      $header->redirect(FunctionsController::GetUrl($url));
  endif;
  
  $user = $_POST['username'];
  $pass = $_POST['password'];
+ 
  
 if ( preg_match("/[^A-Za-z0-9]/", $user) ||  preg_match("/[^A-Za-z0-9]/", $pass) ):
     if(!\SivarApi\Tools\Validation::CheckEmail($user)):
@@ -37,7 +40,9 @@ if ( preg_match("/[^A-Za-z0-9]/", $user) ||  preg_match("/[^A-Za-z0-9]/", $pass)
 endif;
 
  $admin_controller = new AdminController();
+
  $is_user = $admin_controller->GetLogin($user, $pass);
+ 
  $date = new DateTime();
  
  if($is_user):  
@@ -56,6 +61,8 @@ endif;
       $header->redirect(FunctionsController::GetUrl($url_err));
  endif;
  
+  
+
  
 
 

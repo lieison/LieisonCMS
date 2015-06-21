@@ -37,6 +37,10 @@ class AdminController extends AdminModel {
     
     var $query = null;
     
+    public function __construct($conect_dsn = array(), $directory = null) {
+        parent::__construct($conect_dsn, $directory);
+    }
+    
 
     /**
      * @todo Funcion para obtener si el usuario logueado esta dentro de la base de datos

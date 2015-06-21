@@ -2,7 +2,7 @@
 
 function load_message()
 {
-       var route = document.getElementById("route_value").value;
+      /* var route = document.getElementById("route_value").value;
         $.ajax({
                     type: "POST",
                     url: route  + "admin/messages/front_inbox.php",
@@ -13,7 +13,7 @@ function load_message()
         
           var chat_ = new chat();
           chat_.count_chat();
-          chat_.load();
+          chat_.load();*/
  }
  
  

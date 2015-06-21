@@ -63,47 +63,50 @@ class MysqlConection extends PDO
      * @param string $directory directorio del config (Option en vez del $conect_dsn)
      * @since 1.1
      */
-    public function __construct($conect_dsn = array() , $directory = null)
+    public function __construct()
     {
-        
-    if(count($conect_dsn) ==0){
-        
-        if($directory != null){
-            include $directory;
-        }else{
-            global $CONFIG_;
-        }
-        
+        global $CONFIG_;
+
         $this->dsn = $CONFIG_["DB_MYSQL"]["driver"].
                 ':host='.$CONFIG_["DB_MYSQL"]["host"].
                 ';dbname='.$CONFIG_["DB_MYSQL"]["database"].
                 ';port='.$CONFIG_["DB_MYSQL"]["port"];
+        
         try{
                  parent::__construct( $this->dsn, 
                          $CONFIG_["DB_MYSQL"]["user"]
                         ,$CONFIG_["DB_MYSQL"]["password"]); 
-                parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $ex) {
+                 
+                 parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                 
+                
+                 
+        } 
+        catch (PDOException $ex) {
+            
+            $header = new \Http\Header();
+            
             if($ex->getMessage() == "could not find driver") {
-                    echo "<b>Opps !!</d> , El Servidor no <b>Responde</b>";
-                }
+                 $header->redirect(\Url\Url::GetContentUrl("web/admin/error/database/index.php?err=0"));
             }
-    }
-    else{
-         try{
-               $this->dsn = "mysql:host=" . $conect_dsn['host'] 
-                       . ";dbname=" . $conect_dsn['db']
-                       . ";port=" . $conect_dsn['port'];
-               parent::__construct($this->dsn , $conect_dsn['user'] , $conect_dsn['pwd']);
-               parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $ex) {
-                if($ex->getMessage() === "could not find driver"){
-                     echo "<b>Opps !!</d> , El Servidor no <b>Responde</b>";
-                }
+            else{
+                   $header->redirect(\Url\Url::GetContentUrl("web/admin/error/database/index.php?err=1"));
+            }
         }
-    }
-    
+
+
    }
+   
+   
+    public function ping() {
+        try {
+            parent::query('SELECT 1');
+        } catch (PDOException $e) {
+             echo "Echo ...";       
+        }
+        return true;
+    }
+   
     
     /**
      * @todo Destructor de la clase 
