@@ -10,7 +10,6 @@
  * @description cuando en metronics cae un inbox le da seleccionar entonces se abre el chat
  * */
 var chat_preview = function(id){
-    
      var load_chat = new chat();
      load_chat.add(id);
 };
@@ -38,7 +37,23 @@ var chat_message = function(id){
     window.localStorage.setItem("chat_active" , id);
     
     var div_chat   = $("#chat_messages");
-    div_chat.html("<br><br><br><p style='color:white;'>Buscando ...</p>");
+    
+    var route = document.getElementById("route_value").value;
+    var str = "";
+    
+    str += '<div class="post in">';
+                 str += '<img class="avatar" alt="" src="' 
+                        + route + 'admin/img/assert/kiwi.png"/>';
+                str += '<div class="message">';
+                str += '<span class="arrow"></span>';
+                str += '<a href="#" class="name">Lieisoft</a>';
+                str += '<span class="body">cargando tus mensajes' + 
+                       '<img class="" alt="" src="' 
+                        + route + 'admin/img/assert/loading.gif" width="30" height="30"/>' + '</span>';
+                str += '</div>';
+                str += "</div>";
+    
+    div_chat.html(str);
     
     var chat_ = new chat();
     chat_.sidebar();
@@ -63,6 +78,11 @@ var chat_inbox = function(){
  * @descriptionsistema funcion que activa el inbox cuando hace la carga de la pagina
  * */
 var inbox = function(){
+    
+    try{
+         window.clearTimeout('inbox()');
+    }catch(ex){}
+    
     var route = document.getElementById("route_value").value;
     var task = new jtask();
     task.url = route  + "admin/messages/front_inbox.php";
@@ -106,10 +126,10 @@ var inbox = function(){
          }else{
              $("#title").html( "(" + count + ")" + " " + title );
          }
-         
+
+         window.clearTimeout('inbox()');
          setTimeout('inbox()', 1000);
          
-
     });
     task.do_task();
     var chat_ = new chat();
@@ -235,10 +255,8 @@ var chat = function(){
                  }
             }
             if($("#chat_" + id)[0]){
-                //console.log("removiendo nodo");
                 $("#chat_" + id).remove();
             }
-            //console.log("compilando almacenamiento local");
             window.localStorage.removeItem("chat");
             window.localStorage.setItem("chat" , data);
             this.count_chat();
@@ -248,6 +266,10 @@ var chat = function(){
     };
     
     this.chat_messages = function(){
+        
+        try{
+            window.clearTimeout('chat_inbox()');
+        }catch(ex){}
         
         var div_chat   = $("#chat_messages");
         
@@ -282,9 +304,15 @@ var chat = function(){
                 
                 str += '<div class="message">';
                 str += '<span class="arrow"></span>';
-                str += '<a href="#" class="name">' + v.nombre + '</a>';
+                if(me  === v.id){
+                    str += '<a href="#" class="name">Tú</a>';
+                }else{
+                    str += '<a href="#" class="name">' + v.nombre + '</a>';
+                }
                 str += '<span class="datetime"> (' + v.hora +')</span>';
-                str += '<span class="body">' + v.mensaje + '<p style="color:red"><br>' + v.fecha + '</p></span>';
+                str += '<span class="body">' + v.mensaje 
+                        + '<p style="color:red"><br><b>' 
+                        + v.fecha + '</b></p></span>';
                 str += '</div>';
                 str += "</div>";
                 
@@ -304,7 +332,10 @@ var chat = function(){
             
             div_chat.html(str);
             
+            window.clearTimeout('chat_inbox()');
             setTimeout('chat_inbox()', 1000);
+            
+            console.log("iteracion");
 
         });
         task_.do_task();
