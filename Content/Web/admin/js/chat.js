@@ -142,7 +142,7 @@ var inbox = function(){
  * 
  * @author Rolando Arriaza
  * @class chat
- * @version 1.2
+ * @version 1.5
  * @requires jquery , metronics template
  * */
 
@@ -250,8 +250,11 @@ var chat = function(){
             var data = c.split(",");
             for(var i = 0; i < data.length ; i++){
                  if(data[i] == id){
+                     /**
+                      * ELIMINANDO EL ID DEL LOCALSTORAGE POR MEDIO DE 
+                      * SPLICE , MAPEO Y UBICACION DEL DATO
+                      * */
                      data.splice(i , 1);
-                     console.log("Eliminando ... metodo delete");
                  }
             }
             if($("#chat_" + id)[0]){
