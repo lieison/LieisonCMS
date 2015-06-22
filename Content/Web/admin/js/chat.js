@@ -36,9 +36,19 @@ var delele_chat = function(id){
 var chat_message = function(id){
     window.localStorage.removeItem("chat_active");
     window.localStorage.setItem("chat_active" , id);
+    
+    var div_chat   = $("#chat_messages");
+    div_chat.html("<br><br><br><p style='color:white;'>Buscando ...</p>");
+    
     var chat_ = new chat();
     chat_.sidebar();
     chat_.chat_messages();
+};
+
+
+var chat_inbox = function(){
+     var chat_ = new chat();
+     chat_.chat_messages();
 };
 
 
@@ -97,7 +107,6 @@ var inbox = function(){
 
     });
     task.do_task();
-    
     var chat_ = new chat();
     chat_.count_chat();
     chat_.load();
@@ -235,13 +244,66 @@ var chat = function(){
     
     this.chat_messages = function(){
         
+        var div_chat   = $("#chat_messages");
+        
         if(window.localStorage.getItem("chat_active") === null){
              return ;
         }
-        
+
         var id = window.localStorage.getItem("chat_active");
+        var route = document.getElementById("route_value").value;
         
-      
+        task_ = new jtask();
+        task_.method = "GET";
+        task_.url = route  + "admin/messages/loader/message_chat.php";;
+        task_.async = true;
+        task_.data = { "id_message" : id};
+        task_.success_callback(function(call){
+            var data    = JSON.parse(call);
+            var me      = data.me;
+            var str     = "";
+            
+            $.each(data.chat , function(k ,v){
+                
+                if(me === v.id){
+                    str += '<div class="post out">';
+                }else{
+                    str += '<div class="post in">';
+                }
+                
+                str += '<img class="avatar" alt="" src="' 
+                        + route + 'admin/img/users/' 
+                        + v.avatar + '"/>';
+                
+                str += '<div class="message">';
+                str += '<span class="arrow"></span>';
+                str += '<a href="#" class="name">' + v.nombre + '</a>';
+                str += '<span class="datetime"> (' + v.hora +')</span>';
+                str += '<span class="body">' + v.mensaje + '<p style="color:red"><br>' + v.fecha + '</p></span>';
+                str += '</div>';
+                str += "</div>";
+                
+            });
+            
+            if(str === ""){
+                str += '<div class="post in">';
+                 str += '<img class="avatar" alt="" src="' 
+                        + route + 'admin/img/assert/kiwi.png"/>';
+                str += '<div class="message">';
+                str += '<span class="arrow"></span>';
+                str += '<a href="#" class="name">Lieisoft</a>';
+                str += '<span class="body">se el primero en enviar un mensaje...</span>';
+                str += '</div>';
+                str += "</div>";
+            }
+            
+            div_chat.html(str);
+            
+            setTimeout('chat_inbox()', 1000);
+
+        });
+        task_.do_task();
+        
     };
    
 };
