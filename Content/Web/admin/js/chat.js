@@ -31,7 +31,7 @@ var delele_chat = function(id){
 /**
  * @version 1.0
  * @author Rolando Arriaza
- * @descriptionsistema de chateo por medio de tareas asincronas
+ * @description sistema de chateo por medio de tareas asincronas
  * */
 var chat_message = function(id){
     window.localStorage.removeItem("chat_active");
@@ -46,6 +46,11 @@ var chat_message = function(id){
 };
 
 
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @description sistema verifica el chat en un lapso de 2.5 segundos aprox 
+ * */
 var chat_inbox = function(){
      var chat_ = new chat();
      chat_.chat_messages();
