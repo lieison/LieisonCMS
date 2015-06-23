@@ -250,4 +250,16 @@ class MessageController extends MessageModel {
         
     }
 
+    public function SetReadInbox($id) {
+        
+        
+        $id_user = Session::GetSession("login", "id");
+        parent::Update(
+             "lieisoft_mensajeria", array(
+              "leido"   => "1"
+         ) , " id_mensaje LIKE $id AND id_usuario_para LIKE '$id_user'");
+         
+        
+    }
+
 }
