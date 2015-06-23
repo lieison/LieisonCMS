@@ -230,10 +230,11 @@ class MessageController extends MessageModel {
         
         $query = "SELECT id_submensajeria as 'id_sub' FROM lieisoft_submensajeria 
                     WHERE lieisoft_submensajeria.id_usuario 
-                    LIKE  'rolando55admin18894933' 
-                    AND id_mensajeria LIKE 2
+                    NOT LIKE  '$id_user' 
+                    AND id_mensajeria LIKE $id
                     AND lieisoft_submensajeria.leido LIKE 0
                     ORDER BY fecha DESC , hora ASC";
+        
         $result = parent::RawQuery($query);
         
         foreach ($result as $value){

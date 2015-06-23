@@ -369,11 +369,14 @@ var chat = function(){
                 
                 var date = new Date().toJSON().slice(0,10);
 
-                if(v.leido == 0){
-                     str += '<span class="datetime"> (' + v.hora +')&nbsp<i class="fa fa-check"></i></span>';
+                if(v.leido == 1){
+                    if(v.id === me)
+                      str += '<span class="datetime"> (' + v.hora +')&nbsp<i class="fa fa-check"></i></span>';
+                    else
+                       str += '<span class="datetime"> (' + v.hora +')</span>';
                 }
                 else{
-                    str += '<span class="datetime"> (' + v.hora +')</span>';
+                    str += '<span class="datetime"> (' + v.hora +  ')</span>';
                 }
                 
                 if(date === v.fecha){
@@ -450,6 +453,7 @@ var chat = function(){
         var id    = window.localStorage.getItem("chat_active");
         var task_ = new jtask();
         task_.url = route() + "admin/messages/loader/read_chat.php";
+        task_.method = "GET";
         task_.data = { "id": id };
         task_.success_callback(function(call){
             
