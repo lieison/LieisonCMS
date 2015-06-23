@@ -165,11 +165,10 @@ var inbox = function(){
              $("#title").html( title );
          }else{
              $("#title").html( "(" + count + ")" + " " + title );
+               try{
+                    $("#sidebar_inbox").html(count);
+               }catch(ex){}
          }
-         
-         try{
-             $("#sidebar_inbox").html(count);
-         }catch(ex){}
 
          try{
          window.clearTimeout('inbox()');
@@ -375,9 +374,9 @@ var chat = function(){
                     else
                        str += '<span class="datetime"> (' + v.hora +')</span>';
                 }
-                else{
-                    str += '<span class="datetime"> (' + v.hora +  ')</span>';
-                }
+                else
+                  str += '<span class="datetime"> (' + v.hora +  ')</span>';
+                
                 
                 if(date === v.fecha){
                     str += '<span class="body">' 
