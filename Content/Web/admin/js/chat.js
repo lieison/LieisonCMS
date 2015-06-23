@@ -12,6 +12,7 @@
 var chat_preview = function(id){
      var load_chat = new chat();
      load_chat.add(id);
+     load_chat.read_inbox();
 };
 
 
@@ -66,13 +67,20 @@ var chat_message = function(id){
  * @description sistema verifica el chat en un lapso de 2.5 segundos aprox 
  * */
 var chat_inbox = function(){
-     console.log("Iteracion ... inbox");
+    // console.log("Iteracion ... inbox");
      var chat_ = new chat();
      chat_.chat_messages();
      chat_.read_messages();
 };
 
 
+
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @description al momento de chatear envia un preview antes de enviar a la bdd 
+ *              ya que la bdd demora un tiempo en guardar la data 
+ * */
 var set_message_post = function(){
 
     var avatar      = $("#avatar").val();
@@ -106,6 +114,11 @@ var set_message_post = function(){
 };
 
 
+/**
+ * @version 1.0
+ * @author Rolando Arriaza
+ * @description detiene el chat de forma automatica
+ * */
 var stop_chat = function(){
     var chat_ = new chat();
     chat_.stop_chat();
@@ -118,10 +131,6 @@ var stop_chat = function(){
  * @descriptionsistema funcion que activa el inbox cuando hace la carga de la pagina
  * */
 var inbox = function(){
-    
-    try{
-         window.clearTimeout('inbox()');
-    }catch(ex){}
     
     var route = document.getElementById("route_value").value;
     var task = new jtask();
@@ -170,9 +179,6 @@ var inbox = function(){
                }catch(ex){}
          }
 
-         try{
-         window.clearTimeout('inbox()');
-        }catch(ex){}
          setTimeout('inbox()', 1000);
          
     });
@@ -327,9 +333,10 @@ var chat = function(){
         
         var push_chat   =     $("#send_chat_id");
         if(push_chat.val() !== ''){
+            stop_chat();
             console.log("cargando");
             $("#chat_messages").append(push_chat.val());
-            push_chat.val("");
+             push_chat.val("");
         }
 
         var id = window.localStorage.getItem("chat_active");
@@ -345,6 +352,7 @@ var chat = function(){
             var data    = JSON.parse(call);
             var me      = data.me;
             var str     = "";
+
             
             $.each(data.chat , function(k ,v){
                 
@@ -390,7 +398,7 @@ var chat = function(){
                 
                 
                 
-                    str += '</div>';
+                str += '</div>';
                 str += "</div>";
                 
             });
@@ -459,6 +467,19 @@ var chat = function(){
         });
         task_.do_task();
         
+    };
+    
+    this.read_inbox = function(){
+        
+        var id    = window.localStorage.getItem("chat_active");
+        var task_ = new jtask();
+        task_.url = route() + "admin/messages/loader/read_inbox.php";
+        task_.method = "GET";
+        task_.data = { "id": id };
+        task_.success_callback(function(call){
+            
+        });
+        task_.do_task();
     };
     
     this.stop_chat = function(){
