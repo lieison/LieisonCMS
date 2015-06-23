@@ -11,15 +11,16 @@ set_dependencies(array(
 ));
 
 //OBTENEMOS EL ID DEL MENSAJE 
-$id     =   $_GET['id_message'];
+$message      =   $_GET['message'];
+$iduser       =   Session::GetSession("login", "id");  
+$id           =   $_GET['id'];
 
 //CARGAMOS EL CONTROLADOR
 $msj = new MessageController();
 
-//OBTENEMOS LOS DATOS 
-$request = $msj->GetChatById($id);
+if($msj->SetSubmessage($id, $iduser, $message)){
+    echo 1;
+}else{ echo 0; }
 
-//CONVERTIMOS EN FORMATO JSON 
-echo "<pre>";
-print_r($request);
-echo "</pre>";
+exit();
+

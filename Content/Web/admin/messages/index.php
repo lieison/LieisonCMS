@@ -32,9 +32,9 @@ SOFTWARE.
 include   '../../../Conf/Include.php';
 
 
-/*set_dependencies(array(
+set_dependencies(array(
     "MessageController"
-));*/
+));
 
 
 
@@ -42,7 +42,7 @@ include   '../../../Conf/Include.php';
 Session::InitSession();
 Session::InsertSession("page_name", "Inbox");
 Session::InsertSession("home", "Inbox");
-Session::InsertSession("title", "<b>Bandeja</b>");
+Session::InsertSession("title", "<b>Tu Bandeja</b>");
 
 
 //CARGARA LOS SCRIPTS NECESARIOS EN EL HEADER
@@ -51,16 +51,19 @@ $header = ''
     . '<script src="../../assets/global/plugins/pace/pace.min.js" type="text/javascript"></script>'
     . '<link href="../../assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css"/>'
     . '<link href="../css/loading-lieison-cms.css" rel="stylesheet" type="text/css"/>'
+    . '<link href="../../assets/admin/pages/css/inbox.css" rel="stylesheet" type="text/css"/>'
     . '';
 
 //CARGARA EL BODY
-$body = "<?php include 'views/dashboard.php' ?>";
+$body = "<?php include 'views/tray.php' ?>";
 
 //CARGARA EL FOOTER O LOS SCRIPTS JS
-$footer = "";
+$footer = "<script src='js/tray_controller.js'></script>"
+        . "<script src='js/tray_loader.js'></script>"
+        . "<script src='js/tray_events.js'></script>";
 
 //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-$end_footer = "";
+$end_footer = "init_tray();";
 
 
 //PREPARANDO LA VISTA ...

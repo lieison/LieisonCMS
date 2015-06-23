@@ -34,6 +34,7 @@
  }
  
  unset($messagecontroller);
+ exit();
  
 
  

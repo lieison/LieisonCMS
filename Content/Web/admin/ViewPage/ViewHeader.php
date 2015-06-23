@@ -261,6 +261,7 @@ class AdminHeader
              */
             
              echo '<script type="text/javascript" src="' . self::$relative_route  .  'admin/js/task.js"></script>';
+             echo '<script type="text/javascript" src="' . self::$relative_route  .  'admin/js/load.js"></script>';
             
             echo '<script src="'. self::$relative_route . '/assets/global/scripts/metronic.js" type="text/javascript"></script>
                   <script src="'. self::$relative_route . 'assets/admin/layout/scripts/layout.js" type="text/javascript"></script>

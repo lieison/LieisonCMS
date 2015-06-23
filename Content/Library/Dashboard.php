@@ -62,6 +62,8 @@ class Dashboard extends MysqlConection{
      *  -Se agrego el multi privilegio , consiste en que el usuario pueda agregar privilegios de terceros
      * @version 1.4
      *  -Muy pronto , se agregara la opcion de $privilegios por nivel ...
+     * @version 1.5
+     *  -Sistema de complemento (especifica algun tipo de complemento que ira en el badge)
      * 
      * @return Mixed devuelve el dashboard menu sidebar en fortmato HTML
      *
@@ -102,14 +104,12 @@ class Dashboard extends MysqlConection{
             }
         }
         
-        /*echo "<pre>";
-        print_r($array_seccion);
-        echo "</pre>";*/
-        
         foreach ($array_seccion as $key=>$value)
         {
-            $query ="SELECT dashboard.id_dashboard , dashboard.privilegios , dashboard.icono as icono , dashboard.link"
-                . ", dashboard.titulo  FROM dashboard INNER JOIN seccion_dashboard ON "
+            $query ="SELECT dashboard.id_dashboard , dashboard.privilegios , "
+                . "dashboard.icono as icono , dashboard.link"
+                . ", dashboard.titulo , dashboard.complement as 'id_complement' "
+                . " FROM dashboard INNER JOIN seccion_dashboard ON "
                 . " dashboard.id_seccion=seccion_dashboard.id_seccion WHERE "
                 . "seccion_dashboard.id_seccion LIKE '$key' AND dashboard.status LIKE 1"
                 . " ORDER BY dashboard.start ASC";
@@ -165,19 +165,19 @@ class Dashboard extends MysqlConection{
                 $link = $v['link'];
                 $titulo = $v['titulo'];
                 $id = $v['id_dashboard'];
+                $complement = $v['id_complement'];
                 
                     if(count($priv) >= 2)
                     {
-                       
                         foreach ($priv as $p)
                         {
                              if(!in_array($id, $this->dashboard_key)){
-                                $this->ComparePriv($nivel , $p , $link , $titulo , $icon ,$id);
+                                $this->ComparePriv($nivel , $p , $link , $titulo , $icon ,$id , $complement);
                              }
                         }
                     }
                     else{
-                        $this->ComparePriv( $nivel , $priv[0], $link , $titulo , $icon , $id);
+                        $this->ComparePriv( $nivel , $priv[0], $link , $titulo , $icon , $id , $complement);
                     } 
             }
             
@@ -191,7 +191,7 @@ class Dashboard extends MysqlConection{
     }
     
     /**FUNCION QUE COMPLEMENTA LA FUNCION PRINCIPAL get_dashboard_sidebar_menu*/
-    private function ComparePriv($priv_user , $priv_dashboard , $link , $titulo , $icon , $id )
+    private function ComparePriv($priv_user , $priv_dashboard , $link , $titulo , $icon , $id  , $complement = null)
     {
 
           if($priv_dashboard == $priv_user || 
@@ -208,6 +208,20 @@ class Dashboard extends MysqlConection{
                    
                     $this->format.= '<a href="' . FunctionsController::GetUrl($link) .'">';
                     $this->format.= '<i class="'.$icon.'"></i>&nbsp&nbsp';
+                    
+                    if($complement != NULL){
+                        try{
+                            $decode = json_decode($complement);
+                            $this->format.= '<span id="' . $decode[0]->id
+                                    . '" class="badge  badge-warning">'
+                                    . $decode[0]->value
+                                    . '</span>';
+                        }catch (Exception $ex) {
+                            
+                        }
+                    }
+                    
+                    
                     $this->format.= $titulo .'</a></li>';
                     
                     array_push($this->dashboard_key, $id);

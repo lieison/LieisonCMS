@@ -105,18 +105,18 @@ class MessageController extends MessageModel {
 
     public function SetMessage($id_u_para, $id_u_de, $mensaje ,  $asunto = null) {
          $this->Insert("lieisoft_mensajeria" , array(
-             "id_usuario_para" => $id_u_para ,
-             "id_usuario_de" => $id_u_de,
-             "asunto"=> $asunto ,
-             "mensaje"=>$mensaje,
-             "fecha" => FunctionsController::get_date(),
-             "hora" => FunctionsController::get_time(),
-             "leido" => 0
+                "id_usuario_para"       => $id_u_para ,
+                "id_usuario_de"         => $id_u_de,
+                "asunto"                => $asunto ,
+                "mensaje"               =>$mensaje,
+                "fecha"                 => FunctionsController::get_date(),
+                "hora"                  => FunctionsController::get_time(),
+                "leido"                 => 0
              ));
     }
 
     public function SetSubmessage($id_message, $id_usuario, $mensaje) {
-        $this->Insert("lieisoft_submensajeria" , array(
+        return $this->Insert("lieisoft_submensajeria" , array(
                     "id_mensajeria"         =>$id_message,
                     "id_usuario"            =>$id_usuario,
                     "mensaje"               =>$mensaje,
@@ -138,10 +138,10 @@ class MessageController extends MessageModel {
     public function GetCountSubMessage($id_mensaje,  $id_user , $not_read = true) {
         
         $query = "SELECT count(*) as count FROM lieisoft_submensajeria "
-                . " WHERE lieisoft_submensajeria.id_mensajeria LIKE '$id_mensaje' and lieisoft_submensajeria.id_usuario NOT LIKE '$id_user'";
+                . " WHERE lieisoft_submensajeria.id_mensajeria LIKE $id_mensaje and lieisoft_submensajeria.id_usuario NOT LIKE '$id_user'";
         
          if($not_read == true){
-           $query .= " AND lieisoft_submensajeria.leido=0";
+             $query .= " AND lieisoft_submensajeria.leido=0";
          }
          
          $result = $this->RawQuery($query);
@@ -169,7 +169,7 @@ class MessageController extends MessageModel {
                   INNER JOIN usuario ON usuario.id_usuario=lieisoft_submensajeria.id_usuario
                   WHERE lieisoft_submensajeria.id_mensajeria 
                   LIKE $id
-                  ORDER BY lieisoft_submensajeria.fecha , lieisoft_submensajeria.hora DESC;";
+                  ORDER BY lieisoft_submensajeria.fecha DESC , lieisoft_submensajeria.hora ASC ;";
       
         
         return  parent::RawQuery($query);
@@ -222,6 +222,31 @@ class MessageController extends MessageModel {
         return;**/
         
         return $request[0];
+    }
+
+    public function SetReadChat($id) {
+        
+        $id_user = Session::GetSession("login" , "id");
+        
+        $query = "SELECT id_submensajeria as 'id_sub' FROM lieisoft_submensajeria 
+                    WHERE lieisoft_submensajeria.id_usuario 
+                    LIKE  'rolando55admin18894933' 
+                    AND id_mensajeria LIKE 2
+                    AND lieisoft_submensajeria.leido LIKE 0
+                    ORDER BY fecha DESC , hora ASC";
+        $result = parent::RawQuery($query);
+        
+        foreach ($result as $value){
+            $id_sub = $value['id_sub'];
+            $query  = "UPDATE lieisoft_submensajeria"
+                    . " SET lieisoft_submensajeria.leido = 1"
+                    . " WHERE id_submensajeria LIKE $id_sub ";
+            parent::beginTransaction();
+            parent::exec($query);
+            parent::commit();
+        }
+        
+        
     }
 
 }

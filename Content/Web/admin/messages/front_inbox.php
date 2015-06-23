@@ -17,9 +17,11 @@
 
  
  $id_user   = Session::GetSession("login", "id"); //id del usuario
+ 
+ 
  $count     = $messagecontroller->GetMessageCountFrom($id_user); //cuenta los mensajes
  $msjto     = $messagecontroller->GetMessageFrom($id_user , null); //mensaje para
-
+ 
 
  $count_submsj = 0; //
 
@@ -27,9 +29,10 @@
  if(count($msjto) == 0){
       $msjto = $messagecontroller->GetMessageTo($id_user , null);
  }
+ 
  foreach ($msjto as $k=>$v){
      $r = $messagecontroller->GetCountSubMessage($v['id_mensaje'] , $id_user);
-     $count_submsj += count($r);
+     $count_submsj += $r;
  }
 
 

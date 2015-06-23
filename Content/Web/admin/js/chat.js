@@ -21,7 +21,7 @@ var chat_preview = function(id){
  * @description elimina un chat activo
  * */
 var delele_chat = function(id){
-    console.log("eliminando elemento {" + id + "}");
+   // console.log("eliminando elemento {" + id + "}");
     var chat_ = new chat();
     chat_.delete_active_chat(id);
 };
@@ -54,7 +54,6 @@ var chat_message = function(id){
                 str += "</div>";
     
     div_chat.html(str);
-    
     var chat_ = new chat();
     chat_.sidebar();
     chat_.chat_messages();
@@ -67,8 +66,49 @@ var chat_message = function(id){
  * @description sistema verifica el chat en un lapso de 2.5 segundos aprox 
  * */
 var chat_inbox = function(){
+     console.log("Iteracion ... inbox");
      var chat_ = new chat();
      chat_.chat_messages();
+     chat_.read_messages();
+};
+
+
+var set_message_post = function(){
+
+    var avatar      = $("#avatar").val();
+    var route       = $("#route_value").val();
+    var message     = $("#txt_message").val();
+    
+    if(message.length === 0){
+        $("#chat_messages").append("<p style='color:white;'>Mensaje en blanco ..</p>");
+        return;
+    }else{
+        
+         var    tpl = '';
+                tpl += '<div class="post out">';
+                tpl += '<img class="avatar" alt="" src="' + route + "admin/img/users/" + avatar  + '"/>';
+                tpl += '<div class="message">';
+                tpl += '<span class="arrow"></span>';
+                tpl += '<a href="#" class="name">Tú</a>&nbsp;';
+                tpl += '<span class="datetime">Ahora</span>';
+                tpl += '<span class="body">';
+                tpl += message;
+                tpl += '</span>';
+                tpl += '</div>';
+                tpl += '</div>';
+        
+        $("#chat_messages").append(tpl);
+        $("#txt_message").val("");
+         $("#send_chat_id").val(tpl);
+        var chat_ = new chat();
+        chat_.set_messages(message);
+    }
+};
+
+
+var stop_chat = function(){
+    var chat_ = new chat();
+    chat_.stop_chat();
 };
 
 
@@ -126,8 +166,14 @@ var inbox = function(){
          }else{
              $("#title").html( "(" + count + ")" + " " + title );
          }
+         
+         try{
+             $("#sidebar_inbox").html(count);
+         }catch(ex){}
 
+         try{
          window.clearTimeout('inbox()');
+        }catch(ex){}
          setTimeout('inbox()', 1000);
          
     });
@@ -271,13 +317,20 @@ var chat = function(){
     this.chat_messages = function(){
         
         try{
-            window.clearTimeout('chat_inbox()');
+          //  window.clearTimeout('chat_inbox()');
         }catch(ex){}
         
         var div_chat   = $("#chat_messages");
         
         if(window.localStorage.getItem("chat_active") === null){
              return ;
+        }
+        
+        var push_chat   =     $("#send_chat_id");
+        if(push_chat.val() !== ''){
+            console.log("cargando");
+            $("#chat_messages").append(push_chat.val());
+            push_chat.val("");
         }
 
         var id = window.localStorage.getItem("chat_active");
@@ -288,6 +341,7 @@ var chat = function(){
         task_.url = route  + "admin/messages/loader/message_chat.php";;
         task_.async = true;
         task_.data = { "id_message" : id};
+        
         task_.success_callback(function(call){
             var data    = JSON.parse(call);
             var me      = data.me;
@@ -312,11 +366,29 @@ var chat = function(){
                 }else{
                     str += '<a href="#" class="name">' + v.nombre + '</a>';
                 }
-                str += '<span class="datetime"> (' + v.hora +')</span>';
-                str += '<span class="body">' + v.mensaje 
-                        + '<p style="color:red"><br><b>' 
+                
+                var date = new Date().toJSON().slice(0,10);
+
+                if(v.leido == 0){
+                     str += '<span class="datetime"> (' + v.hora +')&nbsp<i class="fa fa-check"></i></span>';
+                }
+                else{
+                    str += '<span class="datetime"> (' + v.hora +')</span>';
+                }
+                
+                if(date === v.fecha){
+                    str += '<span class="body">' 
+                        + v.mensaje 
+                        + '</span>';
+                }else{
+                     str += '<span class="body">' + v.mensaje 
+                        + '<p style="color:yellow"><b>' 
                         + v.fecha + '</b></p></span>';
-                str += '</div>';
+                }
+                
+                
+                
+                    str += '</div>';
                 str += "</div>";
                 
             });
@@ -335,14 +407,66 @@ var chat = function(){
             
             div_chat.html(str);
             
-            window.clearTimeout('chat_inbox()');
-            setTimeout('chat_inbox()', 1000);
+             try{ 
+                 window.clearTimeout($("#id_chat").val());
+             }catch(ex){}
             
-            console.log("iteracion");
+             var id_chat = setTimeout('chat_inbox()', 3000);
+             $("#id_chat").val(id_chat);
+             
+            //console.log("iteracion -->" + $("#id_chat").val());
 
+        });
+        
+        task_.do_task();
+
+       
+    };
+    
+    this.set_messages = function(message){
+        
+        
+        var task_ = new jtask();
+        task_.async = true;
+        task_.url = route() + "admin/messages/loader/set_chat.php";
+        task_.method = "GET";
+        task_.data = { 
+            "message" : message ,
+            "id": window.localStorage.getItem("chat_active")
+        };
+        task_.success_callback(function(call){
+               var t = $.trim(call);
+               if(t === 1){
+                  this.chat_messages();
+               }
         });
         task_.do_task();
         
+        
+    };
+    
+    this.read_messages = function(){
+        
+        var id    = window.localStorage.getItem("chat_active");
+        var task_ = new jtask();
+        task_.url = route() + "admin/messages/loader/read_chat.php";
+        task_.data = { "id": id };
+        task_.success_callback(function(call){
+            
+        });
+        task_.do_task();
+        
+    };
+    
+    this.stop_chat = function(){
+
+        try{
+            var id = $("#id_chat").val();
+            window.clearTimeout(id);
+        }catch(ex){
+            console.log("Error al detener chat ... " );
+        }
+       
     };
    
 };

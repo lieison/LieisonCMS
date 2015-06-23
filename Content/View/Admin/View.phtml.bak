@@ -101,6 +101,9 @@
 <?php AdminHeader::GetHiddenData(); ?>   
 <input type="hidden" id="rol_value" value="<?php echo $rol; ?>" />
 <input type="hidden" id="page_value" value="<?php echo $page_name; ?>" />
+<input type="hidden" id="avatar" value="<?php echo $imagen; ?>" />
+<input type="hidden" id="id_chat" value="" />
+<input type="hidden" id="send_chat_id" value="" />
 
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top">
@@ -181,7 +184,7 @@
 				<!-- BEGIN QUICK SIDEBAR TOGGLER -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-quick-sidebar-toggler">
-					<a href="javascript:;" class="dropdown-toggle">
+					<a href="javascript:;stop_chat();" class="dropdown-toggle">
 					<i class="icon-logout"></i>
 					</a>
 				</li>
@@ -286,14 +289,14 @@
 
                           <div class="page-quick-sidebar-chat-user">
                             <div class="page-quick-sidebar-nav">
-                                <a href="javascript:;" class="page-quick-sidebar-back-to-list"><i class="icon-arrow-left"></i>Atras</a>
+                                <a href="javascript:;stop_chat();" class="page-quick-sidebar-back-to-list"><i class="icon-arrow-left"></i>Atras</a>
                             </div>
                             <div id="chat_messages" class="page-quick-sidebar-chat-user-messages">
                                  <!-- CARGAREMOS LOS MENSAJES DEL USUARIO EN TERMINOS DE CHAT -->
                             </div>
                             <div class="page-quick-sidebar-chat-user-form">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Escribe un mensaje ...">
+                                    <input id="txt_message" type="text" class="form-control" placeholder="Escribe un mensaje ...">
                                     <div class="input-group-btn">
                                         <button type="button" class="btn blue"><i class="icon-paper-clip"></i></button>
                                     </div>

@@ -4,7 +4,9 @@
 
 include '../../../Conf/Include.php';
 
-set_dependencies(array( "AdminController"));
+set_dependencies(array( 
+    "AdminController"
+));
 
 Session::InitSession();//INICIA SESION
 
@@ -21,6 +23,7 @@ while(Session::ExistSession("login")):
         if(!Session::ExistSession("DUPLICATE_SESSION")){//VERIFICA SI ES SESION DUPLICADA
             $admin->UpdateSession($_SESSION['login']["id_log"], 0);
         }
+        
         Session::DestroySession("", true);//LIBERA TODAS LAS VARIABLES DE SESION ... 
 endwhile;
 

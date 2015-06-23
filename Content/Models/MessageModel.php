@@ -25,6 +25,8 @@ abstract class MessageModel extends MysqlConection {
     
     public abstract  function GetChatById($id);
     public abstract  function GetActiveUserChat($id);
+    public abstract  function SetReadChat($id);
+    
   
     
 }

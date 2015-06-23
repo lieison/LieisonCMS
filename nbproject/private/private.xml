@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Plugins/PluginClass.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Helper/DateTime.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Conf/dependencies.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Class/Plugins/InstallClass.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Library/Dashboard.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Conf/Include.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Conf/Config.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/message_chat.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/MessageModel.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/View/Admin/View.phtml.bak</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/add_chat.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/js/chat.js</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/MessageController.php</file>
         </group>
     </open-files>
 </project-private>
