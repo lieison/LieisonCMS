@@ -39,7 +39,7 @@ var messages_table = function(){
                     "sortDescending": ": activate to sort column descending"
                 },
                 "emptyTable": "No existen correos",
-                "info": "Mostrando _START_ to _END_ de _TOTAL_ Mensajes",
+                "info": "Mostrando _START_ de _END_ en _TOTAL_ Mensajes",
                 "infoEmpty": "No entries found",
                 "infoFiltered": "(filtered1 from _MAX_ total entries)",
                 "lengthMenu": "Mostrando _MENU_ mensajes",
@@ -47,7 +47,7 @@ var messages_table = function(){
                 "zeroRecords": "No existen correos"
             },
 
-            "bStateSave": true, 
+            "bStateSave": false, 
 
             "columns": [{
                 "orderable": false
@@ -58,7 +58,7 @@ var messages_table = function(){
             }, {
                 "orderable": true
             }, {
-                "orderable": true
+                "orderable": false
             }, {
                 "orderable": false
             }  ],
@@ -90,7 +90,7 @@ var messages_table = function(){
         });
         /**,
             "order": [
-                [3, "desc"]
+                [1, "asc"]
             ] */
     };
     

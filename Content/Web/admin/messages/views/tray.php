@@ -34,7 +34,7 @@ $id     =   Session::GetSession("login" , "id");
 					</div>
 					<div class="inbox-loading" style="display: block;">
 						<div class="portlet box ">
-			
+                                                     
 						<div class="portlet-body">
 							<table class="table table-striped table-bordered table-hover" id="messages_table">
                                                          <thead>

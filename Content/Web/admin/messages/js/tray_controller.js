@@ -65,8 +65,8 @@ var messages_ = function(){
                             + '<th>'
                             + ''
                             + '</th>'
-                            + '<th class="form-control">'
-                            + '<button onclick="load_tray();">load</buton>'
+                            + '<th>'
+                            + '<button class="btn btn-circle default dark-stripe" onclick="load_tray();"><i class="fa fa-refresh"></i></button>'
                             + '</th>'
                             + '';
             head.html(head_);
@@ -80,9 +80,9 @@ var messages_ = function(){
       
             $.each(data , function(k,v){
                
-                console.log(v.fecha);
-                var body_ = '<tr class="odd gradeX">'
-                          + '<td><input type="checkbox" class="checkboxes" value="1"/></td>'
+                //console.log(v.fecha + " ->" + v.hora);
+                var body_ = '<tr onclick="show_message(' + v.id_mensaje + ');" class="odd gradeX">'
+                          + '<td><input type="checkbox" class="checkboxes" value="' + v.id_mensaje + '"/></td>'
                           + '<td>' + '<img alt="" width="30" height="30" class="img-circle" src="' + route() + 'admin/img/users/' + v.imagen + '" />&nbsp&nbsp<span class="username ">' + v.nombre + '</span></td>'
                           + '<td>' + v.asunto + '</td>'
                           + '<td>' + v.fecha + '</td>'
