@@ -52,18 +52,21 @@ $header = ''
     . '<link href="../../assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css"/>'
     . '<link href="../css/loading-lieison-cms.css" rel="stylesheet" type="text/css"/>'
     . '<link href="../../assets/admin/pages/css/inbox.css" rel="stylesheet" type="text/css"/>'
-    . '';
+    . '<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>';
 
 //CARGARA EL BODY
 $body = "<?php include 'views/tray.php' ?>";
 
 //CARGARA EL FOOTER O LOS SCRIPTS JS
 $footer = "<script src='js/tray_controller.js'></script>"
-        . "<script src='js/tray_loader.js'></script>"
-        . "<script src='js/tray_events.js'></script>";
+        . "<script src='js/tray_events.js'></script>"
+        . '<script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+           <script type="text/javascript" src="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+           <script src="../../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>' 
+        . "<script src='js/tray_loader.js'></script>";
 
 //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-$end_footer = "init_tray();";
+$end_footer = "init_tray(); ";
 
 
 //PREPARANDO LA VISTA ...

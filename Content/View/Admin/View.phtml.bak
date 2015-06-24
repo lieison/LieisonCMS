@@ -103,6 +103,7 @@
 <input type="hidden" id="page_value" value="<?php echo $page_name; ?>" />
 <input type="hidden" id="avatar" value="<?php echo $imagen; ?>" />
 <input type="hidden" id="id_chat" value="" />
+<input type="hidden" id="recive_chat" value="" />
 <input type="hidden" id="send_chat_id" value="" />
 
 

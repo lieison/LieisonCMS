@@ -71,13 +71,25 @@ class MessageController extends MessageModel {
          return $result[0]['count'];
     }
 
-    public function GetMessageFrom($id_u_para , $limit = null) {
+    public function GetMessageFrom($id_u_para , $limit = null , $not_read = false , $trash = false) {
         
         $query = "SELECT lieisoft_mensajeria.id_mensaje ,  lieisoft_mensajeria.asunto ,"
                 . " lieisoft_mensajeria.fecha , lieisoft_mensajeria.hora , lieisoft_mensajeria.mensaje ,"
-                . " concat(usuario.nombre , ' ' , usuario.apellido) as nombre , usuario.imagen "
-                . " FROM lieisoft_mensajeria INNER JOIN usuario ON lieisoft_mensajeria.id_usuario_de=usuario.id_usuario"
-                . " WHERE lieisoft_mensajeria.id_usuario_para LIKE '$id_u_para' ORDER BY lieisoft_mensajeria.hora ASC";
+                . " concat(usuario.nombre , ' ' , usuario.apellido) as nombre , "
+                . " usuario.imagen , lieisoft_mensajeria.leido as 'leido' "
+                . " FROM lieisoft_mensajeria INNER JOIN usuario "
+                . " ON lieisoft_mensajeria.id_usuario_de=usuario.id_usuario "
+                . " WHERE lieisoft_mensajeria.id_usuario_para LIKE '$id_u_para' ";
+       
+        if($not_read){
+            $query .= "AND lieisoft_mensajeria.leido LIKE 0 ";
+        }
+        
+        if($trash){
+            $query .= "AND lieisoft_mensajeria.eliminado LIKE 0 ";
+        }
+        
+        $query .= " ORDER BY lieisoft_mensajeria.fecha DESC , lieisoft_mensajeria.hora DESC";
         
         
         if($limit != null){
