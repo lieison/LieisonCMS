@@ -89,7 +89,7 @@ class MessageController extends MessageModel {
             $query .= "AND lieisoft_mensajeria.eliminado LIKE 0 ";
         }
         
-        $query .= " ORDER BY lieisoft_mensajeria.hora ASC";
+        $query .= " ORDER BY lieisoft_mensajeria.fecha DESC , lieisoft_mensajeria.hora ASC";
         
         
         if($limit != null){

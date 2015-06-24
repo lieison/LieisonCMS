@@ -80,6 +80,7 @@ var messages_ = function(){
       
             $.each(data , function(k,v){
                
+                console.log(v.fecha);
                 var body_ = '<tr class="odd gradeX">'
                           + '<td><input type="checkbox" class="checkboxes" value="1"/></td>'
                           + '<td>' + '<img alt="" width="30" height="30" class="img-circle" src="' + route() + 'admin/img/users/' + v.imagen + '" />&nbsp&nbsp<span class="username ">' + v.nombre + '</span></td>'
