@@ -39,11 +39,11 @@ var messages_table = function(){
                     "sortDescending": ": activate to sort column descending"
                 },
                 "emptyTable": "No existen correos",
-                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "info": "Mostrando _START_ to _END_ de _TOTAL_ Mensajes",
                 "infoEmpty": "No entries found",
                 "infoFiltered": "(filtered1 from _MAX_ total entries)",
-                "lengthMenu": "Show _MENU_ entries",
-                "search": "Search:",
+                "lengthMenu": "Mostrando _MENU_ mensajes",
+                "search": "Buscando:",
                 "zeroRecords": "No existen correos"
             },
 
@@ -72,7 +72,7 @@ var messages_table = function(){
             "pagingType": "bootstrap_full_number",
             "language": {
                 "search": "Buscar: ",
-                "lengthMenu": "  _MENU_ records",
+                "lengthMenu": "  _MENU_ ",
                 "paginate": {
                     "previous":"Prev",
                     "next": "Next",
@@ -86,12 +86,12 @@ var messages_table = function(){
             }, {
                 "searchable": false,
                 "targets": [0]
-            }],
-            "order": [
-                [1, "asc"]
-            ] 
+            }]
         });
-
+        /**,
+            "order": [
+                [3, "desc"]
+            ] */
     };
     
      return {

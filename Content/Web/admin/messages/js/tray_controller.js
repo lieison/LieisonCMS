@@ -20,7 +20,7 @@ var messages_ = function(){
           t.html("Papelera (" +count + ")");
     };
     
-    this.load_from = function( before){
+    this.load_from = function( before , load){
         
         var task = new jtask();
         
@@ -30,7 +30,7 @@ var messages_ = function(){
         
         var body = $("#messages_body");
         var head = $("#messages_head");
-       
+        
         if(before){
             task.beforesend = true;
             task.config_before(function(){
@@ -42,6 +42,7 @@ var messages_ = function(){
             });
         }
         
+ 
         task.success_callback(function(call){
             
             var message     = JSON.parse(call);
@@ -60,21 +61,23 @@ var messages_ = function(){
                             + 'Asunto'
                             + '</th>'
                             + '<th>'
-                            + ''
                             + '</th>'
                             + '<th>'
                             + ''
                             + '</th>'
-                            + '<th>'
+                            + '<th class="form-control">'
+                            + '<button onclick="load_tray();">load</buton>'
                             + '</th>'
                             + '';
             head.html(head_);
             
             try{
                 $("#after_load").remove();
+                
             }catch(ex){}
             
-
+            body.html('');
+      
             $.each(data , function(k,v){
                
                 var body_ = '<tr class="odd gradeX">'
@@ -89,7 +92,9 @@ var messages_ = function(){
                 body.append(body_);
             });
             
+           if(load)
             messages_table.init();
+        
  
         });
         task.do_task();
