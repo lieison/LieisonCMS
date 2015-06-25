@@ -421,6 +421,49 @@ class AdminController extends AdminModel {
         return $delete;
     }
 
+    
+    
+    public function GetuserByParent($id) {
+        
+         $this->QUERY = "SELECT privilegios.nivel , privilegios.padre , privilegios.nombre as priv_name , login.user as user , 
+                        login.id_usuario as id_user , concat(usuario.nombre , ' ' , usuario.apellido) as nombre
+                        FROM login INNER JOIN usuario ON login.id_usuario=usuario.id_usuario 
+                        INNER JOIN privilegios ON privilegios.nombre=login.rol 
+                        AND  login.id_usuario NOT LIKE '$id'";
+       
+        $result = parent::RawQuery($this->QUERY , pdo::FETCH_CLASS);
 
+        $user_              = array();
+        
+        if(is_array($result)){
+
+            $this->QUERY = "SELECT privilegios.nivel as nivel FROM login INNER "
+                    . " JOIN privilegios ON login.rol=privilegios.nombre "
+                    . " WHERE login.id_usuario LIKE '$id'";
+            
+            $nivel = parent::RawQuery($this->QUERY);
+
+            foreach ($result as $value){
+                
+                if($value->padre == 0){
+                     array_push($user_, array(
+                              "id"      =>  $value->id_user,
+                              "name"    =>  $value->nombre,
+                              "priv"    =>  $value->priv_name
+                         ));
+                }else if($value->padre == $nivel[0]['nivel']){
+                     array_push($user_, array(
+                              "id"      =>  $value->id_user,
+                              "name"    =>  $value->nombre,
+                              "priv"    =>  $value->priv_name
+                      ));
+                }
+
+            }
+
+        }
+        
+        return $user_;
+    }
 
 }

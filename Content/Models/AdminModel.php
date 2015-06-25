@@ -11,10 +11,12 @@
  *
  * @author rolandoantonio
  */
-class AdminModel extends MysqlConection {
+abstract class AdminModel extends MysqlConection {
 
     function __construct($conect_dsn = array(), $directory = null) {
         parent::__construct($conect_dsn, $directory);
     }
+    
+    public abstract function  GetuserByParent($id);
 
 }

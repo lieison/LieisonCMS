@@ -210,5 +210,20 @@ var messages_ = function(){
         task.do_task();
     };
     
-    
+    this.get_asign_to = function(request){
+        
+        var task = new jtask();
+        task.url = route()  + "admin/messages/loader/tray_to.php";
+        task.async = true;
+        task.success_callback(function(callback){
+            var data      = JSON.parse(callback);
+            $.each(data , function(k,v){
+                // request.append("<option value='" + v.id + "'>" + v.name + "</option>");
+                // $("#load_to").html("<option value='" + v.id + "'>" + v.name + "</option>");
+                // console.log(v.name);
+            });
+        });
+        task.do_task();
+        
+    };
 };
