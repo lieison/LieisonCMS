@@ -61,20 +61,22 @@ uasort($array_, 'compareuser' );
 
 $flag_id         = NULL;
 $count_chat      = count($array_);
+$i = 1;
 
 foreach ($array_ as $value){
     
    
-    $i = 1;
+   
     $c = $value['count'];
     $request = $value['data'];
     
     if($flag_id == NULL){
         $flag_id = $value['id_user'];
         echo ' <ul id="user_chat" class="media-list list-items">';
-        echo '<h3 class="list-heading">' . $request['to_name'] . '</h3>';
+        echo '<h3 class="list-heading">' . $request['to_name']  . '</h3>';
     }
     else if($flag_id != $value['id_user']){
+        $flag_id = $value['id_user'];
         echo '</ul>';
         echo ' <ul id="user_chat" class="media-list list-items">';
         echo '<h3 class="list-heading">' . $request['to_name'] . '</h3>';
@@ -112,7 +114,7 @@ foreach ($array_ as $value){
     
     if($i == $count_chat){
         echo "</ul>";
-    }
+    }else{ $i++;}
     
 }
 

@@ -8,7 +8,7 @@ $id     =   Session::GetSession("login" , "id");
 				<div class="col-md-2">
 					<ul class="inbox-nav margin-bottom-10">
 						<li class="compose-btn">
-							<a href="javascript:;" data-title="Compose" class="btn green">
+							<a href="javascript:load_compose();" data-title="Compose" class="btn green">
 							<i class="fa fa-edit"></i> Redactar </a>
 						</li>
                                                 <li onclick="event_(1);" id="tray_1" class="inbox active">
@@ -18,14 +18,18 @@ $id     =   Session::GetSession("login" , "id");
 						</li>
                                                 <li onclick="event_(2);" id="tray_2" onclick="" class="sent">
 							<a id="count_tray_2" class="btn" href="javascript:;" data-title="Sent">
-							Enviados (?) </a>
+							Leidos (?) </a>
 							<b></b>
 						</li>
                                                 <li onclick="event_(3);" id="tray_3" class="trash">
 							<a id="count_tray_3" class="btn" href="javascript:;" data-title="Trash">
-							Papelera (?) </a>
+							Enviados (?) </a>
 							<b></b>
 						</li>
+                                                <li onclick="event_(4);" id="tray_4" class="trash">
+							<a id="count_tray_4" class="btn" href="javascript:;" data-title="Trash">
+							Papelera (?) </a>
+                                                <b>
 					</ul>
 				</div>
 				<div class="col-md-10">

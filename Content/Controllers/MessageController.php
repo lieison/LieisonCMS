@@ -71,7 +71,7 @@ class MessageController extends MessageModel {
          return $result[0]['count'];
     }
 
-    public function GetMessageFrom($id_u_para , $limit = null , $not_read = false , $trash = false) {
+    public function GetMessageFrom($id_u_para , $limit = null , $not_read = 0 , $trash = false) {
         
         $query = "SELECT lieisoft_mensajeria.id_mensaje ,  lieisoft_mensajeria.asunto ,"
                 . " lieisoft_mensajeria.fecha , lieisoft_mensajeria.hora , lieisoft_mensajeria.mensaje ,"
@@ -81,12 +81,15 @@ class MessageController extends MessageModel {
                 . " ON lieisoft_mensajeria.id_usuario_de=usuario.id_usuario "
                 . " WHERE lieisoft_mensajeria.id_usuario_para LIKE '$id_u_para' ";
        
-        if($not_read){
-            $query .= "AND lieisoft_mensajeria.leido LIKE 0 ";
+        if($not_read == 1){
+             $query .= " AND lieisoft_mensajeria.leido LIKE 0 ";
+        }
+        else if($not_read == 2){
+            $query .= " AND lieisoft_mensajeria.leido LIKE 1 ";
         }
         
         if($trash){
-            $query .= "AND lieisoft_mensajeria.eliminado LIKE 0 ";
+            $query .= " AND lieisoft_mensajeria.eliminado LIKE 0 ";
         }
         
         $query .= " ORDER BY lieisoft_mensajeria.fecha DESC , lieisoft_mensajeria.hora DESC";
@@ -181,7 +184,7 @@ class MessageController extends MessageModel {
                   INNER JOIN usuario ON usuario.id_usuario=lieisoft_submensajeria.id_usuario
                   WHERE lieisoft_submensajeria.id_mensajeria 
                   LIKE $id
-                  ORDER BY lieisoft_submensajeria.fecha DESC , lieisoft_submensajeria.hora ASC ;";
+                  ORDER BY lieisoft_submensajeria.fecha ASC , lieisoft_submensajeria.hora ASC ;";
       
         
         return  parent::RawQuery($query);

@@ -9,18 +9,100 @@ var primary = function(id){
             $("#" + name).removeClass().addClass("inbox active");
             $("#tray_2").removeClass().addClass("sent");
             $("#tray_3").removeClass().addClass("trash");
+            $("#tray_4").removeClass().addClass("trash");
+            load_tray();
             break;
         case "tray_2":
             $("#" + name).removeClass().addClass("sent active");
             $("#tray_1").removeClass().addClass("inbox");
             $("#tray_3").removeClass().addClass("trash");
+            $("#tray_4").removeClass().addClass("trash");
+            load_read();
             break;
         case "tray_3":
             $("#" + name).removeClass().addClass("trash active");
             $("#tray_1").removeClass().addClass("inbox");
             $("#tray_2").removeClass().addClass("sent");
+            $("#tray_4").removeClass().addClass("trash");
             break;
+       case "tray_4":
+            $("#" + name).removeClass().addClass("trash active");
+            $("#tray_1").removeClass().addClass("inbox");
+            $("#tray_2").removeClass().addClass("sent");
+            $("#tray_3").removeClass().addClass("trash");
+            break;   
     }
+};
+
+var redact = function() {
+    
+    var route = function(){
+        return $("#route_value").val();
+    };
+    
+    var avatar = function(){
+      
+        return route() + "admin/img/users/" +  $("#avatar").val();
+        
+    };
+    
+    
+    this.show = function (){
+
+         var asunto = '<div class="form-group">'
+                    + '<label>Asunto: </label>'
+                    + '<div class="input-group">'
+                    + '<span class="input-group-addon"><i class="fa fa-buysellads"></i></span>'
+                    + '<input type="text" class="form-control" placeholder="...">'
+                    + '</div></div>';
+            
+         var msj    = '<div class="form-group">'
+                    + '<label>Mensaje</label>'
+                    + '<div class="input-group">'
+                    + '<span class="input-group-addon"><i class="fa fa-envelope"></i></span>'
+                    + '<textarea class="form-control" placeholder=""></textarea>'
+                    + '</div></div>';
+            
+         var para   = ''
+                    + ''
+                    + '';
+            
+         var de     = '<img alt="" width="30" height="30" class="img-circle" src="' + avatar() + '" />&nbsp&nbsp<span class="username ">Redacta Un mensaje ...</span>'
+                    + ''
+                    + '';
+        
+         var render = ''
+                    + '<div class="portlet ">'
+                    + '<div class="portlet-body form">'
+                    + '<form role="form"><div class="form-body">'
+                    + asunto 
+                    + msj
+                    + '</div></form>'
+                    + '</div>'
+                    + '</div>'
+                    + '';
+                    
+             
+        
+         bootbox.dialog({
+            title: de,
+            message:render
+        }); 
+        
+    };
+    
+    this.send = function(){
+        
+        this.click = function(){
+            
+        };
+        
+        this.read  = function(){
+            
+        };
+        
+    };
+    
 };
 
 var messages_table = function(){
