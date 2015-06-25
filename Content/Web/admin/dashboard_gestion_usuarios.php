@@ -1,7 +1,14 @@
 <?php
 
-    session_start();
-    include   '../../Conf/Include.php';
+    
+    include   '../../../Conf/Include.php';
+    
+    Session::InitSession();
+    
+    set_dependencies(array(
+        "AdminController"
+    ));
+    
     $header = new Http\Header();
     
     if(!isset($_SESSION['login'])):

@@ -30,23 +30,46 @@ class TaskModel extends MysqlConection {
     
     
     public function GetUserToAsign($id_user_from){
+       
         $this->QUERY = "SELECT privilegios.nivel , privilegios.padre , privilegios.nombre as priv_name , login.user as user , 
                         login.id_usuario as id_user , concat(usuario.nombre , ' ' , usuario.apellido) as nombre
                         FROM login INNER JOIN usuario ON login.id_usuario=usuario.id_usuario 
-                        INNER JOIN privilegios ON privilegios.nombre=login.rol;";
-        
+                        INNER JOIN privilegios ON privilegios.nombre=login.rol 
+                        AND  login.id_usuario NOT LIKE '$id_user_from'";
+       
         $result = parent::RawQuery($this->QUERY , pdo::FETCH_CLASS);
-        $user_ = array();
+
+        $user_              = array();
+        $priv_parent        = array();
+        
         if(is_array($result)){
-            
-            $this->QUERY = "SELECT privilegios.nivel as nivel FROM login INNER JOIN privilegios ON login.rol=privilegios.nombre "
+
+            $this->QUERY = "SELECT privilegios.nivel as nivel FROM login INNER "
+                    . " JOIN privilegios ON login.rol=privilegios.nombre "
                     . " WHERE login.id_usuario LIKE '$id_user_from'";
             
             $nivel = parent::RawQuery($this->QUERY);
             $nivel = $nivel[0]['nivel'];
-            $priv_parent = array();
             
-            foreach ($result as $class){
+            foreach ($result as $value){
+                
+                if($value->padre == 0){
+                     array_push($user_, array(
+                              "id"      =>  $value->id_user,
+                              "name"    =>  $value->nombre,
+                              "priv"    =>  $value->priv_name
+                         ));
+                }else if($value->padre == $nivel){
+                     array_push($user_, array(
+                              "id"      =>  $value->id_user,
+                              "name"    =>  $value->nombre,
+                              "priv"    =>  $value->priv_name
+                         ));
+                }
+
+            }
+           
+       /*     foreach ($result as $class){
                  if($class->padre == 0){
                      array_push($user_, array(
                               "id"      =>  $class->id_user,
@@ -55,12 +78,13 @@ class TaskModel extends MysqlConection {
                          ));
                  }
                  else if($class->padre != 0){
-                     //|| $nivel == 55
                      if($class->padre == $nivel ){
+                         
                          if(count($priv_parent) == 0){
                              $admin = new AdminController();
                              $priv_parent = $admin->Get_MasterPrivilegios();
                          }
+                         
                          $priv_parent_name = null;
                          foreach ($priv_parent as $priv){
                              if($class->padre === $priv['nivel']){
@@ -75,7 +99,7 @@ class TaskModel extends MysqlConection {
                          ));
                      }
                  }
-            }
+            }*/
         }
         
         return $user_;

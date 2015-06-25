@@ -52,7 +52,7 @@ var redact = function() {
          var asunto = '<div class="form-group">'
                     + '<label>Asunto: </label>'
                     + '<div class="input-group">'
-                    + '<span class="input-group-addon"><i class="fa fa-buysellads"></i></span>'
+                    + '<span class="input-group-addon"><i class="fa fa-briefcase"></i></span>'
                     + '<input type="text" class="form-control" placeholder="...">'
                     + '</div></div>';
             
@@ -60,34 +60,57 @@ var redact = function() {
                     + '<label>Mensaje</label>'
                     + '<div class="input-group">'
                     + '<span class="input-group-addon"><i class="fa fa-envelope"></i></span>'
-                    + '<textarea class="form-control" placeholder=""></textarea>'
+                    + '<textarea rows="10" cols="100" class="form-control" placeholder=""></textarea>'
                     + '</div></div>';
             
-         var para   = ''
-                    + ''
-                    + '';
+         var para   = '<div class="form-group">'
+                    + '<label>Para:</label>'
+                    + '<div>'
+                    + '<select class="selectpicker" id="load_to" style="display: none;" >'
+                    + '<option value="-1">Seleccione un usuario</option>'
+                    + '</select>'
+                    + '</div></div>';
             
          var de     = '<img alt="" width="30" height="30" class="img-circle" src="' + avatar() + '" />&nbsp&nbsp<span class="username ">Redacta Un mensaje ...</span>'
                     + ''
                     + '';
         
-         var render = ''
-                    + '<div class="portlet ">'
+         var render = '<div class="row"><div class="col-md-12">'
+                    + '<div class="portlet">'
                     + '<div class="portlet-body form">'
                     + '<form role="form"><div class="form-body">'
+                    + para
                     + asunto 
                     + msj
                     + '</div></form>'
                     + '</div>'
                     + '</div>'
-                    + '';
+                    + '</div></div>';
                     
-             
-        
+
          bootbox.dialog({
             title: de,
-            message:render
+            message:render,
+            buttons: {
+                    success: {
+                        label: "  Enviar",
+                        className: "btn-success fa fa-paper-plane",
+                        callback: function () {
+                          
+                        }
+                    },
+                    close: {
+                            label: " Cerrar",
+                            className: "btn-danger fa fa-times",
+                            callback: function() {
+                             
+                            }
+                    }
+              }
         }); 
+        
+         var msj = new messages_();
+         msj.get_asign_to($("#load_to"));
         
     };
     
