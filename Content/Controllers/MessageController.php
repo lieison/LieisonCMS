@@ -119,11 +119,11 @@ class MessageController extends MessageModel {
     }
 
     public function SetMessage($id_u_para, $id_u_de, $mensaje ,  $asunto = null) {
-         $this->Insert("lieisoft_mensajeria" , array(
+        return  $this->Insert("lieisoft_mensajeria" , array(
                 "id_usuario_para"       => $id_u_para ,
                 "id_usuario_de"         => $id_u_de,
                 "asunto"                => $asunto ,
-                "mensaje"               =>$mensaje,
+                "mensaje"               => $mensaje,
                 "fecha"                 => FunctionsController::get_date(),
                 "hora"                  => FunctionsController::get_time(),
                 "leido"                 => 0

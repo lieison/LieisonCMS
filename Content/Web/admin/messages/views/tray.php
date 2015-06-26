@@ -9,13 +9,14 @@ echo '<input type="hidden" id="id_asing_to"' . "value='"
 ,  json_encode($search) ,  "'" , '/>';
 
 ?>
-
+<input type="hidden" id="text_area_data" value="" />
 <div class="row inbox">
 				<div class="col-md-2">
 					<ul class="inbox-nav margin-bottom-10">
-						<li class="compose-btn">
-							<a href="javascript:load_compose();" data-title="Compose" class="btn green">
-							<i class="fa fa-edit"></i> Redactar </a>
+                                            <li id="cmd_compose" class="compose-btn">
+                                                <a  id="load_compose" href="javascript:load_compose();" data-title="Compose" class="btn green">
+                                                       <i class="fa fa-edit"></i> Redactar 
+                                                </a>
 						</li>
                                                 <li onclick="event_(1);" id="tray_1" class="inbox active">
                                                     <a id="count_tray_1" href="javascript:;" class="btn" data-title="Inbox">
@@ -78,7 +79,7 @@ echo '<input type="hidden" id="id_asing_to"' . "value='"
 					</div>
 					</div>
                                         <div class="inbox-content">
-                                        
+                                                
                                         </div>
 				</div>
 </div>

@@ -2,6 +2,10 @@ var event_ = function(id){
     primary(id);
 };
 
+var text_area_funcion = function(value){
+    $("#text_area_data").val(value);
+};
+
 var primary = function(id){
     var name    = "tray_" + id;
     switch(name){
@@ -34,7 +38,11 @@ var primary = function(id){
     }
 };
 
+
+
 var redact = function() {
+    
+    
     
     var route = function(){
         return $("#route_value").val();
@@ -60,13 +68,13 @@ var redact = function() {
                     + '<label>Mensaje</label>'
                     + '<div class="input-group">'
                     + '<span class="input-group-addon"><i class="fa fa-envelope"></i></span>'
-                    + '<textarea id="txt_message" rows="10" cols="100" class="form-control" placeholder=""></textarea>'
+                    + '<textarea required onkeyup="text_area_funcion(this.value);" id="txt_message" name="txt_message" rows="10" cols="100" class="form-control" ></textarea>'
                     + '</div></div>';
             
          var para   = '<div class="form-group">'
                     + '<label>Para:</label>'
                     + '<div>'
-                    + '<select id="cmd_asing" class="image-picker show-html"  >'
+                    + '<select id="cmd_asing" class="form-control"  >'
                     + '<option value="-1">Seleccione un usuario</option>';
                     
          var   users = JSON.parse($("#id_asing_to").val());
@@ -94,7 +102,7 @@ var redact = function() {
                     + '</div>'
                     + '</div>'
                     + '</div></div>';
-                    
+     
 
          bootbox.dialog({
             title: de,
@@ -104,7 +112,29 @@ var redact = function() {
                         label: "  Enviar",
                         className: "btn-success fa fa-paper-plane",
                         callback: function () {
-                          
+                            
+                             var to     = $("#cmd_asing").val();
+                             var m      = $("#text_area_data").val();
+                             var asunto = $("#txt_asunto").val();
+                             
+                             if(to == "-1" ||  to === -1){
+                                 $("#cmd_compose").notify(
+                                        "No se pudo enviar el mensaje, Causa(No se selecciono un remitente)", 
+                                    { position:"right"   },
+                                        "warn"
+                                 );
+                                 return;
+                             }else if(m === '' || m === 'undefinded'){
+                                 $("#cmd_compose").notify(
+                                        "No se pudo enviar el mensaje, Causa( No hay mensaje )", 
+                                    { position:"right"   },
+                                        "warn"
+                                 );
+                                 return;
+                             }
+                             
+                             var msj = new  messages_();
+                             msj.send_messaje(to , asunto , m);
                         }
                     },
                     close: {
@@ -120,17 +150,7 @@ var redact = function() {
         
     };
     
-    this.send = function(){
-        
-        this.click = function(){
-            
-        };
-        
-        this.read  = function(){
-            
-        };
-        
-    };
+   
     
 };
 

@@ -67,12 +67,12 @@ $footer = "<script src='js/tray_controller.js'></script>"
            <script src="../../assets/admin/layout/scripts/demo.js" type="text/javascript"></script>' 
         .  "<script src='js/tray_loader.js'></script>"
         . '<script src="../js/bootbox.min.js"></script>'
-        . '<script src="../notify.js"></script>'
         . '<script src="../js/bootbox.js"></script>'
-        . '<script src="../js/image-picker/image-picker.min.js"></script>';
+        . '<script src="../js/image-picker/image-picker.min.js"></script>'
+        . '<script src="../js/notify.js"></script>';
 
 //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-$end_footer = "init_tray();$('select'').imagepicker(); ";
+$end_footer = "init_tray(); ";
 
 
 //PREPARANDO LA VISTA ...

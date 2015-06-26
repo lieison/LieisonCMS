@@ -228,4 +228,43 @@ var messages_ = function(){
         task.do_task();
         
     };
+    
+    this.send_messaje = function(to , bussiness , msj){
+        
+        var task = new jtask();
+        task.method = "GET";
+        task.data = {
+            "msj" : msj,
+            "msj_to" : to,
+            "msj_bussines" : bussiness
+        };
+        task.url = route()  + "admin/messages/loader/tray_send.php";
+        task.async = true;
+        task.beforesend = true;
+        task.config_before(function(){
+             $("#load_compose").html("Enviando ...");
+        });
+        task.success_callback(function(callback){
+                var result = $.trim(callback);
+            if(result){
+                $("#cmd_compose").notify(
+                                    "Tu mensaje ha sido enviado ...", 
+                                    "success"        
+                );
+            }
+            else{
+                    $("#cmd_compose").notify(
+                                        "No se pudo enviar el mensaje, Causa(Error interno ...)", 
+                                    { position:"right"   },
+                                        "warn"
+                                 );
+                }
+               $("#load_compose").html('<i class="fa fa-edit"></i> Redactar');
+        });
+        task.do_task();
+ 
+        
+    };
+    
+    
 };
