@@ -33,6 +33,7 @@ include   '../../../Conf/Include.php';
 
 
 set_dependencies(array(
+    "AdminController",
     "MessageController"
 ));
 
@@ -52,7 +53,8 @@ $header = ''
     . '<link href="../../assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css"/>'
     . '<link href="../css/loading-lieison-cms.css" rel="stylesheet" type="text/css"/>'
     . '<link href="../../assets/admin/pages/css/inbox.css" rel="stylesheet" type="text/css"/>'
-    . '<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>';
+    . '<link rel="stylesheet" type="text/css" href="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>'
+    . '<link rel="stylesheet" type="text/css" href="../js/image-picker/image-picker.css"/>';
 
 //CARGARA EL BODY
 $body = "<?php include 'views/tray.php' ?>";
@@ -66,10 +68,11 @@ $footer = "<script src='js/tray_controller.js'></script>"
         .  "<script src='js/tray_loader.js'></script>"
         . '<script src="../js/bootbox.min.js"></script>'
         . '<script src="../notify.js"></script>'
-        . '<script src="../js/bootbox.js"></script>';
+        . '<script src="../js/bootbox.js"></script>'
+        . '<script src="../js/image-picker/image-picker.min.js"></script>';
 
 //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-$end_footer = "init_tray(); ";
+$end_footer = "init_tray();$('select'').imagepicker(); ";
 
 
 //PREPARANDO LA VISTA ...

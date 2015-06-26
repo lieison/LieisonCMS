@@ -53,23 +53,31 @@ var redact = function() {
                     + '<label>Asunto: </label>'
                     + '<div class="input-group">'
                     + '<span class="input-group-addon"><i class="fa fa-briefcase"></i></span>'
-                    + '<input type="text" class="form-control" placeholder="...">'
+                    + '<input id="txt_asunto" type="text" class="form-control" placeholder="...">'
                     + '</div></div>';
             
          var msj    = '<div class="form-group">'
                     + '<label>Mensaje</label>'
                     + '<div class="input-group">'
                     + '<span class="input-group-addon"><i class="fa fa-envelope"></i></span>'
-                    + '<textarea rows="10" cols="100" class="form-control" placeholder=""></textarea>'
+                    + '<textarea id="txt_message" rows="10" cols="100" class="form-control" placeholder=""></textarea>'
                     + '</div></div>';
             
          var para   = '<div class="form-group">'
                     + '<label>Para:</label>'
                     + '<div>'
-                    + '<select class="selectpicker" id="load_to" style="display: none;" >'
-                    + '<option value="-1">Seleccione un usuario</option>'
-                    + '</select>'
-                    + '</div></div>';
+                    + '<select id="cmd_asing" class="image-picker show-html"  >'
+                    + '<option value="-1">Seleccione un usuario</option>';
+                    
+         var   users = JSON.parse($("#id_asing_to").val());
+                      
+                    $.each(users , function(k,v){
+                           para += "<option value='" + v.id + "'><b>" + v.name + "</b></option>";
+                       });
+                    
+               para  += '</select>'
+                     + '</div></div>';
+            
             
          var de     = '<img alt="" width="30" height="30" class="img-circle" src="' + avatar() + '" />&nbsp&nbsp<span class="username ">Redacta Un mensaje ...</span>'
                     + ''
@@ -109,8 +117,6 @@ var redact = function() {
               }
         }); 
         
-         var msj = new messages_();
-         msj.get_asign_to($("#load_to"));
         
     };
     

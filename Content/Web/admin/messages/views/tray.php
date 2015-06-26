@@ -1,6 +1,12 @@
 <?php
 
-$id     =   Session::GetSession("login" , "id");
+//$id     =   Session::GetSession("login" , "id");
+$adm = new AdminController();
+$search  = $adm->GetuserByParent(session::GetSession("login" , "id"));
+
+
+echo '<input type="hidden" id="id_asing_to"' . "value='" 
+,  json_encode($search) ,  "'" , '/>';
 
 ?>
 
