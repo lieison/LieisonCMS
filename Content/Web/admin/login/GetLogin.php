@@ -2,16 +2,24 @@
 
  include '../../../Conf/Include.php';
 
- set_dependencies(array( "AdminController"));
+ set_dependencies(
+     array( "AdminController")
+ );
  
- $header = new Http\Header();
- $redirect = $_REQUEST['redirect'] ? : null;
+ 
+ $header        = new Http\Header();
+ $redirect      = $_REQUEST['redirect'] ? : null;
+ 
+ $user          = $_POST['username'];
+ $pass          = $_POST['password'];
+ 
+ //$url_builder   = NULL;
+
+ $url           = null;
+ $url_err       = null;
+ $url_index     = null;
  
 
- $url = null;
- $url_err = null;
- $url_index = null;
- 
  if(SivarApi\Tools\Validation::Is_Empty_OrNull($redirect)):
      $url = "login.php";
      $url_err = "login.php?error=true";
@@ -23,13 +31,11 @@
  endif;
  
  
- 
  if(!isset($_POST['username'])):
      $header->redirect(FunctionsController::GetUrl($url));
  endif;
  
- $user = $_POST['username'];
- $pass = $_POST['password'];
+ 
  
  
 if ( preg_match("/[^A-Za-z0-9]/", $user) ||  preg_match("/[^A-Za-z0-9]/", $pass) ):
@@ -42,8 +48,6 @@ endif;
  $admin_controller = new AdminController();
 
  $is_user = $admin_controller->GetLogin($user, $pass);
- 
- $date = new DateTime();
  
  if($is_user):  
       $hora_entrada =  FunctionsController::get_time();

@@ -28,6 +28,11 @@
  *@todo Lieison S.A de C.V 
  */
 
+defined("ERROR_USER") or define("ERROR_USER", 0);
+defined("ERROR_PASSWORD") or define("ERROR_PASSWORD", 1);
+defined("ERROR_SINTAX") or define("ERROR_SINTAX", 2);
+defined("ERROR_OTHER") or define("ERROR_USER", 3);
+
 
 
 class AdminController extends AdminModel {

@@ -97,7 +97,7 @@
                         <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Contraseña" id="password" name="password"/>
 		</div>
 		<div class="form-actions">
-			<button type="submit" class="btn btn-success uppercase">Entrar</button>
+                    <button type="submit" class="btn btn-success uppercase">Entrar</button>
 			<label class="rememberme check">
 			<input type="checkbox" name="remember" value="1"/>Recordar </label>
 		</div>
@@ -152,8 +152,8 @@
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     
-	Metronic.init(); // init metronic core components
-	Layout.init(); // init current layout
+	Metronic.init(); 
+	Layout.init(); 
 	Login.init();
 	Demo.init();
 });

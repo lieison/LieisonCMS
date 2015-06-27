@@ -30,7 +30,7 @@ echo '<input type="hidden" id="id_asing_to"' . "value='"
 						</li>
                                                 <li onclick="event_(3);" id="tray_3" class="trash">
 							<a id="count_tray_3" class="btn" href="javascript:;" data-title="Trash">
-							Enviados (?) </a>
+                                                            Enviados (?) &nbsp;&nbsp;<span class="badge  badge-warning">Nuevo</span></a> 
 							<b></b>
 						</li>
                                                 <li onclick="event_(4);" id="tray_4" class="trash">
@@ -47,7 +47,7 @@ echo '<input type="hidden" id="id_asing_to"' . "value='"
 						<div class="portlet box ">
                                                      
 						<div class="portlet-body">
-							<table class="table table-striped table-bordered table-hover" id="messages_table">
+						<table class="table table-striped table-bordered table-hover" id="messages_table">
                                                          <thead>
                                                          <tr id="messages_head">
 								<th class="table-checkbox">
@@ -74,7 +74,35 @@ echo '<input type="hidden" id="id_asing_to"' . "value='"
                                                          <tbody id="messages_body">
                                                                         
                                                         </tbody>
-							</table>
+                                                </table>
+                                                <table class="" id="messages_table_read">
+                                                         <thead>
+                                                         <tr id="messages_head_read">
+								<th class="table-checkbox">
+                                       
+								</th>
+								<th>
+									
+								</th>
+								<th>
+									
+								</th>
+								<th>
+									 
+								</th>
+								<th>
+									 
+								</th>
+								<th>
+									 
+								</th>
+							</tr>
+                                                       
+							</thead>
+                                                         <tbody id="messages_body_read">
+                                                                        
+                                                        </tbody>
+                                                </table>    
 						</div>
 					</div>
 					</div>

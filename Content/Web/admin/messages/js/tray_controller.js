@@ -46,7 +46,7 @@ var messages_ = function(){
           t.html("Papelera (" +count + ")");
     };
     
-    this.load_from = function( before , load){
+    this.load_from = function(before){
         
         var task = new jtask();
         
@@ -56,7 +56,7 @@ var messages_ = function(){
         
         var body = $("#messages_body");
         var head = $("#messages_head");
-        
+
         if(before){
             task.beforesend = true;
             task.config_before(function(){
@@ -77,6 +77,7 @@ var messages_ = function(){
             var m           = new messages_();
             m.count_from(count);
             
+
             var head_        = "";
                 head_       +='<th class="table-checkbox">'
                             + '<input type="checkbox" class="group-checkable" />'
@@ -100,13 +101,11 @@ var messages_ = function(){
             
             try{
                 $("#after_load").remove();
-                
             }catch(ex){}
             
             body.html('');
-      
+            
             $.each(data , function(k,v){
-               
                 //console.log(v.fecha + " ->" + v.hora);
                 var body_ = '<tr onclick="show_message(' + v.id_mensaje + ');" class="odd gradeX">'
                           + '<td><input type="checkbox" class="checkboxes" value="' + v.id_mensaje + '"/></td>'
@@ -120,15 +119,14 @@ var messages_ = function(){
                 body.append(body_);
             });
             
-           if(load)
-            messages_table.init();
+            from_table.init();
         
  
         });
         task.do_task();
     };
     
-    this.load_from_read = function( before , load){
+    this.load_from_read = function( before){
         
         var task = new jtask();
         
@@ -136,8 +134,8 @@ var messages_ = function(){
         task.async  = true;
         task.url = route() + "admin/messages/loader/tray_read.php";
         
-        var body = $("#messages_body");
-        var head = $("#messages_head");
+        var body = $("#messages_body_read");
+        var head = $("#messages_head_read");
         
         if(before){
             task.beforesend = true;
@@ -186,7 +184,7 @@ var messages_ = function(){
             }catch(ex){}
             
             body.html('');
-      
+            
             $.each(data , function(k,v){
                
                 //console.log(v.fecha + " ->" + v.hora);
@@ -201,11 +199,9 @@ var messages_ = function(){
 
                 body.append(body_);
             });
-            
-           if(load)
-            messages_table.init();
-        
- 
+          
+            read_table.init();
+           
         });
         task.do_task();
     };
