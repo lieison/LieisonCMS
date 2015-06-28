@@ -36,7 +36,7 @@ echo '<input type="hidden" id="id_asing_to"' . "value='"
                                                 <li onclick="event_(4);" id="tray_4" class="trash">
 							<a id="count_tray_4" class="btn" href="javascript:;" data-title="Trash">
 							Papelera (?) </a>
-                                                <b>
+                                                </li>
 					</ul>
 				</div>
 				<div class="col-md-10">
@@ -50,24 +50,7 @@ echo '<input type="hidden" id="id_asing_to"' . "value='"
 						<table class="table table-striped table-bordered table-hover" id="messages_table">
                                                          <thead>
                                                          <tr id="messages_head">
-								<th class="table-checkbox">
-                                       
-								</th>
-								<th>
-									
-								</th>
-								<th>
-									
-								</th>
-								<th>
-									 
-								</th>
-								<th>
-									 
-								</th>
-								<th>
-									 
-								</th>
+								
 							</tr>
                                                        
 							</thead>
@@ -78,28 +61,22 @@ echo '<input type="hidden" id="id_asing_to"' . "value='"
                                                 <table class="" id="messages_table_read">
                                                          <thead>
                                                          <tr id="messages_head_read">
-								<th class="table-checkbox">
-                                       
-								</th>
-								<th>
-									
-								</th>
-								<th>
-									
-								</th>
-								<th>
-									 
-								</th>
-								<th>
-									 
-								</th>
-								<th>
-									 
-								</th>
+								
 							</tr>
                                                        
 							</thead>
                                                          <tbody id="messages_body_read">
+                                                                        
+                                                        </tbody>
+                                                </table> 
+                                                <table class="" id="messages_table_send">
+                                                         <thead>
+                                                         <tr id="messages_head_send">
+								
+							</tr>
+                                                       
+							</thead>
+                                                         <tbody id="messages_body_send">
                                                                         
                                                         </tbody>
                                                 </table>    

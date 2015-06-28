@@ -19,9 +19,19 @@ $msj = new MessageController();
 
 $request = $msj->GetChatById($id);
 
+$first  = $msj->GetMessageById($id);
+
+
+if(count($first) == 0){
+    $first = "";
+}else{
+    $first = $first[0]['mensaje'];
+}
+
 $data = array(
         "me"    => Session::GetSession("login", "id"),
-        "chat"  => $request
+        "chat"  => $request,
+        "mensaje" => $first
 );
 
 $json = new SivarApi\Tools\Services_JSON();

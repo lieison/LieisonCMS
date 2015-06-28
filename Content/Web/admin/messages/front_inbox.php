@@ -21,14 +21,34 @@
  
  $count     = $messagecontroller->GetMessageCountFrom($id_user); //cuenta los mensajes
  $msjto     = $messagecontroller->GetMessageFrom($id_user , null); //mensaje para
- 
+
 
  $count_submsj = 0; //
 
- 
- if(count($msjto) == 0){
-      $msjto = $messagecontroller->GetMessageTo($id_user , null);
+ $sub_msj = $messagecontroller->GetMessageTo($id_user , null);   
+ foreach ($sub_msj as $value){
+     $msjto[] = $value;
  }
+ 
+function ordenar_fecha( $a, $b ) {
+    return strtotime($b['fecha']) - strtotime($a['fecha']);
+}
+
+function ordenar_hora( $a, $b ) {
+    return strtotime($b['hora']) - strtotime($a['hora']);
+}
+ 
+usort($msjto, 'ordenar_fecha');
+//usort($msjto, 'ordenar_hora');
+
+ /*if(count($msjto) == 0){
+      $msjto = $messagecontroller->GetMessageTo($id_user , null);   
+ }else{
+    // array_push($msjto, $messagecontroller->GetMessageTo($id_user , null));
+ }*/
+ 
+ //echo "<pre>" , print_r($msjto) , "</pre>";
+//exit();
  
  foreach ($msjto as $k=>$v){
      $r = $messagecontroller->GetCountSubMessage($v['id_mensaje'] , $id_user);
