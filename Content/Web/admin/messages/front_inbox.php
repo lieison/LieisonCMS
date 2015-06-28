@@ -41,14 +41,6 @@ function ordenar_hora( $a, $b ) {
 usort($msjto, 'ordenar_fecha');
 //usort($msjto, 'ordenar_hora');
 
- /*if(count($msjto) == 0){
-      $msjto = $messagecontroller->GetMessageTo($id_user , null);   
- }else{
-    // array_push($msjto, $messagecontroller->GetMessageTo($id_user , null));
- }*/
- 
- //echo "<pre>" , print_r($msjto) , "</pre>";
-//exit();
  
  foreach ($msjto as $k=>$v){
      $r = $messagecontroller->GetCountSubMessage($v['id_mensaje'] , $id_user);
@@ -63,7 +55,7 @@ usort($msjto, 'ordenar_fecha');
  
  $array_['count'] = array(
          "counter"  => $count,
-         "url"      => FunctionsController::GetUrl("messages") . '/inbox.php'   
+         "url"      => FunctionsController::GetUrl("messages") . '/'   
   );
  
  $data = "";
