@@ -58,7 +58,7 @@ function ShowTask(type , style , order , load){
                               loading += '<div class="portlet-title tabbable-line"></div>';
                               loading += '<div class="portlet-body">';
                               loading += '<div class="portlet-body" align="center">';
-                              loading += '<div id="facebookG"><div id="blockG_1" class="facebook_blockG"></div><div id="blockG_2" class="facebook_blockG"></div><div id="blockG_3" class="facebook_blockG"></div></div> ';
+                              loading += '<img src="' +  $("#route_value").val() + "admin/img/assert/loading.gif" + '" width="200" height="200" />';
                               loading += '</div></div></div>';
                               $("#task_view").html(loading);
                         }

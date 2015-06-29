@@ -209,13 +209,13 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '<ul class="nav nav-tabs">';
 
         if($type == 0):
-        $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i></a></li>';
-        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i></a></li>';
-        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i></a></li>';
+            $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i></a></li>';
+            $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i></a></li>';
+            $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i></a></li>';
         else:
-         $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i></a></li>';
-        $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i></a></li>';
-        $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i></a></li>';
+            $body_porlet           .= '<li><a href="#portlet_tab' . $q . '" data-toggle="tab"><i class="fa fa-tachometer"></i></a></li>';
+            $body_porlet           .= '<li><a href="#portlet_tab' . $p . '" data-toggle="tab"><i class="fa fa-user"></i></a></li>';
+            $body_porlet           .= '<li class="active" ><a href="#portlet_tab' . $n . '" data-toggle="tab"><i class="fa fa-info"></i></a></li>';
         endif;
 
         $body_porlet           .= '</ul>';
@@ -230,23 +230,23 @@ function PorltetStyle($request , $type , $id ){
         if($type == 0):
             switch ($task_type_id):
                 case 1:
-                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent red btn-sm active">Estado de la Tarea: ' 
+                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent red btn-sm active" >' 
                                            . $task_type_name 
                                            .'</label></h4>';
                     break;
                 case 2:
-                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent blue btn-sm active">Estado de la Tarea: ' 
+                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent blue btn-sm active">' 
                                            . $task_type_name 
                                            .'</label></h4>';
                     break;
                 case 3:
-                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent green btn-sm active">Estado de la Tarea: ' 
+                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent green btn-sm active"> ' 
                                            . $task_type_name 
                                            .'</label></h4>';
                     break;
                 case 4:
                     //FALTA PROGRAMAR LA REASIGNACION
-                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent grey-cascade btn-sm active">Estado de la Tarea: ' 
+                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent grey-cascade btn-sm active"> ' 
                                            . $task_type_name 
                                            .'</label>&nbsp;&nbsp;<br><a href="javascript:alert();" class="btn btn-circle btn-primary btn-sm"><i class="fa fa-check-circle-o"></i>&nbsp;Tomar Accion</a></h4>';
                     break;
@@ -262,7 +262,7 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '<i class="fa fa-university blog-twiiter-icon"></i>';
         $body_porlet           .= '</div></div>';
         $body_porlet           .= '<p><b>Descripcion:</b></p>';
-        $body_porlet           .= '<p class="bg-danger">' . $mt_description . '</p>';
+        $body_porlet           .= '<p class="">' . $mt_description . '</p>';
         $body_porlet           .= '</div></div>';
 
 
