@@ -3,17 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/active_chat.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/js/tray_events.js</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/message_chat.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Models/MessageModel.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/js/tray_loader.js</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/index.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/tray_from.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/dashboard_admin_prospecto.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/loader/tray_to.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/ViewPage/ViewHeader.php</file>
+            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/views/tray.php</file>
             <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/messages/js/tray_controller.js</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Controllers/MessageController.php</file>
-            <file>file:/C:/wamp/www/LieisonCMS/Content/Web/admin/sales/AjaxAdminSales.js</file>
         </group>
     </open-files>
 </project-private>
