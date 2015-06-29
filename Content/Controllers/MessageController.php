@@ -148,6 +148,21 @@ class MessageController extends MessageModel {
                 "leido"                 => 0
              ));
     }
+    
+    
+    public function SetmessageLastId($id_u_para, $id_u_de, $mensaje ,  $asunto = null) {
+         $this->Insert("lieisoft_mensajeria" , array(
+                "id_usuario_para"       => $id_u_para ,
+                "id_usuario_de"         => $id_u_de,
+                "asunto"                => $asunto ,
+                "mensaje"               => $mensaje,
+                "fecha"                 => FunctionsController::get_date(),
+                "hora"                  => FunctionsController::get_time(),
+                "leido"                 => 0
+             ));
+         return parent::RawQuery("SELECT LAST_INSERT_ID();");
+    }
+    
 
     public function SetSubmessage($id_message, $id_usuario, $mensaje) {
         return $this->Insert("lieisoft_submensajeria" , array(

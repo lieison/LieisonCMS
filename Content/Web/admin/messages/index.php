@@ -72,8 +72,9 @@ $footer = "<script src='js/tray_controller.js'></script>"
         . '<script src="../js/notify.js"></script>';
 
 //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-$end_footer = "init_tray(); ";
+$end_footer = "init_tray();";
 
+        
 
 //PREPARANDO LA VISTA ...
 ViewClass::PrepareView("View.phtml", "Admin");

@@ -25,7 +25,8 @@ $type = $_REQUEST['type'] ? : null;
 
 set_dependencies(array(
     "TaskController",
-    "LogsController"
+    "LogsController",
+    "MessageController"
  ));
 
 if(SivarApi\Tools\Validation::Is_Empty_OrNull($type)):
@@ -40,9 +41,18 @@ $encript = new \SivarApi\Tools\Encriptacion\Encriptacion();
 $id_mt = $encript->Md5Encrypt((mt_rand(0, 1000) . mt_rand(100, 500) . $id_user . $_REQUEST['title']));
 $box_files = $_REQUEST['box_nodes'] ? : "";
 
-switch ($type):
-    case "task":
-     try{
+
+$mensaje = "<b>La tarea Consiste en :<b><br> " 
+        . $_REQUEST['client_description'] 
+        . "<br><a href='" . FunctionsController::GetRootUrl("task/show_task.php?id=$id_mt") .   "'>Ver tarea ...</a>" ;
+
+$asunto = " Tarea :" . $_REQUEST['title'];
+
+try{
+    
+        $msj        = new MessageController();
+        $id_msj     = $msj->SetmessageLastId($_REQUEST['id_user'], $id_user, $mensaje, $asunto);
+    
         $val = $task->SaveTask(array(
             "id_multitask"          => $id_mt,
             "id_client"             => $_REQUEST['id_client'],
@@ -56,7 +66,7 @@ switch ($type):
              "id_type"              => 1,
              "id_user_from"         => $id_user,
              "id_user_to"           => $_REQUEST['id_user'],
-             "id_message"           => null,
+             "id_message"           => $id_msj,
              "date_asign"           => FunctionsController::get_date(),
              "time_asign"           => FunctionsController::get_time(),
              "box_files"            => $box_files,
@@ -84,10 +94,7 @@ switch ($type):
             $log->CloseLog();
         }
         
-        break;
-    case "multitask":
-        break;
-endswitch;
+
 
 
 unset($task);

@@ -254,7 +254,7 @@ class AdminHeader
         
              
             echo '<script type="text/javascript" src="' . self::$relative_route  .  'admin/js/chat.js"></script>';
-            
+            echo '<script type="text/javascript" src="' . self::$relative_route  .  'admin/js/howler.min.js"></script>';
       
             /**
              * JS JAVASCRIPT TASK 
