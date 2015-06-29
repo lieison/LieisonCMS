@@ -614,7 +614,6 @@ var TaskInit = function () {
         init: function () {     
             FindClients();
             AsignTo();
-           
         }
     };
 }();

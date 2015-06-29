@@ -141,6 +141,30 @@ var inbox = function(){
          var count      = decode['count'].counter;
          
          $("#inbox_count").html(count);
+         
+         var cmd_count  = $("#cmd_message_count");
+         var tone_dir   = route + "admin/files/tones/ChatTone.mp3";
+         
+         if(cmd_count.val() === 0 ){
+               cmd_count.val(count);
+         }else{
+             
+             if(count > cmd_count.val()){
+                 var sound = new Howl({
+                    urls: [tone_dir],
+                    autoplay: true,
+                    volume: 0.5,
+                    onend: function() {
+                        console.log(count + "-->" + cmd_count.val());
+                    }
+                });
+                cmd_count.val(count);
+                
+             }
+             
+         }
+         
+         
         
          var c          = '';
          switch(parseInt(count)){
