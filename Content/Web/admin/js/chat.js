@@ -131,7 +131,7 @@ var stop_chat = function(){
  * @descriptionsistema funcion que activa el inbox cuando hace la carga de la pagina
  * */
 var inbox = function(){
-    
+   
     var route = document.getElementById("route_value").value;
     var task = new jtask();
     task.url = route  + "admin/messages/front_inbox.php";
@@ -169,6 +169,8 @@ var inbox = function(){
             title = title.replace('(' , "" , title);
             title = title.replace(')' , "" , title);
             title = title.replace(/[0-9]+/gi, "");
+            
+        
                           
          if(parseInt(count) === 0){
              $("#title").html( title );
@@ -178,9 +180,9 @@ var inbox = function(){
                     $("#sidebar_inbox").html(count);
                }catch(ex){}
          }
-
+       
          setTimeout('inbox()', 1000);
-         
+        
     });
     task.do_task();
     var chat_ = new chat();
@@ -232,7 +234,6 @@ var chat = function(){
                       
                       $.map(data , function(call){
                           if(call == id){
-                              //console.log("bandera arriba");
                               flag = true;
                           }
                       });
@@ -334,7 +335,7 @@ var chat = function(){
         var push_chat   =     $("#send_chat_id");
         if(push_chat.val() !== ''){
             stop_chat();
-            console.log("cargando");
+            //console.log("cargando");
             $("#chat_messages").append(push_chat.val());
              push_chat.val("");
         }
@@ -351,8 +352,20 @@ var chat = function(){
         task_.success_callback(function(call){
             var data    = JSON.parse(call);
             var me      = data.me;
+            var mensaje = data.mensaje;
             var str     = "";
-
+            
+            if(mensaje != '' || mensaje != "" || mensaje != null){
+                
+                str += '<div class="post">';
+                str += '<div class="message">';
+                str += '<span class="arrow"></span>';
+                str += '<a href="#" class="name"></a>';
+                str += '<span class="body">' + mensaje + '</span>';
+                str += '</div>';
+                str += "</div>";
+            }
+            
             
             $.each(data.chat , function(k ,v){
                 

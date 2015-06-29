@@ -102,6 +102,25 @@ class MessageController extends MessageModel {
         return $result = $this->RawQuery($query); 
     }
 
+    public function GetMessageTrash($id_u_para, $state = MESSAGE_FROM) {
+         
+        $e = "lieisoft_mensajeria.id_usuario_de";
+        
+        if($state == MESSAGE_TO){
+            $e = "lieisoft_mensajeria.id_usuario_para";
+        }
+        
+        $query = "SELECT lieisoft_mensajeria.id_mensaje ,  lieisoft_mensajeria.asunto ,"
+                . " lieisoft_mensajeria.fecha , lieisoft_mensajeria.hora , lieisoft_mensajeria.mensaje ,"
+                . " concat(usuario.nombre , ' ' , usuario.apellido) as nombre , "
+                . " usuario.imagen , lieisoft_mensajeria.leido as 'leido' "
+                . " FROM lieisoft_mensajeria INNER JOIN usuario "
+                . " ON lieisoft_mensajeria.id_usuario_de=usuario.id_usuario "
+                . " WHERE $e LIKE '$id_u_para' AND  lieisoft_mensajeria.eliminado LIKE 1";
+        
+        return $result = $this->RawQuery($query); 
+    }
+    
     public function GetMessageTo($id_u_de , $limit = null) {
       
         $query = "SELECT lieisoft_mensajeria.id_mensaje ,  lieisoft_mensajeria.asunto ,"
@@ -119,11 +138,11 @@ class MessageController extends MessageModel {
     }
 
     public function SetMessage($id_u_para, $id_u_de, $mensaje ,  $asunto = null) {
-         $this->Insert("lieisoft_mensajeria" , array(
+        return  $this->Insert("lieisoft_mensajeria" , array(
                 "id_usuario_para"       => $id_u_para ,
                 "id_usuario_de"         => $id_u_de,
                 "asunto"                => $asunto ,
-                "mensaje"               =>$mensaje,
+                "mensaje"               => $mensaje,
                 "fecha"                 => FunctionsController::get_date(),
                 "hora"                  => FunctionsController::get_time(),
                 "leido"                 => 0
@@ -275,6 +294,11 @@ class MessageController extends MessageModel {
          ) , " id_mensaje LIKE $id AND id_usuario_para LIKE '$id_user'");
          
         
+    }
+
+    public function GetMessageById($id) {
+         $query = "SELECT mensaje FROM lieisoft_mensajeria WHERE id_mensaje LIKE $id ";
+         return parent::RawQuery($query);
     }
 
 }

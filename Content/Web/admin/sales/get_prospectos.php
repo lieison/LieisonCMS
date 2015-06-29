@@ -32,7 +32,8 @@
  
   set_dependencies(array(
       "ProspectController",
-      "AdminController"
+      "AdminController",
+      "UserController"
     ));
  
  $sales = new ProspectController();//constructor nuevo sales en el controlador
@@ -56,7 +57,7 @@
                 $print_status .=  " En Proceso  &nbsp&nbsp&nbsp"
                         . " <input class='btn green' type='button' onclick='ProspectInitProcess(1 ,$id_p);' "
                         . "value='Terminar Proceso' id='cmdmeta_estado' />&nbsp<a class='btn btn-primary' href='" . 
-                        FunctionsController::GetUrl("dashboard_admin_prospecto.php?id=$id_p") . "'>"
+                        FunctionsController::GetUrl("sales/") . "dashboard_admin_prospecto.php?id=$id_p" . "'>"
                         . "<i class='fa fa-refresh'></i></a>";
                 break;
             case 1:

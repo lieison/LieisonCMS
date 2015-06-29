@@ -41,7 +41,7 @@
 						
     </div>
 	<div class="portlet-body form">
-		<div class="form-body"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Nombre:</b> Peperecha INC<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Telefono:</b> (503) 22620282<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fax:</b> 22620282<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fecha de Entrada:</b> 2015-06-15<br><br><div id="prospect_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado:</b> Activo &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectActivate(0 ,23);' value='Desactivar' id='cmd_estado' /></div><br><br><div id="meta_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Arranque Del Prospecto:</b> No iniciado &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(0 ,23);' value='Iniciar Proceso' id='cmdmeta_estado' /></div></div>
+		<div class="form-body"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Nombre:</b> Peperecha INC<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Telefono:</b> (503) 22620282<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fax:</b> 22620282<br><br><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Fecha de Entrada:</b> 2015-06-15<br><br><div id="prospect_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Estado:</b> Activo &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectActivate(0 ,23);' value='Desactivar' id='cmd_estado' /></div><br><br><div id="meta_estado"><i class="fa fa-building-o"></i>&nbsp&nbsp <b>Arranque Del Prospecto:</b>  En Proceso  &nbsp&nbsp&nbsp <input class='btn green' type='button' onclick='ProspectInitProcess(1 , 23);' value='Terminar Proceso' id='cmdmeta_estado' /></div></div>
 	</div>
 </div>
 <div class="portlet box blue">
@@ -78,14 +78,14 @@
 					<div class="portlet box green ">
 						<div class="portlet-title">
 							<div class="caption" id='bitacora_reload'>
-								<i class="fa fa-book"></i> Bitacora <span class='badge' id='bitacora_counter'>0</span>
+								<i class="fa fa-book"></i> Bitacora <span class='badge' id='bitacora_counter'>3</span>
 							</div>
                                                  <div class="tools">
-                                                    
+                                                    <button class='btn green' onclick='InsertBitacora(10,"rolando55admin18894933");'><i class='fa fa-plus'></i></button>
                                                 </div>           
 						</div>
 						<div class="portlet-body form">
-                                                    <input type='hidden' id='BitacoraTypes' value='[{"id":"0","title":"Sistema"},{"id":"1","title":"Nulo"}]' /><div class="form-body"><div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-triangle"></i><span>&nbsp&nbsp<b>NO SE HA INICIADO LA BITACORA</b>&nbsp&nbsp<img src="../img/assert/flechaderecha_naranja.png" width="50" height="20" />&nbsp&nbsp&nbsp<b>INICIE EL PROCESO</b> </span></div></div>  
+                                                    <input type='hidden' id='BitacoraTypes' value='[{"id":"0","title":"Sistema"},{"id":"1","title":"Nulo"}]' /><div class="scroller" style="height: 430px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2"><div class="general-item-list class_tbody_bitacora" id="bitacora_seccion"><div class="item class_tr_bitacora"><div class="item-head"><div class="item-details"><img class="item-pic" src="../img/users/MTA0MjQyNThfMTAxNTMzMTA5NDEwMzgyMjJfNzI5ODM1MDgwMDU3MTY2NjY4M19uYjhiZWFhOTU=.jpg"><a href="" class="item-name primary-link">Rolando Antonio Arriaza Marroquin</a><span class="item-label">4 minutes ago </span></div><span class="item-status"><span class="badge badge-empty badge-success"></span>&nbsp&nbsp&nbsp&nbspTipo: Sistema</span></div><div class="item-body"><b>Inicio del proceso:</b>&nbsp&nbspEste prospecto ha iniciado el proceso de verificacion</div></div><div class="item class_tr_bitacora"><div class="item-head"><div class="item-details"><img class="item-pic" src="../img/users/MTA0MjQyNThfMTAxNTMzMTA5NDEwMzgyMjJfNzI5ODM1MDgwMDU3MTY2NjY4M19uYjhiZWFhOTU=.jpg"><a href="" class="item-name primary-link">Rolando Antonio Arriaza Marroquin</a><span class="item-label">1 minute ago </span></div><span class="item-status"><span class="badge badge-empty badge-success"></span>&nbsp&nbsp&nbsp&nbspTipo: Sistema</span></div><div class="item-body"><b>Inicio del proceso:</b>&nbsp&nbspEste prospecto ha iniciado el proceso de verificacion</div></div><div class="item class_tr_bitacora"><div class="item-head"><div class="item-details"><img class="item-pic" src="../img/users/MTA0MjQyNThfMTAxNTMzMTA5NDEwMzgyMjJfNzI5ODM1MDgwMDU3MTY2NjY4M19uYjhiZWFhOTU=.jpg"><a href="" class="item-name primary-link">Rolando Antonio Arriaza Marroquin</a><span class="item-label">17 seconds ago </span></div><span class="item-status"><span class="badge badge-empty badge-success"></span>&nbsp&nbsp&nbsp&nbspTipo: Sistema</span></div><div class="item-body"><b>pepera se ha comunicado:</b>&nbsp&nbsppeperecha ha comuicado su sistema</div></div></div></div>  
                                                 </div>
 					</div>
 					<!-- END SAMPLE FORM PORTLET-->

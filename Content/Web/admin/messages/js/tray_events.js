@@ -2,6 +2,10 @@ var event_ = function(id){
     primary(id);
 };
 
+var text_area_funcion = function(value){
+    $("#text_area_data").val(value);
+};
+
 var primary = function(id){
     var name    = "tray_" + id;
     switch(name){
@@ -24,18 +28,23 @@ var primary = function(id){
             $("#tray_1").removeClass().addClass("inbox");
             $("#tray_2").removeClass().addClass("sent");
             $("#tray_4").removeClass().addClass("trash");
+            load_send();
             break;
        case "tray_4":
             $("#" + name).removeClass().addClass("trash active");
             $("#tray_1").removeClass().addClass("inbox");
             $("#tray_2").removeClass().addClass("sent");
             $("#tray_3").removeClass().addClass("trash");
+            load_trash();
             break;   
     }
 };
 
+
+
 var redact = function() {
     
+
     var route = function(){
         return $("#route_value").val();
     };
@@ -60,13 +69,13 @@ var redact = function() {
                     + '<label>Mensaje</label>'
                     + '<div class="input-group">'
                     + '<span class="input-group-addon"><i class="fa fa-envelope"></i></span>'
-                    + '<textarea id="txt_message" rows="10" cols="100" class="form-control" placeholder=""></textarea>'
+                    + '<textarea required onkeyup="text_area_funcion(this.value);" id="txt_message" name="txt_message" rows="10" cols="100" class="form-control" ></textarea>'
                     + '</div></div>';
             
          var para   = '<div class="form-group">'
                     + '<label>Para:</label>'
                     + '<div>'
-                    + '<select id="cmd_asing" class="image-picker show-html"  >'
+                    + '<select id="cmd_asing" class="form-control"  >'
                     + '<option value="-1">Seleccione un usuario</option>';
                     
          var   users = JSON.parse($("#id_asing_to").val());
@@ -94,7 +103,7 @@ var redact = function() {
                     + '</div>'
                     + '</div>'
                     + '</div></div>';
-                    
+     
 
          bootbox.dialog({
             title: de,
@@ -104,7 +113,29 @@ var redact = function() {
                         label: "  Enviar",
                         className: "btn-success fa fa-paper-plane",
                         callback: function () {
-                          
+                            
+                             var to     = $("#cmd_asing").val();
+                             var m      = $("#text_area_data").val();
+                             var asunto = $("#txt_asunto").val();
+                             
+                             if(to == "-1" ||  to === -1){
+                                 $("#cmd_compose").notify(
+                                        "No se pudo enviar el mensaje, Causa(No se selecciono un remitente)", 
+                                    { position:"right"   },
+                                        "warn"
+                                 );
+                                 return;
+                             }else if(m === '' || m === 'undefinded'){
+                                 $("#cmd_compose").notify(
+                                        "No se pudo enviar el mensaje, Causa( No hay mensaje )", 
+                                    { position:"right"   },
+                                        "warn"
+                                 );
+                                 return;
+                             }
+                             
+                             var msj = new  messages_();
+                             msj.send_messaje(to , asunto , m);
                         }
                     },
                     close: {
@@ -120,29 +151,17 @@ var redact = function() {
         
     };
     
-    this.send = function(){
-        
-        this.click = function(){
-            
-        };
-        
-        this.read  = function(){
-            
-        };
-        
-    };
+   
     
 };
 
-var messages_table = function(){
+var from_table = function(){
    
      var tray_table = function () {
 
         var table = $('#messages_table');
-
-        // begin first table
-        table.dataTable({
-
+         table.DataTable({
+             destroy: true,
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
             "language": {
                 "aria": {
@@ -203,6 +222,84 @@ var messages_table = function(){
             "order": [
                 [1, "asc"]
             ] */
+
+    };
+     return {
+     
+            init: function(){
+                  tray_table();
+            }
+ 
+     };
+    
+}();
+
+
+var read_table = function(){
+   
+     var tray_table = function () {
+
+         var table = $('#messages_table_read');
+         table.DataTable({
+             destroy: true,
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No existen correos",
+                "info": "Mostrando _START_ de _END_ en _TOTAL_ Mensajes",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Mostrando _MENU_ mensajes",
+                "search": "Buscando:",
+                "zeroRecords": "No existen correos"
+            },
+
+            "bStateSave": false, 
+
+            "columns": [{
+                "orderable": false
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": false
+            }, {
+                "orderable": false
+            }  ],
+        
+            "lengthMenu": [
+                [5, 15, 20, -1],
+                [5, 15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,            
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Buscar: ",
+                "lengthMenu": "  _MENU_ ",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "columnDefs": [{  
+                'orderable': false,
+                'targets': [0]
+            }, {
+                "searchable": false,
+                "targets": [0]
+            }]
+        });
+
+       
     };
     
      return {
@@ -216,3 +313,77 @@ var messages_table = function(){
 }();
 
 
+var send_table = function(){
+     var tray_table = function () {
+
+         var table = $('#messages_table_send');
+         table.DataTable({
+             destroy: true,
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No existen correos",
+                "info": "Mostrando _START_ de _END_ en _TOTAL_ Mensajes",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Mostrando _MENU_ mensajes",
+                "search": "Buscando:",
+                "zeroRecords": "No existen correos"
+            },
+
+            "bStateSave": false, 
+
+            "columns": [{
+                "orderable": false
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": false
+            }, {
+                "orderable": false
+            }  ],
+        
+            "lengthMenu": [
+                [5, 15, 20, -1],
+                [5, 15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,            
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Buscar: ",
+                "lengthMenu": "  _MENU_ ",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "columnDefs": [{  
+                'orderable': false,
+                'targets': [0]
+            }, {
+                "searchable": false,
+                "targets": [0]
+            }]
+        });
+
+       
+    };
+    
+     return {
+     
+            init: function(){
+                  tray_table();
+            }
+ 
+     };
+}();

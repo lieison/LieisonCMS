@@ -22,9 +22,9 @@
     
     if(!Session::GetSession("login")): //verifica si existe sesion 
         if(file_exists("login.php")):
-              $header->redirect("login.php"); //dado caso no exista retorna a login
+              $header->redirect("login/"); //dado caso no exista retorna a login
         else:
-             $header->redirect("../login.php"); //dado caso no exista retorna a login
+             $header->redirect("../login/"); //dado caso no exista retorna a login
         endif;
             exit();
     endif;
