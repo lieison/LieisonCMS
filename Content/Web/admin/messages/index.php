@@ -69,18 +69,12 @@ $footer = "<script src='js/tray_controller.js'></script>"
         . '<script src="../js/bootbox.min.js"></script>'
         . '<script src="../js/bootbox.js"></script>'
         . '<script src="../js/image-picker/image-picker.min.js"></script>'
-<<<<<<< HEAD
-        . '';
-
-//CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-$end_footer = "init_tray();";
-=======
         . '<script src="../js/notify.js"></script>';
 
 //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-$end_footer = "init_tray(); ";
->>>>>>> origin/master
+$end_footer = "init_tray();";
 
+        
 
 //PREPARANDO LA VISTA ...
 ViewClass::PrepareView("View.phtml", "Admin");
