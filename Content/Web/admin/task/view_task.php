@@ -7,11 +7,30 @@
 /*
  * CONTROL DE TAREAS 
  * 
- * **/ ?>
-<select onchange="alert(this.value);" class="selectpicker" id="task_selected" name="task_selected">
-    <option selected value="1" data-content='Mis Tareas'></option>
-    <option value="0" data-content='Tareas Asignadas'></option>
-</select>
+ * **/
+
+  /*set_dependencies(array(
+        "UserController"
+  ));*/
+
+  $parent   = new UserController(Session::GetSession("login", "id"));
+  $result_  = $parent->GetParent();
+
+?>
+    
+    
+
+    <?php 
+    
+     if($result_ == 0):
+         echo '<select onchange="alert(this.value);" class="selectpicker" id="task_selected" name="task_selected">';
+         echo '<option selected value="1" data-content="Mis Tareas"></option>';
+         echo '<option value="1" data-content="Tareas Asignadas"></option>';
+         echo '</select>';
+     endif;
+
+ ?>
+
  <select onchange="alert(this.value);" class="selectpicker" id="task_selected" name="task_selected">
   <option value="-1" selected data-content='Ordenar Por...'></option>   
   <option value="0" data-content='Fecha'></option>
