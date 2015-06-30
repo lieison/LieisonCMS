@@ -48,8 +48,8 @@ try{
 
         $mensaje = htmlspecialchars("<b>La tarea Consiste en :</b><br> " 
         . $_REQUEST['client_description'] 
-        . "<br><a href='" . FunctionsController::GetUrl("task/show_task.php?id=$id_mt") 
-        .   "'>Ver tarea ...</a>" , ENT_QUOTES) ;
+        . "<br><div align='center'><a target='_blank' class='btn btn-circle green-haze btn-sm ' href='" . FunctionsController::GetUrl("task/show_task.php?id=$id_mt") 
+        .   "'>Ver tarea ...</a></div>" , ENT_QUOTES) ;
 
         $asunto = " Tarea :" . $_REQUEST['title'];
         
