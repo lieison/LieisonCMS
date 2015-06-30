@@ -150,5 +150,14 @@ class UserController extends UserModel  {
     public static function GetIDUser(){
         return $_SESSION['login']['id'];
     }
+    
+    
+    public function GetParent(){
+        $this->QUERY = "SELECT privilegios.padre as 'padre' FROM login "
+                . " INNER JOIN privilegios ON login.rol=privilegios.nombre"
+                . " WHERE login.id_usuario LIKE '" . $this->ID_USER . "'";
+        $result = parent::RawQuery($this->QUERY);
+        return $result[0]['padre'];
+    }
 
 }

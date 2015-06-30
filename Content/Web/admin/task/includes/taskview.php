@@ -51,9 +51,10 @@ endswitch;
 
 switch ($type):
     case 0:
-        $request = $task->GetMyTask($id , $order );
+        $request = $task->GetTask($id , $order);
         break;
     case 1:
+        $request = $task->GetTask($id , $order , TO );
         break;
 endswitch;
 
@@ -228,29 +229,34 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '<div class="scroller">';
        
         if($type == 0):
+            $color = "red";
+            $reasign = FALSE;
             switch ($task_type_id):
                 case 1:
-                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent red btn-sm active" >' 
-                                           . $task_type_name 
-                                           .'</label></h4>';
                     break;
                 case 2:
-                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent blue btn-sm active">' 
-                                           . $task_type_name 
-                                           .'</label></h4>';
+                    $color = "blue";
                     break;
                 case 3:
-                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent green btn-sm active"> ' 
-                                           . $task_type_name 
-                                           .'</label></h4>';
+                    $color = "green";
                     break;
                 case 4:
-                    //FALTA PROGRAMAR LA REASIGNACION
-                    $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent grey-cascade btn-sm active"> ' 
-                                           . $task_type_name 
-                                           .'</label>&nbsp;&nbsp;<br><a href="javascript:alert();" class="btn btn-circle btn-primary btn-sm"><i class="fa fa-check-circle-o"></i>&nbsp;Tomar Accion</a></h4>';
+                    $reasign = TRUE;
                     break;
             endswitch;
+            
+            if($reasign){
+                $body_porlet           .= '<h4><label class="btn btn-circle btn-transparent grey-cascade btn-sm active"> ' 
+                                           . $task_type_name 
+                                           .'</label>&nbsp;&nbsp;<a title="Si desea tomar accion en este momento sobre la reasignacion haz clic" href="javascript:alert();" class="btn btn-circle btn-primary btn-sm"><i class="fa fa-refresh"></i>&nbsp;Accion</a>' 
+                                           .'</label>&nbsp;<a title="muestra un poco mas acerca de esta tarea" href="show_task.php?id=' . $mt_id . '" class="btn btn-circle btn-transparent  active" ><i class="fa fa-eye"></i></a></h4>';
+            }
+            else{
+                $body_porlet .= '<h4><label class="btn btn-circle btn-transparent ' . $color . ' btn-sm active" >' 
+                                           . $task_type_name 
+                                           .'</label>&nbsp;&nbsp;&nbsp;<a title="muestra un poco mas acerca de esta tarea" href="show_task.php?id=' . $mt_id . '" class="btn btn-circle btn-transparent green  btn-sm active" ><i class="fa fa-eye"></i></a></h4>';
+            }
+            
         else:    
             $body_porlet           .= '<h4>Estado: :) FELIZ</h4>';
         endif;
@@ -283,7 +289,7 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '<p><i class="fa fa-envelope-o"></i>&nbsp;<b><a href="mailto:' . $user_mail . '">' . current(explode("@" , $user_mail )) . '</a></b></p>';
 
         if($type == 0):
-        $select_users           = $task->AsignTouser($id);
+        //$select_users           = $task->AsignTouser($id);
         $body_porlet           .= '<div align="center">'
                                . '<button  onclick="alert();" type="button" class="btn btn-circle btn-primary">'
                                . '<i class="fa fa-repeat"></i> Reasignar</button>'
@@ -297,6 +303,15 @@ function PorltetStyle($request , $type , $id ){
         /**TERCER TAB -----------------------------------------------------------------------------------------*/
         $body_porlet           .= '<div class="tab-pane" id="portlet_tab' . $q. '">';
         $body_porlet           .= '<div class="scroller">';
+        $body_porlet           .= '<div>';
+        $body_porlet           .= '<p><i class="fa fa-comment"></i>&nbsp; <b>' . $task_comment . '</b></p>';
+        $body_porlet           .= '';
+        $body_porlet           .= '<p><i class="fa fa-calendar"></i>&nbsp;<b>Tarea Asignada Hace (' 
+                                    . FunctionsController::Get_TimeAgo($date_asign. " " . $time_asign) . ')</b></p>';
+        $body_porlet           .= '<p><i class="fa fa-calendar-o"></i>&nbsp;<b>Expiracion : En ' .  FunctionsController::Get_TimeExpired($date_deadline. " " . $time_deadline) . '</b></p>';
+        $body_porlet           .= '<div align="center"><a title="muestra un poco mas acerca de esta tarea" href="show_task.php?id=' 
+                               . $mt_id . '" class="btn btn-circle btn-transparent green  btn-sm active" ><i class="fa fa-eye"></i>&nbsp;Ver tarea</a</div>';
+        $body_porlet           .= '</div>';
         $body_porlet           .= '</div></div>';
 
        /* $body_porlet         .= '';
@@ -346,9 +361,7 @@ function PorltetStyle($request , $type , $id ){
          $paste_body .= implode("", $portlet_array[$i]);
     endfor;
     
-    /*echo '<pre>';
-    print_r($portlet_array);
-    echo "</pre>";*/
+
     echo $paste_body;
   
 }

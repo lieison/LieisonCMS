@@ -31,7 +31,7 @@ if(count($first) == 0){
 $data = array(
         "me"    => Session::GetSession("login", "id"),
         "chat"  => $request,
-        "mensaje" => $first
+        "mensaje" => htmlspecialchars_decode($first, ENT_QUOTES) 
 );
 
 $json = new SivarApi\Tools\Services_JSON();

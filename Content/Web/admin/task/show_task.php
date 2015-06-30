@@ -1,7 +1,6 @@
-<?php 
+<?php
 
-  
- /**
+/**
  *@author Rolando Antonio Arriaza <rmarroquin@lieison.com>
  *@copyright (c) 2015, Lieison
  *
@@ -63,14 +62,13 @@
             . '';
     
     //CARGARA EL BODY
-    $body = "<?php include 'view_task.php' ?>";
+    $body = "<?php include 'view_show.php' ?>";
 
     //CARGARA EL FOOTER O LOS SCRIPTS JS
-    $footer = '<script src="../js/task.js"></script>'
-            . "<script src='js/TaskView.js'></script>";
+    $footer = "<script src='js/TaskView.js'></script>";
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
-    $end_footer = "call_task(true);";
+    $end_footer = "";
     
 
     //PREPARANDO LA VISTA ...
@@ -82,5 +80,3 @@
     
     //MUESTRA LAS TAREAS ...
  
-    
-

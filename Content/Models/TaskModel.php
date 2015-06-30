@@ -1,5 +1,7 @@
 <?php
 
+defined("FROM") or define("FROM", 0);
+defined("TO") or define("TO", 1);
 
 class TaskModel extends MysqlConection {
     
@@ -131,7 +133,14 @@ class TaskModel extends MysqlConection {
     }
     
     
-    public function ViewTask( $id_user_from , $order = NULL){
+    public function ViewTask( $id_user_from , $order = NULL , $type = FROM){
+        
+         $data = "task_task.id_user_from";
+         $person = "task_task.id_user_to";
+         if($type == TO){
+              $data = "task_task.id_user_to";
+              $person = "task_task.id_user_from";
+         }
         
          $this->QUERY = "SELECT task_multitask.id_multitask as 'mt_id' ,
                           task_multitask.status as 'status',
@@ -158,9 +167,9 @@ class TaskModel extends MysqlConection {
                           FROM task_multitask
                           INNER JOIN task_task ON task_multitask.id_multitask = task_task.id_multitask
                           INNER JOIN sales_client ON task_multitask.id_client = sales_client.id_client
-                          INNER JOIN usuario ON task_task.id_user_to=usuario.id_usuario
+                          INNER JOIN usuario ON $person=usuario.id_usuario
                           INNER JOIN task_type ON task_task.id_type = task_type.id_type
-                          WHERE task_task.id_user_from LIKE '$id_user_from' ORDER BY task_task.date_asign DESC;";
+                          WHERE $data LIKE '$id_user_from' ORDER BY task_task.date_asign DESC;";
          
          if(!\SivarApi\Tools\Validation::Is_Empty_OrNull($order)){
              

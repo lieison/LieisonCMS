@@ -86,11 +86,11 @@ class TaskController extends TaskModel {
               );
     }
     
-    public function GetMyTask($id_user_from , $order = FECHA){
-        
-        return parent::ViewTask($id_user_from, $order);
-        
+    public function GetTask($id_user_from , $order = FECHA , $type = FROM){
+        return parent::ViewTask($id_user_from, $order , $type);
     }
+    
+  
     
     
     

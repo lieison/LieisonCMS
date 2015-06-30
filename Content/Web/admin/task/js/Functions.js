@@ -494,7 +494,7 @@ function SaveTask(){
                         if(is_task != 0){
                             $("#taskmessage").html(
                                     '<b>Tarea Creada con exito !! </b>'
-                                    + '&nbsp;&nbsp;<a href="dashboard_index.php?task=' + is_task +  '" class="btn btn-primary">Ver Tarea</a>'
+                                    + '&nbsp;&nbsp;<a href="show_task.php?task=' + is_task +  '" class="btn btn-primary">Ver Tarea</a>'
                                   );
                             $("#savetask").html('Guardar <i class="m-icon-swapright m-icon-white"></i>');
                             $('#savetask').attr('href', 'javascript:alert("Esta Tarea ya se ha creado ...");');

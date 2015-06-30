@@ -113,7 +113,13 @@ class FunctionsController {
         $timeago = new \SivarApi\Tools\Time();
         return $timeago->GetTimeAgo($datetime, $full);
     }
-     
+    
+    public static function Get_TimeExpired($datetime, $full = false){
+         $timeago = new \SivarApi\Tools\Time();
+        return str_replace( "ago" , "" , $timeago->GetTimeAgo($datetime, $full));
+    }
+
+
     public static function get_actual_page()
      {
         $data_server =  $_SERVER['REQUEST_URI'];
