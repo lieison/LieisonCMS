@@ -160,7 +160,7 @@ class MessageController extends MessageModel {
                 "hora"                  => FunctionsController::get_time(),
                 "leido"                 => 0
              ));
-         return parent::RawQuery("SELECT LAST_INSERT_ID();");
+         return parent::RawQuery("SELECT LAST_INSERT_ID() as 'id';");
     }
     
 

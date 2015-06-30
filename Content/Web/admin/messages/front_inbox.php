@@ -93,7 +93,7 @@ usort($msjto, 'ordenar_fecha');
      
      if(strlen($value['mensaje'])  >= 65)
      {
-         $data .= substr($value['mensaje'], 0 , 60) . ' (...)';
+         $data .= substr(htmlspecialchars_decode($value['mensaje']), 0 , 60) . ' (...)';
      }else{
          $data .= $value['mensaje'];
      }
