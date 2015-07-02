@@ -138,10 +138,12 @@ function PorltetStyle($request , $type , $id ){
         $client_name            = $data->client_name;
         $client_phone           = $data->client_phone;
         $client_mail            = $data->client_email;
+        
         //USUARIO
         $user                   = $data->user_name;
         $user_image             = $data->user_image;
         $user_mail              = $data->user_email;
+        
         //TAREA TIEMPOS
         $date_asign             = $data->td_asign;
         $time_asign             = $data->tt_asign;
@@ -229,6 +231,7 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '<div class="scroller">';
        
         if($type == 0):
+            
             $color = "red";
             $reasign = FALSE;
             switch ($task_type_id):
@@ -257,9 +260,40 @@ function PorltetStyle($request , $type , $id ){
                                            .'</label>&nbsp;&nbsp;&nbsp;<a title="muestra un poco mas acerca de esta tarea" href="show_task.php?id=' . $mt_id . '" class="btn btn-circle btn-transparent green  btn-sm active" ><i class="fa fa-eye"></i></a></h4>';
             }
             
-        else:    
-            $body_porlet           .= '<h4>Estado: :) FELIZ</h4>';
+        else: 
+            
+            /****
+             * Cuando Te asignan una tarea ....
+             * se verifica antes el typo de estado que tiene 
+             * estos se categoriza por defecto no iniciado
+             */
+            if($task_type_id == 4):
+                $body_porlet .= '<i class="fa fa-pause"></i>&nbsp;Reasignado : <button onclick="wait_reasign('  
+                    . $task_id .');" class="btn btn-sm btn-circle btn-primary">Ver Proceso</button><br><br>';
+            else:
+                $type_data              = $task->get_task_type($task_type_id);
+                $state_form             = "<div id='task_type_change'>"
+                                        . "<select onchange='change_state_task($task_id);' "
+                                        . "id='task_state_$task_id' class='form-control'>";
+                foreach ($type_data as $tvalue):
+                    if($task_type_id == $tvalue->id_type):
+                    $state_form .= "<option selected value='" 
+                                . $tvalue->id_type 
+                                . "' >$tvalue->name</option>";
+                 else:
+                    $state_form .= "<option value='" 
+                                . $tvalue->id_type 
+                                . "' >$tvalue->name</option>";
+                endif;
+            endforeach;
+                $state_form            .= "</select></div><br>";
+                $body_porlet           .= $state_form;
+            endif;
+
         endif;
+        
+        
+        
         $body_porlet           .= '<div class="blog-twitter">'; 
         $body_porlet           .= '<div class="blog-twitter-block">';
         $body_porlet           .= '<p><i class="fa fa-university "></i>&nbsp;&nbsp;<b>Cliente:</b>&nbsp;' .  $client_name . ' </p>';
