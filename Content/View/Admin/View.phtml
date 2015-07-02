@@ -90,6 +90,7 @@
 ?>
     
 <!-- ESTABLECIENDO EL HEADER  --> 
+
 </head>
 
 
@@ -247,6 +248,7 @@
                                      
                                 ?>
 			</div>          
+                    <?php include 'view_user.php' ?>
                 </div>
             
 </div>
@@ -690,6 +692,7 @@
 
 <?php AdminHeader::GetJs(); ?>
 
+<script src='PrimaryFunctions.js'></script> 
 
 <script>
     
@@ -711,6 +714,7 @@
    Index.init();   
 
     //app init lieisoft
+   UserTiles.init();    
 
 });
 </script>
