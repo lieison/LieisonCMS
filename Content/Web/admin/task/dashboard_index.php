@@ -67,7 +67,8 @@
 
     //CARGARA EL FOOTER O LOS SCRIPTS JS
     $footer = '<script src="../js/task.js"></script>'
-            . "<script src='js/TaskView.js'></script>";
+            . "<script src='js/TaskView.js'></script>"
+            . "<script src='../js/bootbox.js'></script>";
     
     //CUIDADO SOLO CARGA LOS INITS DE JS ejemplo Load();
     $end_footer = "call_task(true);";
