@@ -15,6 +15,11 @@
      *@copyright (c) 2015, Lieison
      */
 
+     /**
+      * Aca definiremos la zona actual 
+      */
+    date_default_timezone_set("America/El_Salvador");
+
     set_dependencies(array( "UserController"));
     
     $header = new Http\Header(); //clase header , ver en documentacion

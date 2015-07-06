@@ -90,6 +90,27 @@ class TaskController extends TaskModel {
         return parent::ViewTask($id_user_from, $order , $type);
     }
     
+    
+    public function get_task_type($restrict = NULL){
+        
+        $query = "SELECT id_type , name FROM task_type WHERE status LIKE 1";
+        
+        if($restrict != NULL){
+            if($restrict >= 2){
+                 $query .= " AND id_type NOT LIKE 1";
+            }
+        }
+        
+        return parent::RawQuery($query ,
+                PDO::FETCH_CLASS);
+    }
+    
+    public function set_task_type($id , $new_type){
+         return parent::Update("task_task", 
+                 array("id_type" => $new_type) ,
+                 " id_task LIKE $id");
+    }
+    
   
     
     

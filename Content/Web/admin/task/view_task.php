@@ -9,10 +9,6 @@
  * 
  * **/
 
-  /*set_dependencies(array(
-        "UserController"
-  ));*/
-
   $parent   = new UserController(Session::GetSession("login", "id"));
   $result_  = $parent->GetParent();
 
