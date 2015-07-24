@@ -3,6 +3,13 @@ var call_task = function(load){
     tarea.ShowTask(1,0,0 , load);
 };
 
+
+var call_thetask = function(type , style , order , load) 
+{ 
+    var tarea = new LieisoftTask();
+    tarea.ShowTask(type,style, order, load);
+};
+
 var change_state_task = function(task){
     
      var tarea      = new LieisoftTask();

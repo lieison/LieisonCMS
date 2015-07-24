@@ -258,8 +258,19 @@ function PorltetStyle($request , $type , $id ){
             }
             
         else:    
-            $body_porlet           .= '<h4>Estado: :) FELIZ</h4>';
+            $estatus_               = $task->get_task_type();
+            $body_porlet           .= '<select class="">';
+            foreach($estatus_ as $v){
+                if($task_type_id == 1){
+                    $body_porlet .= "<option value='" . $v->id_type . "'>" . $v->name . "</option>";
+                }
+                else if($v->id_type !== $task_type_id ){
+                     $body_porlet .= "<option value='" . $v->id_type . "'>" . $v->name . "</option>";
+                }
+            }
+            $body_porlet           .= '</select>';
         endif;
+        
         $body_porlet           .= '<div class="blog-twitter">'; 
         $body_porlet           .= '<div class="blog-twitter-block">';
         $body_porlet           .= '<p><i class="fa fa-university "></i>&nbsp;&nbsp;<b>Cliente:</b>&nbsp;' .  $client_name . ' </p>';
@@ -299,19 +310,10 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '</div>';
         $body_porlet           .= '</div>';
         $body_porlet           .= '</div></div>';
-
+        
         /**TERCER TAB -----------------------------------------------------------------------------------------*/
         $body_porlet           .= '<div class="tab-pane" id="portlet_tab' . $q. '">';
         $body_porlet           .= '<div class="scroller">';
-        $body_porlet           .= '<div>';
-        $body_porlet           .= '<p><i class="fa fa-comment"></i>&nbsp; <b>' . $task_comment . '</b></p>';
-        $body_porlet           .= '';
-        $body_porlet           .= '<p><i class="fa fa-calendar"></i>&nbsp;<b>Tarea Asignada Hace (' 
-                                    . FunctionsController::Get_TimeAgo($date_asign. " " . $time_asign) . ')</b></p>';
-        $body_porlet           .= '<p><i class="fa fa-calendar-o"></i>&nbsp;<b>Expiracion : En ' .  FunctionsController::Get_TimeExpired($date_deadline. " " . $time_deadline) . '</b></p>';
-        $body_porlet           .= '<div align="center"><a title="muestra un poco mas acerca de esta tarea" href="show_task.php?id=' 
-                               . $mt_id . '" class="btn btn-circle btn-transparent green  btn-sm active" ><i class="fa fa-eye"></i>&nbsp;Ver tarea</a</div>';
-        $body_porlet           .= '</div>';
         $body_porlet           .= '</div></div>';
 
        /* $body_porlet         .= '';
@@ -329,6 +331,7 @@ function PorltetStyle($request , $type , $id ){
         $body_porlet           .= '';
         $body_porlet           .= '';*/
         $body_porlet           .= '</div></div></div>';
+        
         
         /*
          * TABULACION PROBLEMA MATEMATICO
@@ -355,6 +358,7 @@ function PorltetStyle($request , $type , $id ){
         
        }
   
+       
     $paste_body = "";
     for($i=0 ; $i < count($portlet_array) ; $i++):
          $portlet_array[$i][] = "</div>";
@@ -363,6 +367,7 @@ function PorltetStyle($request , $type , $id ){
     
 
     echo $paste_body;
+    exit();
   
 }
 

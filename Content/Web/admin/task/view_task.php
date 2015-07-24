@@ -19,9 +19,9 @@
     <?php 
     
      if($result_ == 0):
-         echo '<select onchange="alert(this.value);" class="selectpicker" id="task_selected" name="task_selected">';
+         echo '<select onchange="call_thetask(this.value,0,0,true);" class="selectpicker" id="task_selected" name="task_selected">';
          echo '<option selected value="1" data-content="Mis Tareas"></option>';
-         echo '<option value="1" data-content="Tareas Asignadas"></option>';
+         echo '<option value="0" data-content="Tareas Asignadas"></option>';
          echo '</select>';
      endif;
 
